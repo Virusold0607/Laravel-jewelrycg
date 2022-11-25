@@ -20,19 +20,19 @@
                         <div class="row">
                           <div class="col-lg-4">
                             <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100 border" alt="{{ $service->name }}">
-                          </div>
-                          <div class="col-lg-8">
-                            <div class="card-title mb-2">{{ $service->name }}</div>
-                            @foreach ($service->categories as $item)
-                            <div class="fs-14 mb-2 fw-700">{{ $item->category->category_name }}</div>
-                            @endforeach
                             <div class="row mb-2">
                               <div class="col-3">
                                 <img class="w-100 rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
                               </div>
                               <div class="col-9">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
                             </div>
-                            
+                          </div>
+                          <div class="col-lg-8">
+                            <div class="card-title mb-2">{{ $service->name }}</div>
+                            @foreach ($service->categories as $item)
+                            <div class="fs-14 mb-2 fw-700">{{ $item->category->category_name }}</div>
+                            @endforeach
+                
                             @if ($service->count > 0)
                             <div class="col-6">
                               <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
