@@ -42,15 +42,15 @@
                         </div>
                       </div>
                       <div class="card-footer bg-white">
-                      <div class="row">
+                      <div class="row py-1">
                         <div class="col-6">
                             @if ($service->count > 0)
-                              <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
+                              <span><i class="bi bi-star-fill fs-18 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
                               <span class="text-secondary">({{$service->count}})</span>
                             @endif
                         </div>
                         <div class="col-6">
-                          <div class="text-right">Starting at <span class="fw-700 fs-16 text-primary">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</span></div>
+                          <div class="text-right">Starting at <span class="fw-700 fs-18 text-primary">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</span></div>
                         </div>
                       </div>
                       </div>
