@@ -19,30 +19,20 @@
                       <div class="card-body">
                         <div class="row">
                           <div class="col-lg-4">
-                            <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="card-img-top" alt="{{ $service->name }}" data-xblocker="passed" style="visibility: visible;">
+                            <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100" alt="{{ $service->name }}">
                           </div>
                           <div class="col-lg-8">
-                            <h5 class="card-title">{{ $service->name }}</h5>
-                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
-                              <li>Category:</li>
-                              @foreach ($service->categories as $item)
-                              <li>
-                                <div class="chip ms-3">{{ $item->category->category_name }}</div>
-                              </li>
-                              @endforeach
-                            </ul>
-                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
-                              <li>Seller Name:</li>
-                              <li>
-                                <div class="chip ms-3">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
-                              </li>
-                            </ul>
-                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
-                              <li>Seller Avatar:</li>
-                              <li>
-                                <img style="width: 50px" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100) }}" alt="{{ $service->postauthor->first_name }}">
-                              </li>
-                            </ul>
+                            <div class="card-title">{{ $service->name }}</div>
+                            @foreach ($service->categories as $item)
+                            <div class="fs-14">{{ $item->category->category_name }}</div>
+                            @endforeach
+                            <div class="row">
+                              <div class="col-3">
+                                <img style="w-100" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
+                              </div>
+                              <div class="col-9">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
+                            </div>
+
                             <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
                               <li>Start Price:</li>
                               <li>
