@@ -29,7 +29,7 @@
 
                             <div class="d-flex align-items-center mb-2">
                               <div class="mr-10px">
-                                <img class="w-40px rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
+                                <img class="w-30px rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
                               </div>
                               <div class="col-">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
                             </div>
