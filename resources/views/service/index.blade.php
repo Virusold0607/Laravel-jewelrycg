@@ -19,12 +19,12 @@
                       <div class="card-body">
                         <div class="row">
                           <div class="col-lg-4">
-                            <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100" alt="{{ $service->name }}">
+                            <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100 border" alt="{{ $service->name }}">
                           </div>
                           <div class="col-lg-8">
-                            <div class="card-title">{{ $service->name }}</div>
+                            <div class="card-title mb-2">{{ $service->name }}</div>
                             @foreach ($service->categories as $item)
-                            <div class="fs-14">{{ $item->category->category_name }}</div>
+                            <div class="fs-14 mb-2 fw-700">{{ $item->category->category_name }}</div>
                             @endforeach
                             <div class="row">
                               <div class="col-3">
