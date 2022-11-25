@@ -24,7 +24,7 @@
                           <div class="col-lg-8">
                             <div class="fs-20 fw-700 mb-2">{{ $service->name }}</div>
                             @foreach ($service->categories as $item)
-                            <div class="fs-14 mb-2 fw-700">{{ $item->category->category_name }}</div>
+                            <div class="fs-14 mb-2 fw-700 opacity-50">{{ $item->category->category_name }}</div>
                             @endforeach
 
                             <div class="d-flex align-items-center mb-2">
