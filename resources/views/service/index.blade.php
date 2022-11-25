@@ -16,44 +16,50 @@
                   @foreach ($services as $service)
                   <div class="col mb-4 mb-lg-0">
                     <div class="card">
-                      <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="card-img-top" alt="{{ $service->name }}" data-xblocker="passed" style="visibility: visible;">
                       <div class="card-body">
-                        <h5 class="card-title">{{ $service->name }}</h5>
-                        <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
-                          <li>Category:</li>
-                          @foreach ($service->categories as $item)
-                          <li>
-                            <div class="chip ms-3">{{ $item->category->category_name }}</div>
-                          </li>
-                          @endforeach
-                        </ul>
-                        <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
-                          <li>Seller Name:</li>
-                          <li>
-                            <div class="chip ms-3">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
-                          </li>
-                        </ul>
-                        <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
-                          <li>Seller Avatar:</li>
-                          <li>
-                            <img style="width: 50px" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100) }}" alt="{{ $service->postauthor->first_name }}">
-                          </li>
-                        </ul>
-                        <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
-                          <li>Start Price:</li>
-                          <li>
-                            <div class="chip ms-3">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
-                          </li>
-                        </ul>
-                        @if ($service->count > 0)
-                        <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-3">
-                          <li>
-                            <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
-                            <span class="text-secondary">({{$service->count}})</span>
-                          </li>
-                        </ul>
-                        @endif
-                        <a href="/services/{{$service->slug}}" class="btn btn-primary">Details</a>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="card-img-top" alt="{{ $service->name }}" data-xblocker="passed" style="visibility: visible;">
+                          </div>
+                          <div class="col-lg-8">
+                            <h5 class="card-title">{{ $service->name }}</h5>
+                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
+                              <li>Category:</li>
+                              @foreach ($service->categories as $item)
+                              <li>
+                                <div class="chip ms-3">{{ $item->category->category_name }}</div>
+                              </li>
+                              @endforeach
+                            </ul>
+                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
+                              <li>Seller Name:</li>
+                              <li>
+                                <div class="chip ms-3">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
+                              </li>
+                            </ul>
+                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
+                              <li>Seller Avatar:</li>
+                              <li>
+                                <img style="width: 50px" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100) }}" alt="{{ $service->postauthor->first_name }}">
+                              </li>
+                            </ul>
+                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
+                              <li>Start Price:</li>
+                              <li>
+                                <div class="chip ms-3">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
+                              </li>
+                            </ul>
+                            @if ($service->count > 0)
+                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-3">
+                              <li>
+                                <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
+                                <span class="text-secondary">({{$service->count}})</span>
+                              </li>
+                            </ul>
+                            @endif
+                            <a href="/services/{{$service->slug}}" class="btn btn-primary">Details</a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
