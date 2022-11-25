@@ -28,17 +28,11 @@
                             @endforeach
                             <div class="row">
                               <div class="col-3">
-                                <img style="w-100" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
+                                <img class="w-100 rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
                               </div>
                               <div class="col-9">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
                             </div>
-
-                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-2">
-                              <li>Start Price:</li>
-                              <li>
-                                <div class="chip ms-3">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
-                              </li>
-                            </ul>
+                            <div class="fw-700 fs-16 text-primary col-8">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
                             @if ($service->count > 0)
                             <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-3">
                               <li>
