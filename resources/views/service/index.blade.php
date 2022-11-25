@@ -19,10 +19,14 @@
                       <div class="card-body">
                         <div class="row">
                           <div class="col-lg-4">
-                            <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100 border" alt="{{ $service->name }}">
+                            <a href="/services/{{$service->slug}}" class="btn btn-primary">
+                              <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100 border" alt="{{ $service->name }}">
+                            </a>
                           </div>
                           <div class="col-lg-8">
-                            <div class="fs-20 fw-700 mb-2">{{ $service->name }}</div>
+                            <div class="fs-20 fw-700 mb-2">
+                              <a href="/services/{{$service->slug}}" class="btn btn-primary">{{ $service->name }}</a>
+                            </div>
                             @foreach ($service->categories as $item)
                             <div class="fs-14 mb-2 fw-700 opacity-70">{{ $item->category->category_name }}</div>
                             @endforeach
@@ -40,8 +44,6 @@
                               <span class="text-secondary">({{$service->count}})</span>
                             </div>
                             @endif
-
-                            <a href="/services/{{$service->slug}}" class="btn btn-primary">Details</a>
                           </div>
                         </div>
                       </div>
