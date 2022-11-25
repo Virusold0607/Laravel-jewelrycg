@@ -20,11 +20,11 @@
                         <div class="row">
                           <div class="col-lg-4">
                             <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100 border" alt="{{ $service->name }}">
-                            <div class="row mb-2">
-                              <div class="col-3">
+                            <div class="d-flex mb-2">
+                              <div class="co">
                                 <img class="w-100 rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
                               </div>
-                              <div class="col-9">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
+                              <div class="col-">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
                             </div>
                           </div>
                           <div class="col-lg-8">
