@@ -20,7 +20,6 @@
                         <div class="row">
                           <div class="col-lg-4">
                             <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100" alt="{{ $service->name }}">
-                            <div class="fw-700 fs-16 text-primary col-6">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
                           </div>
                           <div class="col-lg-8">
                             <div class="card-title">{{ $service->name }}</div>
@@ -33,15 +32,17 @@
                               </div>
                               <div class="col-9">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
                             </div>
-                            
-                            @if ($service->count > 0)
-                            <ul class="list-unstyled d-flex justify-content-start align-items-center fs-6 mb-3">
-                              <li>
-                                <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
-                                <span class="text-secondary">({{$service->count}})</span>
-                              </li>
-                            </ul>
-                            @endif
+                            <div class="row">
+                              <div class="fw-700 fs-16 text-primary col-6">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
+                              @if ($service->count > 0)
+                              <div class="col-6">
+                                <li>
+                                  <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
+                                  <span class="text-secondary">({{$service->count}})</span>
+                                </li>
+                              </div>
+                              @endif
+                            </div>
                             <a href="/services/{{$service->slug}}" class="btn btn-primary">Details</a>
                           </div>
                         </div>
