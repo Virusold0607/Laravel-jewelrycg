@@ -19,13 +19,13 @@
                       <div class="card-body">
                         <div class="row">
                           <div class="col-lg-4">
-                            <a href="/services/{{$service->slug}}" class="btn btn-primary">
+                            <a href="/services/{{$service->slug}}" class=""">
                               <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100 border" alt="{{ $service->name }}">
                             </a>
                           </div>
                           <div class="col-lg-8">
                             <div class="fs-20 fw-700 mb-2">
-                              <a href="/services/{{$service->slug}}" class="btn btn-primary">{{ $service->name }}</a>
+                              <a href="/services/{{$service->slug}}" class="">{{ $service->name }}</a>
                             </div>
                             @foreach ($service->categories as $item)
                             <div class="fs-14 mb-2 fw-700 opacity-70">{{ $item->category->category_name }}</div>
