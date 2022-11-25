@@ -48,7 +48,7 @@
                         </div>
                       </div>
                       <div class="card-footer bg-white">
-                      <div class="fw-700 fs-16 text-primary col-6 mb-2">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
+                      <div class="text-right mb-2">Starting at <span class="fw-700 fs-16 text-primary">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</span></div>
                       </div>
                     </div>
                   </div>
