@@ -32,17 +32,16 @@
                               </div>
                               <div class="col-9">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
                             </div>
-                            <div class="row mb-2">
-                              <div class="fw-700 fs-16 text-primary col-6">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
-                              @if ($service->count > 0)
-                              <div class="col-6">
-                                <li>
-                                  <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
-                                  <span class="text-secondary">({{$service->count}})</span>
-                                </li>
-                              </div>
-                              @endif
+                            
+                            @if ($service->count > 0)
+                            <div class="col-6">
+                              <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
+                              <span class="text-secondary">({{$service->count}})</span>
                             </div>
+                            @endif
+
+                            <div class="fw-700 fs-16 text-primary col-6 mb-2">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
+          
                             <a href="/services/{{$service->slug}}" class="btn btn-primary">Details</a>
                           </div>
                         </div>
