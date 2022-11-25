@@ -34,7 +34,7 @@
                             @endforeach
                 
                             @if ($service->count > 0)
-                            <div class="col-6">
+                            <div class="col-6 mb-2">
                               <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
                               <span class="text-secondary">({{$service->count}})</span>
                             </div>
