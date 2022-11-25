@@ -41,11 +41,12 @@
                             </div>
                             @endif
 
-                            <div class="fw-700 fs-16 text-primary col-6 mb-2">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
-          
                             <a href="/services/{{$service->slug}}" class="btn btn-primary">Details</a>
                           </div>
                         </div>
+                      </div>
+                      <div class="card-footer bg-white">
+                      <div class="fw-700 fs-16 text-primary col-6 mb-2">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
                       </div>
                     </div>
                   </div>
