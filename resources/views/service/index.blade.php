@@ -26,13 +26,13 @@
                             @foreach ($service->categories as $item)
                             <div class="fs-14 mb-2 fw-700">{{ $item->category->category_name }}</div>
                             @endforeach
-                            <div class="row">
+                            <div class="row mb-2">
                               <div class="col-3">
                                 <img class="w-100 rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
                               </div>
                               <div class="col-9">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
                             </div>
-                            <div class="row">
+                            <div class="row mb-2">
                               <div class="fw-700 fs-16 text-primary col-6">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</div>
                               @if ($service->count > 0)
                               <div class="col-6">
