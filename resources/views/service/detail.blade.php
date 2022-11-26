@@ -81,27 +81,32 @@
 
             </div>
             
-            <div class="col-md-12 row">
-              <h4>Packages</h4>
-              <div class="col-span-5 col-md-3">
-                Package
+            <div class="col-lg-3">
+              <div class="row">
+                <h4>Packages</h4>
+                <div class="col-span-5 col-md-3">
+                  Package
+                </div>
+                @foreach ($service->packages as $package)
+                <div class="col-span-5 col-md-3">
+                  <h3>${{number_format($package->price / 100, 2)}}</h3>
+                  <h4>{{$package->name}}</h4>
+                  <p>{{$package->description}}</p>
+                  <p>{{$package->delivery_time}}</p>
+                  <p>{{$package->revisions}}</p>
+                  <a href="/services/checkout/{{$package->id}}" type="button" class="btn btn-info">Continue(${{number_format($package->price / 100, 2)}})</a>
+                </div>
+                @endforeach
               </div>
-              @foreach ($service->packages as $package)
-              <div class="col-span-5 col-md-3">
-                <h3>${{number_format($package->price / 100, 2)}}</h3>
-                <h4>{{$package->name}}</h4>
-                <p>{{$package->description}}</p>
-                <p>{{$package->delivery_time}}</p>
-                <p>{{$package->revisions}}</p>
-                <a href="/services/checkout/{{$package->id}}" type="button" class="btn btn-info">Continue(${{number_format($package->price / 100, 2)}})</a>
+
+              <div class="col">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal">
+                  Contact to Seller
+                </button>
               </div>
-              @endforeach
+
             </div>
-            <div class="col">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal">
-                Contact to Seller
-              </button>
-            </div>
+            
 
             <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
               <div class="modal-dialog">
