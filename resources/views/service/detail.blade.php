@@ -40,6 +40,16 @@
       <div class="container">
           <div class="row">
             <div class="col-lg-6">
+              <div class="mb-2">
+                <h1 class="fs-24">{{$service->name}}</h4>
+                @if ($service->count > 0)
+                <div class="d-flex">
+                  <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
+                  <span class="text-secondary">({{$service->count}})</span>
+                </div>
+                @endif
+              </div>
+
               <div class="carousel">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
@@ -65,15 +75,6 @@
                 </div>
               </div>
 
-              <div class="mb-2">
-                <h4>{{$service->name}}</h4>
-                @if ($service->count > 0)
-                <div>
-                  <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
-                  <span class="text-secondary">({{$service->count}})</span>
-                </div>
-                @endif
-              </div>
               <div class="mb-2">
                 <h4>Content</h4>
                 <div>{!! $service->content !!}</div>
