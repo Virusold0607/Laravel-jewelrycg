@@ -39,13 +39,13 @@
   <div class="py-9">
       <div class="container">
           <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-6">
               <div class="carousel">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
                     @for ($i = 0; $i < count($service->galleries); ++$i)
                     <div class="carousel-item {{ $i == 0 ? "active" : "" }}">
-                      <img src="/uploads/all/{{$service->galleries[$i]->file_name}}" class="d-block w-100" alt="..." />
+                      <img src="/uploads/all/{{$service->galleries[$i]->file_name}}" class="d-block w-100 border" alt="..." />
                     </div>
                     @endfor
                   </div>
@@ -58,7 +58,7 @@
                   <ol class="carousel-indicators">
                       @for ($i = 0; $i < count($service->galleries); ++$i)
                       <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}" class="{{$i == 0 ? "active": "" }}">
-                          <img src="/uploads/all/{{$service->galleries[$i]->file_name}}" class="d-block w-100">
+                          <img src="/uploads/all/{{$service->galleries[$i]->file_name}}" class="d-block w-100 border">
                       </li>
                       @endfor
                   </ol>
@@ -81,7 +81,7 @@
 
             </div>
             
-            <div class="col-lg-3">
+            <div class="col-lg-6">
               <div class="row">
                 <h4>Packages</h4>
                 <div class="col-span-5 col-md-3">
