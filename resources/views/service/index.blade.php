@@ -24,7 +24,7 @@
                             </a>
                           </div>
                           <div class="col-lg-8">
-                            <div class="fs-20 fw-700 mb-2">
+                            <div class="fs-20 fw-500 mb-2">
                               <a href="/services/{{$service->slug}}" class="mt-2">{{ $service->name }}</a>
                             </div>
                             @foreach ($service->categories as $item)
