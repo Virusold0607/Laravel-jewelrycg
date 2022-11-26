@@ -85,11 +85,8 @@
             <div class="col-lg-6">
               <div class="row">
                 <h4>Packages</h4>
-                <div class="col-span-5 col-md-3">
-                  Package
-                </div>
                 @foreach ($service->packages as $package)
-                <div class="col-span-5 col-md-3">
+                <div class="col-span-5 col-lg-4">
                   <h3>${{number_format($package->price / 100, 2)}}</h3>
                   <h4>{{$package->name}}</h4>
                   <p>{{$package->description}}</p>
