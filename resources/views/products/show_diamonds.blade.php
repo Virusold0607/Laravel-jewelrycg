@@ -1,5 +1,5 @@
 <div class="show-model-specs">
-    <div class="show-specs-btn mb-3 text-uppercase fw-700 border p-3">
+    <div class="show-specs-btn card rounded mb-3 text-uppercase fw-700 border p-3">
         Diamonds
     </div>
 </div>
