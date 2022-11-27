@@ -17,7 +17,7 @@ class Checkout
      */
     public function handle(Request $request, Closure $next)
     {
-        if(! (Cart::instance('default')->content()->count()))
+        if(! (Cart::instance('default')->content()->count() || Cart::instance('buy_now')->content()->count()))
         {
             return redirect()->route('cart.index')->with('message', 'Your cart is empty');
         }
