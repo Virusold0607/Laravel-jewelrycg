@@ -46,7 +46,7 @@ $current_rate = CurrentRate::getLastRate();
                         @endphp
 
                         <div class="col-lg-4 col-6">
-                            <div class="border p-3 item-value-card mb-3 cal-select-item" data-metal_id="{{$type_id}}">
+                            <div class="border p-3 item-value-card mb-3 rounded cal-select-item" data-metal_id="{{$type_id}}">
                                 <div class="item-value-card-body">
                                     <div class="value-title pb-2 mb-2 text-uppercase fw-700">
                                         {{ $type_name }}
@@ -71,7 +71,7 @@ $current_rate = CurrentRate::getLastRate();
             <div class="accordion-body">
                 <div class="row">                        
                     <div class="col-lg-6 col-6">
-                        <div class="border p-3 item-value-card mb-3 diamondtype-select-item" data-diamondtype_id="1">
+                        <div class="border p-3 item-value-card mb-3 rounded diamondtype-select-item" data-diamondtype_id="1">
                             <div class="item-value-card-body">
                                 <div class="py-1 fw-700 fs-24">Natural Diamonds</div>
                                 <div class="py-1 fw-700 fs-14">Natural Diamonds</div>
@@ -79,7 +79,7 @@ $current_rate = CurrentRate::getLastRate();
                         </div>
                     </div>                        
                     <div class="col-lg-6 col-6">
-                        <div class="border p-3 item-value-card mb-3 diamondtype-select-item" data-diamondtype_id="2">
+                        <div class="border p-3 item-value-card mb-3 rounded diamondtype-select-item" data-diamondtype_id="2">
                             <div class="item-value-card-body">
                                 <div class="py-1 fw-700 fs-24">Lab Diamonds</div>
                                 <div class="py-1 fw-700 fs-14">Lab Diamonds</div>
