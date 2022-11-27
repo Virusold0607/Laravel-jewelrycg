@@ -117,9 +117,6 @@
                     <!-- Product Details/Title -->
                     <div class="col-xl-12 col-lg-12">
                         <div class="bg-white p-3 mb-0">
-                            <div class="product-details-title mb-3">
-                                <h1 class="mb-2 fs-30 fw-400">{{ $product->name }}</h1>
-                            </div>
                             <div class="product-details-misc border-bottom pb-2 mb-4">
                                 <div class="col-6 text-left">
                                     <ul class="list-inline social fw-600 mb-0">
