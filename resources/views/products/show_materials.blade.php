@@ -5,7 +5,7 @@ $current_rate = CurrentRate::getLastRate();
 
 @if (count($arrProductMaterials))
     <div class="show-model-specs">
-        <div class="show-specs-btn mb-3 text-uppercase fw-700 border p-3">
+        <div class="show-specs-btn card rounded mb-3 text-uppercase fw-700 border p-3">
             Metal Weight
         </div>
     </div>
@@ -39,7 +39,7 @@ $current_rate = CurrentRate::getLastRate();
                 @endphp
 
                 <div class="col-lg-4 col-6">
-                    <div class="border p-3 item-value-card mb-3">
+                    <div class="border p-3 item-value-card card rounded mb-3">
                         <div class="item-value-card-body">
                             <div class="value-title pb-2 mb-2 text-uppercase fw-700">
                                 {{ $type_name }}
