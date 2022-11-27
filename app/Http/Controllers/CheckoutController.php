@@ -377,6 +377,7 @@ class CheckoutController extends Controller
                     'order_id' => $order->id,
                     'sale_type' => 0,
                     'type' => 'add',
+                    'status' => 1
                 ]);
 
                 $seller->wallet = $seller->wallet + $amount;
