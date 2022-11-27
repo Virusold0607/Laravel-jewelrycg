@@ -34,9 +34,9 @@ class CheckoutController extends Controller
     public function __construct()
     {
         $setting = SettingGeneral::first();
-        /*if ($setting->guest_checkout != 1) {
+        if ($setting->guest_checkout != 1) {
             $this->middleware(['checkout', 'verified']);
-        }*/
+        }
     }
     public function index()
     {
