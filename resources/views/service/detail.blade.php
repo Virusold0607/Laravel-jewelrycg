@@ -43,7 +43,7 @@
               <div class="mb-2">
                 <h1 class="fs-24">{{$service->name}}</h4>
                 @if ($service->count > 0)
-                <div class="d-flex">
+                <div class="">
                   <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
                   <span class="text-secondary">({{$service->count}})</span>
                 </div>
