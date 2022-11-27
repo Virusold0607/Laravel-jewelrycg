@@ -5,7 +5,7 @@ $current_rate = CurrentRate::getLastRate();
 
 @if (count($arrProductMaterials))
 <div class="section-header">
-    <div class="section-header-title mb-3 text-uppercase fw-700 border p-3">Cost to Make Calculator</div>
+    <div class="section-header-title card rounded mb-3 text-uppercase fw-700 border p-3">Cost to Make Calculator</div>
 </div>
 
 <div class="card">
