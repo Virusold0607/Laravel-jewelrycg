@@ -66,8 +66,6 @@ class AppController extends Controller
                 return $query->where('user_id', Auth::user()->id);
             }
         )
-            ->leftJoin('products', 'products.id', 'order_items.product_id')
-            ->whereNotNull('products.id')
             ->paginate(12, 'order_items.*', 'product');
 
         $services = ServiceOrder::with('service.uploads')->where('user_id', Auth::user()->id)->paginate(12, '*', 'service');
