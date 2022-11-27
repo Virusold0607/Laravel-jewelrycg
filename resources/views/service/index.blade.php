@@ -18,12 +18,12 @@
                     <div class="card">
                       <div class="card-body">
                         <div class="row">
-                          <div class="col-lg-4">
+                          <div class="col-4">
                             <a href="/services/{{$service->slug}}" class=""">
                               <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100 border" alt="{{ $service->name }}">
                             </a>
                           </div>
-                          <div class="col-lg-8">
+                          <div class="col-8">
                             <div class="fs-20 fw-500 mb-2">
                               <a href="/services/{{$service->slug}}" class="mt-2">{{ $service->name }}</a>
                             </div>
