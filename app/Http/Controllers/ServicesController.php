@@ -716,6 +716,7 @@ class ServicesController extends Controller
 
         $order->user_id = auth()->id();
         $order->service_id = $package->service_id;
+        $order->service_name = $package->service->name;
         $order->package_name = $package->name;
         $order->package_description = $package->description;
         $order->package_price = $package->price;
