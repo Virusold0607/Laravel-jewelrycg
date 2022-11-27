@@ -144,7 +144,7 @@
                 @auth
                 @php
                     $new_count =Auth::user()->notifications()->where('status', 0)->count();
-                    $notifications = Auth::user()->notifications()->where('status', 0)->get();
+                    $notifications = Auth::user()->notifications()->whereBetween('status', [0,1])->get();
                     $message_notifications = App\Models\Message::where('conversation_id',Auth::id())->groupBy('user_id')->get();
                     
                     $user_id = Auth::id();
