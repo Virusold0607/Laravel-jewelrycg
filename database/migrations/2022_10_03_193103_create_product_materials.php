@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('product_materials', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->integer('product_attribute')->default(0);
+            $table->integer('product_attribute_id')->default(0);
             $table->integer('material_id');
             $table->integer('material_type_id');
             $table->string('material_weight');
