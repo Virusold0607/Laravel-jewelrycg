@@ -1,20 +1,20 @@
 @extends('backend.layouts.app', ['activePage' => 'products', 'title' => 'Edit Product', 'navName' => 'Table List', 'activeButton' => 'catalogue'])
 
 @section('content')
-<style>
-    #srtUnselected li, #srtSelected li {
-        cursor: pointer;
-        list-style-type: none;
-    }
-</style>
+    <style>
+        #srtUnselected li, #srtSelected li {
+            cursor: pointer;
+            list-style-type: none;
+        }
+    </style>
 
-@php
-$arrStepTypes = array(
-    0   =>  'Step Group',
-    1   =>  'Steps'
-);
-$arrSelected = explode(',', $product->steps);
-@endphp
+    @php
+        $arrStepTypes = array(
+            0   =>  'Step Group',
+            1   =>  'Steps'
+        );
+        $arrSelected = explode(',', $product->steps);
+    @endphp
 
     <div class="page-header mb-4">
         <div class="row align-items-center">
@@ -22,7 +22,7 @@ $arrSelected = explode(',', $product->steps);
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-no-gutter">
                         <li class="breadcrumb-item"><a class="breadcrumb-link"
-                                href="{{ route('backend.products.list') }}">Products</a></li>
+                                                       href="{{ route('backend.products.list') }}">Products</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
                     </ol>
                 </nav>
@@ -44,8 +44,8 @@ $arrSelected = explode(',', $product->steps);
     </div>
 
     <form action="{{ route('backend.products.update', $product) }}"
-        id="frmUpdateProduct"
-        method="post" enctype="multipart/form-data"
+          id="frmUpdateProduct"
+          method="post" enctype="multipart/form-data"
     >
         @csrf
         @method('PUT')
@@ -59,16 +59,17 @@ $arrSelected = explode(',', $product->steps);
                         <div class="mb-4">
                             <label for="name">Name</label>
                             <input type="text" value='{{ $product->name }}' name="name" id="name"
-                                class="form-control">
+                                   class="form-control">
                         </div>
                         <div class="mb-4">
                             <label for="name">Slug</label>
                             <input type="text" value='{{ $product->slug }}' name="slug" id="slug"
-                                class="form-control">
+                                   class="form-control">
                         </div>
                         <div class="mb-4">
                             <label for="desc">Description</label>
-                            <textarea name="description" value='{{ $product->description }}' id="description" rows="3" class="form-control">{{ $product->description }}</textarea>
+                            <textarea name="description" value='{{ $product->description }}' id="description" rows="3"
+                                      class="form-control">{{ $product->description }}</textarea>
                         </div>
 
                     </div>
@@ -82,7 +83,8 @@ $arrSelected = explode(',', $product->steps);
                         <!-- Gallery link -->
                         <label class="btn text-primary p-0" id="getFileManagerForProducts">
                             Select product gallery images
-                            <input type="hidden" id="all_checks" value="{{ $product->product_images }}" name="product_images">
+                            <input type="hidden" id="all_checks" value="{{ $product->product_images }}"
+                                   name="product_images">
                         </label>
                         <!-- End Gallery link -->
                     </div>
@@ -95,16 +97,20 @@ $arrSelected = explode(',', $product->steps);
                             @foreach ($uploads as $upload)
                                 <div id="fileappend-{{$upload->id}}" class="col-6 col-sm-4 col-md-3 mb-3 mb-lg-5">
                                     <div class="card card-sm"><img class="card-img-top"
-                                            src="{{ $upload->getFileFullPath() }}"
-                                            alt="Image Description">
+                                                                   src="{{ $upload->getFileFullPath() }}"
+                                                                   alt="Image Description">
                                         <div class="card-body">
                                             <div class="row col-divider text-center">
                                                 <div class="col"><a class="text-body"
-                                                        href="./assets/img/1920x1080/img3.jpg" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="" data-fslightbox="gallery"
-                                                        data-bs-original-title="View"><i class="bi-eye"></i></a></div>
+                                                                    href="./assets/img/1920x1080/img3.jpg"
+                                                                    data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title=""
+                                                                    data-fslightbox="gallery"
+                                                                    data-bs-original-title="View"><i class="bi-eye"></i></a>
+                                                </div>
                                                 <div class="col"><a onclick="removepreviewappended({{$upload->id}})"
-                                                        class="text-danger" href="javascript:;"><i class="bi-trash"></i></a>
+                                                                    class="text-danger" href="javascript:;"><i
+                                                                class="bi-trash"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -132,10 +138,12 @@ $arrSelected = explode(',', $product->steps);
                                 $attributes_selected = explode(',', $product->product_attributes)
                             @endphp
                             <select name="attributes[]" id="attributes" value="" class="form-control select2"
-                                multiple="multiple" style="width: 100%;">
+                                    multiple="multiple" style="width: 100%;">
                                 @foreach ($attributes as $attribute)
-                                <option value="{{ $attribute->id }}" @if(in_array($attribute->id, $attributes_selected)) selected @endif data-tokens="{{ $attribute->name }}">
-                                    {{ $attribute->name }}</option>
+                                    <option value="{{ $attribute->id }}"
+                                            @if(in_array($attribute->id, $attributes_selected)) selected
+                                            @endif data-tokens="{{ $attribute->name }}">
+                                        {{ $attribute->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -145,16 +153,17 @@ $arrSelected = explode(',', $product->steps);
                                 $values_selected = explode(',', $product->product_attribute_values)
                             @endphp
                             <select name="values[]" id="product_attribute_values" value="" class="form-control select2"
-                                multiple="multiple" style="width: 100%;">
+                                    multiple="multiple" style="width: 100%;">
 
                                 @include('backend.products.attributes.values.ajax',[
-                                'attributes' => $selected_values,
-                                'values_selected' => $values_selected
+                                    'attributes' => $selected_values,
+                                    'values_selected' => $values_selected
                                 ])
                             </select>
                         </div>
                         <div class="mb-4 text-right">
-                            <a class="btn btn-info btn-sm pull-right" id="generatevariants" data-product-id="{{ $product->id }}">
+                            <a class="btn btn-info btn-sm pull-right" id="generatevariants"
+                               data-product-id="{{ $product->id }}">
                                 Generate variants
                             </a>
                         </div>
@@ -169,8 +178,8 @@ $arrSelected = explode(',', $product->steps);
                 </div>
 
                 <div class="card col-md-12">
-                     <!-- Header -->
-                     <div class="card-header">
+                    <!-- Header -->
+                    <div class="card-header">
                         <h4 class="card-header-title mb-0">Meta information</h4>
                     </div>
                     <!-- End Header -->
@@ -179,17 +188,19 @@ $arrSelected = explode(',', $product->steps);
                         <div class="mb-4">
                             <label for="meta_title">Meta Title</label>
                             <input type="text" value='{{ $product->meta_title }}' name="meta_title" id="meta_title"
-                                class="form-control">
+                                   class="form-control">
                         </div>
                         <div class="mb-4">
                             <label for="meta_description">Meta Description</label>
-                            <textarea name="meta_description" value='{{ $product->meta_description }}' id="meta_description" rows="3" class="form-control">{{ $product->meta_description }}</textarea>
+                            <textarea name="meta_description" value='{{ $product->meta_description }}'
+                                      id="meta_description" rows="3"
+                                      class="form-control">{{ $product->meta_description }}</textarea>
                         </div>
                     </div>
                 </div>
 
                 @include('backend.products.materials.list')
-                
+
                 <div class="card col-md-12 mb-6">
                     <!-- Header -->
                     <div class="card-header">
@@ -203,8 +214,8 @@ $arrSelected = explode(',', $product->steps);
                                 <option value="0" selected>Select Type</option>
                                 @foreach ($arrStepTypes as $id => $name)
                                     <option
-                                        value="{{ $id + 1 }}"
-                                        {{ $id + 1 == $product->step_type ? "selected" : "" }}
+                                            value="{{ $id + 1 }}"
+                                            {{ $id + 1 == $product->step_type ? "selected" : "" }}
                                     >{{ $name }}</option>
                                 @endforeach
                             </select>
@@ -216,8 +227,8 @@ $arrSelected = explode(',', $product->steps);
                                 <select name="step_group" id="selStepGroup" class="form-control">
                                     @foreach ($arrStepGroups as $id => $name)
                                         <option
-                                            value="{{ $id }}"
-                                            {{ $id == $product->step_group ? "selected" : "" }}
+                                                value="{{ $id }}"
+                                                {{ $id == $product->step_group ? "selected" : "" }}
                                         >{{ $name }}</option>
                                     @endforeach
                                 </select>
@@ -266,8 +277,8 @@ $arrSelected = explode(',', $product->steps);
                     </div>
                     <div class="card-body">
                         {{ date('F d, Y, h:i:s A', strtotime($product->created_at)) }}
-                        <br />
-                        <br />
+                        <br/>
+                        <br/>
                         Seller: {{ $seller->first_name ?? ''}} {{  $seller->last_name ?? ''}}
                     </div>
                 </div>
@@ -288,7 +299,8 @@ $arrSelected = explode(',', $product->steps);
                                 <span class="text-dark">Digital</span>
                             </span>
                             <span class="col-4 col-sm-3 text-end">
-                                <input type="checkbox" class="form-check-input" name="is_digital" @if($product->is_digital == 1) checked @endif id="availabilitySwitch1">
+                                <input type="checkbox" class="form-check-input" name="is_digital"
+                                       @if($product->is_digital == 1) checked @endif id="availabilitySwitch1">
                             </span>
                         </label>
                         <label class="row form-switch mb-4" for="availabilitySwitch2">
@@ -296,7 +308,8 @@ $arrSelected = explode(',', $product->steps);
                                 <span class="text-dark">Virtual</span>
                             </span>
                             <span class="col-4 col-sm-3 text-end">
-                                <input type="checkbox" name="is_virtual" @if($product->is_virtual == 1) checked @endif class="form-check-input" id="availabilitySwitch2">
+                                <input type="checkbox" name="is_virtual" @if($product->is_virtual == 1) checked
+                                       @endif class="form-check-input" id="availabilitySwitch2">
                             </span>
                         </label>
                         <label class="row form-switch" for="">
@@ -329,7 +342,7 @@ $arrSelected = explode(',', $product->steps);
                         <div class="mb-4">
                             <label for="priceNameLabel" class="form-label">Price</label>
                             <input type="text" value='{{ $product->price }}' name="price" id="price"
-                                class="form-control" placeholder="80.00...">
+                                   class="form-control" placeholder="80.00...">
                         </div>
                         <div class="mb-4">
                             <label class="row form-switch mb-4" for="availabilitySwitch5">
@@ -337,21 +350,26 @@ $arrSelected = explode(',', $product->steps);
                                     <span class="text-dark">Track Quantity</span>
                                 </span>
                                 <span class="col-4 col-sm-3 text-end">
-                                    <input type="checkbox" name="is_trackingquantity" value="1" @if($product->is_trackingquantity == 1) checked @endif class="form-check-input" id="availabilitySwitch5">
+                                    <input type="checkbox" name="is_trackingquantity" value="1"
+                                           @if($product->is_trackingquantity == 1) checked
+                                           @endif class="form-check-input" id="availabilitySwitch5">
                                 </span>
                             </label>
                         </div>
                         <div class="mb-4">
                             <label for="quantity">Quantity in Stock</label>
-                            <input type="number" value='{{ $product->quantity }}' name="quantity" id="quantity" @if($product->is_trackingquantity == 0) disabled @endif
-                                class="form-control" min="0">
+                            <input type="number" value='{{ $product->quantity }}' name="quantity" id="quantity"
+                                   @if($product->is_trackingquantity == 0) disabled @endif
+                                   class="form-control" min="0">
                         </div>
                         <label class="row form-switch mb-4" for="availabilitySwitch3">
                             <span class="col-8 col-sm-9 ms-0">
                                 <span class="text-dark">Backorder</span>
                             </span>
                             <span class="col-4 col-sm-3 text-end">
-                                <input type="checkbox" name="is_backorder" value="1" @if($product->is_backorder == 1) checked @endif class="form-check-input" id="availabilitySwitch3">
+                                <input type="checkbox" name="is_backorder" value="1"
+                                       @if($product->is_backorder == 1) checked @endif class="form-check-input"
+                                       id="availabilitySwitch3">
                             </span>
                         </label>
                         <label class="row form-switch mb-4" for="availabilitySwitch4">
@@ -359,7 +377,9 @@ $arrSelected = explode(',', $product->steps);
                                 <span class="text-dark">Made to Order</span>
                             </span>
                             <span class="col-4 col-sm-3 text-end">
-                                <input type="checkbox" name="is_madetoorder" value="1" @if($product->is_madetoorder == 1) checked @endif class="form-check-input" id="availabilitySwitch4">
+                                <input type="checkbox" name="is_madetoorder" value="1"
+                                       @if($product->is_madetoorder == 1) checked @endif class="form-check-input"
+                                       id="availabilitySwitch4">
                             </span>
                         </label>
                     </div>
@@ -383,8 +403,8 @@ $arrSelected = explode(',', $product->steps);
                                     <option disabled>Select category</option>
                                     @foreach ($categories as $categorie)
                                         <option value="{{ $categorie->id }}"
-                                            {{ $product->category == $categorie->id  ? 'selected' : ''  }}
-                                            data-tokens="{{ $categorie->category_name }}">
+                                                {{ $product->category == $categorie->id  ? 'selected' : ''  }}
+                                                data-tokens="{{ $categorie->category_name }}">
                                             {{ $categorie->category_name }}
                                         </option>
                                     @endforeach
@@ -394,9 +414,10 @@ $arrSelected = explode(',', $product->steps);
                         <div class="mb-4">
                             <label for="name" class="mb-2">Tags</label>
                             <select name="tags[]" id="tags" value="" class="form-control select2"
-                                multiple="multiple" style="width: 100%;">
+                                    multiple="multiple" style="width: 100%;">
                                 @foreach ($tags as $tag)
-                                    <option @if ($product->tags->contains('id_tag', $tag->id)) selected @endif value='{{ $tag->id }}'>
+                                    <option @if ($product->tags->contains('id_tag', $tag->id)) selected
+                                            @endif value='{{ $tag->id }}'>
                                         {{ $tag->name }} </option>
                                 @endforeach
                             </select>
@@ -414,15 +435,16 @@ $arrSelected = explode(',', $product->steps);
                     <!-- Body -->
                     <div class="card-body">
                         <p>
-                        @if ($product->product_3dpreview != null)
-                            <span class="badge btn-success"> 3d model attached </span>
-                            <p>{{$product->modelpreview->file_original_name . "." . $product->modelpreview->extension}}</p>
+                            @if ($product->product_3dpreview != null)
+                                <span class="badge btn-success"> 3d model attached </span>
+                        <p>{{$product->modelpreview->file_original_name . "." . $product->modelpreview->extension}}</p>
                         @else
                             <span class="badge btn-danger"> No 3d model attached</span>
-                        @endif
-                        </p>
-                        <label class="btn text-primary mt-2 p-0" id="getFileManagerModel">Select 3d model</label>
-                        <input type="d-none" id="fileManagerModelId" value="{{ $product->product_3dpreview }}" name="product_3dpreview">
+                            @endif
+                            </p>
+                            <label class="btn text-primary mt-2 p-0" id="getFileManagerModel">Select 3d model</label>
+                            <input type="d-none" id="fileManagerModelId" value="{{ $product->product_3dpreview }}"
+                                   name="product_3dpreview">
                     </div>
                 </div>
                 <!-- Card -->
@@ -437,11 +459,12 @@ $arrSelected = explode(',', $product->steps);
                     <div class="card-body">
                         <div class="imagePreview img-thumbnail p-2">
                             <img id="fileManagerPreview"
-                                src="{{ $product->uploads->getImageOptimizedFullName(400) }}"
-                                style="width: 100%">
+                                 src="{{ $product->uploads->getImageOptimizedFullName(400) }}"
+                                 style="width: 100%">
                         </div>
                         <label class="btn text-primary mt-2 p-0" id="getFileManager">Select thumbnail</label>
-                        <input type="hidden" id="fileManagerId" value="{{$product->product_thumbnail}}" name="product_thumbnail">
+                        <input type="hidden" id="fileManagerId" value="{{$product->product_thumbnail}}"
+                               name="product_thumbnail">
                     </div>
                 </div>
                 <!-- End Card -->
@@ -457,15 +480,16 @@ $arrSelected = explode(',', $product->steps);
                     <!-- Body -->
                     <div class="card-body">
                         <p>
-                        @if ($product->digital_download_assets)
-                            <span class="badge btn-success"> Digital asset attached </span>
-                            <p>{{$product->digital->file_original_name . "." . $product->digital->extension}}</p>
+                            @if ($product->digital_download_assets)
+                                <span class="badge btn-success"> Digital asset attached </span>
+                        <p>{{$product->digital->file_original_name . "." . $product->digital->extension}}</p>
                         @else
                             <span class="badge btn-danger"> No digital asset attached</span>
-                        @endif
-                        </p>
-                        <label class="btn text-primary mt-2 p-0" id="getFileManagerAsset">Select asset</label>
-                        <input type="hidden" id="digital_download_assets" name="digital_download_assets" value="{{ $product->digital_download_assets }}" >
+                            @endif
+                            </p>
+                            <label class="btn text-primary mt-2 p-0" id="getFileManagerAsset">Select asset</label>
+                            <input type="hidden" id="digital_download_assets" name="digital_download_assets"
+                                   value="{{ $product->digital_download_assets }}">
                     </div>
                 </div>
                 <!-- End Card -->
@@ -484,7 +508,10 @@ $arrSelected = explode(',', $product->steps);
                         <select name="tax_option_id" id="tax_option_id" class="form-control">
                             <option value="0">Not Taxable</option>
                             @foreach ($taxes as $tax)
-                                <option @if ($product->tax_option_id == $tax->id) selected @endif value="{{ $tax->id }}">{{ $tax->name }} - {{ $tax->price / 100 }} ({{ $tax->type }})</option>
+                                <option @if ($product->tax_option_id == $tax->id) selected
+                                        @endif value="{{ $tax->id }}">{{ $tax->name }} - {{ $tax->price / 100 }}
+                                    ({{ $tax->type }})
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -526,196 +553,197 @@ $arrSelected = explode(',', $product->steps);
 @endsection
 
 @section('js_content')
-<script>
-    var createChecks = $('#all_checks').val() === '' ? [] : $('#all_checks').val().split(",");
+    <script>
+      var createChecks = $('#all_checks').val() === '' ? [] : $('#all_checks').val().split(",");
 
-    $(document).ready(function() {
+      $(document).ready(function () {
         $("ul.droptrue").sortable({
-        connectWith: "ul"
-        });
-    
-        $( "#srtUnselected, #srtSelected" ).disableSelection();
-
-        $('body').on('submit', '#frmUpdateProduct', function() {
-            var step_ids = [];
-            $('#srtSelected li').each(function() {
-                step_ids.push($(this).data('id'));
-            });
-
-            $('#hidStepIds').val(step_ids.join(','));
+          connectWith: "ul"
         });
 
-        $('body').on('change', '#selStepType', function() {
-            var step_type = $(this).val();
-            // debugger;
-            if (step_type == 0) {
-                $('#divStepGroups').addClass('d-none');
-                $('#divSteps').addClass('d-none');
-            } else if (step_type == 1) {
-                $('#divStepGroups').removeClass('d-none');
-                $('#divSteps').addClass('d-none');
-            } else {
-                $('#divStepGroups').addClass('d-none');
-                $('#divSteps').removeClass('d-none');
-            }
-        });
-    });
+        $("#srtUnselected, #srtSelected").disableSelection();
 
-    function removepreviewappended(id) {
-        createChecks = jQuery.grep(createChecks, function(value) {
-            return value != id;
+        $('body').on('submit', '#frmUpdateProduct', function () {
+          var step_ids = [];
+          $('#srtSelected li').each(function () {
+            step_ids.push($(this).data('id'));
+          });
+
+          $('#hidStepIds').val(step_ids.join(','));
+        });
+
+        $('body').on('change', '#selStepType', function () {
+          var step_type = $(this).val();
+          // debugger;
+          if (step_type == 0) {
+            $('#divStepGroups').addClass('d-none');
+            $('#divSteps').addClass('d-none');
+          } else if (step_type == 1) {
+            $('#divStepGroups').removeClass('d-none');
+            $('#divSteps').addClass('d-none');
+          } else {
+            $('#divStepGroups').addClass('d-none');
+            $('#divSteps').removeClass('d-none');
+          }
+        });
+      });
+
+      function removepreviewappended(id) {
+        createChecks = jQuery.grep(createChecks, function (value) {
+          return value != id;
         });
         $('#fileappend-' + id).remove();
         $('#all_checks').val(createChecks);
-    }
+      }
 
-    function selectFileFromManagerMultiple(id, preview) {
+      function selectFileFromManagerMultiple(id, preview) {
         if ($('#file-' + id).hasClass('selected')) {
-            $('#file-' + id).removeClass('selected')
-            $('#file-' + id).find('.check-this').fadeOut()
-            removepreviewappended(id);
+          $('#file-' + id).removeClass('selected')
+          $('#file-' + id).find('.check-this').fadeOut()
+          removepreviewappended(id);
         } else {
-            $('#file-' + id).addClass('selected')
-            $('#file-' + id).find('.check-this').fadeIn()
-            createChecks.push(id)
-            $('#fancyboxGallery').prepend(productImageDiv(id, preview))
+          $('#file-' + id).addClass('selected')
+          $('#file-' + id).find('.check-this').fadeIn()
+          createChecks.push(id)
+          $('#fancyboxGallery').prepend(productImageDiv(id, preview))
         }
         $('#all_checks').val(createChecks);
-    }
-    $(document).ready(function() {
+      }
+
+      $(document).ready(function () {
         $('.select2').select2({
 
-            tags: true,
-            maximumSelectionLength: 100,
-            tokenSeparators: [','],
-            placeholder: "Select or type keywords",
+          tags: true,
+          maximumSelectionLength: 100,
+          tokenSeparators: [','],
+          placeholder: "Select or type keywords",
         })
-    });
+      });
 
-    // check the digital setting turn on
-    $('#availabilitySwitch1').click(function () {
+      // check the digital setting turn on
+      $('#availabilitySwitch1').click(function () {
         if ($('#availabilitySwitch1').prop('checked')) {
-            $('#digital_download_assets').val(0);
-            $('#digital_download_assets').parent().parent().show();
+          $('#digital_download_assets').val(0);
+          $('#digital_download_assets').parent().parent().show();
         } else {
-            $('#digital_download_assets').parent().parent().hide();
+          $('#digital_download_assets').parent().parent().hide();
         }
 
         if ($('#variantsbody').html() != '') {
-            var values_selected = $('#product_attribute_values').val()
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('backend.products.attributes.combinations') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "values": values_selected,
-                    'isDigital': $('#availabilitySwitch1').prop('checked') * 1
-                },
-                success: function(result) {
-                    $('#variantsbody').html(result)
-                }
-            })
+          var values_selected = $('#product_attribute_values').val()
+          $.ajax({
+            type: 'POST',
+            url: "{{ route('backend.products.attributes.combinations') }}",
+            data: {
+              "_token": "{{ csrf_token() }}",
+              "values": values_selected,
+              'isDigital': $('#availabilitySwitch1').prop('checked') * 1
+            },
+            success: function (result) {
+              $('#variantsbody').html(result)
+            }
+          })
         }
         // getVariants($('#availabilitySwitch1').prop('checked') * 1);
-    })
+      })
 
-    $('#availabilitySwitch5').click(function () {
+      $('#availabilitySwitch5').click(function () {
         var isTrackQuantity = $('#availabilitySwitch5').prop('checked');
 
         if (!isTrackQuantity) {
-            // $('#quantity').val(0);
-            $('#quantity').attr('disabled', 'true');
+          // $('#quantity').val(0);
+          $('#quantity').attr('disabled', 'true');
         } else {
-            $('#quantity').removeAttr('disabled');
+          $('#quantity').removeAttr('disabled');
         }
-    })
+      })
 
-    $('#getFileManagerForProducts').click(function () {
+      $('#getFileManagerForProducts').click(function () {
         $.ajax({
-            url: "{{ route('backend.file.show') }}",
-            success: function (data) {
-                if (!$.trim($('#fileManagerContainer').html()))
-                    $('#fileManagerContainer').html(data);
+          url: "{{ route('backend.file.show') }}",
+          success: function (data) {
+            if (!$.trim($('#fileManagerContainer').html()))
+              $('#fileManagerContainer').html(data);
 
-                $('#fileManagerModal').modal('show');
+            $('#fileManagerModal').modal('show');
 
-                const getSelectedItem = function (selectedId, filePath) {
-                    $('#fancyboxGallery').empty();
+            const getSelectedItem = function (selectedId, filePath) {
+              $('#fancyboxGallery').empty();
 
-                    createChecks = selectedId;
-                    $('#all_checks').val(createChecks);
+              createChecks = selectedId;
+              $('#all_checks').val(createChecks);
 
-                    selectedId.map(function (id, i) {
-                        $('#fancyboxGallery').prepend(productImageDiv(id, filePath[i]));
-                    });
-                }
-
-                setSelectedItemsCB(getSelectedItem, createChecks);
+              selectedId.map(function (id, i) {
+                $('#fancyboxGallery').prepend(productImageDiv(id, filePath[i]));
+              });
             }
-        })
-    });
 
-    var digital_download_assets = [];
-    $('#getFileManagerModel').click(function () {
+            setSelectedItemsCB(getSelectedItem, createChecks);
+          }
+        })
+      });
+
+      var digital_download_assets = [];
+      $('#getFileManagerModel').click(function () {
         $.ajax({
-            url: "{{ route('backend.file.show') }}",
-            success: function (data) {
-                if (!$.trim($('#fileManagerContainer').html()))
-                    $('#fileManagerContainer').html(data);
+          url: "{{ route('backend.file.show') }}",
+          success: function (data) {
+            if (!$.trim($('#fileManagerContainer').html()))
+              $('#fileManagerContainer').html(data);
 
-                $('#fileManagerModal').modal('show');
+            $('#fileManagerModal').modal('show');
 
-                const getSelectedItem = function (selectedId, filePath) {
+            const getSelectedItem = function (selectedId, filePath) {
 
-                    digital_download_assets = selectedId;
-                    $('#fileManagerModelId').val(digital_download_assets);
-                }
-
-                setSelectedItemsCB(getSelectedItem, digital_download_assets, false);
+              digital_download_assets = selectedId;
+              $('#fileManagerModelId').val(digital_download_assets);
             }
-        })
-    });
 
-    $('#getFileManagerAsset').click(function () {
+            setSelectedItemsCB(getSelectedItem, digital_download_assets, false);
+          }
+        })
+      });
+
+      $('#getFileManagerAsset').click(function () {
         $.ajax({
-            url: "{{ route('backend.file.show') }}",
-            success: function (data) {
-                if (!$.trim($('#fileManagerContainer').html()))
-                    $('#fileManagerContainer').html(data);
+          url: "{{ route('backend.file.show') }}",
+          success: function (data) {
+            if (!$.trim($('#fileManagerContainer').html()))
+              $('#fileManagerContainer').html(data);
 
-                $('#fileManagerModal').modal('show');
+            $('#fileManagerModal').modal('show');
 
-                const getSelectedItem = function (selectedId, filePath) {
+            const getSelectedItem = function (selectedId, filePath) {
 
-                    $('#digital_download_assets').val(selectedId);
-                }
-
-                setSelectedItemsCB(getSelectedItem, $('#digital_download_assets').val() == '' ? [] : [$('#digital_download_assets').val()], false);
+              $('#digital_download_assets').val(selectedId);
             }
-        })
-    });
 
-    $('#getFileManager').click(function () {
+            setSelectedItemsCB(getSelectedItem, $('#digital_download_assets').val() == '' ? [] : [$('#digital_download_assets').val()], false);
+          }
+        })
+      });
+
+      $('#getFileManager').click(function () {
         $.ajax({
-            url: "{{ route('backend.file.show') }}",
-            success: function (data) {
-                if (!$.trim($('#fileManagerContainer').html()))
-                    $('#fileManagerContainer').html(data);
+          url: "{{ route('backend.file.show') }}",
+          success: function (data) {
+            if (!$.trim($('#fileManagerContainer').html()))
+              $('#fileManagerContainer').html(data);
 
-                $('#fileManagerModal').modal('show');
+            $('#fileManagerModal').modal('show');
 
-                const getSelectedItem = function (selectedId, filePath) {
+            const getSelectedItem = function (selectedId, filePath) {
 
-                    $('#fileManagerId').val(selectedId);
-                    $('#fileManagerPreview').attr('src', filePath);
-                }
-
-                setSelectedItemsCB(getSelectedItem, $('#fileManagerId').val() == '' ? [] : [$('#fileManagerId').val()], false);
+              $('#fileManagerId').val(selectedId);
+              $('#fileManagerPreview').attr('src', filePath);
             }
+
+            setSelectedItemsCB(getSelectedItem, $('#fileManagerId').val() == '' ? [] : [$('#fileManagerId').val()], false);
+          }
         })
-    });
+      });
 
-</script>
+    </script>
 
-@stack('material_scripts')
+    @stack('material_scripts')
 @endsection

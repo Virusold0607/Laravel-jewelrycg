@@ -7,16 +7,21 @@ use App\Models\MaterialTypeDiamonds;
 class ProductMaterial extends Model
 {
     protected $fillable = [
-        'product_id', 'material_id', 'material_type_id', 'material_weight',
+        'product_id', 'product_attribute_value_id', 'material_id', 'material_type_id', 'material_weight',
         'is_diamond', 'diamond_id', 'diamond_amount'
     ];
 
     protected $appends = [
-        'material_name', 'material_type_name'
+        'material_name', 'material_type_name', 'attribute_name'
     ];
 
     public function material() {
         return $this->belongsTo(Material::class);
+    }
+
+    public function attribute()
+    {
+        return $this->belongsTo(AttributeValue::class, 'product_attribute_value_id', 'id');
     }
 
     public function material_type() {
@@ -29,6 +34,14 @@ class ProductMaterial extends Model
 
     public function getMaterialTypeNameAttribute() {
         return $this->material_type->type;
+    }
+
+    public function getAttributeNameAttribute()
+    {
+        if($this->attribute)
+            return $this->attribute->attribute->name . ' ' . $this->attribute->name;
+        else
+            return '';
     }
 
     public static function getMaterialsByProduct($product_id) {
