@@ -114,6 +114,14 @@
     $('#selAttributeValues').on('change', function (e) {
 
       let new_html = ''
+
+      if($('#selAttributeValues').val().length == 0){
+        new_html = '<div class="mb-3"><input type="hidden" name="txtAttributeValueIds[]" value="0">' +
+          '<label for="txtMaterialWeight_0" class="col-form-label">Material Weight:</label>' +
+          '<input type="text" class="form-control" id="txtMaterialWeight_0" value="">' +
+          '</div>'
+      }
+
       for(let i=0; i<selected_attributes.length; i++){
         for(let j=0; j<selected_attributes[i].values.length; j++){
           if($('#selAttributeValues').val().includes(String(selected_attributes[i].values[j].id))){
