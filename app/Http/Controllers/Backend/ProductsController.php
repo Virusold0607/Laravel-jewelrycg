@@ -281,6 +281,7 @@ class ProductsController extends Controller
         }
         if(isset($data['diamond_id'])) {
             $i = 0;
+            $material_order = -1;
             foreach ($data['product_material_id'] as $item) {
                 if($data['material_id'][$i] == 1) {
                     if(!$product_material_id[$i]) {
@@ -320,9 +321,13 @@ class ProductsController extends Controller
                         $price['natural_price'] = $data['natural_price'][$i];
                         MaterialTypeDiamondsPrices::create($price);
                     }
-                } else {    
-                    if(!$product_material_id[$i]) {            
+                } else {
+                    if($material_order == -1){
+                        $material_order = $i;
+                    }
+                    if(!$product_material_id[$i]) {
                         $temp['product_id'] = $product->id;
+                        $temp['product_attribute_value_id'] = $data['product_attribute_value_id'][$i - $material_order];
                         $temp['material_id'] = $data['material_id'][$i];
                         $temp['material_type_id'] = $data['material_type_id'][$i];
                         $temp['diamond_id'] = 0;
@@ -333,6 +338,7 @@ class ProductsController extends Controller
                     } else {
                         $product_material = ProductMaterial::find($product_material_id[$i]);            
                         $temp['product_id'] = $product->id;
+                        $temp['product_attribute_value_id'] = $data['product_attribute_value_id'][$i - $material_order];
                         $temp['material_id'] = $data['material_id'][$i];
                         $temp['material_type_id'] = $data['material_type_id'][$i];
                         $temp['diamond_id'] = 0;
