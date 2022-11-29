@@ -90,7 +90,7 @@
                             @endforeach
                         @endforeach
 
-                        @if(isset($values_selected) || !count($values_selected))
+                        @if(isset($values_selected) && in_array("", $values_selected))
                             <div class="mb-3">
                                 <input type="hidden" name="txtAttributeValueIds[]" value="0">
                                 <label for="txtMaterialWeight_0" class="col-form-label">Material Weight:</label>

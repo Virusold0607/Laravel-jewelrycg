@@ -114,6 +114,7 @@
                                            value="{{ $product_material->material_weight }}"/></td>
                             @endif
                             <td class='text-center action'>
+                                <input type="hidden" name="diamond_id[]">
                                 <input type="hidden" class="form-control" id="material_type_id"
                                        name="material_type_id[]" value="{{ $product_material->material_type_id }}"/>
                                 <input type="hidden" class="form-control" id="material_id" name="material_id[]"
