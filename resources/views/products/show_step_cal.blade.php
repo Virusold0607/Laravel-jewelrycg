@@ -195,19 +195,19 @@
   }
   getEstimatePrice()
 
-  let selectVariant = function(attribute_value_id){
+  let selectVariant = function (attribute_value_id) {
     $('.variant-select-item').removeClass('active')
-    $('.variant-select-item[data-attribute-value-id="'+ attribute_value_id +'"]').addClass('active')
+    $('.variant-select-item[data-attribute-value-id="' + attribute_value_id + '"]').addClass('active')
 
     filterMetalsByAttributeValue(attribute_value_id)
     $('.cal-select-item-wrapper:not(.d-none) .cal-select-item')[0].click()
   }
 
-  let filterMetalsByAttributeValue = function(attribute_value) {
+  let filterMetalsByAttributeValue = function (attribute_value) {
     $('.cal-select-item-wrapper').addClass('d-none')
 
-    for(let i=0; i<$('.cal-select-item').length; i++){
-      if($('.cal-select-item')[i].dataset.attributeValueId == attribute_value){
+    for (let i = 0; i < $('.cal-select-item').length; i++) {
+      if ($('.cal-select-item')[i].dataset.attributeValueId == attribute_value) {
         $('.cal-select-item')[i].parentElement.classList.remove('d-none')
       }
     }
@@ -258,7 +258,9 @@
     $('.printing_cost_title').html(goldWeightConstText)
     $('.printing_cost_amount').html("$" + goldWeightConst)
     $('.casting_cost_amount').html("$" + (metal_price * 0.15).toFixed(2))
-    var diamond_setting_cost = Number(($('.diamond_setting_cost_amount').html()).replace('$', ''))
+    var diamond_setting_cost = 0;
+    if ($('.diamond_setting_cost_amount').length)
+      var diamond_setting_cost = Number(($('.diamond_setting_cost_amount').html()).replace('$', ''))
 
     estimatedPrice += metal_price
     diamondtype_id = $('.diamondtype-select-item.active').data('diamondtype_id')
@@ -277,7 +279,6 @@
 
     $('#total_estimate_price').html('$' + estimatedPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
   }
-
 
 
 </script>
