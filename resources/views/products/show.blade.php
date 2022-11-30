@@ -1,6 +1,7 @@
-<x-app-layout page-title="{{$product->meta_title?$product->meta_title:$product->name}}" page-description="{{$product->meta_description}}">
+<x-app-layout page-title="{{$product->meta_title?$product->meta_title:$product->name}}"
+              page-description="{{$product->meta_description}}">
     <style>
-        .btn-check:active+.btn, .btn-check:checked+.btn, .btn.active, .btn.show, .btn:active {
+        .btn-check:active + .btn, .btn-check:checked + .btn, .btn.active, .btn.show, .btn:active {
             border: solid 1px white !important;
             outline: solid 2px #007bff !important;
         }
@@ -14,13 +15,16 @@
                     <div class="col-lg-6 col-12 px-0 py-3">
                         <div class="d-flex align-items-center">
                             <a href="/u/{{$product->user->username}}">
-                                <img id="fileManagerPreview" src="{{ $product->user->uploads->getImageOptimizedFullName(100,100) }}" class="product-seller rounded-circle h-60px mr-5px">
+                                <img id="fileManagerPreview"
+                                     src="{{ $product->user->uploads->getImageOptimizedFullName(100,100) }}"
+                                     class="product-seller rounded-circle h-60px mr-5px">
                             </a>
                             {{-- <img src="https://jewelrycg.com/assets/img/avatar.png" class="product-seller rounded-circle h-60px mr-5px" /> --}}
                             <div class="product-details-title px-2">
                                 <div class="fs-20 fw-600">{{ $product->name }}</div>
                                 <div class="link">
-                                    <span><a href="/u/{{$product->user->username}}">{{$product->user->username}}</a></span> <span> • Follow • Hire Us</span>
+                                    <span><a href="/u/{{$product->user->username}}">{{$product->user->username}}</a></span>
+                                    <span> • Follow • Hire Us</span>
                                 </div>
                             </div>
                         </div>
@@ -28,15 +32,17 @@
                     <div class="col-lg-auto col-12 ml-auto p-0">
                         <div class="product-details-price">
                             <div class="w-100">
-                                
+
                                 @if(Auth::id() != $product->vendor)
-                                <a class="btn btn-primary" href="{{route('create_chat_room',['conversation_id'=>$product->vendor])}}">Message</a>
-                                @endif     
+                                    <a class="btn btn-primary"
+                                       href="{{route('create_chat_room',['conversation_id'=>$product->vendor])}}">Message</a>
+                                @endif
                                 <a class="btn btn-primary product_price" href="#">
                                     <i class="bi bi-cart-plus p-1"></i>
                                     @if (count($variants))
                                         @if($minPrice != $maxPrice)
-                                            ${{ number_format($minPrice, 2, ".", ",") }} ~ ${{ number_format($maxPrice, 2, ".", ",") }}
+                                            ${{ number_format($minPrice, 2, ".", ",") }} ~
+                                            ${{ number_format($maxPrice, 2, ".", ",") }}
                                         @else
                                             ${{ number_format($minPrice, 2, ".", ",") }}
                                         @endif
@@ -66,28 +72,35 @@
                                             </button>
                                         </form>
                                     @endif
-                                    
-                                
-                               
-                          
-                                      <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+
+
+
+
+                                    <div class="modal fade" id="messageModal" tabindex="-1"
+                                         aria-labelledby="messageModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <h1 class="modal-title fs-5" id="messageModalLabel">Send message to seller</h1>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="messageModalLabel">Send message to
+                                                        seller</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <label for="message" class="form-label">Input message here</label>
+                                                    <textarea id="message" class="form-control"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary"
+                                                            data-bs-dismiss="modal" id="send-message">Send
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                              <label for="message" class="form-label">Input message here</label>
-                                              <textarea id="message" class="form-control"></textarea>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="send-message">Send</button>
-                                            </div>
-                                          </div>
                                         </div>
-                                      </div>
+                                    </div>
                                 @endauth
                             </div>
                         </div>
@@ -96,7 +109,12 @@
                 @if ($product->modelpreview->file_name != 'none.png')
                     <div class="product-3dmodel bg-white mb-4">
                         <div class="model-box border rounded h-500px p-2">
-                            <model-viewer class="model-full-hw" alt="{{ $product->name }} Preview" src="{{ asset('uploads/all/') }}/{{ $product->modelpreview->file_name }}" poster="{{ asset('assets/img/placeholder.jpg') }}" ar-scale="auto" poster="assets/img/placeholder.jpg" loading="lazy" ar-modes="webxr scene-viewer quick-look" shadow-intensity="0" camera-controls auto-rotate></model-viewer>
+                            <model-viewer class="model-full-hw" alt="{{ $product->name }} Preview"
+                                          src="{{ asset('uploads/all/') }}/{{ $product->modelpreview->file_name }}"
+                                          poster="{{ asset('assets/img/placeholder.jpg') }}" ar-scale="auto"
+                                          poster="assets/img/placeholder.jpg" loading="lazy"
+                                          ar-modes="webxr scene-viewer quick-look" shadow-intensity="0" camera-controls
+                                          auto-rotate></model-viewer>
                         </div>
                     </div>
                 @endif
@@ -106,7 +124,7 @@
                         @if ($key < 3)
                             <div class="carousel-box c-pointer col-6 col-lg-6 mb-3">
                                 <img src="{{ asset('uploads/all/') }}/{{ $image->file_name }}"
-                                    class="mw-100 mx-auto border rounded" alt="{{ $key }}">
+                                     class="mw-100 mx-auto border rounded" alt="{{ $key }}">
                             </div>
                         @endif
                     @endforeach
@@ -122,33 +140,33 @@
                                     <ul class="list-inline social fw-600 mb-0">
                                         <li class="list-inline-item">
                                             <a target="_self" href="mailto:?subject={{ $product->name }}&amp;body=#"
-                                                class="jssocials-share-link text-black fs-18">
+                                               class="jssocials-share-link text-black fs-18">
                                                 <i class="bi bi-envelope fs-20"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a target="_blank"
-                                                href="https://twitter.com/share?url=#&amp;text={{ $product->name }}"
-                                                class="jssocials-share-link text-black fs-18">
+                                               href="https://twitter.com/share?url=#&amp;text={{ $product->name }}"
+                                               class="jssocials-share-link text-black fs-18">
                                                 <i class="bi bi-twitter fs-20"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a target="_blank" href="https://facebook.com/sharer/sharer.php?u=#"
-                                                class="jssocials-share-link text-black fs-18">
+                                               class="jssocials-share-link text-black fs-18">
                                                 <i class="bi bi-facebook fs-20"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a target="_blank"
-                                                href="https://www.linkedin.com/shareArticle?mini=true&amp;url=#"
-                                                class="jssocials-share-link text-black fs-18">
+                                               href="https://www.linkedin.com/shareArticle?mini=true&amp;url=#"
+                                               class="jssocials-share-link text-black fs-18">
                                                 <i class="bi bi-linkedin fs-20"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a target="_self" href="whatsapp://send?text=#"
-                                                class="jssocials-share-link text-black fs-18">
+                                               class="jssocials-share-link text-black fs-18">
                                                 <i class="bi bi-whatsapp fs-20"></i>
                                             </a>
                                         </li>
@@ -180,7 +198,8 @@
                                         <strong class="h2 fw-400 text-black product_price">
                                             @if (count($variants))
                                                 @if($minPrice != $maxPrice)
-                                                    ${{ number_format($minPrice, 2, ".", ",") }} ~ ${{ number_format($maxPrice, 2, ".", ",") }}
+                                                    ${{ number_format($minPrice, 2, ".", ",") }} ~
+                                                    ${{ number_format($maxPrice, 2, ".", ",") }}
                                                 @else
                                                     ${{ number_format($minPrice, 2, ".", ",") }}
                                                 @endif
@@ -226,36 +245,59 @@
                                 </div>
                             @endif
                             <form action="{{ route('cart.store') }}" method="post" class="my-3"
-                                name="cart_star_form" id="cart_star_form">
+                                  name="cart_star_form" id="cart_star_form">
                                 @csrf
 
                                 <input type="hidden" name="variant_attribute_value" id="variant_attribute_value"
-                                    value="0">
+                                       value="0">
                                 @if (count($variants) > 0)
                                     <div class="variant-group mb-2">
                                         @foreach ($product->attribute() as $attribute)
                                             <div class="form-group mb-2">
-                                                <label for="" class="control-label opacity-50 my-2">{{ $attribute->name }}:</label>
+                                                <label for=""
+                                                       class="control-label opacity-50 my-2">{{ $attribute->name }}
+                                                    :</label>
                                                 <div class="col-md-10 mt-1">
                                                     <div class="variants-btn-group" data-toggle="buttons"
-                                                        id="variants_group">
+                                                         id="variants_group">
                                                         @foreach ($product->attributeValue($attribute->id) as $attributeValue)
                                                             @if ($attribute->type == 1)
-                                                            <!-- color type -->
-                                                                <input type="radio" class="attribute-radio btn-check attribute{{ $attribute->id }}" name="attribute{{ $attribute->id }}" value="{{ $attributeValue->id }}" id="attributeValue{{$attributeValue->id}}" autocomplete="off">
-                                                                <label class="btn btn-secondary me-2" for="attributeValue{{$attributeValue->id}}" style="background-color:{{$attributeValue->value}};border-color: white;border-radius: 50%;height: 50px;width: 50px;"></label>
+                                                                <!-- color type -->
+                                                                <input type="radio"
+                                                                       class="attribute-radio btn-check attribute{{ $attribute->id }}"
+                                                                       name="attribute{{ $attribute->id }}"
+                                                                       value="{{ $attributeValue->id }}"
+                                                                       id="attributeValue{{$attributeValue->id}}"
+                                                                       autocomplete="off">
+                                                                <label class="btn btn-secondary me-2"
+                                                                       for="attributeValue{{$attributeValue->id}}"
+                                                                       style="background-color:{{$attributeValue->value}};border-color: white;border-radius: 50%;height: 50px;width: 50px;"></label>
                                                             @endif
                                                             @if ($attribute->type == 2)
-                                                            <!-- image type -->
-                                                                <input type="radio" class="attribute-radio btn-check attribute{{ $attribute->id }}" name="attribute{{ $attribute->id }}" value="{{ $attributeValue->id }}" id="attributeValue{{$attributeValue->id}}" autocomplete="off">
-                                                                <label class="btn btn-secondary me-2 p-0" for="attributeValue{{$attributeValue->id}}" style="border: solid grey 1px;height: 52px;width: 52px;background-color: transparent;">
-                                                                    <img src="{{$attributeValue->image->getImageOptimizedFullName(50, 50)}}" class="" style="border-radius: 6px;"/>
+                                                                <!-- image type -->
+                                                                <input type="radio"
+                                                                       class="attribute-radio btn-check attribute{{ $attribute->id }}"
+                                                                       name="attribute{{ $attribute->id }}"
+                                                                       value="{{ $attributeValue->id }}"
+                                                                       id="attributeValue{{$attributeValue->id}}"
+                                                                       autocomplete="off">
+                                                                <label class="btn btn-secondary me-2 p-0"
+                                                                       for="attributeValue{{$attributeValue->id}}"
+                                                                       style="border: solid grey 1px;height: 52px;width: 52px;background-color: transparent;">
+                                                                    <img src="{{$attributeValue->image->getImageOptimizedFullName(50, 50)}}"
+                                                                         class="" style="border-radius: 6px;"/>
                                                                 </label>
                                                             @endif
                                                             @if ($attribute->type == 0)
-                                                            <!-- select type -->
-                                                                <input type="radio" class="attribute-radio btn-check attribute{{ $attribute->id }}" name="attribute{{ $attribute->id }}" value="{{ $attributeValue->id }}" id="attributeValue{{$attributeValue->id}}" autocomplete="off">
-                                                                <label class="btn btn-outline-primary me-2" for="attributeValue{{$attributeValue->id}}">{{$attributeValue->name}}</label>
+                                                                <!-- select type -->
+                                                                <input type="radio"
+                                                                       class="attribute-radio btn-check attribute{{ $attribute->id }}"
+                                                                       name="attribute{{ $attribute->id }}"
+                                                                       value="{{ $attributeValue->id }}"
+                                                                       id="attributeValue{{$attributeValue->id}}"
+                                                                       autocomplete="off">
+                                                                <label class="btn btn-outline-primary me-2"
+                                                                       for="attributeValue{{$attributeValue->id}}">{{$attributeValue->name}}</label>
                                                             @endif
                                                         @endforeach
                                                     </div>
@@ -267,22 +309,24 @@
 
                                 <input type="hidden" name="id_product" value="{{ $product->id }}">
                                 <button class="btn btn-primary shadow-md add-to-cart mt-4 d-none" type="submit"
-                                    {{ ($product->is_trackingquantity == 1 && $product->quantity < 1) || count($variants) > 0 ? 'disabled' : null }}  id="add_to_cart_btn">
+                                        {{ ($product->is_trackingquantity == 1 && $product->quantity < 1) || count($variants) > 0 ? 'disabled' : null }}  id="add_to_cart_btn">
                                     <div class="loader-container">
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        <span class="spinner-border spinner-border-sm" role="status"
+                                              aria-hidden="true"></span>
                                         Adding ...
                                     </div>
                                     <div class="orginal-name">Add to Cart</div>
                                 </button>
-                                <a id="view_order_btn" class="btn btn-primary shadow-md add-to-cart mt-4 d-none" href="{{ route('orders.index') }}">
+                                <a id="view_order_btn" class="btn btn-primary shadow-md add-to-cart mt-4 d-none"
+                                   href="{{ route('orders.index') }}">
                                     <div class="orginal-name">View Order</div>
                                 </a>
 
                                 <!--<button type="submit" formaction="{{ route('cart.buy.now') }}"
                                     class="btn btn-success shadow-md mt-4"
                                     {{ ($product->is_trackingquantity == 1 && $product->quantity < 1) || count($variants) > 0 ? 'disabled' : null }}
-                                    id="buy_now_btn">Buy Now</button>
-                                    -->
+                                id="buy_now_btn">Buy Now</button>
+-->
                             </form>
                         </div>
 
@@ -293,8 +337,8 @@
                 @if(isset($arrProductDiamonds) && count($arrProductDiamonds) > 0)
                     @include('products.show_diamonds')
                 @endif
-                    
-                @if (count($arrProductMaterials))    
+
+                @if (count($arrProductMaterials))
                     @include('products.show_step_cal')
                 @endif
 
@@ -309,8 +353,9 @@
                                 <div class="rate pb-3">
                                     @for ($i = 5; $i > 0; $i--)
                                         <input
-                                            type="radio" id="star{!! $i !!}" class="rate" name="rating" value="{!! $i !!}"
-                                            {{ $user_product_review?->rating == $i ? "checked" : "" }}
+                                                type="radio" id="star{!! $i !!}" class="rate" name="rating"
+                                                value="{!! $i !!}"
+                                                {{ $user_product_review?->rating == $i ? "checked" : "" }}
                                         />
                                         <label for="star{!! $i !!}">{{ $i }}</label>
                                     @endfor
@@ -320,7 +365,7 @@
                                         Rated at {{ $user_product_review->updated_at }}
                                     </div>
                                 @endif
-                                
+
                                 <div class="clearfix"></div>
 
                                 <div>
@@ -347,42 +392,43 @@
                     <div class="section-header-title mb-3 text-uppercase fw-700 border p-3 card rounded">Reviews</div>
                 </div>
                 @if ($review_count > 0)
-                <div class="card">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <div class="star-ratings me-auto ml-auto">
-                                <div class="fill-ratings" style="width: {{ $average_rating * 100 / 5 }}%;">
-                                    <span>★★★★★</span>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="star-ratings me-auto ml-auto">
+                                    <div class="fill-ratings" style="width: {{ $average_rating * 100 / 5 }}%;">
+                                        <span>★★★★★</span>
+                                    </div>
+                                    <div class="empty-ratings">
+                                        <span>★★★★★</span>
+                                    </div>
                                 </div>
-                                <div class="empty-ratings">
-                                    <span>★★★★★</span>
-                                </div>
+                                <h1 class="text-black fs-30 fw-700">{{ $average_rating }}</h1>
+                                <p>based on {{ $review_count }} reviews</>
                             </div>
-                            <h1 class="text-black fs-30 fw-700">{{ $average_rating }}</h1>
-                            <p>based on {{ $review_count }} reviews</>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div id="review_listing">
-                            @include('products.show_reviews')
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="review_listing">
+                                @include('products.show_reviews')
+                            </div>
                         </div>
                     </div>
-                </div>
                 @else
-                <div class="card">
-                    <div class="card-body">
-                        <p class="text-left mb-0">No reviews posted.</p>
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="text-left mb-0">No reviews posted.</p>
+                        </div>
                     </div>
-                </div>
                 @endif
             </div>
         </div>
     </section>
 
     {{-- data-bs-scroll="true" --}}
-    <div class="offcanvas offcanvas-end cart-drawer-panel" tabindex="-1" id="cartDrawer" aria-labelledby="cartDrawerLabel">
+    <div class="offcanvas offcanvas-end cart-drawer-panel" tabindex="-1" id="cartDrawer"
+         aria-labelledby="cartDrawerLabel">
         <div class="offcanvas-header cart-drawer-header">
             <h5 class="offcanvas-title" id="cartDrawerLabel">Cart</h5>
             <button type="button" class="btn text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
@@ -401,136 +447,136 @@
 
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#frmRate').submit(function() {
-                if ($('.rate:checked').length == 0) {
-                    alert('Please rate the product');
-                    return false;
-                }
-            });
-
-            $('body').on('click', '.pagination a', function(e) {
-                var url = $(this).attr('href');
-                $.ajax({
-                    url: url,
-                    success: function (result) {
-                        $('#review_listing').html(result);
-                    }
-                });
-                e.preventDefault();
-            });
+      $(document).ready(function () {
+        $('#frmRate').submit(function () {
+          if ($('.rate:checked').length == 0) {
+            alert('Please rate the product');
+            return false;
+          }
         });
 
-        var variants = [];
-        $('.loader-container').hide();
-
-        @foreach ($variants as $variant)
-            var ids = '{{ $variant->variant_attribute_value }}';
-            ids = ids.split(',');
-
-            variants.push({
-                id: ids.sort().join(','),
-                price: '{{ $variant->variant_price }}'
-            })
-        @endforeach
-
-        $('.attribute-radio').click(function() {
-            var selectedAttributeValue = [];
-            var selectedAttributeCount = 0;
-
-            $('.variant-group').find('div.form-group').each(function(i, div) {
-                var name = $(div).find('input').attr('name');
-                var value = document.cart_star_form[name].value
-                selectedAttributeCount++;
-
-                if (value)
-                    selectedAttributeValue.push(value)
-            })
-            
-            if (selectedAttributeValue.length == selectedAttributeCount) {
-                $('#buy_now_btn, #add_to_cart_btn').removeAttr('disabled');
+        $('body').on('click', '.pagination a', function (e) {
+          var url = $(this).attr('href');
+          $.ajax({
+            url: url,
+            success: function (result) {
+              $('#review_listing').html(result);
             }
-            
-            variants.forEach(function(variant) {
-                if (variant.id == selectedAttributeValue.sort().join(',')) {
-                    $('#variant_attribute_value').val(variant.id)
-                    $('.product_price').text('$' + parseFloat((variant.price / 100).toFixed(2)).toLocaleString())
-                }
-            })
-
-            onVariantClick($(this).val());
+          });
+          e.preventDefault();
         });
-        
-        var purchaseInfo = {!!$purchaseInfo!!};
-        
-        if (variants.length == 0 && purchaseInfo.length > 0 && purchaseInfo[0].count > 0) {
-            $("#add_to_cart_btn").addClass("d-none");
+      });
+
+      var variants = [];
+      $('.loader-container').hide();
+
+      @foreach ($variants as $variant)
+      var ids = '{{ $variant->variant_attribute_value }}';
+      ids = ids.split(',');
+
+      variants.push({
+        id: ids.sort().join(','),
+        price: '{{ $variant->variant_price }}'
+      })
+      @endforeach
+
+      $('.attribute-radio').click(function () {
+        var selectedAttributeValue = [];
+        var selectedAttributeCount = 0;
+
+        $('.variant-group').find('div.form-group').each(function (i, div) {
+          var name = $(div).find('input').attr('name');
+          var value = document.cart_star_form[name].value
+          selectedAttributeCount++;
+
+          if (value)
+            selectedAttributeValue.push(value)
+        })
+
+        if (selectedAttributeValue.length == selectedAttributeCount) {
+          $('#buy_now_btn, #add_to_cart_btn').removeAttr('disabled');
+        }
+
+        variants.forEach(function (variant) {
+          if (variant.id == selectedAttributeValue.sort().join(',')) {
+            $('#variant_attribute_value').val(variant.id)
+            $('.product_price').text('$' + parseFloat((variant.price / 100).toFixed(2)).toLocaleString())
+          }
+        })
+
+        onVariantClick($(this).val());
+      });
+
+      var purchaseInfo = {!!$purchaseInfo!!};
+
+      if (variants.length == 0 && purchaseInfo.length > 0 && purchaseInfo[0].count > 0) {
+        $("#add_to_cart_btn").addClass("d-none");
+        $("#view_order_btn").removeClass("d-none");
+      } else {
+        $("#add_to_cart_btn").removeClass("d-none");
+        $("#view_order_btn").addClass("d-none");
+      }
+
+      var onVariantClick = function (variant) {
+        $("#add_to_cart_btn").addClass("d-none");
+        $("#view_order_btn").addClass("d-none");
+        for (var i in purchaseInfo) {
+          if (purchaseInfo[i].variant_attribute == variant && purchaseInfo[i].count > 0) {
             $("#view_order_btn").removeClass("d-none");
-        } else {
-            $("#add_to_cart_btn").removeClass("d-none");
-            $("#view_order_btn").addClass("d-none");
+            return;
+          }
         }
+        $("#add_to_cart_btn").removeClass("d-none");
+      }
 
-        var onVariantClick = function(variant) {
-            $("#add_to_cart_btn").addClass("d-none");
-            $("#view_order_btn").addClass("d-none");
-            for(var i in purchaseInfo) {
-                if(purchaseInfo[i].variant_attribute == variant && purchaseInfo[i].count > 0) {
-                    $("#view_order_btn").removeClass("d-none");
-                    return;
-                }
-            }
-            $("#add_to_cart_btn").removeClass("d-none");
-        }
+      document.cart_star_form.onsubmit = function () {
+        var data = {};
+        var formData = $('#cart_star_form').serializeArray();
+        formData.map(function (item) {
+          data[item.name] = item.value;
+        });
 
-        document.cart_star_form.onsubmit = function() {
-            var data = {};
-            var formData = $('#cart_star_form').serializeArray();
-            formData.map(function(item) {
-                data[item.name] = item.value;
-            });
+        $('.orginal-name').hide();
+        $('.loader-container').fadeIn();
 
-            $('.orginal-name').hide();
-            $('.loader-container').fadeIn();
+        $.ajax({
+          url: "{{ route('cart.store') }}",
+          method: 'post',
+          data: data,
+          success: function (data) {
+            $('.loader-container').hide();
+            $('.orginal-name').fadeIn();
 
             $.ajax({
-                url: "{{ route('cart.store') }}",
-                method: 'post',
-                data: data,
-                success: function(data) {
-                    $('.loader-container').hide();
-                    $('.orginal-name').fadeIn();
+              url: "{{ route('cart.count') }}",
+              method: 'get',
+              success: function (count) {
+                $('.cart-count').html(
+                  '<span class="cart-count-number">' +
+                  count + '</span>');
+              }
+            });
 
-                    $.ajax({
-                        url: "{{ route('cart.count') }}",
-                        method: 'get',
-                        success: function(count) {
-                            $('.cart-count').html(
-                                '<span class="cart-count-number">' +
-                                count + '</span>');
-                        }
-                    });
+            $('.cart-drawer-content').html(data);
+            var cartDrawer = new bootstrap.Offcanvas(document.getElementById(
+              'cartDrawer'));
+            cartDrawer.show();
+          }
+        })
 
-                    $('.cart-drawer-content').html(data);
-                    var cartDrawer = new bootstrap.Offcanvas(document.getElementById(
-                        'cartDrawer'));
-                    cartDrawer.show();
-                }
-            })
-
-            return false;
-        }
+        return false;
+      }
     </script>
-  <script>
-    (function() {
-      $('#send-message').click(async function (){
-        var message = $('#message').val();
+    <script>
+      (function () {
+        $('#send-message').click(async function () {
+          var message = $('#message').val();
 
-        if (message.length > 0) {
+          if (message.length > 0) {
 
-          $('#message').val();
-        }
-      })
-    })();
-  </script>
+            $('#message').val();
+          }
+        })
+      })();
+    </script>
 </x-app-layout>
