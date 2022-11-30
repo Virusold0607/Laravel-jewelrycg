@@ -266,6 +266,7 @@
                                                                 <input type="radio"
                                                                        class="attribute-radio btn-check attribute{{ $attribute->id }}"
                                                                        name="attribute{{ $attribute->id }}"
+                                                                       data-attribute-id="{{ $attribute->id }}"
                                                                        value="{{ $attributeValue->id }}"
                                                                        id="attributeValue{{$attributeValue->id}}"
                                                                        autocomplete="off">
@@ -278,6 +279,7 @@
                                                                 <input type="radio"
                                                                        class="attribute-radio btn-check attribute{{ $attribute->id }}"
                                                                        name="attribute{{ $attribute->id }}"
+                                                                       data-attribute-id="{{ $attribute->id }}"
                                                                        value="{{ $attributeValue->id }}"
                                                                        id="attributeValue{{$attributeValue->id}}"
                                                                        autocomplete="off">
@@ -293,6 +295,7 @@
                                                                 <input type="radio"
                                                                        class="attribute-radio btn-check attribute{{ $attribute->id }}"
                                                                        name="attribute{{ $attribute->id }}"
+                                                                       data-attribute-id="{{ $attribute->id }}"
                                                                        value="{{ $attributeValue->id }}"
                                                                        id="attributeValue{{$attributeValue->id}}"
                                                                        autocomplete="off">
@@ -505,6 +508,9 @@
         })
 
         onVariantClick($(this).val());
+
+        $('.item-value-card-wrapper').addClass('d-none')
+        $('.item-value-card-wrapper[data-attribute-id="'+ this.dataset.attributeId +'"][data-attribute-value-id="'+ this.value +'"]').removeClass('d-none')
       });
 
       var purchaseInfo = {!!$purchaseInfo!!};
@@ -566,6 +572,8 @@
 
         return false;
       }
+
+      $('.attribute-radio')[0].click()
     </script>
     <script>
       (function () {

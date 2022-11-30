@@ -1,6 +1,6 @@
 @php
-use App\Models\CurrentRate;
-$current_rate = CurrentRate::getLastRate();
+    use App\Models\CurrentRate;
+    $current_rate = CurrentRate::getLastRate();
 @endphp
 
 @if (count($arrProductMaterials))
@@ -38,7 +38,10 @@ $current_rate = CurrentRate::getLastRate();
                     }
                 @endphp
 
-                <div class="col-lg-4 col-6">
+                <div class="col-lg-4 col-6 item-value-card-wrapper"
+                     data-attribute-id="{{ $product_material->product_attribute_value_id == 0 ? 0 : $product_material->attribute->attribute->id }}"
+                     data-attribute-value-id="{{ $product_material->product_attribute_value_id }}"
+                >
                     <div class="border p-3 item-value-card card rounded mb-3">
                         <div class="item-value-card-body">
                             <div class="value-title pb-2 mb-2 text-uppercase fw-700">
