@@ -277,6 +277,18 @@ button.navbar-toggler {
   height: 100%;
   width: 100%;
 }
+.variant-select-item {
+  cursor: pointer;
+  border-color: #0057ff !important;
+  color: #0057ff;
+}
+.variant-select-item.active {
+  border: 1px solid #0057ff !important;
+  outline: 1px solid #0057ff;
+  outline-offset: 1px;
+  background-color: #0057ff;
+  color: white;
+}
 .cal-select-item.active {
     border: 1px solid #0057ff !important;
 }
