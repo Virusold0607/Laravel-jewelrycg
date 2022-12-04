@@ -7,6 +7,15 @@
     </style>
 @endsection
 @section('content')
+    <div class="d-flex justify-content-between align-items-center mb-30px">
+        <div class="d-flex align-items-end">
+            <img src="{{ $product->uploads->getImageOptimizedFullName(400) }}" class="w-50px">
+            <h2>{{ $product->name }}</h2>
+        </div>
+
+        <a href="{{ route('backend.products.edit', $product->id) }}" class="btn btn-sm btn-primary">Back to product</a>
+    </div>
+
     <form method="POST" action="{{ route('backend.products.update_product_materials') }}">
         @csrf
         <input type="hidden" name="product_id" value="{{ $product->id }}">
