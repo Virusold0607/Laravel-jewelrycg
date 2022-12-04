@@ -19,4 +19,14 @@ class MaterialTypeDiamondsPrices extends Model
     public function materialtypediamondsclarity() {
         return $this->hasMany('App\Models\MaterialTypeDiamondsClarity');
     }
+
+    public function material_type_diamonds_color()
+    {
+        return $this->belongsTo(MaterialTypeDiamondsColor::class, 'color', 'id');
+    }
+
+    public function material_type_diamonds_clarity()
+    {
+        return $this->belongsTo(MaterialTypeDiamondsClarity::class, 'clarity', 'id');
+    }
 }

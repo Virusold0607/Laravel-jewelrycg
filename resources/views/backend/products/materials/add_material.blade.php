@@ -18,6 +18,18 @@
             @if ($material->id == 1)
                 <div class="modal-body">
                     <div class="mb-3">
+                        <label for="name">Attributes values:</label>
+                        <select id="selectAttributeValues" value="" class="form-control select2"
+                                multiple="multiple" style="width: 100%;">
+
+                            @include('backend.products.attributes.values.ajax',[
+                                'attributes' => $selected_values,
+                                'values_selected' => $values_selected,
+                                'can_select_other_options' => false
+                            ])
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="selMaterialType" class="col-form-label">Diamond Types:</label>
                         <select id="selMaterialType" class="form-control">
                             @foreach ($material->types as $material_type)
@@ -104,7 +116,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 <button type="button" class="btn btn-primary btn-add-material"
-                        data-material-id="{{ $material->id }}">{{$material->id == 1 ? 'Update' : 'Add' }}</button>
+                        data-material-id="{{ $material->id }}">Add</button>
             </div>
         </div>
     </div>
@@ -112,15 +124,8 @@
 <script>
   let selected_attributes = @json($selected_values);
   $(document).ready(function () {
-    // var diamond_ids = $("input[name^='diamond_id']").map(function (idx, ele) {
-    //         return $(ele).val();
-    //     }).get();
-    // for (let index = 0; index < diamond_ids.length; index++) {
-    //     const element = diamond_ids[index];
-    //     $("#DiamondSize option[value='"+element+"']").remove();
-    // }
-    $('#selAttributeValues').on('change', function (e) {
 
+    $('#selAttributeValues').on('change', function (e) {
       let new_html = ''
 
       if($('#selAttributeValues').val().length == 0){

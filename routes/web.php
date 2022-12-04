@@ -123,6 +123,9 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::get('/get', [ProductsController::class, 'get'])->name('get');
         Route::put('/update_digital_assets/{id}', [ProductsController::class, 'update_digital_assets'])->name('update_digital_assets');
         Route::put('/update_variant_assets/{id}', [ProductsController::class, 'update_variant_assets'])->name('update_variant_assets');
+
+        Route::get('/product_materials/{id}', [ProductsController::class, 'product_materials'])->name('product_materials');
+        Route::post('/update_product_materials', [ProductsController::class, 'update_product_materials'])->name('update_product_materials');
     });
 
     //users routes

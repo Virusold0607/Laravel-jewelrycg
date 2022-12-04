@@ -244,4 +244,20 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'vendor');
     }
+
+    public function product_materials()
+    {
+        return $this->hasMany(ProductMaterial::class, 'product_id', 'id');
+    }
+
+    public function product_materials_by_material_id($material_id)
+    {
+        $product_materials = ProductMaterial::where('material_id', $material_id)
+            ->where('product_id', $this->id)
+            ->orderBy('product_attribute_value_id', 'asc')
+            ->orderBy('material_type_id', 'asc')
+            ->get();
+
+        return $product_materials;
+    }
 }
