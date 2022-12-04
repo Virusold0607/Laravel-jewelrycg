@@ -444,6 +444,11 @@ class ProductsController extends Controller
         $material_type_diamonds_natural_prices = $request->material_type_diamonds_natural_price;
         $material_type_diamonds_lab_prices = $request->material_type_diamonds_lab_price;
 
+        $metal_product_material_ids = $request->metal_product_material_id;
+        $metal_material_type_ids = $request->metal_material_type_id;
+        $metal_product_attribute_value_ids = $request->metal_product_attribute_value_id;
+        $material_weights = $request->material_weight;
+
         ProductMaterial::whereNotIn('id', $product_material_ids)
             ->where('product_id', $product_id)
             ->where('is_diamond', 1)
@@ -482,6 +487,29 @@ class ProductsController extends Controller
             $material_type_diamonds_price->lab_price = $material_type_diamonds_lab_prices[$k];
 
             $material_type_diamonds_price->save();
+        }
+
+        ProductMaterial::whereNotIn('id', $metal_product_material_ids)
+            ->where('product_id', $product_id)
+            ->where('is_diamond', '<>', 1)
+            ->delete();
+
+        foreach ($metal_product_material_ids as $k => $metal_product_material_id) {
+            /* Update */
+            if ($metal_product_material_id) {
+                $product_material = ProductMaterial::find($metal_product_material_id);
+            } else {
+                $product_material = new ProductMaterial;
+                $product_material->product_id = $product_id;
+                $product_material->material_id = 2;
+                $product_material->is_diamond = 0;
+            }
+
+            $product_material->product_attribute_value_id = $metal_product_attribute_value_ids[$k];
+            $product_material->material_type_id = $metal_material_type_ids[$k];
+            $product_material->material_weight = $material_weights[$k];
+
+            $product_material->save();
         }
 
         return redirect()->back();
