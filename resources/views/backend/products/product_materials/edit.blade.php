@@ -68,7 +68,7 @@
                                            value="{{ $product_material->product_attribute_value_id }}">
                                 </td>
                                 <td>
-                                    <select name="material_type_diamonds_id[]" class="form-control">
+                                    <select name="material_type_diamonds_id[]" class="form-control select2">
                                         @foreach($material_type_diamonds as $material_type_diamond)
                                             @if($material_type_diamond->material_id == $product_material->material_id && $material_type_diamond->material_type_id == $product_material->material_type_id)
                                                 <option value="{{ $material_type_diamond->id }}" {{ $material_type_diamond->id == $product_material->diamond_id ? 'selected' : '' }}>{{ $material_type_diamond->mm_size }}</option>
@@ -80,7 +80,7 @@
                                     <input type="number" name="diamond_amount[]" value="{{ $product_material->diamond_amount }}" class="form-control">
                                 </td>
                                 <td>
-                                    <select class="form-control" name="material_type_diamonds_clarity_id[]">
+                                    <select class="form-control select2" name="material_type_diamonds_clarity_id[]">
                                         @foreach($material_type_diamonds_clarities as $material_type_diamonds_clarity)
                                             <option value="{{ $material_type_diamonds_clarity->id }}" {{ $material_type_diamonds_clarity->id == $product_material->material_type_diamonds_price($product_material->diamond_id)->material_type_diamonds_clarity->id ? 'selected' : '' }}>
                                                 {{ $material_type_diamonds_clarity->clarity_name }}
@@ -89,7 +89,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="form-control" name="material_type_diamonds_color_id[]">
+                                    <select class="form-control select2" name="material_type_diamonds_color_id[]">
                                         @foreach($material_type_diamonds_colors as $material_type_diamonds_color)
                                             <option value="{{ $material_type_diamonds_color->id }}" {{ $material_type_diamonds_color->id == $product_material->material_type_diamonds_price($product_material->diamond_id)->material_type_diamonds_color->id ? 'selected' : '' }}>
                                                 {{ $material_type_diamonds_color->color_name }}
@@ -222,17 +222,17 @@
 
               /* if current attribute_value id is existed in current DB */
               if ($('tr[data-diamond-attribute-value-id="' + diamond_attribute_values[i] + '"]').length == 0) {
-                new_html = '<tr data-diamond-attribute-value-id="' + attribute_value.id + '"><td colspan="7"><div class="text-primary">' + attribute_value.value + ' ' + attribute_value.name + '</div></td></tr>'
+                new_html = '<tr data-diamond-attribute-value-id="' + diamond_attribute_values[i] + '"><td colspan="7"><div class="text-primary">' + (attribute_value ? attribute_value.value + ' ' + attribute_value.name : 'No Attribute') + '</div></td></tr>'
               }
 
-              new_html += '<tr data-product-material-id="0" data-unique-key="' + attribute_value.id + '_' + diamond_material_type_value + '_' + diamond.id + '" data-diamond-attribute-value-id="' + attribute_value.id + '">' +
+              new_html += '<tr data-product-material-id="0" data-unique-key="' + diamond_attribute_values[i] + '_' + diamond_material_type_value + '_' + diamond.id + '" data-diamond-attribute-value-id="' + diamond_attribute_values[i] + '">' +
                 '<td>' + material_type.type +
                 '<input type="hidden" name="product_material_id[]" value="0">' +
                 '<input type="hidden" name="material_type_id[]" value="' + diamond_material_type_value + '">' +
-                '<input type="hidden" name="product_attribute_value_id[]" value="' + attribute_value.id + '">' +
+                '<input type="hidden" name="product_attribute_value_id[]" value="' + diamond_attribute_values[i] + '">' +
                 '</td>';
               new_html += '<td>' +
-                '<select name="material_type_diamonds_id[]" class="form-control">';
+                '<select name="material_type_diamonds_id[]" class="form-control select2">';
               for (let k = 0; k < material_type_diamonds.length; k++) {
                 if (material_type_diamonds[k].material_id == 1 && material_type_diamonds[k].material_type_id == diamond_material_type_value) {
                   new_html += '<option value="' + material_type_diamonds[k].id + '"' + (material_type_diamonds[k].id == diamond.id ? 'selected' : '') + '>' + material_type_diamonds[k].mm_size + '</option>'
@@ -243,14 +243,14 @@
               new_html += '<td><input type="number" name="diamond_amount[]" class="form-control" value="0"></td>'
 
               material_type_diamonds_price = material_type_diamonds_prices.find(ele => ele.diamond_id == diamond.id)
-              new_html += '<td><select class="form-control" name="material_type_diamonds_clarity_id[]">';
+              new_html += '<td><select class="form-control select2" name="material_type_diamonds_clarity_id[]">';
               for (k = 0; k < material_type_diamonds_clarities.length; k++) {
                 new_html += '<option value="' + material_type_diamonds_clarities[k].id + '" ' + (material_type_diamonds_clarities[k].id == (material_type_diamonds_price ? material_type_diamonds_price.clarity : 3) ? 'selected' : '') + '>' + material_type_diamonds_clarities[k].name + '(' + material_type_diamonds_clarities[k].letters + ')' + '</option>'
               }
               new_html += '</select></td>';
 
 
-              new_html += '<td><select class="form-control" name="material_type_diamonds_color_id[]">'
+              new_html += '<td><select class="form-control select2" name="material_type_diamonds_color_id[]">'
               for (k = 0; k < material_type_diamonds_colors.length; k++) {
                 new_html += '<option value="' + material_type_diamonds_colors[k].id + '">' + material_type_diamonds_colors[k].name + ' ' + material_type_diamonds_colors[k].letters + '</option>'
               }
@@ -272,6 +272,16 @@
         }
 
         $('#add_diamond_modal').modal('hide')
+
+        $('#diamond_attribute_values_select').val([]).trigger("change");
+        $('#material_type_diamond_select').val([]).trigger("change");
+
+        $('.select2').select2({
+          tags: true,
+          maximumSelectionLength: 10,
+          tokenSeparators: [','],
+          placeholder: "Select or type keywords",
+        })
       }
 
       let delete_current_row = function (ele) {
@@ -293,6 +303,11 @@
         })
         $('#material_type_diamond_select').html(optiondata);
 
+        $('#material_type_diamond_select').val([]).trigger("change");
+      })
+
+      $('document').ready(function() {
+        $('#diamond_attribute_values_select').val([]).trigger("change");
         $('#material_type_diamond_select').val([]).trigger("change");
       })
     </script>
