@@ -15,4 +15,9 @@ class MaterialTypeDiamondsClarity extends Model
     public function clarity() {
         return $this->belongsTo('App\Models\MaterialTypeDiamondsPrices');
     }
+
+    public function getClarityNameAttribute()
+    {
+        return $this->name . '(' . $this->letters . ')';
+    }
 }

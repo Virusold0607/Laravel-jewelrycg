@@ -56,7 +56,7 @@
           }
         });
 
-        $('body').on('click', '.btn-add-material-modal', function () {
+        /*$('body').on('click', '.btn-add-material-modal', function () {
           var material_id = $(this).data('material_id');
           if (material_id == 1) {
             var modal = $(this).data('bs-target');
@@ -97,6 +97,7 @@
 
 
             let uIndexs = [...new Set(material_type_ids)];
+            debugger
 
             for (let index = 0; index < list[uIndexs[0]].length; index++) {
               const itemdata = list[uIndexs[0]][index];
@@ -127,19 +128,20 @@
             $("#selMaterialType").val(uIndexs[0]);
             $('#sizeSetValues').html(tempelement)
           }
-        });
+        });*/
 
 
-        $('#DiamondSize').on('select2:select', function (e) {
+        /*$('#DiamondSize').on('select2:select', function (e) {
           let data = e.params.data;
           let tempelement = '<div class="row" id="add_diamond_' + data.id + '">' +
+            '<div class="col-4"><label for="">Attribute Value</label></div>'
             '<div class="col-4">' +
             '<label for="diamondSizeId" class="col-form-label">Value</label>' +
             '<input type="hidden" class="form-control" name="diamondId[]" value="' + data.id + '">' +
             '<input type="hidden" class="form-control" name="product_materialid[]" value="">' +
             '<h6 id="diamondSizeId" name="diamond_sizename[]">' + data.text + '</h6>' +
             '</div>' +
-            '<div class="col-8">' +
+            '<div class="col-4">' +
             '<label for="diamondAmount" class="col-form-label">Amount</label>' +
             '<input type="text" class="form-control" name="diamondAmount[]">' +
             '</div>' +
@@ -156,7 +158,7 @@
             $(".meterial_list_" + material_id).append(deletedItem);
           }
           $("#add_diamond_" + data.id + "").remove();
-        })
+        })*/
 
         $('#selMaterialType').on('change', function (e) {
           let newValue = e.target.value;
@@ -217,196 +219,34 @@
           var material_type_id = $('#modalAddMaterial' + material_id + ' #selMaterialType').val();
           var material_weight = $('#modalAddMaterial' + material_id + ' #txtMaterialWeight').val();
           var material_typename = $("#modalAddMaterial" + material_id + " #selMaterialType option:selected").text();
-          if (material_id == 1) {
-            var diamond_ids = $('#DiamondSize').val();
-            var diamond_amounts = $("input[name^='diamondAmount']").map(function (idx, ele) {
-              return $(ele).val();
-            }).get();
-            var product_material_ids = $("input[name^='product_materialid']").map(function (idx, ele) {
-              return $(ele).val();
-            }).get();
-            var diamond_sizenames = $("h6[name^='diamond_sizename']").map(function (idx, ele) {
-              return $(ele).html();
-            }).get();
-            var deleted_material_ids = $("input[name^='deleted_material_ids']").map(function (idx, ele) {
-              return $(ele).val();
-            }).get();
-            var product_mids = $("input[name^='product_material_id']").map(function (idx, ele) {
-              return $(ele).val();
-            }).get();
-            var diamondIds = $("input[name^='diamond_id']").map(function (idx, ele) {
-              return $(ele).val();
-            }).get();
-          } else {
-            var diamond_amounts = '';
-            var diamond_ids = [];
-          }
+          var diamond_amounts = '';
+          var diamond_ids = [];
           $('#modalAddMaterial' + material_id + ' #txtMaterialWeight').val('');
           $('#modalAddMaterial' + material_id + ' #selMaterialType').val('');
           $('#modalAddMaterial' + material_id + ' #diamondAmount').val('');
           var trItemdata = '';
-          if (material_id == 1) {
-            product_mids.map(function (product_mid, key) {
-              for (let i = 0; i < deleted_material_ids.length; i++) {
-                const element = deleted_material_ids[i];
-                if (element == product_mid) {
-                  console.log(key, diamondIds)
-                  console.log(".pm" + diamondIds[key] + "_pmt" + material_type_id + "_m" + material_id)
-                  $(".pm" + diamondIds[key] + "_pmt" + material_type_id + "_m" + material_id).remove()
-                }
-              }
-            })
-            for (let index = 0; index < diamond_amounts.length; index++) {
-              let diamond_amount = diamond_amounts[index];
-              let diamond_sizename = diamond_sizenames[index];
-              let diamond_id = diamond_ids[index];
-              let diamondPrices = {!! json_encode($diamondPrices) !!};
-              let clarities = {!! json_encode($arrDiamondTypeClarity) !!};
-              let colors = {!! json_encode($arrDiamondTypeColors) !!};
-              let product_material_id = product_material_ids[index];
-              if ($('.pm' + diamond_id + '_pmt' + material_type_id + '_m' + material_id).length) {
-
-                let rowdata = '<td>' + material_typename + '</td>' +
-                  '<input type="hidden" class="form-control" id="product_material_id" name="product_material_id[]" value="' + (product_material_id != undefined ? product_material_id : '') + '" />' +
-                  '<td>' + diamond_sizename + '</td>' +
-                  '<td><input type="number" name="diamond_amount[]" class="form-control" value="' + diamond_amount + '" /></td>' +
-                  '<td>' +
-                  '<select class="form-control" name="diamond_clarity[]">';
-                if (typeof (clarities)) {
-                  clarities.map(function (clarity) {
-                    if (typeof (diamondPrices[diamond_id])) {
-                      rowdata += '<option value="' + clarity["id"] + '" ' + (clarity["id"] == diamondPrices[diamond_id]["clarity"] ? "selected" : "") + '>' + clarity["name"] + '(' + clarity["letters"] + ')</option>';
-                    } else {
-                      rowdata += '<option value="' + clarity["id"] + '">' + clarity["name"] + '(' + clarity["letters"] + ')</option>';
-                    }
-                  })
-                }
-                rowdata += '</select>' +
-                  '</td>' +
-                  '<td>' +
-                  '<select class="form-control" name="diamond_color[]">';
-                if (typeof (colors)) {
-                  colors.map(function (color) {
-                    if (typeof (diamondPrices[diamond_id])) {
-                      rowdata += '<option value="' + color["id"] + '" ' + (color["id"] == diamondPrices[diamond_id]["color"] ? "selected" : "") + '>' + color["name"] + '(' + color["letters"] + ')</option>';
-                    } else {
-                      rowdata += '<option value="' + color["id"] + '">' + color["name"] + '(' + color["letters"] + ')</option>';
-                    }
-                  })
-                }
-                rowdata += '</select>' +
-                  '</td>' +
-                  '<td><input type="text" name="lab_price[]" class="form-control" value="' + diamondPrices[diamond_id]["lab_price"] + '" /></td>' +
-                  '<td><input type="text" name="natural_price[]" class="form-control" value="' + diamondPrices[diamond_id]["natural_price"] + '" /></td>' +
-                  '<input type="hidden" name="material_weight[]" class="form-control" value="" />' +
-                  '<td class="text-center action">' +
-                  '<input type="hidden" class="form-control" id="diamond_id" name="diamond_id[]" value="' + diamond_id + '" />' +
-                  '<input type="hidden" class="form-control" id="material_type_id" name="material_type_id[]" value="' + material_type_id + '" />' +
-                  '<input type="hidden" class="form-control" id="material_id" name="material_id[]" value="' + material_id + '" />' +
-                  '<input type="hidden" class="form-control" id="is_diamond" name="is_diamond[]" value="' + (material_id == 1 ? 1 : 0) + '" />' +
-                  '<input type="hidden" class="form-control" name="diamond_mmsize[]" value="' + diamond_sizename + '" />' +
-                  '<button type="button" class="btn btn-sm btn-danger btn-delete-material" data-id="" >Delete</button>' +
-                  '</td>';
-                $('.pm' + diamond_id + '_pmt' + material_type_id + '_m' + material_id).html(rowdata);
-              } else {
-
-                let rowdata = '<tr class="pm' + diamond_id + '_pmt' + material_type_id + '_m' + material_id + '">' +
-                  '<td>' + material_typename + '</td>' +
-                  '<input type="hidden" class="form-control" id="product_material_id" name="product_material_id[]" value="' + (product_material_id != undefined ? product_material_id : '') + '" />' +
-                  '<td>' + diamond_sizename + '</td>' +
-                  '<td><input type="number" name="diamond_amount[]" class="form-control" value="' + diamond_amount + '" /></td>' +
-                  '<td>' +
-                  '<select class="form-control" name="diamond_clarity[]">';
-                if (typeof (clarities)) {
-                  clarities.map(function (clarity) {
-                    rowdata += '<option value="' + clarity["id"] + '">' + clarity["name"] + '(' + clarity["letters"] + ')</option>';
-                  })
-                }
-                rowdata += '</select>' +
-                  '</td>' +
-                  '<td>' +
-                  '<select class="form-control" name="diamond_color[]">';
-                if (typeof (colors)) {
-                  colors.map(function (color) {
-                    rowdata += '<option value="' + color["id"] + '">' + color["name"] + '(' + color["letters"] + ')</option>';
-                  })
-                }
-                rowdata += '</select>' +
-                  '</td>' +
-                  '<td><input type="text" name="lab_price[]" class="form-control" value="" /></td>' +
-                  '<td><input type="text" name="natural_price[]" class="form-control" value="" /></td>' +
-                  '<input type="hidden" name="material_weight[]" class="form-control" value="" />' +
-                  '<td class="text-center action">' +
-                  '<input type="hidden" class="form-control" id="diamond_id" name="diamond_id[]" value="' + diamond_id + '" />' +
-                  '<input type="hidden" class="form-control" id="material_type_id" name="material_type_id[]" value="' + material_type_id + '" />' +
-                  '<input type="hidden" class="form-control" id="material_id" name="material_id[]" value="' + material_id + '" />' +
-                  '<input type="hidden" class="form-control" id="is_diamond" name="is_diamond[]" value="' + (material_id == 1 ? 1 : 0) + '" />' +
-                  '<input type="hidden" class="form-control" name="diamond_mmsize[]" value="' + diamond_sizename + '" />' +
-                  '<button type="button" class="btn btn-sm btn-danger btn-delete-material" data-id="" >Delete</button>' +
-                  '</td>' +
-                  '</tr>';
-                $(".meterial_list_" + material_id).append(rowdata);
-              }
-            }
-          } else {
-            for (let i = 0; i < attributeValueIds.length; i++) {
-              trItemdata += '<tr><td>' +  $('label[for="txtMaterialWeight_' + attributeValueIds[i] + '"]').text().substring($('label[for="txtMaterialWeight_' + attributeValueIds[i] + '"]').text().indexOf("(")+1, $('label[for="txtMaterialWeight_' + attributeValueIds[i] + '"]').text().lastIndexOf(")")) + '</td>' +
-                '<input type="hidden" name="product_attribute_value_id[]" value="' + attributeValueIds[i] +'">' +
-                '<td>' + material_typename + '</td>' +
-                '<input type="hidden" class="form-control" id="product_material_id" name="product_material_id[]" value="" />' +
-                '<input type="hidden" name="diamond_amount[]" class="form-control" value="" />' +
-                '<td><input type="number" name="material_weight[]" class="form-control" value="' + $('#modalAddMaterial' + material_id + ' #txtMaterialWeight_' + attributeValueIds[i]).val() + '" /></td>' +
-                '<td class="text-center action">' +
-                '<input type="hidden" class="form-control" id="diamond_id" name="diamond_id[]" value="" />' +
-                '<input type="hidden" class="form-control" id="material_type_id" name="material_type_id[]" value="' + material_type_id + '" />' +
-                '<input type="hidden" class="form-control" id="material_id" name="material_id[]" value="' + material_id + '" />' +
-                '<input type="hidden" class="form-control" id="is_diamond" name="is_diamond[]" value="0" />' +
-                '<button type="button" class="btn btn-sm btn-danger btn-delete-material" data-id="" >Delete</button>' +
-                '</td>' +
-                '</tr>';
-            }
-
-            $(".meterial_list_" + material_id).append(trItemdata);
-          }
-          if (material_id == 1) {
-            if ($('.none-material-message' + material_id).length) {
-              $('.none-material-message' + material_id).remove()
-            }
-            $('#DiamondSize').val(null).trigger('change');
-            $('#modalAddMaterial' + material_id).modal('hide');
-            // $('#sizeSetValues').html('');
-          } else {
-            if ($('.none-material-message' + material_id).length) {
-              $('.none-material-message' + material_id).remove()
-            }
-            $('#modalAddMaterial' + material_id).modal('hide');
+          for (let i = 0; i < attributeValueIds.length; i++) {
+            trItemdata += '<tr><td>' +  $('label[for="txtMaterialWeight_' + attributeValueIds[i] + '"]').text().substring($('label[for="txtMaterialWeight_' + attributeValueIds[i] + '"]').text().indexOf("(")+1, $('label[for="txtMaterialWeight_' + attributeValueIds[i] + '"]').text().lastIndexOf(")")) + '</td>' +
+              '<input type="hidden" name="product_attribute_value_id[]" value="' + attributeValueIds[i] +'">' +
+              '<td>' + material_typename + '</td>' +
+              '<input type="hidden" class="form-control" id="product_material_id" name="product_material_id[]" value="" />' +
+              '<input type="hidden" name="diamond_amount[]" class="form-control" value="" />' +
+              '<td><input type="number" name="material_weight[]" class="form-control" value="' + $('#modalAddMaterial' + material_id + ' #txtMaterialWeight_' + attributeValueIds[i]).val() + '" /></td>' +
+              '<td class="text-center action">' +
+              '<input type="hidden" class="form-control" id="diamond_id" name="diamond_id[]" value="" />' +
+              '<input type="hidden" class="form-control" id="material_type_id" name="material_type_id[]" value="' + material_type_id + '" />' +
+              '<input type="hidden" class="form-control" id="material_id" name="material_id[]" value="' + material_id + '" />' +
+              '<input type="hidden" class="form-control" id="is_diamond" name="is_diamond[]" value="0" />' +
+              '<button type="button" class="btn btn-sm btn-danger btn-delete-material" data-id="" >Delete</button>' +
+              '</td>' +
+              '</tr>';
           }
 
-          // $.ajax({
-          //     type: 'POST',
-          //     url: "{{ route('backend.products.materials.store') }}",
-          //     data: {
-          //         "_token": "{{ csrf_token() }}",
-          //         "product_id": product_id,
-          //         "material_type_id": material_type_id,
-          //         "material_weight": material_weight,
-          //         "diamond_amount": diamond_amount,
-          //         "diamond_ids": diamond_ids
-          //     },
-          //     dataType: "json",
-          //     success: (result) => {
-          //         $('#modalAddMaterial' + material_id).modal('hide');
-          //         var materials_html = result.materials_html;
-          //         replaceMaterialsHtml(materials_html);
-          //     },
-          //     error: (resp) => {
-          //         var result = resp.responseJSON;
-          //         if (result.errors && result.message) {
-          //             alert(result.message);
-          //             return;
-          //         }
-          //     }
-          // });
+          $(".meterial_list_" + material_id).append(trItemdata);
+          if ($('.none-material-message' + material_id).length) {
+            $('.none-material-message' + material_id).remove()
+          }
+          $('#modalAddMaterial' + material_id).modal('hide');
         });
 
         $('body').on('click', '.btn-edit-material', function () {

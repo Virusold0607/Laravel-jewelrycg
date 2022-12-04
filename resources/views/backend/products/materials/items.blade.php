@@ -4,10 +4,14 @@
         <div class="card-header">
             <h4 class="card-header-title mb-0">{{ $material->name }}</h4>
 
+            @if($material->id == 1)
+                <a href="{{ route('backend.products.product_materials', $product->id) }}" class="btn btn-sm btn-primary btn-add-material-modal">Add {{ $material->name }}</a>
+            @else
             <button type="button" class="btn btn-sm btn-primary btn-add-material-modal"
                     data-bs-toggle="modal" data-bs-target="#modalAddMaterial{{ $material->id }}"
                     data-material_id="{{ $material->id }}"
             >Add {{ $material->name}}</button>
+            @endif
         </div>
         <!-- End Header -->
 
@@ -16,6 +20,7 @@
                 <thead>
                 @if($material->id == 1)
                     <tr>
+                        <th>Attribute Value</th>
                         <th>Diamond</th>
                         <th>Diamond size</th>
                         <th>Diamond amount</th>
@@ -40,10 +45,8 @@
                     @foreach ($arrProductMaterials[$material->id] as $product_material)
                         <tr class="pm{{$product_material->diamond_id}}_pmt{{$product_material->material_type_id}}_m{{$material->id}}">
                             <!-- {{-- <td>{{ $product_material->material_type }}</td> --}} -->
-                            @if($material->id != 1)
-                                <td>{{ $product_material->attribute_name }}</td>
-                                <input type="hidden" name="product_attribute_value_id[]" value="{{ $product_material->product_attribute_value_id }}">
-                            @endif
+                            <td>{{ $product_material->attribute_name }}</td>
+                            <input type="hidden" name="product_attribute_value_id[]" value="{{ $product_material->product_attribute_value_id }}">
                             <td>{{ $product_material->material_type_name }}</td>
                             <input type="hidden" class="form-control" id="product_material_id"
                                    name="product_material_id[]" value="{{ $product_material->id }}"/>

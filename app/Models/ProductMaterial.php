@@ -28,6 +28,11 @@ class ProductMaterial extends Model
         return $this->belongsTo(MaterialType::class);
     }
 
+    public function material_type_diamond()
+    {
+        return $this->belongsTo(MaterialTypeDiamonds::class, 'diamond_id');
+    }
+
     public function getMaterialNameAttribute() {
         return $this->material->name;
     }
@@ -86,5 +91,11 @@ class ProductMaterial extends Model
         ))->render();
 
         return $materials_html;
+    }
+
+    public function material_type_diamonds_price($diamond_id)
+    {
+        return MaterialTypeDiamondsPrices::where('diamond_id', $diamond_id)
+            ->first();
     }
 }

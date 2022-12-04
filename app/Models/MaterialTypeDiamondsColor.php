@@ -15,4 +15,9 @@ class MaterialTypeDiamondsColor extends Model
     public function color() {
         return $this->belongsTo('App\Models\MaterialTypeDiamondsPrices');
     }
+
+    public function getColorNameAttribute()
+    {
+        return $this->name . ' ' . $this->letters;
+    }
 }

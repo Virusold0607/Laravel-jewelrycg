@@ -11,7 +11,7 @@ class MaterialType extends Model
     ];
     
     protected $appends = [
-        'material_name', 'author_name'
+        'material_name'
     ];
 
     public function material() {
