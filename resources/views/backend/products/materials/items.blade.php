@@ -3,15 +3,7 @@
         <!-- Header -->
         <div class="card-header">
             <h4 class="card-header-title mb-0">{{ $material->name }}</h4>
-
-            @if($material->id == 1)
-                <a href="{{ route('backend.products.product_materials', $product->id) }}" class="btn btn-sm btn-primary btn-add-material-modal">Add {{ $material->name }}</a>
-            @else
-            <button type="button" class="btn btn-sm btn-primary btn-add-material-modal"
-                    data-bs-toggle="modal" data-bs-target="#modalAddMaterial{{ $material->id }}"
-                    data-material_id="{{ $material->id }}"
-            >Add {{ $material->name}}</button>
-            @endif
+            <a href="{{ route('backend.products.product_materials', $product->id) }}" class="btn btn-sm btn-primary btn-add-material-modal">Add {{ $material->name }}</a>
         </div>
         <!-- End Header -->
 
