@@ -11,7 +11,9 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="alert alert-info" role="alert"><strong>Step 1:</strong> Select US Ring Size.</div>
+            @php $step = 1 @endphp
+            @if($product->attributeValue(1)->count())
+            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select US Ring Size.</div>
             <div>
                 <label for="" class="control-label opacity-50 my-2">US Ring Size:</label>
                 <div class="accordion-body d-flex">
@@ -25,7 +27,9 @@
                     @endforeach
                 </div>
             </div>
-            <div class="alert alert-info" role="alert"><strong>Step 2:</strong> Select the metal below you want to make
+            @php $step++; @endphp
+            @endif
+            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the metal below you want to make
                 this item with.
             </div>
             <div id="">
@@ -88,7 +92,10 @@
                     </div>
                 </div>
             </div>
-            <div class="alert alert-info" role="alert"><strong>Step 3:</strong> Select the type of diamond you want to
+            @php
+                $step++;
+            @endphp
+            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the type of diamond you want to
                 below.
             </div>
             <div>
