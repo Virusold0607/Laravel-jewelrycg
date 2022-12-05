@@ -511,6 +511,9 @@
 
         $('.item-value-card-wrapper').addClass('d-none')
         $('.item-value-card-wrapper[data-attribute-id="'+ this.dataset.attributeId +'"][data-attribute-value-id="'+ this.value +'"]').removeClass('d-none')
+
+        $('.diamond').addClass('d-none')
+        $('.diamond[data-product-attribute-value-id="'+ this.value +'"]').removeClass('d-none')
       });
 
       var purchaseInfo = {!!$purchaseInfo!!};
@@ -573,7 +576,8 @@
         return false;
       }
 
-      $('.attribute-radio')[0].click()
+      if($('.attribute-radio').length)
+        $('.attribute-radio')[0].click()
     </script>
     <script>
       (function () {

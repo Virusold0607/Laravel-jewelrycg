@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         @foreach ($arrProductDiamonds as $diamond)
-                            <tr>
+                            <tr data-product-attribute-value-id="{{ $diamond->product_attribute_value_id }}" class="diamond">
                                 <td>{{ $diamond->typename }}</td>
                                 <td>{{ $diamond->mm_size }} mm</td>
                                 <td class="product_diamond_amount">{{ $diamond->diamond_amount }}</td>

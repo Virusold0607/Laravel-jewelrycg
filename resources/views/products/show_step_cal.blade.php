@@ -13,23 +13,24 @@
         <div class="card-body">
             @php $step = 1 @endphp
             @if($product->attributeValue(1)->count())
-            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select US Ring Size.</div>
-            <div>
-                <label for="" class="control-label opacity-50 my-2">US Ring Size:</label>
-                <div class="accordion-body d-flex">
-                    @foreach($product->attributeValue(1) as $k => $att)
-                        <div class="border p-2 item-value-card mb-3 rounded mr-10px w-50px h-50px variant-select-item {{ $k == 0 ? 'active' : '' }}"
-                             data-attribute-value-id="{{ $att->id }}" onclick="selectVariant({{ $att->id }})">
-                            <div class="item-value-card-body">
-                                <div class="pt-2 fw-700 fs-14 text-center">{{ $att->name }}</div>
+                <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select US Ring Size.</div>
+                <div>
+                    <label for="" class="control-label opacity-50 my-2">US Ring Size:</label>
+                    <div class="accordion-body d-flex">
+                        @foreach($product->attributeValue(1) as $k => $att)
+                            <div class="border p-2 item-value-card mb-3 rounded mr-10px w-50px h-50px variant-select-item {{ $k == 0 ? 'active' : '' }}"
+                                 data-attribute-value-id="{{ $att->id }}" onclick="selectVariant({{ $att->id }})">
+                                <div class="item-value-card-body">
+                                    <div class="pt-2 fw-700 fs-14 text-center">{{ $att->name }}</div>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            @php $step++; @endphp
+                @php $step++; @endphp
             @endif
-            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the metal below you want to make
+            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the metal below you
+                want to make
                 this item with.
             </div>
             <div id="">
@@ -95,7 +96,8 @@
             @php
                 $step++;
             @endphp
-            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the type of diamond you want to
+            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the type of diamond you
+                want to
                 below.
             </div>
             <div>
@@ -139,7 +141,7 @@
                             </tr>
 
                             @foreach ($arrProductDiamonds as $diamond)
-                                <tr class="natural_price">
+                                <tr class="natural_price" data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
                                     <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} *
                                         ${{ $diamond->natural_price }})
                                     </td>
@@ -148,7 +150,7 @@
                                 </tr>
                             @endforeach
                             @foreach ($arrProductDiamonds as $diamond)
-                                <tr class="lab_price">
+                                <tr class="lab_price" data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
                                     <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} *
                                         ${{ $diamond->lab_price }})
                                     </td>
@@ -208,6 +210,10 @@
 
     filterMetalsByAttributeValue(attribute_value_id)
     $('.cal-select-item-wrapper:not(.d-none) .cal-select-item')[0].click()
+    $('tr.natural_price').addClass('d-none')
+    $('tr.natural_price[data-attribute-value-id="'+ attribute_value_id +'"]').removeClass('d-none')
+    $('tr.lab_price').addClass('d-none')
+    $('tr.lab_price[data-attribute-value-id="'+ attribute_value_id +'"]').removeClass('d-none')
   }
 
   let filterMetalsByAttributeValue = function (attribute_value) {
@@ -219,8 +225,6 @@
       }
     }
   }
-
-  selectVariant($('.variant-select-item')[0].dataset.attributeValueId)
 
   $('.cal-select-item').on('click', function () {
     $('.cal-select-item').removeClass('active')
@@ -272,11 +276,11 @@
     estimatedPrice += metal_price
     diamondtype_id = $('.diamondtype-select-item.active').data('diamondtype_id')
     if (diamondtype_id == 1) {
-      $('.natural_price .product_diamond_price').map(function (idx, ele) {
+      $('.natural_price:not(.d-none) .product_diamond_price').map(function (idx, ele) {
         estimatedPrice += Number(($(ele).html()).replace('$', ''))
       })
     } else {
-      $('.lab_price .product_diamond_price').map(function (idx, ele) {
+      $('.lab_price:not(.d-none) .product_diamond_price').map(function (idx, ele) {
         estimatedPrice += Number(($(ele).html()).replace('$', ''))
       })
     }
@@ -287,5 +291,7 @@
     $('#total_estimate_price').html('$' + estimatedPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
   }
 
-
+  if ($('.variant-select-item').length){
+    selectVariant($('.variant-select-item')[0].dataset.attributeValueId)
+  }
 </script>
