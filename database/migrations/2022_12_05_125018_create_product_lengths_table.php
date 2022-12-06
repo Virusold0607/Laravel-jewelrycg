@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_lengths', function (Blueprint $table) {
+        Schema::create('product_measurement_relationships', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('value');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('measurement_id');
