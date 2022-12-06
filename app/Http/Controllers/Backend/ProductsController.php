@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductMeasurement;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -24,6 +25,7 @@ use App\Models\MaterialTypeDiamondsPrices;
 use App\Models\Step;
 use App\Models\StepGroup;
 use App\Models\AttributeValue;
+use App\Models\ProductMeasurementRelationship;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -191,6 +193,7 @@ class ProductsController extends Controller
     {
         $product = Product::whereId($id)->with(['tags', 'variants', 'variants.uploads'])->firstOrFail();
         $product->setPriceToFloat();
+        $product_measurements = ProductMeasurement::all();
 
         $variants = ProductsVariant::where('product_id', $id)->get();
 
@@ -219,6 +222,7 @@ class ProductsController extends Controller
 
         return view('backend.products.edit', [
             'product' => $product,
+            'product_measurements' => $product_measurements,
             'variants' => $variants,
             'categories' => ProductsCategorie::all(),
             'attributes' => Attribute::orderBy('id', 'DESC')->get(),
@@ -379,6 +383,22 @@ class ProductsController extends Controller
             ]);
 
         }
+
+        $product_measurement_values = $req->product_measurement_values;
+        $product_measurement_ids = $req->product_measurement_ids;
+
+        ProductMeasurementRelationship::where('product_id', $product->id)
+            ->whereNotIn('measurement_id', $product_measurement_ids)
+            ->delete();
+
+        $product_measurement_relationships = array();
+        foreach($product_measurement_values as $k => $product_measurement_value){
+            ProductMeasurementRelationship::updateOrCreate(
+                ['product_id' => $product->id, 'measurement_id' => $product_measurement_ids[$k]],
+                ['value' => $product_measurement_value]
+            );
+        }
+
         cache()->forget('todays-deals');
 
         return redirect()->route('backend.products.edit', $product->id);

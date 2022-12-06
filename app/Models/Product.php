@@ -260,4 +260,9 @@ class Product extends Model
 
         return $product_materials;
     }
+
+    public function measurements()
+    {
+        return $this->hasMany(ProductMeasurementRelationship::class, 'product_id', 'id');
+    }
 }

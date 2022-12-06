@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductMaterial;
+use App\Models\ProductMeasurementRelationship;
 use App\Models\ProductsCategorie;
 use App\Models\ProductsReview;
 use App\Models\ProductsVariant;
