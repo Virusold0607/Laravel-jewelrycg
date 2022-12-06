@@ -132,6 +132,18 @@
               </div>
 
               <div class="nav-item">
+                <a class="nav-link nav-link-main dropdown-toggle " href="#navbarVerticalMenuAllProductMeasurementsMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuAllProductMeasurementsMenu" aria-expanded="false" aria-controls="navbarVerticalMenuAllProductMeasurementsMenu">
+                  <i class="bi-folder2-open nav-icon"></i>
+                  {{ __("Product Measurements") }}
+                </a>
+
+                <div id="navbarVerticalMenuAllProductMeasurementsMenu" class="nav-collapse collapse @if($activePage == 'measurements') show @endif" data-bs-parent="#navbarVerticalMenuPagesMenu">
+                  <a class="nav-link @if($navName == 'all_measurements') active @endif" href="{{ route('backend.measurements.list') }}">{{ __("All measurements") }}</a>
+                  <a class="nav-link @if($navName == 'add_measurement') active @endif" href="{{ route('backend.measurements.create') }}">{{ __("Create measurement") }}</a>
+                </div>
+              </div>
+
+              <div class="nav-item">
                 <a class="nav-link nav-link-main dropdown-toggle " href="#navbarVerticalMenuAllDiamondMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuAllDiamondMenu" aria-expanded="false" aria-controls="navbarVerticalMenuAllDiamondMenu">
                   <i class="bi-folder2-open nav-icon"></i>
                   {{ __("Diamonds") }}

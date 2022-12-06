@@ -271,6 +271,16 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::get('/get', [MaterialsController::class, 'get'])->name('get');
     });
 
+    Route::group(['prefix' => 'measurements', 'as' => 'measurements.'], function() {
+        Route::get('/', ['App\Http\Controllers\Backend\MeasurementController', 'index'])->name('list');
+        Route::get('/get', ['App\Http\Controllers\Backend\MeasurementController', 'get'])->name('get');
+        Route::get('/create', ['App\Http\Controllers\Backend\MeasurementController', 'create'])->name('create');
+        Route::post('/store', ['App\Http\Controllers\Backend\MeasurementController', 'store'])->name('store');
+        Route::get('/edit/{id}', ['App\Http\Controllers\Backend\MeasurementController', 'edit'])->name('edit');
+        Route::post('/update', ['App\Http\Controllers\Backend\MeasurementController', 'update'])->name('update');
+        Route::get('/delete/{id}', ['App\Http\Controllers\Backend\MeasurementController', 'delete'])->name('delete');
+    });
+
     Route::group(['prefix' => 'diamond', 'as' => 'diamonds.'], function () {
         Route::get('/', [DiamondsController::class, 'index'])->name('list');
         Route::get('/create', [DiamondsController::class, 'create'])->name('create');

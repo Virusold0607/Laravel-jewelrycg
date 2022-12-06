@@ -201,6 +201,55 @@
 
                 @include('backend.products.materials.list')
 
+                {{-- Product Lengths information --}}
+                <div class="card col-md-12 mb-6">
+                    <div class="card-header">
+                        <h4 class="card-header-title">Product length</h4>
+                        <select id="select_product_measurement" class="form-control select2" multiple style="">
+                            @foreach($product_measurements as $product_measurement)
+                                @php $is_searched = 0; @endphp
+                                @foreach($product->measurements as $measurement)
+                                    @if($product_measurement->id == $measurement->measurement_id)
+                                        @php $is_searched = 1; @endphp
+                                    @endif
+                                @endforeach
+                                <option data-product-measurement-full-name="{{ $product_measurement->full_name }}"
+                                        value="{{ $product_measurement->id }}" {{ $is_searched ? 'selected' : '' }}>{{ $product_measurement->full_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="card-body row">
+                        <table class="table table-thead-bordered table-nowrap table-align-middle card-table table-responsive no-footer align-middle">
+                            <thead>
+                            <tr>
+                                <th>Value</th>
+                                <th>Measurement</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody id="product_measurement_table_body">
+                            @foreach($product->measurements as $measurement)
+                                <tr data-product-measurement-id="{{ $measurement->measurement_id }}">
+                                    <td><input type="text" class="form-control" name="product_measurement_values[]"
+                                               value="{{ $measurement->value }}" required></td>
+                                    <td>
+                                        {{ $measurement->product_measurement->full_name }}
+                                        <input type="hidden" name="product_measurement_ids[]" value="{{ $measurement->measurement_id }}">
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm" type="button"
+                                                onclick="delete_current_row(this)">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <div class="card col-md-12 mb-6">
                     <!-- Header -->
                     <div class="card-header">
@@ -743,6 +792,25 @@
         })
       });
 
+      let delete_current_row = function (ele) {
+        ele.closest('tr').remove()
+      }
+
+      $('#select_product_measurement').on('change', function (e) {
+        let sel_val = $('#select_product_measurement').val()
+        let new_html = ''
+        for (let i = 0; i < sel_val.length; i++) {
+          if($('tr[data-product-measurement-id="'+ sel_val[i] +'"]').length == 0){
+            new_html += '<tr data-product-measurement-relationship-id="'+ sel_val[i] +'">' +
+              '<td><input type="text" class="form-control" name="product_measurement_values[]" required></td>' +
+              '<td>' + $('#select_product_measurement option[value="' + sel_val[i] +'"]')[0].dataset.productMeasurementFullName +
+              '<input type="hidden" name="product_measurement_ids[]" value="'+ sel_val[i] +'"></td>' +
+              '<td><button type="button" class="btn btn-sm btn-danger" onclick="delete_current_row(this)">Delete</td>'
+          }
+        }
+
+        $('#product_measurement_table_body')[0].insertAdjacentHTML('beforeend', new_html)
+      })
     </script>
 
     @stack('material_scripts')

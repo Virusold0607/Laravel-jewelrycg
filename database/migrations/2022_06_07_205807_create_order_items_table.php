@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('product_isdigital');
             $table->string('product_isvirtual');
             $table->string('product_name');
-            $table->string('product_variant');->nullable();
-            $table->string('product_variant_name');->nullable();
-            $table->string('product_digital_download_assets');->nullable();
+            $table->string('product_variant')->nullable();
+            $table->string('product_variant_name')->nullable();
+            $table->string('product_digital_download_assets')->nullable();
             $table->string('product_thumbnail')->nullable();
             $table->tinyInteger('quantity')->unsigned();
             $table->integer('price')->unsigned();
