@@ -230,12 +230,14 @@
                             </thead>
                             <tbody id="product_measurement_table_body">
                             @foreach($product->measurements as $measurement)
-                                <tr data-product-measurement-id="{{ $measurement->measurement_id }}">
+                                <tr class="product-measurement-row"
+                                    data-product-measurement-id="{{ $measurement->measurement_id }}">
                                     <td><input type="text" class="form-control" name="product_measurement_values[]"
                                                value="{{ $measurement->value }}" required></td>
                                     <td>
                                         {{ $measurement->product_measurement->full_name }}
-                                        <input type="hidden" name="product_measurement_ids[]" value="{{ $measurement->measurement_id }}">
+                                        <input type="hidden" name="product_measurement_ids[]"
+                                               value="{{ $measurement->measurement_id }}">
                                     </td>
                                     <td>
                                         <button class="btn btn-danger btn-sm" type="button"
@@ -799,12 +801,18 @@
       $('#select_product_measurement').on('change', function (e) {
         let sel_val = $('#select_product_measurement').val()
         let new_html = ''
+        for (let i = 0; i < $('tr.product-measurement-row').length; i++) {
+          if(!sel_val.includes($('tr.product-measurement-row')[i].dataset.productMeasurementId)){
+            $('tr.product-measurement-row')[i].remove()
+          }
+        }
+
         for (let i = 0; i < sel_val.length; i++) {
-          if($('tr[data-product-measurement-id="'+ sel_val[i] +'"]').length == 0){
-            new_html += '<tr data-product-measurement-relationship-id="'+ sel_val[i] +'">' +
+          if ($('tr[data-product-measurement-id="' + sel_val[i] + '"]').length == 0) {
+            new_html += '<tr class="product-measurement-row" data-product-measurement-id="' + sel_val[i] + '">' +
               '<td><input type="text" class="form-control" name="product_measurement_values[]" required></td>' +
-              '<td>' + $('#select_product_measurement option[value="' + sel_val[i] +'"]')[0].dataset.productMeasurementFullName +
-              '<input type="hidden" name="product_measurement_ids[]" value="'+ sel_val[i] +'"></td>' +
+              '<td>' + $('#select_product_measurement option[value="' + sel_val[i] + '"]')[0].dataset.productMeasurementFullName +
+              '<input type="hidden" name="product_measurement_ids[]" value="' + sel_val[i] + '"></td>' +
               '<td><button type="button" class="btn btn-sm btn-danger" onclick="delete_current_row(this)">Delete</td>'
           }
         }
