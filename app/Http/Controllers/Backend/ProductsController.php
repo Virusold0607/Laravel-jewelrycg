@@ -384,8 +384,8 @@ class ProductsController extends Controller
 
         }
 
-        $product_measurement_values = $req->product_measurement_values;
-        $product_measurement_ids = $req->product_measurement_ids;
+        $product_measurement_values = $req->product_measurement_values ? $req->product_measurement_values : [];
+        $product_measurement_ids = $req->product_measurement_ids ? $req->product_measurement_ids: [];
 
         ProductMeasurementRelationship::where('product_id', $product->id)
             ->whereNotIn('measurement_id', $product_measurement_ids)
