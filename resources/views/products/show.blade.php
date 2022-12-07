@@ -329,7 +329,8 @@
                                     class="btn btn-success shadow-md mt-4"
                                     {{ ($product->is_trackingquantity == 1 && $product->quantity < 1) || count($variants) > 0 ? 'disabled' : null }}
                                 id="buy_now_btn">Buy Now</button>
--->
+                                -->
+
                             </form>
                         </div>
 
@@ -510,10 +511,10 @@
         onVariantClick($(this).val());
 
         $('.item-value-card-wrapper').addClass('d-none')
-        $('.item-value-card-wrapper[data-attribute-id="'+ this.dataset.attributeId +'"][data-attribute-value-id="'+ this.value +'"]').removeClass('d-none')
+        $('.item-value-card-wrapper[data-attribute-id="' + this.dataset.attributeId + '"][data-attribute-value-id="' + this.value + '"]').removeClass('d-none')
 
         $('.diamond').addClass('d-none')
-        $('.diamond[data-product-attribute-value-id="'+ this.value +'"]').removeClass('d-none')
+        $('.diamond[data-product-attribute-value-id="' + this.value + '"]').removeClass('d-none')
       });
 
       var purchaseInfo = {!!$purchaseInfo!!};
@@ -576,7 +577,7 @@
         return false;
       }
 
-      if($('.attribute-radio').length)
+      if ($('.attribute-radio').length)
         $('.attribute-radio')[0].click()
     </script>
     <script>

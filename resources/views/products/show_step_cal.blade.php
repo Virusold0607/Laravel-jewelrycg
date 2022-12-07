@@ -12,23 +12,46 @@
     <div class="card">
         <div class="card-body">
             @php $step = 1 @endphp
-            @if($product->attributeValue(1)->count())
-                <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select US Ring Size.</div>
+            @foreach($attributes as $attribute)
+                @if($product->attributeValue($attribute->id)->count())
+                    <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong>
+                        Select {{ $attribute->name }}.
+                    </div>
+                    <div>
+                        <label for="" class="control-label opacity-50 my-2">{{ $attribute->name }}:</label>
+                        <div class="accordion-body d-flex">
+                            @foreach($product->attributeValue($attribute->id ) as $k => $att)
+                                <div class="border p-2 item-value-card mb-3 rounded mr-10px h-50px variant-select-item {{ $k == 0 ? 'active' : '' }}"
+                                     data-attribute-value-id="{{ $att->id }}" onclick="selectVariant({{ $att->id }})">
+                                    <div class="item-value-card-body">
+                                        <div class="pt-2 fw-700 fs-14 text-center">{{ $att->name }}</div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @php $step++; @endphp
+                @endif
+            @endforeach
+            @if($product->measurements->count())
+                <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select Product Length.
+                </div>
                 <div>
-                    <label for="" class="control-label opacity-50 my-2">US Ring Size:</label>
+                    <label for="" class="control-label opacity-50 my-2">Product Length:</label>
                     <div class="accordion-body d-flex">
-                        @foreach($product->attributeValue(1) as $k => $att)
-                            <div class="border p-2 item-value-card mb-3 rounded mr-10px w-50px h-50px variant-select-item {{ $k == 0 ? 'active' : '' }}"
-                                 data-attribute-value-id="{{ $att->id }}" onclick="selectVariant({{ $att->id }})">
+                        @foreach($product->measurements as $k => $measurement)
+                            <div class="border p-2 item-value-card mb-3 rounded mr-10px h-50px product-measurement-select-item {{ $k == 0 ? 'active' : '' }}"
+                                 data-product-measurement-id="{{ $measurement->measurement_id }}"
+                                 onclick="select_product_measurement({{ $measurement->measurement_id }})">
                                 <div class="item-value-card-body">
-                                    <div class="pt-2 fw-700 fs-14 text-center">{{ $att->name }}</div>
+                                    <div class="pt-2 fw-700 fs-14 text-center">{{ $measurement->product_measurement->full_name }}</div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
-                @php $step++; @endphp
             @endif
+
             <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the metal below you
                 want to make
                 this item with.
@@ -132,7 +155,7 @@
                                class="table table-lg table-bordered table-nowrap table-align-middle card-table dataTable table-responsive no-footer">
                             <thead>
                             <th>Estimated Cost</th>
-                            <th id="total_estimate_price"></th>
+                            <th id="total_estimate_price" class="total-estimate-price"></th>
                             </thead>
                             <tbody>
                             <tr class="metal_price">
@@ -141,7 +164,8 @@
                             </tr>
 
                             @foreach ($arrProductDiamonds as $diamond)
-                                <tr class="natural_price" data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
+                                <tr class="natural_price"
+                                    data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
                                     <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} *
                                         ${{ $diamond->natural_price }})
                                     </td>
@@ -150,7 +174,8 @@
                                 </tr>
                             @endforeach
                             @foreach ($arrProductDiamonds as $diamond)
-                                <tr class="lab_price" data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
+                                <tr class="lab_price"
+                                    data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
                                     <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} *
                                         ${{ $diamond->lab_price }})
                                     </td>
@@ -173,6 +198,14 @@
                                 <td>Casting Cost</td>
                                 <td class="casting_cost_amount"></td>
                             </tr>
+                            @if($product->measurements->count())
+                                @foreach($product->measurements as $measurement)
+                                    <tr class="measurement" data-product-measurement-id="{{ $measurement->measurement_id }}">
+                                        <td>Length Cost(<span class="total-estimate-price"></span> X {{ $measurement->value }})</td>
+                                        <td class="total-price" data-measurement-value="{{ $measurement->value }}"></td>
+                                    </tr>
+                                @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -211,9 +244,9 @@
     filterMetalsByAttributeValue(attribute_value_id)
     $('.cal-select-item-wrapper:not(.d-none) .cal-select-item')[0].click()
     $('tr.natural_price').addClass('d-none')
-    $('tr.natural_price[data-attribute-value-id="'+ attribute_value_id +'"]').removeClass('d-none')
+    $('tr.natural_price[data-attribute-value-id="' + attribute_value_id + '"]').removeClass('d-none')
     $('tr.lab_price').addClass('d-none')
-    $('tr.lab_price[data-attribute-value-id="'+ attribute_value_id +'"]').removeClass('d-none')
+    $('tr.lab_price[data-attribute-value-id="' + attribute_value_id + '"]').removeClass('d-none')
   }
 
   let filterMetalsByAttributeValue = function (attribute_value) {
@@ -288,10 +321,23 @@
     estimatedPrice += Number((metal_price * 0.15).toFixed(2));
     estimatedPrice += diamond_setting_cost;
 
-    $('#total_estimate_price').html('$' + estimatedPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
+    $('.total-estimate-price').html('$' + estimatedPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
+    for(let i=0; i<$('.total-price').length; i++){
+      $('.total-price')[i].innerHTML = '$' + (estimatedPrice * $('.total-price')[i].dataset.measurementValue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+    }
   }
 
-  if ($('.variant-select-item').length){
+  if ($('.variant-select-item').length) {
     selectVariant($('.variant-select-item')[0].dataset.attributeValueId)
   }
+
+  let select_product_measurement = function (measurement_id) {
+    $('.product-measurement-select-item').removeClass('active')
+    $('.product-measurement-select-item[data-product-measurement-id="'+ measurement_id +'"]').addClass('active')
+    $('.measurement').removeClass('d-none')
+    $('.measurement:not([data-product-measurement-id="'+ measurement_id +'"])').addClass('d-none')
+  }
+
+  if($('.product-measurement-select-item').length)
+    $('.product-measurement-select-item')[0].click()
 </script>

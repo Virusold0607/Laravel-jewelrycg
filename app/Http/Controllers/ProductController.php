@@ -221,11 +221,13 @@ class ProductController extends Controller
             ->groupBy('products_variants.variant_attribute_value')
             ->select(DB::raw('COUNT(*) count, IF(products_variants.variant_attribute_value is NULL, 0, products_variants.variant_attribute_value) variant_attribute'))
             ->get();
+
+        $attributes = Attribute::all();
         
         return view('products.show', compact(
             'product', 'uploads', 'variants', 'maxPrice', 'minPrice',
             'product_reviewable', 'user_product_review', 'review_count',
-            'average_rating', 'arrReviewListing', 'arrProductMaterials', 'arrProductDiamonds', 'purchaseInfo'
+            'average_rating', 'arrReviewListing', 'arrProductMaterials', 'arrProductDiamonds', 'purchaseInfo', 'attributes'
         ));
     }
 
