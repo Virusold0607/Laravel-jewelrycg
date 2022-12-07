@@ -277,12 +277,12 @@ button.navbar-toggler {
   height: 100%;
   width: 100%;
 }
-.variant-select-item {
+.variant-select-item, .product-measurement-select-item {
   cursor: pointer;
   border-color: #0057ff !important;
   color: #0057ff;
 }
-.variant-select-item.active {
+.variant-select-item.active, .product-measurement-select-item.active {
   border: 1px solid #0057ff !important;
   outline: 1px solid #0057ff;
   outline-offset: 1px;
