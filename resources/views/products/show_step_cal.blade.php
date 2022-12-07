@@ -201,7 +201,7 @@
                             @if($product->measurements->count())
                                 @foreach($product->measurements as $measurement)
                                     <tr class="measurement" data-product-measurement-id="{{ $measurement->measurement_id }}">
-                                        <td>Length Cost(<span class="total-estimate-price"></span> X {{ $measurement->value }})</td>
+                                        <td>Length Cost (<span class="total-estimate-price"></span> X {{ $measurement->value }})</td>
                                         <td class="total-price" data-measurement-value="{{ $measurement->value }}"></td>
                                     </tr>
                                 @endforeach
