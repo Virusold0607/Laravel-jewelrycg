@@ -159,6 +159,10 @@
                             <th id="total_estimate_price" class="total-estimate-price"></th>
                             </thead>
                             <tbody>
+                            <tr class="fw-bold">
+                                <td>Material</td>
+                                <td></td>
+                            </tr>
                             <tr class="metal_price">
                                 <td class="metal_price_category"></td>
                                 <td class="metal_total_price"></td>
@@ -183,9 +187,17 @@
                                     <td class="product_diamond_price">${{ ($diamond->tcw * $diamond->lab_price) }}</td>
                                 </tr>
                             @endforeach
+                            <tr class="fw-bold">
+                                <td>Labor</td>
+                                <td></td>
+                            </tr>
                             <tr class="printing_cost">
                                 <td class="printing_cost_title">3D Printing Cost</td>
                                 <td class="printing_cost_amount"></td>
+                            </tr>
+                            <tr class="casting_cost">
+                                <td>Casting Cost</td>
+                                <td class="casting_cost_amount"></td>
                             </tr>
                             @if($diamond_tamount > 0)
                                 <tr class="diamond_setting_cost">
@@ -195,10 +207,6 @@
                                     <td class="diamond_setting_cost_amount">${{ round($diamond_tamount * 1.5, 2) }}</td>
                                 </tr>
                             @endif
-                            <tr class="casting_cost">
-                                <td>Casting Cost</td>
-                                <td class="casting_cost_amount"></td>
-                            </tr>
                             @if($product->measurements->count())
                                 <tr class="measurement">
                                     <td>Length Cost (<span class="total-estimate-price"></span> X <span id="measurement_value"></span>)</td>
