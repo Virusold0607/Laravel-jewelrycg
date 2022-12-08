@@ -336,7 +336,6 @@
   let select_product_measurement = function (measurement_id) {
     $('.product-measurement-select-item').removeClass('active')
     $('.product-measurement-select-item[data-product-measurement-id="'+ measurement_id +'"]').addClass('active')
-    cur_measurement_id = measurement_id
     getEstimatePrice()
   }
 
