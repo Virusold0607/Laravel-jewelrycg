@@ -276,7 +276,7 @@ class ProductsController extends Controller
         ProductTagsRelationship::where('id_product', $product->id)->delete();
 
         // product material 
-        if (isset($data['product_material_id'])) {
+        /*if (isset($data['product_material_id'])) {
             $product_material_id = $data['product_material_id'];
         }
         if (isset($data['deleted_material_ids'])) {
@@ -284,8 +284,8 @@ class ProductsController extends Controller
                 $material = ProductMaterial::findOrFail($deleted_item);
                 $material->delete();
             }
-        }
-        if (isset($data['diamond_id'])) {
+        }*/
+        /*if (isset($data['diamond_id'])) {
             $i = 0;
             $material_order = -1;
             foreach ($data['product_material_id'] as $item) {
@@ -356,7 +356,7 @@ class ProductsController extends Controller
                 }
                 $i++;
             }
-        }
+        }*/
 
 
         // product variant
