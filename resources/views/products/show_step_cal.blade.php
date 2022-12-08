@@ -42,6 +42,7 @@
                         @foreach($product->measurements as $k => $measurement)
                             <div class="border p-2 item-value-card mb-3 rounded mr-10px h-50px product-measurement-select-item {{ $k == 0 ? 'active' : '' }}"
                                  data-product-measurement-id="{{ $measurement->measurement_id }}"
+                                 data-product-measurement-value="{{ $measurement->value }}"
                                  onclick="select_product_measurement({{ $measurement->measurement_id }})">
                                 <div class="item-value-card-body">
                                     <div class="pt-2 fw-700 fs-14 text-center">{{ $measurement->product_measurement->full_name }}</div>
@@ -199,12 +200,10 @@
                                 <td class="casting_cost_amount"></td>
                             </tr>
                             @if($product->measurements->count())
-                                @foreach($product->measurements as $measurement)
-                                    <tr class="measurement" data-product-measurement-id="{{ $measurement->measurement_id }}">
-                                        <td>Length Cost (<span class="total-estimate-price"></span> X {{ $measurement->value }})</td>
-                                        <td class="total-price" data-measurement-value="{{ $measurement->value }}"></td>
-                                    </tr>
-                                @endforeach
+                                <tr class="measurement">
+                                    <td>Length Cost (<span class="total-estimate-price"></span> X <span id="measurement_value"></span>)</td>
+                                    <td class="total-price"></td>
+                                </tr>
                             @endif
                             </tbody>
                         </table>
@@ -214,7 +213,7 @@
         </div>
     </div>
 @endif
-<script>
+<script type="text/javascript">
   var diamondtype_id = 1;
   var estimatedPrice = 0;
   $('.cal-select-item').first().addClass('active');
@@ -242,11 +241,11 @@
     $('.variant-select-item[data-attribute-value-id="' + attribute_value_id + '"]').addClass('active')
 
     filterMetalsByAttributeValue(attribute_value_id)
-    $('.cal-select-item-wrapper:not(.d-none) .cal-select-item')[0].click()
     $('tr.natural_price').addClass('d-none')
     $('tr.natural_price[data-attribute-value-id="' + attribute_value_id + '"]').removeClass('d-none')
     $('tr.lab_price').addClass('d-none')
     $('tr.lab_price[data-attribute-value-id="' + attribute_value_id + '"]').removeClass('d-none')
+    $('.cal-select-item-wrapper:not(.d-none) .cal-select-item')[0].click()
   }
 
   let filterMetalsByAttributeValue = function (attribute_value) {
@@ -292,6 +291,7 @@
     var metal_price = Number(($('.cal-select-item.active .value-price').html()).replace('$', '').replace(',', ''))
     var metal_weight = Number($('.cal-select-item.active .metal_weight').val())
     var print_cost = metal_weight * 2.5;
+
     if (print_cost > 24.99) {
       goldWeightConst = print_cost.toFixed(2);
       goldWeightConstText = '3D Printing Cost - ($2.50 x ' + metal_weight.toFixed(2) + ')';
@@ -321,9 +321,11 @@
     estimatedPrice += Number((metal_price * 0.15).toFixed(2));
     estimatedPrice += diamond_setting_cost;
 
-    $('.total-estimate-price').html('$' + estimatedPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
-    for(let i=0; i<$('.total-price').length; i++){
-      $('.total-price')[i].innerHTML = '$' + (estimatedPrice * $('.total-price')[i].dataset.measurementValue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+    if($('.product-measurement-select-item').length){
+      let measurement_value = $('.product-measurement-select-item.active')[0].dataset.productMeasurementValue
+      $('#measurement_value').html(measurement_value)
+      $('.total-estimate-price').html('$' + estimatedPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
+      $('.total-price').html('$' + (estimatedPrice * measurement_value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
     }
   }
 
@@ -334,10 +336,11 @@
   let select_product_measurement = function (measurement_id) {
     $('.product-measurement-select-item').removeClass('active')
     $('.product-measurement-select-item[data-product-measurement-id="'+ measurement_id +'"]').addClass('active')
-    $('.measurement').removeClass('d-none')
-    $('.measurement:not([data-product-measurement-id="'+ measurement_id +'"])').addClass('d-none')
+    cur_measurement_id = measurement_id
+    getEstimatePrice()
   }
 
-  if($('.product-measurement-select-item').length)
-    $('.product-measurement-select-item')[0].click()
+  if($('.product-measurement-select-item').length){
+    select_product_measurement($('.product-measurement-select-item')[0].dataset.productMeasurementId)
+  }
 </script>
