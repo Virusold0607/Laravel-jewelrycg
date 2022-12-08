@@ -6,6 +6,10 @@
             outline: solid 2px #007bff !important;
         }
 
+        .min-w-50 {
+            min-width: 50px;
+        }
+
     </style>
 
     <section class="product_detail_single">
