@@ -454,20 +454,20 @@ class ProductsController extends Controller
     public function update_product_materials(Request $request)
     {
         $product_id = $request->product_id;
-        $product_material_ids = $request->product_material_id;
-        $product_attribute_value_ids = $request->product_attribute_value_id;
-        $material_type_ids = $request->material_type_id;
-        $diamond_amounts = $request->diamond_amount;
-        $material_type_diamonds_ids = $request->material_type_diamonds_id;
-        $material_type_diamonds_clarity_ids = $request->material_type_diamonds_clarity_id;
-        $material_type_diamonds_color_ids = $request->material_type_diamonds_color_id;
-        $material_type_diamonds_natural_prices = $request->material_type_diamonds_natural_price;
-        $material_type_diamonds_lab_prices = $request->material_type_diamonds_lab_price;
+        $product_material_ids = $request->product_material_id ? $request->product_material_id : [];
+        $product_attribute_value_ids = $request->product_attribute_value_id ? $request->product_attribute_value_id : [];
+        $material_type_ids = $request->material_type_id ? $request->material_type_id : [];
+        $diamond_amounts = $request->diamond_amount ? $request->diamond_amount : [];
+        $material_type_diamonds_ids = $request->material_type_diamonds_id ? $request->material_type_diamonds_id : [];
+        $material_type_diamonds_clarity_ids = $request->material_type_diamonds_clarity_id ? $request->material_type_diamonds_clarity_id : [];
+        $material_type_diamonds_color_ids = $request->material_type_diamonds_color_id ? $request->material_type_diamonds_color_id : [];
+        $material_type_diamonds_natural_prices = $request->material_type_diamonds_natural_price ? $request->material_type_diamonds_natural_price : [];
+        $material_type_diamonds_lab_prices = $request->material_type_diamonds_lab_price ? $request->material_type_diamonds_lab_price : [];
 
-        $metal_product_material_ids = $request->metal_product_material_id;
-        $metal_material_type_ids = $request->metal_material_type_id;
-        $metal_product_attribute_value_ids = $request->metal_product_attribute_value_id;
-        $material_weights = $request->material_weight;
+        $metal_product_material_ids = $request->metal_product_material_id ? $request->metal_product_material_id : [];
+        $metal_material_type_ids = $request->metal_material_type_id ? $request->metal_material_type_id : [];
+        $metal_product_attribute_value_ids = $request->metal_product_attribute_value_id ? $request->metal_product_attribute_value_id : [];
+        $material_weights = $request->material_weight ? $request->material_weight : [];
 
         ProductMaterial::whereNotIn('id', $product_material_ids)
             ->where('product_id', $product_id)
