@@ -15,7 +15,7 @@ class Coupon extends Model
     ];
 
     public static function getCouponByUser($coupon_code) {
-        $user_id = Auth::user()->id;
+        $user_id = Auth::check() ? Auth::user()->id : 0;
 
         $today = date('Y-m-d');
         $arrCoupons = self::where('name', $coupon_code)
