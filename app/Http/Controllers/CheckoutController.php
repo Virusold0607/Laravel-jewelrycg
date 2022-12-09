@@ -237,8 +237,8 @@ class CheckoutController extends Controller
             ////////////////////////////////////////////////////////////////////////////////////////////////
             // Calculate the total and tax
             $coupon = null;
-            if(Auth::check()){
-                $coupon_code = $req->coupon_code;
+            $coupon_code = $req->coupon_code;
+            if($req->coupon_code != ""){
                 $arrCouponInfo = Coupon::getCouponByUser($coupon_code);
                 $coupon = $arrCouponInfo['coupon'];
             }
