@@ -47,15 +47,20 @@
                                     <th>Amount</th>
                                     <th>Type</th>
                                     <th>Date</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $transaction_names = ['pending', 'balanced', 'canceled', 'chargeback'];
+                                @endphp
                                 @foreach ($transactions as $key=> $transaction)
                                     <tr>
                                         <th>{{ $key+1 }}</th>
                                         <th>$ {{ number_format($transaction->amount/100, 2, ".", ",") }}</th>
                                         <th>{{ $transaction->type == 'add' ? ( $transaction->sale_type == 0 ? "Product Sale" : ($transaction->sale_type == 1 ? "Service Sale" : "Course Sale")) : 'Withdrawn' }}</th>
                                         <th>{{ $transaction->created_at->format('M d, Y') }}</th>
+                                        <th>{{ $transaction_names[$transaction->status] }}</th>
                                     </tr>                                
                                 @endforeach
                             </tbody>

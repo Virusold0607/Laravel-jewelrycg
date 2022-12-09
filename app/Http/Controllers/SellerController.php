@@ -45,7 +45,9 @@ class SellerController extends Controller
             ->select('amount')
             ->get()
             ->sum('amount');
-        $totalEarned = SellersWalletHistory::where('user_id', auth()->id())->where('type', 'add')->select('amount')->get()->sum('amount');
+        $totalEarned = SellersWalletHistory::where('user_id', auth()->id())->where('type', 'add')
+            ->whereNotIn('status', [2,3])
+            ->select('amount')->get()->sum('amount');
 
         return view('seller.dashboard')->with([
             'products' => $products,
