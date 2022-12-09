@@ -392,6 +392,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::get('/show/{id}', [BackendOrderController::class, 'show'])->name('show');
         Route::put('/item/{id}', [BackendOrderController::class, 'update'])->name('update');
         Route::get('/pending', [BackendOrderController::class, 'pending'])->name('pending');
+        Route::post('/mark_as_canceled', [BackendOrderController::class, 'mark_as_canceled'])->name('mark_as_canceled');
+        Route::post('/mark_as_chargeback', [BackendOrderController::class, 'mark_as_chargeback'])->name('mark_as_chargeback');
     });
 
     Route::group(['prefix' => 'withdraws', 'as' => 'withdraws.'], function () {

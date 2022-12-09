@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Mail\OrderStatusChangedMail;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\SellersWalletHistory;
 use Auth;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Mail;
 
 class OrderController extends Controller
@@ -141,5 +143,75 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Mark as canceled
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function mark_as_canceled(Request $request)
+    {
+        $order = Order::where('id', $request->order_id)->firstOrFail();
+
+        $order->status_payment = 3; // canceled
+        $order->save();
+
+        // set seller balance
+        $amount = 0;
+        foreach ($order->items as $orderItem) {
+            $seller = $orderItem->product->user->seller;
+            if ($seller) {
+                /* Mark seller wallet history status to 2 */
+                $seller_wallet_history = SellersWalletHistory::where([
+                    'user_id' => $seller->user_id,
+                    'order_id' => $order->id,
+                ])->first();
+
+                $seller_wallet_history->status = 2;
+                $seller_wallet_history->save();
+
+                $seller->wallet = $seller->wallet - $seller_wallet_history->amount;
+                $seller->save();
+            }
+        }
+
+        return response()->json(['status' => 'success']);
+    }
+
+    /**
+     * Mark as chargeback
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function mark_as_chargeback(Request $request)
+    {
+        $order = Order::where('id', $request->order_id)->firstOrFail();
+
+        $order->status_payment = 3; // chargeback
+        $order->save();
+
+        // set seller balance
+        $amount = 0;
+        foreach ($order->items as $orderItem) {
+            $seller = $orderItem->product->user->seller;
+            if ($seller) {
+                /* Mark seller wallet history status to 3 */
+                $seller_wallet_history = SellersWalletHistory::where([
+                    'user_id' => $seller->user_id,
+                    'order_id' => $order->id,
+                ])->first();
+
+                $seller_wallet_history->status = 3;
+                $seller_wallet_history->save();
+
+                $seller->wallet = $seller->wallet - $seller_wallet_history->amount;
+                $seller->save();
+            }
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }
