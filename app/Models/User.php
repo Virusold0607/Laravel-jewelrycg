@@ -55,6 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->first_name . " " . $this->last_name;
     }
 
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+
     public function uploads()
     {
         return $this->belongsTo(Upload::class, 'avatar', 'id')->withDefault([
