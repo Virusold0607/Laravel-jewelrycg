@@ -31,9 +31,10 @@
                             <div class="fs-14 mb-2 fw-700">{{ $item->category->category_name }}</div>
                             @endforeach
 
-                            @if ($service->count > 0)
+                            
                               <span><i class="bi bi-star-fill fs-18 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
                               <span class="text-secondary">({{$service->count}})</span>
+                            @if ($service->count > 0)
                             @endif
                             
                           </div>
