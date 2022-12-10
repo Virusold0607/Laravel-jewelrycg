@@ -31,12 +31,10 @@
                             <div class="fs-14 mb-2 fw-700">{{ $item->category->category_name }}</div>
                             @endforeach
 
-                            <div class="d-flex align-items-center mb-2">
-                              <div class="mr-10px">
-                                <img class="w-30px rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
-                              </div>
-                              <div class="col-">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
-                            </div>
+                            @if ($service->count > 0)
+                              <span><i class="bi bi-star-fill fs-18 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
+                              <span class="text-secondary">({{$service->count}})</span>
+                            @endif
                             
                           </div>
                         </div>
@@ -44,10 +42,13 @@
                       <div class="card-footer bg-white">
                       <div class="row py-1">
                         <div class="col-6">
-                            @if ($service->count > 0)
-                              <span><i class="bi bi-star-fill fs-18 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
-                              <span class="text-secondary">({{$service->count}})</span>
-                            @endif
+                            
+                            <div class="d-flex align-items-center mb-2">
+                              <div class="mr-5px">
+                                <img class="w-20px rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
+                              </div>
+                              <div class="col- fs-14 fw-700">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
+                            </div>
                         </div>
                         <div class="col-6">
                           <div class="text-right">Starting at <span class="fw-700 fs-18 text-primary">{{ count($service->packages) ? "$".($service->packages[0]->price / 100) : "..." }}</span></div>
