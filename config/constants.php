@@ -29,6 +29,7 @@ return [
     'file_upload_path' => 'uploads/all/',
     'strings' => [
         'ask_verify' => 'Please verify your email address',
+        'receive_review' => 'You received a review'
     ],
     'default_sales_commission_rate' => 80,
     'withdraw_status' => [
