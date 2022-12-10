@@ -36,8 +36,8 @@
 
   <div class="py-9">
       <div class="container">
-          <div class="row">
-            <div class="col-xl-11 mx-auto">
+          <div class="col-xl-11 mx-auto">
+            <div class="row">
               <div class="col-lg-6">
                 <div class="mb-2">
                   <h1 class="fs-24 mb-4">{{$service->name}}</h4>
