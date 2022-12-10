@@ -39,7 +39,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="card-footer bg-white p-3">
+                      <div class="card-footer border-top bg-white p-3">
                       <div class="row">
                         <div class="col-6">
                             
