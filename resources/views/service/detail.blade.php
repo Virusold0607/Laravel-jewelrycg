@@ -1,6 +1,4 @@
 <x-app-layout>
-  {{-- <link rel="stylesheet" href="{{ asset('assets/css/mdb.min.css') }}"> --}}
-  {{-- <script src="{{ asset('assets/js/mdb.min.js') }}"></script> --}}
   <style>
       .pur {
           width: 100%;
