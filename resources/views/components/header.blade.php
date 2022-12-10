@@ -197,11 +197,11 @@
                             <span class="dropdown-title">Messages (0)</span>
                         </div>
                         @foreach ($message_notifications as $message_notification)
-                        <a href="{{ env('APP_URL')}}/chat/{{$message_notification->user_id }}" class="filterDiscussions all unread single active d-block py-2 border-bottom"  data-toggle="list" role="tab">
+                        <a href="{{ env('APP_URL')}}/chat/{{$message_notification->user_id }}" class="filterDiscussions all unread single active d-block py-2 border-bottom text-black"  data-toggle="list" role="tab">
                             <div class="row">
                                 <div class="d-flex align-items-center">
-                                    <div class="mr-5px">
-                                        <img class="w-50 rounded-circle" src="{{user_name($message_notification->user_id)[0]->uploads->getImageOptimizedFullName(100,100)}}" data-toggle="tooltip" data-placement="top" title="Janette" alt="{{user_name($message_notification->user_id)[0]->first_name}} avatar">
+                                    <div class="mr-5px w-50px">
+                                        <img class="w-100 rounded-circle" src="{{user_name($message_notification->user_id)[0]->uploads->getImageOptimizedFullName(100,100)}}" data-toggle="tooltip" data-placement="top" title="Janette" alt="{{user_name($message_notification->user_id)[0]->first_name}} avatar">
                                     </div>
                                     <div class="col- fs-14 fw-700">
                                         <div class="data">
