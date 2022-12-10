@@ -29,8 +29,6 @@
             display: flex;
             flex-direction: row;
             gap: 10px;
-            width: 300px;
-            padding: 5px;
         }
 
         .notification-thumb {
@@ -169,7 +167,7 @@
                         </i>
                     </a>
                     <ul class="dropdown-menu half-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <div class="dropdown-header pb-2 border-bottom">
+                        <div class="dropdown-header pb-2 mb-2 border-bottom">
                             <span class="dropdown-title">Notifications (0)</span>
                         </div>
                         @foreach ($notifications as $notification)
@@ -195,18 +193,22 @@
                     </a>
                   
                     <ul class="dropdown-menu half-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="width:250px;">
-                        <div class="dropdown-header pb-2 border-bottom">
+                        <div class="dropdown-header pb-2 mb-2 border-bottom">
                             <span class="dropdown-title">Messages (0)</span>
                         </div>
                         @foreach ($message_notifications as $message_notification)
                         <a href="{{ env('APP_URL')}}/chat/{{$message_notification->user_id }}" class="filterDiscussions all unread single active d-block py-2 border-bottom"  data-toggle="list" role="tab">
                             <div class="row">
-                                <div class="col-lg-3">
-                                    <img class="avatar-md w-100 rounded-circle" src="{{user_name($message_notification->user_id)[0]->uploads->getImageOptimizedFullName(100,100)}}" data-toggle="tooltip" data-placement="top" title="Janette" alt="{{user_name($message_notification->user_id)[0]->first_name}} avatar">
-                                </div>
-                                <div class="data col-lg-9">
-                                    <p class="fw-700">{{user_name($message_notification->user_id)[0]->first_name}} {{user_name($message_notification->user_id)[0]->last_name}}</p>
-                                    <p>{{$message_notification->message}}</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="mr-5px">
+                                        <img class="avatar-md w-100 rounded-circle" src="{{user_name($message_notification->user_id)[0]->uploads->getImageOptimizedFullName(100,100)}}" data-toggle="tooltip" data-placement="top" title="Janette" alt="{{user_name($message_notification->user_id)[0]->first_name}} avatar">
+                                    </div>
+                                    <div class="col- fs-14 fw-700">
+                                        <div class="data">
+                                            <p class="fw-700">{{user_name($message_notification->user_id)[0]->first_name}} {{user_name($message_notification->user_id)[0]->last_name}}</p>
+                                            <p>{{$message_notification->message}}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </a>
