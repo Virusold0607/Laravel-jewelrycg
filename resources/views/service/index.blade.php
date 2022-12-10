@@ -47,7 +47,7 @@
                               <div class="mr-5px">
                                 <img class="w-20px rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
                               </div>
-                              <div class="col- fs-14 fw-700">{{ $service->postauthor->first_name." ".$service->postauthor->last_name }}</div>
+                              <a href="u/{{ $service->postauthor->username }}" class="col- fs-14 fw-700">{{ $service->postauthor->username }}</a>
                             </div>
                         </div>
                         <div class="col-6">

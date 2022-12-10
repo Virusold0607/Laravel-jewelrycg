@@ -418,7 +418,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
 Route::get('/', [AppController::class, 'index'])->name('index');
 
 // Seller Profile
-Route::get('/u/{username}', [SellerController::class, 'seller_profile'])->name('seller.profile');
+Route::get('/u/{username}', [SellerController::class, 'seller_profile'])->name('seller_profile');
 
 Route::group(['middleware' => ['auth']], function () {
     // User Dashboard
