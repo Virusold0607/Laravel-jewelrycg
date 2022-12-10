@@ -201,7 +201,7 @@
                             <div class="row">
                                 <div class="d-flex align-items-center">
                                     <div class="mr-5px">
-                                        <img class="avatar-md w-100 rounded-circle" src="{{user_name($message_notification->user_id)[0]->uploads->getImageOptimizedFullName(100,100)}}" data-toggle="tooltip" data-placement="top" title="Janette" alt="{{user_name($message_notification->user_id)[0]->first_name}} avatar">
+                                        <img class="w-50 rounded-circle" src="{{user_name($message_notification->user_id)[0]->uploads->getImageOptimizedFullName(100,100)}}" data-toggle="tooltip" data-placement="top" title="Janette" alt="{{user_name($message_notification->user_id)[0]->first_name}} avatar">
                                     </div>
                                     <div class="col- fs-14 fw-700">
                                         <div class="data">
