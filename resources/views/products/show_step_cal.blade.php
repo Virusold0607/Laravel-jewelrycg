@@ -51,6 +51,7 @@
                         @endforeach
                     </div>
                 </div>
+                @php $step++; @endphp
             @endif
 
             <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the metal below you
