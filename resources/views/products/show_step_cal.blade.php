@@ -120,6 +120,7 @@
             @php
                 $step++;
             @endphp
+            @if($diamond_tamount > 0)
             <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the type of diamond you
                 want to
                 below.
@@ -148,7 +149,7 @@
                     </div>
                 </div>
             </div>
-
+            @endif
             <div class="accordion-body">
                 <div class="table-full-width">
                     <div class="col-md-12">
