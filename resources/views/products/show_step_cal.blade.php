@@ -329,10 +329,10 @@
     estimatedPrice += Number((metal_price * 0.15).toFixed(2));
     estimatedPrice += diamond_setting_cost;
 
+    $('.total-estimate-price').html('$' + estimatedPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
     if($('.product-measurement-select-item').length){
       let measurement_value = $('.product-measurement-select-item.active')[0].dataset.productMeasurementValue
       $('#measurement_value').html(measurement_value)
-      $('.total-estimate-price').html('$' + estimatedPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
       $('.total-price').html('$' + (estimatedPrice * measurement_value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
     }
   }
