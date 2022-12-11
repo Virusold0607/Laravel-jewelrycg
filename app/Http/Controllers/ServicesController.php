@@ -85,6 +85,14 @@ class ServicesController extends Controller
             ->groupBy('services.id')
             ->orderBy('services.id', 'DESC')
             ->firstOrFail();
+
+        $rating = SellersProfile::withWhereHas('user', fn($query) => $query->where('username', $data->postauthor->username))
+            ->leftJoin('services', 'services.user_id', 'sellers_profile.user_id')
+            ->leftJoin('orders_services', 'services.id', 'orders_services.service_id')
+            ->leftJoin('service_reviews', 'service_reviews.order_id', 'orders_services.id')
+            ->select(DB::raw('FORMAT(AVG(service_reviews.rating), 1) rating, COUNT(service_reviews.id) count'))
+            ->firstOrFail();
+
         $gallery_ids = explode(',', $data->gallery);
 
         $galleries = [];
@@ -106,6 +114,7 @@ class ServicesController extends Controller
 
         return view('service.detail', [
             'service' => $data,
+            'rating' => $rating
         ]);
     }
 
