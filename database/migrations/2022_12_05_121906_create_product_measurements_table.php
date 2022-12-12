@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('product_measurements', function (Blueprint $table) {
             $table->id();
-            $table->decimal('name', 10, 2)->default(0);
+            $table->integer('name')->default(0);
             $table->string('units');
             $table->timestamps();
         });

@@ -42,7 +42,6 @@
                       <div class="card-footer border-top bg-white p-3">
                       <div class="row">
                         <div class="col-6">
-                            
                             <div class="d-flex align-items-center">
                               <div class="mr-5px">
                                 <img class="w-20px rounded-circle" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}" alt="{{ $service->postauthor->first_name }}">
