@@ -785,6 +785,17 @@ class ServicesController extends Controller
         // redirect to order details
         // return view('service.checkout.order', ['order' => $order, 'requirements' => $requirements]);
 
+        /* Add notification setting */
+        if(Auth::check()){
+            Notification::create([
+                'status' => 0,
+                'user_id' => Auth::id(),
+                'thumb' => 0,
+                'message' => 'You successfully ordered service('. $order->service->name .'). Please submit the requirements to continue.',
+                'link' => '/services/order/'.$order->order_id
+            ]);
+        }
+
         return redirect()->route('services.order_detail', ['id' => $order->order_id]);
     }
 
