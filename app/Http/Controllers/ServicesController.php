@@ -853,8 +853,8 @@ class ServicesController extends Controller
             'status' => 0,
             'user_id' => $order->service->user_id,
             'thumb' => 0,
-            'message' => $order->user->full_name . ' has submitted the requirements for your service order '. $order->id . '.',
-            'link' => '/seller/orders'
+            'message' => $order->user->full_name . ' has submitted the requirements for your service order '. $order->order_id . '.',
+            'link' => '/seller/order_detail/' . $order->order_id
         ]);
 
         return redirect()->back()->with("message", "We have sent your message to " . $author->first_name . " " . $author->last_name);
