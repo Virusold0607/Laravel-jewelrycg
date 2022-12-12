@@ -34,4 +34,14 @@ class ServiceOrder extends Model
     {
         return $this->hasMany(ServiceReview::class, 'order_id', 'id');
     }
+
+    public function order_service_deliveries()
+    {
+        return $this->hasMany(OrderServiceDelivery::class, 'order_id', 'id');
+    }
+
+    public function order_service_revision_requests()
+    {
+        return $this->hasMany(OrderServiceRevisionRequest::class, 'order_id', 'id');
+    }
 }
