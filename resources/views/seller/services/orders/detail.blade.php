@@ -390,7 +390,7 @@
     @section('js')
         <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
         <script>
-          var countDownDate = new Date("{{ $order->original_delivery_time }}").getTime()
+          var countDownDate = new Date("{{ $order->original_delivery_time }}".replace(" ", "T")).getTime()
 
           function padLeadingZeros(num, size) {
             if (!num) return "00";
