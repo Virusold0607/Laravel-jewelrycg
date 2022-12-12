@@ -796,6 +796,15 @@ class ServicesController extends Controller
             ]);
         }
 
+        /* Send notification to seller */
+        Notification::create([
+            'status' => 0,
+            'user_id' => $seller->user_id,
+            'thumb' => 0,
+            'message' => 'You received a new order on your service ('. $order->service->name .').',
+            'link' => '/seller/orders'
+        ]);
+
         return redirect()->route('services.order_detail', ['id' => $order->order_id]);
     }
 
