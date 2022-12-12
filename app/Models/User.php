@@ -85,6 +85,7 @@ class User extends Authenticatable implements MustVerifyEmail
             ->where('services.user_id', $this->id)
             ->where('orders_services.status', 5)
             ->orderBy('orders_services.updated_at', 'desc')
+            ->select('orders_services.updated_at')
             ->first();
 
         if($last_delivery){
