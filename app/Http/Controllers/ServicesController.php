@@ -1027,7 +1027,7 @@ class ServicesController extends Controller
 
         if ($order->user_id == Auth::id()) {
             $notification = new Notification();
-            $notification->message = Config::get('constants.strings.receive_review');
+            $notification->message = Auth::user()->full_name . ' has left you a review on service order #'. $order->order_id . '.';
             $notification->user_id = $order->service->user_id;
             $notification->link = "/seller/order_detail/" . $order->order_id;
             $notification->save();
@@ -1035,7 +1035,7 @@ class ServicesController extends Controller
             return redirect()->route('services.order_detail', $order->order_id)->with('success', 'Your review successfully saved');
         } else {
             $notification = new Notification();
-            $notification->message = Config::get('constants.strings.receive_review');
+            $notification->message = $order->service->postauthor->full_name . ' has left you a review on service order #' . $order->order_id . '.';
             $notification->user_id = $order->user_id;
             $notification->link = "/services/order/" . $order->order_id;
             $notification->save();
