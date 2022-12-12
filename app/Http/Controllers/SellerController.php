@@ -277,7 +277,7 @@ class SellerController extends Controller
             'status' => 0,
             'user_id' => $order->user->id,
             'thumb' => 0,
-            'message' => 'Seller '. $order->service->postauthor()->full_name .' just delivered your service order #'. $order->order_id .'. View delivery.',
+            'message' => 'Seller '. $order->service->postauthor->full_name .' just delivered your service order #'. $order->order_id .'. View delivery.',
             'link' => '/services/order/' . $order->order_id
         ]);
 
