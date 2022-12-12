@@ -139,7 +139,7 @@
                                         </div>
                                     </div>
 
-                                    <hr class="text-black">
+                                    <hr class="text-black" style="border-color: black !important;">
 
                                     <div class="container">
                                         {{ $service->seller->about }}
