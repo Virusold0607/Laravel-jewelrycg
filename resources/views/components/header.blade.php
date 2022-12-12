@@ -29,6 +29,7 @@
             display: flex;
             flex-direction: row;
             gap: 10px;
+            margin-bottom: 10px;
         }
 
         .notification-thumb {
@@ -42,7 +43,7 @@
             flex: 1 1 0%;
             display: flex;
             flex-direction: column;
-            height: 50px;
+            /*height: 50px;*/
             gap: 5px;
         }
 
