@@ -184,20 +184,21 @@
                                         </div>
                                         <div class="card-body">
                                             @if(count($order->review) == 2)
-                                            <div class="rate pb-3">
-                                                @for ($i = 5; $i > 0; $i--)
-                                                    <input
-                                                            type="radio" id="star{!! $i !!}" class="rate" name="rating1"
-                                                            value="{!! $i !!}"
-                                                            {{ $order->review[0]->rating == $i ? "checked" : "" }}
-                                                            disabled
-                                                    />
-                                                    <label for="star{!! $i !!}">{{ $i }}</label>
-                                                @endfor
-                                            </div>
-                                            <div style="clear: left">
-                                                {{ $order->review[0]->review }}
-                                            </div>
+                                                <div class="rate pb-3">
+                                                    @for ($i = 5; $i > 0; $i--)
+                                                        <input
+                                                                type="radio" id="star{!! $i !!}" class="rate"
+                                                                name="rating1"
+                                                                value="{!! $i !!}"
+                                                                {{ $order->review[0]->rating == $i ? "checked" : "" }}
+                                                                disabled
+                                                        />
+                                                        <label for="star{!! $i !!}">{{ $i }}</label>
+                                                    @endfor
+                                                </div>
+                                                <div style="clear: left">
+                                                    {{ $order->review[0]->review }}
+                                                </div>
                                             @else
                                                 Rate the buyer({{ $order->user->full_name }}) to see their review.
                                             @endif
@@ -267,15 +268,15 @@
                                     </div>
                                 </div>
                                 @if($order->status == 2 && $order->order_service_revision_requests->count() == 0)
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#deliverModal">
-                                    Deliver Now
-                                </button>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#deliverModal">
+                                        Deliver Now
+                                    </button>
                                 @else
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#deliverModal">
-                                    Deliver again
-                                </button>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#deliverModal">
+                                        Deliver again
+                                    </button>
                                 @endif
                             @elseif ($order->status == 0)
                                 <div class="col-md-12">
