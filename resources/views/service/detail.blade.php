@@ -162,38 +162,36 @@
                     </div>
 
                     <div class="col-lg-6">
-                        <div class="row">
+                        <div class="service-packages-card border">
                             <h4>Packages</h4>
-                            <div class="service-packages-card border">
-                                <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
-                                    @foreach ($service->packages as $k => $package)
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link {{ $k == 0 ? 'active' : '' }}"
-                                                    id="pills-{{ $package->id }}-tab"
-                                                    data-bs-toggle="pill"
-                                                    data-bs-target="#pills-{{ $package->id }}" type="button" role="tab"
-                                                    aria-controls="pills-{{ $package->id }}"
-                                                    aria-selected="true">{{ $package->name }}
-                                            </button>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                                <div class="tab-content" id="pills-tabContent">
-                                    @foreach ($service->packages as $k => $package)
-                                        <div class="tab-pane fade {{ $k == 0 ? 'show active' : '' }}"
-                                            id="pills-{{ $package->id }}" role="tabpanel"
-                                            aria-labelledby="pills-{{ $package->id }}-tab">
-                                            <h3>${{number_format($package->price / 100, 2)}}</h3>
-                                            <h4>{{$package->name}}</h4>
-                                            <p>{{$package->description}}</p>
-                                            <p>{{$package->delivery_time}} Day Delivery</p>
-                                            <p>{{$package->revisions}} Revisions</p>
-                                            <a href="/services/checkout/{{$package->id}}" type="button"
-                                            class="btn btn-info">Continue(${{number_format($package->price / 100, 2)}}
-                                                )</a>
-                                        </div>
-                                    @endforeach
-                                </div>
+                            <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                                @foreach ($service->packages as $k => $package)
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link {{ $k == 0 ? 'active' : '' }}"
+                                                id="pills-{{ $package->id }}-tab"
+                                                data-bs-toggle="pill"
+                                                data-bs-target="#pills-{{ $package->id }}" type="button" role="tab"
+                                                aria-controls="pills-{{ $package->id }}"
+                                                aria-selected="true">{{ $package->name }}
+                                        </button>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                @foreach ($service->packages as $k => $package)
+                                    <div class="tab-pane fade {{ $k == 0 ? 'show active' : '' }}"
+                                        id="pills-{{ $package->id }}" role="tabpanel"
+                                        aria-labelledby="pills-{{ $package->id }}-tab">
+                                        <h3>${{number_format($package->price / 100, 2)}}</h3>
+                                        <h4>{{$package->name}}</h4>
+                                        <p>{{$package->description}}</p>
+                                        <p>{{$package->delivery_time}} Day Delivery</p>
+                                        <p>{{$package->revisions}} Revisions</p>
+                                        <a href="/services/checkout/{{$package->id}}" type="button"
+                                        class="btn btn-info">Continue(${{number_format($package->price / 100, 2)}}
+                                            )</a>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
