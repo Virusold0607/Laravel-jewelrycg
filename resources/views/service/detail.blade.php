@@ -47,9 +47,9 @@
 
     <div class="py-9">
         <div class="container">
-            <div class="col-xl-11 mx-auto">
+            <div class="col-xl-10 mx-auto">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="mb-2">
                             <h1 class="fs-24 w-100 mb-2">{{$service->name}}</h4>
                                 <div class="d-flex align-items-center">
@@ -161,7 +161,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="service-packages-card border">
                             <h4>Packages</h4>
                             <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
