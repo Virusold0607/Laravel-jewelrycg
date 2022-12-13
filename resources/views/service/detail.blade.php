@@ -54,10 +54,10 @@
                             <h1 class="fs-24 w-100 mb-2">{{$service->name}}</h4>
                                 <div class="d-flex align-items-center">
                                     <div class="mr-10px w-50px">
-                                        <img class="w-100 rounded-circle" src="https://jewelrycg.com/uploads/all//Wc9vM1KxeAc9DrSmhwcfueyLh9p8v8hqoz1iZQiY-100-100.png" data-toggle="tooltip" data-placement="top" title="Janette" alt="David Sells avatar">
+                                        <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(30,30) }}" alt="avatar" class="rounded-circle img-fluid">
                                     </div>
                                     <div class="fs-14 fw-700">
-                                        <div class="data">David Sells Johnson</div>
+                                        <div class="data">{{ $service->postauthor->full_name }}</div>
                                     </div>
                                 
                                     @if ($service->count > 0)
