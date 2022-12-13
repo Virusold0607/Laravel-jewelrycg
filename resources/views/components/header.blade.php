@@ -172,16 +172,16 @@
                             </i>
                         </a>
                         <ul class="dropdown-menu half-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <div class="dropdown-header pb-2 mb-2 border-bottom">
+                            <div class="dropdown-header pb-2 mb-3 border-bottom">
                                 <span class="dropdown-title">Notifications (0)</span>
                             </div>
                             @foreach ($notifications as $notification)
                                 <a href="/notifications/check/{{$notification->id}}">
-                                    <div class="notification-container">
+                                    <div class="notification-container mb-3">
                                         <img class="notification-thumb"
                                              src="{{$notification->thumb ? $notification->thumb : "/assets/img/jewelrycg_default_logo.png"}}">
                                         <div class="notification-body">
-                                            <p class="notification-message">{{ $notification->message }}</p>
+                                            <p class="notification-message text-black">{{ $notification->message }}</p>
                                             <p class="notification-time">{{ get_period($notification->created_at) }}</p>
                                         </div>
                                     </div>
