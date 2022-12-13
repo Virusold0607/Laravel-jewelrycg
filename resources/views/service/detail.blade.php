@@ -102,13 +102,13 @@
                             </div>
                         </div>
 
-                        <div class="mb-2">
+                        <div class="mb-6 about-service">
                             <h4>About This Service</h4>
                             <div>{!! $service->content !!}</div>
                         </div>
 
-                        <div class="row mt-3">
-                            <h4>About the seller</h4>
+                        <div class="mb-6 about-seller">
+                            <h4>About this seller</h4>
                             <div class="d-flex">
                                 <div class="">
                                     <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(110,110) }}"
