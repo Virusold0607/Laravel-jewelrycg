@@ -53,15 +53,15 @@
                         <div class="mb-2">
                             <h1 class="fs-24 w-100 mb-2">{{$service->name}}</h4>
                                 <div class="d-flex align-items-center">
-                                    <div class="mr-10px w-50px">
+                                    <div class="mr-10px w-30px">
                                         <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(30,30) }}" alt="avatar" class="rounded-circle img-fluid">
                                     </div>
-                                    <div class="fs-14 fw-700">
+                                    <div class="fs-14 fw-700 mr-10px border-right">
                                         <div class="data">{{ $service->postauthor->full_name }}</div>
                                     </div>
                                 
                                     @if ($service->count > 0)
-                                        <div class="">
+                                        <div class="ml-10px">
                                             <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
                                             <span class="text-secondary">({{$service->count}})</span>
                                         </div>
