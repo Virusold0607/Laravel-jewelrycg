@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="col-lg-4">
-                        <div class="service-packages-card border">
+                        <div class="service-packages-card border p-3">
                             <h4>Packages</h4>
                             <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
                                 @foreach ($service->packages as $k => $package)
