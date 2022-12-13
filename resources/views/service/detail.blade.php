@@ -51,13 +51,23 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="mb-2">
-                            <h1 class="fs-24 mb-4">{{$service->name}}</h4>
+                            <h1 class="fs-24 w-100 mb-2">{{$service->name}}</h4>
+                                <div class="d-flex">
+                                    <div class="mr-10px w-50px">
+                                        <img class="w-100 rounded-circle" src="https://jewelrycg.com/uploads/all//Wc9vM1KxeAc9DrSmhwcfueyLh9p8v8hqoz1iZQiY-100-100.png" data-toggle="tooltip" data-placement="top" title="Janette" alt="David Sells avatar">
+                                    </div>
+                                    <div class="fs-14 fw-700">
+                                        <div class="data">
+                                            <p class="fw-700">David Sells Johnson</p>
+                                        </div>
+                                    </div>
+                                </div>
                                 @if ($service->count > 0)
                                     <div class="">
                                         <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
                                         <span class="text-secondary">({{$service->count}})</span>
                                     </div>
-                            @endif
+                                @endif
                         </div>
 
                         <div class="carousel">
