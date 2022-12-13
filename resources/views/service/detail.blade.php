@@ -27,6 +27,9 @@
         .carousel-indicators {
             position: static;
             margin-top: 10px;
+            justify-content: normal;
+            margin-left: 0;
+            margin-right: 0;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -50,7 +53,7 @@
             <div class="col-xl-10 mx-auto">
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="mb-2">
+                        <div class="mb-3">
                             <h1 class="fs-24 w-100 mb-2">{{$service->name}}</h4>
                                 <div class="d-flex align-items-center">
                                     <div class="mr-10px w-30px">
@@ -100,7 +103,7 @@
                         </div>
 
                         <div class="mb-2">
-                            <h4>Content</h4>
+                            <h4>About This Service</h4>
                             <div>{!! $service->content !!}</div>
                         </div>
 
