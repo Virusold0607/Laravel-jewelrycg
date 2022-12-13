@@ -163,8 +163,7 @@
 
                     <div class="col-lg-4">
                         <div class="service-packages-card border p-3">
-                            <h4>Packages</h4>
-                            <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                            <ul class="nav nav-pills nav-fill mb-3 bg-dark rounded p-2" id="pills-tab" role="tablist">
                                 @foreach ($service->packages as $k => $package)
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link {{ $k == 0 ? 'active' : '' }}"
