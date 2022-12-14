@@ -111,7 +111,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="border-top">
+                                    <div class="border-top mt-3 pt-3">
                                         {{ $service->seller->about }}
                                     </div>
                                 </div>
