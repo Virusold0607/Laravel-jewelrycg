@@ -80,9 +80,9 @@
                                 <div class="ml-15px">
                                     <a href="/u/{{ $service->postauthor->username }}"
                                        class="fs-18 fw-700 text-black">{{ $service->postauthor->full_name }}</a>
-                                    <p class="mb-5px">{{ $service->seller->slogan == '' ? 'No Slogan' : $service->seller->slogan }}</p>
+                                    <p class="mb-0">{{ $service->seller->slogan == '' ? 'No Slogan' : $service->seller->slogan }}</p>
                                     @if ($rating->count > 0)
-                                        <div class="mb-3">
+                                        <div class="mb-2">
                                             <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $rating->rating ?: "0.0" }}</span>
                                             <span class="text-secondary">({{$rating->count}})</span>
                                         </div>
@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
+                            <div class="card mt-2">
                                 <div class="card-body">
                                     <div class="container">
                                         <div class="row mb-5px">
