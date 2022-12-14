@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="ml-15px">
                                     <a href="/u/{{ $service->postauthor->username }}"
-                                       class="fs-20 fw-700 text-black">{{ $service->postauthor->full_name }}</a>
+                                       class="fs-18 fw-700 text-black">{{ $service->postauthor->full_name }}</a>
                                     <p class="mb-5px">{{ $service->seller->slogan == '' ? 'No Slogan' : $service->seller->slogan }}</p>
                                     @if ($rating->count > 0)
                                         <div class="mb-3">
