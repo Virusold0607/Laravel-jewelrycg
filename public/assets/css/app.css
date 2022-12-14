@@ -378,6 +378,34 @@ button.navbar-toggler {
 .star-ratings-sm {
   font-size: 16px !important;
 }
+/*Services */
+.service-packages-pill {
+    background: #fafafa !important;
+    border: 1px solid #cccccc;
+}
+.carousel-indicators li {
+    width: 120px;
+    height: 100%;
+    opacity: 0.8;
+    margin: 0px 5px;
+}
+
+.carousel-indicators button[data-bs-target] {
+    width: 120px;
+}
+
+.carousel-indicators button[data-bs-target]:not(.active) {
+    opacity: 0.8;
+}
+
+.carousel-indicators {
+    position: static;
+    margin-top: 10px;
+    justify-content: normal;
+    margin-left: 0;
+    margin-right: 0;
+}
+
 /* Footer */
 .footer .footer-logo {
   height:20px;
