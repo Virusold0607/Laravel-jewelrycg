@@ -1,37 +1,5 @@
 <x-app-layout>
-    <style>
-        .pur {
-            width: 100%;
-            margin-bottom: 8px;
-        }
 
-        .carousel {
-            margin-bottom: 70px;
-        }
-
-        .carousel-indicators li {
-            width: 120px;
-            height: 100%;
-            opacity: 0.8;
-            margin: 0px 5px;
-        }
-
-        .carousel-indicators button[data-bs-target] {
-            width: 120px;
-        }
-
-        .carousel-indicators button[data-bs-target]:not(.active) {
-            opacity: 0.8;
-        }
-
-        .carousel-indicators {
-            position: static;
-            margin-top: 10px;
-            justify-content: normal;
-            margin-left: 0;
-            margin-right: 0;
-        }
-    </style>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -41,12 +9,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <div class="py-9">
         <div class="container">
@@ -72,7 +34,7 @@
                                 </div>
                         </div>
 
-                        <div class="carousel">
+                        <div class="carousel mb-6">
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     @for ($i = 0; $i < count($service->galleries); ++$i)
@@ -166,7 +128,7 @@
 
                     <div class="col-lg-4">
                         <div class="service-packages-card border p-3">
-                            <ul class="nav nav-pills nav-fill mb-3 bg-dark rounded p-2" id="pills-tab" role="tablist">
+                            <ul class="nav nav-pills nav-fill mb-3 service-packages-pill rounded p-2" id="pills-tab" role="tablist">
                                 @foreach ($service->packages as $k => $package)
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link {{ $k == 0 ? 'active' : '' }}"
