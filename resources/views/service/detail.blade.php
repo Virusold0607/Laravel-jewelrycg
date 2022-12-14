@@ -95,20 +95,20 @@
                             <div class="card mt-2">
                                 <div class="card-body">
                                     <div class="container">
-                                        <div class="row mb-5px">
-                                            <div class="col">
-                                                <p class="text-muted mb-0">Member since</p>
-                                                <div>{{ $service->postauthor->created_at->format('M Y') }}</div>
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <span class="text-muted mb-0">Member since</span>
+                                                <div class="fw-700">{{ $service->postauthor->created_at->format('M Y') }}</div>
                                             </div>
-                                            <div class="col">
-                                                <p class="text-muted mb-0">Avg. response time</p>
-                                                <div>{{ !$service->postauthor->get_avg_response_time() == '-' ? '-' : ($service->postauthor->get_avg_response_time() . 'Hours') }}</div>
+                                            <div class="col mb-3">
+                                                <span class="text-muted mb-0">Avg. response time</span>
+                                                <div class="fw-700">{{ !$service->postauthor->get_avg_response_time() == '-' ? '-' : ($service->postauthor->get_avg_response_time() . 'Hours') }}</div>
                                             </div>
                                         </div>
-                                        <div class="row mb-5px">
+                                        <div class="row">
                                             <div class="col">
-                                                <p class="text-muted mb-0">Last delivery</p>
-                                                <div>{{ !$service->postauthor->last_delivery_time() ? 'None' : $service->postauthor->last_delivery_time()->diffForHumans() }}</div>
+                                                <span class="text-muted mb-0">Last delivery</span>
+                                                <div class="fw-700">{{ !$service->postauthor->last_delivery_time() ? 'None' : $service->postauthor->last_delivery_time()->diffForHumans() }}</div>
                                             </div>
                                         </div>
                                     </div>
