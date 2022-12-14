@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="mb-3">
-                            <h1 class="fs-24 w-100 mb-2">{{$service->name}}</h4>
+                            <h1 class="fs-25 w-100 mb-2">{{$service->name}}</h4>
                                 <div class="d-flex align-items-center">
                                     <div class="mr-10px w-30px">
                                         <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(30,30) }}" alt="avatar" class="rounded-circle img-fluid">
@@ -103,12 +103,12 @@
                         </div>
 
                         <div class="mb-6 about-service">
-                            <h4>About This Service</h4>
+                            <h4 class="mb-3">About This Service</h4>
                             <div>{!! $service->content !!}</div>
                         </div>
 
                         <div class="mb-6 about-seller">
-                            <h4>About this seller</h4>
+                            <h4 class="mb-3">About this seller</h4>
                             <div class="d-flex">
                                 <div class="">
                                     <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(110,110) }}"
