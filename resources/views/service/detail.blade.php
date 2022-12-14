@@ -152,7 +152,7 @@
                                         <p>{{$package->delivery_time}} Day Delivery</p>
                                         <p>{{$package->revisions}} Revisions</p>
                                         <a href="/services/checkout/{{$package->id}}" type="button"
-                                        class="btn btn-primary">Continue</a>
+                                        class="btn btn-primary w-100">Continue</a>
                                     </div>
                                 @endforeach
                             </div>
