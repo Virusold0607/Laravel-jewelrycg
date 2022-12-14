@@ -126,7 +126,7 @@
                                         </div>
                                     @endif
                                     <div class="d-flex justify-content-start mb-2">
-                                        <a class="btn btn-primary" href="{{route('create_chat_room',['conversation_id'=>$service->seller->user->id])}}">Message</a>
+                                        <a class="btn btn-primary" href="{{route('create_chat_room',['conversation_id'=>$service->seller->user->id])}}">Contact Me</a>
                                     </div>
                                 </div>
                             </div>
