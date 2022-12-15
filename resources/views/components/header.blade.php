@@ -233,7 +233,15 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false" href="#">{{ Auth::user()->first_name }}</a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu half-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <div class="d-flex align-items-center">
+                                <div class="mr-10px w-30px">
+                                    <img src="https://jewelrycg.com/uploads/all//Wc9vM1KxeAc9DrSmhwcfueyLh9p8v8hqoz1iZQiY-30-30.png" alt="avatar" class="rounded-circle img-fluid">
+                                </div>
+                                <div class="fs-14 fw-700 mr-10px border-right">
+                                    <div class="data">David Sells Johnson</div>
+                                </div>
+                            </div>
                             <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
                             @if (auth()->user()->role == 2)
                                 <li><a class="dropdown-item" href="{{route('seller.services.list')}}">Services</a></li>
