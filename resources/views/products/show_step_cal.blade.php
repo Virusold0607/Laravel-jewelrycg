@@ -162,10 +162,12 @@
                                     <th id="total_estimate_price" class="total-estimate-price"></th>
                                 </tr>
                                 @if($product->measurements->count())
+                                <!--
                                 <tr class="measurement">
                                     <th>Estimated Length Cost (<span class="total-estimate-price"></span> X <span id="measurement_value"></span>)</th>
                                     <th class="total-price"></th>
                                 </tr>
+                                -->
                                 @endif
                             </thead>
                             <tbody>
