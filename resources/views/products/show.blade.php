@@ -3,7 +3,6 @@
     <style>
         .btn-check:active + .btn, .btn-check:checked + .btn, .btn.active, .btn.show, .btn:active {
             border: solid 1px white !important;
-            outline: solid 2px #007bff !important;
         }
 
         .min-w-50 {
