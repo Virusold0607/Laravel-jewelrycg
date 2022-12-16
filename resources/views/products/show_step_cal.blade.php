@@ -157,8 +157,16 @@
                         <table id="product_total_estimate_price"
                                class="table table-lg table-bordered table-nowrap table-align-middle card-table dataTable table-responsive no-footer">
                             <thead>
-                            <th>Estimated Cost</th>
-                            <th id="total_estimate_price" class="total-estimate-price"></th>
+                                <tr>
+                                    <th>Estimated Cost</th>
+                                    <th id="total_estimate_price" class="total-estimate-price"></th>
+                                </tr>
+                                @if($product->measurements->count())
+                                <tr class="measurement">
+                                    <th>Estimated Length Cost (<span class="total-estimate-price"></span> X <span id="measurement_value"></span>)</th>
+                                    <th class="total-price"></th>
+                                </tr>
+                                @endif
                             </thead>
                             <tbody>
                             <tr class="fw-bold">
