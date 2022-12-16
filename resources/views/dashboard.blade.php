@@ -67,10 +67,10 @@
                                               <h6>{{ $item->product_name }} - {{ $item->product_variant_name }}</h6>
                                           </a>
                                       @endif
-                                      <a class="btn btn-primary" id="download" href="{{ url('/product/download/') . $item->id }}">
+                                      <a class="btn btn-primary w-100 mb-2" id="download" href="{{ url('/product/download/') . $item->id }}">
                                           <i class="bi bi-download"></i> Download
                                       </a>
-                                      <button class="btn btn-danger">
+                                      <button class="btn btn-danger w-100">
                                           <i class="bi bi-link"></i> Create Item
                                       </button>
                                   </div>
