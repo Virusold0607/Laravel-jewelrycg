@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        /*
         $password = bcrypt('password');
 
         User::factory()->create([
@@ -33,5 +34,6 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory()->count(10)->create(['password' => $password]);
+        */
     }
 }
