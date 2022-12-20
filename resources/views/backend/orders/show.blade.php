@@ -49,10 +49,10 @@
                         <div class="col-lg-2 col-3">
                             @if ($item->productVariant && $item->productVariant->uploads)
                                 <img src="{{ $item->productVariant->uploads->getImageOptimizedFullName(150) }}"
-                                     alt="" class="thumbnail border w-100">
+                                    alt="" class="thumbnail border w-100">
                             @else
                                 <img src="{{ $item->product->uploads->getImageOptimizedFullName(150) }}" alt=""
-                                     class="thumbnail border w-100">
+                                    class="thumbnail border w-100">
                             @endif
                         </div>
                         <div class="col-lg-10 col-9">
@@ -70,9 +70,8 @@
                                 ${{ number_format($item->price / 100, 2) }}
                             </div>
                             <div class="is_downloadable mt-2" data-item-id="{{ $item->id }}"
-                                 data-product-id="{{ $item->product->id }}"
-                                 data-variant-id="{{ $item->product_variant }}"
-                                 data-product-digital-assets="{{ $item->product->digital_download_assets }}">
+                                data-product-id="{{ $item->product->id }}" data-variant-id="{{ $item->product_variant }}"
+                                data-product-digital-assets="{{ $item->product->digital_download_assets }}">
                                 @if ($item->product->is_digital)
                                     @if ($item->productVariant)
                                         @if (!$item->productVariant->asset || $item->productVariant->asset->file_name == 'none')
@@ -80,16 +79,16 @@
                                         @else
                                             <span class="fs-14 badge bg-success">Digital asset attached</span>
                                             <span class="fs-14 mt-2 d-block" class=""
-                                                  data-product-id="{{ $item->id }}">{{ $item->productVariant->asset->file_original_name . '.' . $item->productVariant->asset->extension }}</span>
+                                                data-product-id="{{ $item->id }}">{{ $item->productVariant->asset->file_original_name . '.' . $item->productVariant->asset->extension }}</span>
                                         @endif
 
                                         <div class="card-body">
                                             <label class="btn btn-primary btn-sm mt-2 getFileManagerModel cursor-pointer"
-                                                   onclick="openFileMangerModalVariant(event)"><i
-                                                        class="bi bi-upload mr-10px"></i> Select
+                                                onclick="openFileMangerModalVariant(event)"><i
+                                                    class="bi bi-upload mr-10px"></i> Select
                                                 asset</label>
                                             <input type="hidden" class="variant_assets" name="variant_assets"
-                                                   value="{{ $item->productVariant->digital_download_assets }}">
+                                                value="{{ $item->productVariant->digital_download_assets }}">
                                         </div>
                                     @else
                                         @if (!$item->product->digital_download_assets)
@@ -97,16 +96,16 @@
                                         @else
                                             <span class="fs-14 badge bg-success">Digital asset attached</span>
                                             <span class="fs-14 mt-2 d-block" class=""
-                                                  data-product-id="{{ $item->id }}">{{ $item->product->digitalImage->file_original_name . '.' . $item->product->digitalImage->extension }}</span>
+                                                data-product-id="{{ $item->id }}">{{ $item->product->digitalImage->file_original_name . '.' . $item->product->digitalImage->extension }}</span>
                                         @endif
 
                                         <div class="card-body">
                                             <label class="btn btn-primary btn-sm mt-2 getFileManagerModel cursor-pointer"
-                                                   onclick="openFileMangerModalDigital(event)"><i
-                                                        class="bi bi-upload mr-10px"></i> Select
+                                                onclick="openFileMangerModalDigital(event)"><i
+                                                    class="bi bi-upload mr-10px"></i> Select
                                                 asset</label>
                                             <input type="hidden" class="digital_assets" name="digital_download_assets"
-                                                   value="{{ $item->product->digital_download_assets }}">
+                                                value="{{ $item->product->digital_download_assets }}">
                                         </div>
                                     @endif
                                 @endif
@@ -118,26 +117,25 @@
                                     <div class="row">
                                         <div class="col-auto">
                                             <select class="order-status form-select w-100"
-                                                    data-item-id="{{ $item->id }}">
+                                                data-item-id="{{ $item->id }}">
                                                 @foreach ($orderStatus as $key => $status)
                                                     @if ($key != 0)
                                                         <option @if ($item->status_fulfillment == $key) selected @endif
-                                                        value="{{ $key }}">{{ $status }}</option>
+                                                            value="{{ $key }}">{{ $status }}</option>
                                                     @endif
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="col-6">
                                             <input
-                                                    class='track_number @if ($item->status_fulfillment != 2) d-none @endif track_number form-control w-100'
-                                                    type='text' placeholder='Tracking Number '
-                                                    value='{{ $item->status_tracking }}'/>
+                                                class='track_number @if ($item->status_fulfillment != 2) d-none @endif track_number form-control w-100'
+                                                type='text' placeholder='Tracking Number '
+                                                value='{{ $item->status_tracking }}' />
                                         </div>
                                     </div>
                                 </div>
-                                <button
-                                        class='allsave_button btn btn-sm btn-primary mt-2 d-none'
-                                        onclick="AllSave(event)">save
+                                <button class='allsave_button btn btn-sm btn-primary mt-2 d-none'
+                                    onclick="AllSave(event)">save
                                 </button>
                             </div>
                         </div>
@@ -148,7 +146,7 @@
             <div class="col-lg-4">
                 <h5 class="fs-18 py-2 fw-600">Billing Address</h5>
                 @include('includes.validation-form')
-                <x-order-info :order="$order"/>
+                <x-order-info :order="$order" />
             </div>
 
             <div class="col-lg-4">
@@ -165,190 +163,191 @@
     <div id="fileManagerContainer"></div>
 
     <script>
-      $(function () {
-        $(".track_number").change(function () {
-          $(this).closest(".is_downloadable").find('.allsave_button').removeClass('d-none');
-        })
-        $('.order-status').change(function () {
-          $(this).closest(".is_downloadable").find('.allsave_button').removeClass('d-none');
-          $(this).closest(".is_downloadable").find(".track_number").addClass('d-none');
-          if ($(this).val() == '2') {
-            $(this).closest(".is_downloadable").find('.track_number').removeClass('d-none');
-          }
-          // } else {
-          //     $(this).closest(".is_downloadable").find(".allsave_button").addClass('d-none');
-          // }
+        $(function() {
+            $(".track_number").change(function() {
+                $(this).closest(".is_downloadable").find('.allsave_button').removeClass('d-none');
+            })
+            $('.order-status').change(function() {
+                $(this).closest(".is_downloadable").find('.allsave_button').removeClass('d-none');
+                $(this).closest(".is_downloadable").find(".track_number").addClass('d-none');
+                if ($(this).val() == '2') {
+                    $(this).closest(".is_downloadable").find('.track_number').removeClass('d-none');
+                }
+                // } else {
+                //     $(this).closest(".is_downloadable").find(".allsave_button").addClass('d-none');
+                // }
+            });
+
         });
 
-      });
+        function AllSave(e) {
+            var orderItemId = $(e.target).closest(".is_downloadable").attr("data-item-id");
 
-      function AllSave(e) {
-        var orderItemId = $(e.target).closest(".is_downloadable").attr("data-item-id");
+            $.ajax({
+                url: "{{ url('backend/orders/item') }}" + "/" + orderItemId,
+                type: 'put',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    status: $(e.target).closest(".is_downloadable").find(".order-status").val()
+                },
+                success: function(data) {
+                    console.log(data)
+                }
+            })
 
-        $.ajax({
-          url: "{{ url('backend/orders/item') }}" + "/" + orderItemId,
-          type: 'put',
-          data: {
-            "_token": "{{ csrf_token() }}",
-            status: $(e.target).closest(".is_downloadable").find(".order-status").val()
-          },
-          success: function (data) {
-            console.log(data)
-          }
-        })
-
-        // Send if status is 2 aka shipped
-        if ($(e.target).closest(".is_downloadable").find(".order-status").val() == 2) {
-          $.ajax({
-            url: "{{ url('backend/orders/status_tracking/') }}" + "/" + orderItemId,
-            type: 'put',
-            data: {
-              "_token": "{{ csrf_token() }}",
-              status: $(e.target).closest(".is_downloadable").find(".track_number").val()
-            },
-            async: false,
-            success: function (data) {
-              console.log(data)
+            // Send if status is 2 aka shipped
+            if ($(e.target).closest(".is_downloadable").find(".order-status").val() == 2) {
+                $.ajax({
+                    url: "{{ url('backend/orders/status_tracking/') }}" + "/" + orderItemId,
+                    type: 'put',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        status: $(e.target).closest(".is_downloadable").find(".track_number").val()
+                    },
+                    async: false,
+                    success: function(data) {
+                        console.log(data)
+                    }
+                })
             }
-          })
+
+            // send if status is 3 aka delivered
+            if ($(e.target).closest(".is_downloadable").find(".order-status").val() == 3) {
+                $.ajax({
+                    url: "{{ url('backend/orders/status_tracking/') }}" + "/" + orderItemId,
+                    type: 'put',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        status: $(e.target).closest(".is_downloadable").find(".track_number").val()
+                    },
+                    async: false,
+                    success: function(data) {
+                        console.log(data)
+                    }
+                })
+            }
+
+            var productId = $(e.target).closest(".is_downloadable").attr("data-product-id");
+            var variantId = $(e.target).closest(".is_downloadable").attr("data-variant-id");
+
+            if (variantId == '0' && variantId) {
+                $.ajax({
+                    url: "{{ url('backend/products/update_digital_assets/') }}" + "/" + productId,
+                    type: 'put',
+                    async: false,
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        value: $(e.target).closest(".is_downloadable").find(".digital_assets").val(),
+                        orderId: orderItemId
+                    },
+                    success: function(data) {
+                        console.log(data)
+                    }
+                })
+            } else {
+                $.ajax({
+                    url: "{{ url('backend/products/update_variant_assets/') }}" + "/" + variantId,
+                    type: 'put',
+                    async: false,
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        value: $(e.target).closest(".is_downloadable").find(".variant_assets").val()
+                    },
+                    success: function(data) {
+                        console.log(data)
+                    }
+                })
+            }
+
+            // location.reload();
         }
 
-        // send if status is 3 aka delivered
-        if ($(e.target).closest(".is_downloadable").find(".order-status").val() == 3) {
-          $.ajax({
-            url: "{{ url('backend/orders/status_tracking/') }}" + "/" + orderItemId,
-            type: 'put',
-            data: {
-              "_token": "{{ csrf_token() }}",
-              status: $(e.target).closest(".is_downloadable").find(".track_number").val()
-            },
-            async: false,
-            success: function (data) {
-              console.log(data)
-            }
-          })
+        function openFileMangerModalDigital(e) {
+            var target = $(e.target);
+            $.ajax({
+                url: "{{ route('backend.file.show') }}",
+                success: function(data) {
+                    if (!$.trim($('#fileManagerContainer').html()))
+                        $('#fileManagerContainer').html(data);
+
+                    $('#fileManagerModal').modal('show');
+
+                    const getSelectedItem = function(selectedId, filePath) {
+                        $(target).closest(".is_downloadable").find(".digital_assets").val(
+                            selectedId);
+                    }
+                    var digital_assets = $(target).closest(".is_downloadable").find(
+                        ".digital_assets").val();
+                    if (digital_assets == '') digital_assets = [];
+                    setSelectedItemsCB(getSelectedItem, [digital_assets], false);
+                    $(target).closest(".is_downloadable").find(".allsave_button").removeClass(
+                        'd-none');
+                }
+            })
         }
 
-        var productId = $(e.target).closest(".is_downloadable").attr("data-product-id");
-        var variantId = $(e.target).closest(".is_downloadable").attr("data-variant-id");
+        function openFileMangerModalVariant(e) {
+            var target = $(e.target);
+            $.ajax({
+                url: "{{ route('backend.file.show') }}",
+                success: function(data) {
+                    if (!$.trim($('#fileManagerContainer').html()))
+                        $('#fileManagerContainer').html(data);
 
-        if (variantId == '0' && variantId) {
-          $.ajax({
-            url: "{{ url('backend/products/update_digital_assets/') }}" + "/" + productId,
-            type: 'put',
-            async: false,
-            data: {
-              "_token": "{{ csrf_token() }}",
-              value: $(e.target).closest(".is_downloadable").find(".digital_assets").val()
-            },
-            success: function (data) {
-              console.log(data)
-            }
-          })
-        } else {
-          $.ajax({
-            url: "{{ url('backend/products/update_variant_assets/') }}" + "/" + variantId,
-            type: 'put',
-            async: false,
-            data: {
-              "_token": "{{ csrf_token() }}",
-              value: $(e.target).closest(".is_downloadable").find(".variant_assets").val()
-            },
-            success: function (data) {
-              console.log(data)
-            }
-          })
+                    $('#fileManagerModal').modal('show');
+
+                    const getSelectedItem = function(selectedId, filePath) {
+                        $(target).closest(".is_downloadable").find(".variant_assets").val(
+                            selectedId);
+                    }
+                    var digital_assets = $(target).closest(".is_downloadable").find(
+                        ".variant_assets").val();
+                    if (digital_assets == '') digital_assets = [];
+                    setSelectedItemsCB(getSelectedItem, [digital_assets], false);
+                    $(target).closest(".is_downloadable").find(".allsave_button").removeClass(
+                        'd-none');
+                }
+            })
         }
 
-        // location.reload();
-      }
+        let mark_as_canceled = function(order_id) {
+            $.ajax({
+                url: '{{ route('backend.orders.mark_as_canceled') }}',
+                type: 'POST',
+                data: {
+                    '_token': "{{ csrf_token() }}",
+                    order_id: order_id
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        if (confirm("Order successfully marked as canceled!") == true) {
+                            window.location.reload();
+                        } else {
+                            window.location.reload()
+                        }
+                    }
+                }
+            })
+        }
 
-      function openFileMangerModalDigital(e) {
-        var target = $(e.target);
-        $.ajax({
-          url: "{{ route('backend.file.show') }}",
-          success: function (data) {
-            if (!$.trim($('#fileManagerContainer').html()))
-              $('#fileManagerContainer').html(data);
-
-            $('#fileManagerModal').modal('show');
-
-            const getSelectedItem = function (selectedId, filePath) {
-              $(target).closest(".is_downloadable").find(".digital_assets").val(
-                selectedId);
-            }
-            var digital_assets = $(target).closest(".is_downloadable").find(
-              ".digital_assets").val();
-            if (digital_assets == '') digital_assets = [];
-            setSelectedItemsCB(getSelectedItem, [digital_assets], false);
-            $(target).closest(".is_downloadable").find(".allsave_button").removeClass(
-              'd-none');
-          }
-        })
-      }
-
-      function openFileMangerModalVariant(e) {
-        var target = $(e.target);
-        $.ajax({
-          url: "{{ route('backend.file.show') }}",
-          success: function (data) {
-            if (!$.trim($('#fileManagerContainer').html()))
-              $('#fileManagerContainer').html(data);
-
-            $('#fileManagerModal').modal('show');
-
-            const getSelectedItem = function (selectedId, filePath) {
-              $(target).closest(".is_downloadable").find(".variant_assets").val(
-                selectedId);
-            }
-            var digital_assets = $(target).closest(".is_downloadable").find(
-              ".variant_assets").val();
-            if (digital_assets == '') digital_assets = [];
-            setSelectedItemsCB(getSelectedItem, [digital_assets], false);
-            $(target).closest(".is_downloadable").find(".allsave_button").removeClass(
-              'd-none');
-          }
-        })
-      }
-
-      let mark_as_canceled = function (order_id) {
-        $.ajax({
-          url: '{{ route('backend.orders.mark_as_canceled') }}',
-          type: 'POST',
-          data: {
-            '_token': "{{ csrf_token() }}",
-            order_id: order_id
-          },
-          success: function (response) {
-            if(response.status == 'success'){
-              if (confirm("Order successfully marked as canceled!") == true) {
-                window.location.reload();
-              } else {
-                window.location.reload()
-              }
-            }
-          }
-        })
-      }
-
-      let mark_as_chargeback = function (order_id) {
-        $.ajax({
-          url: '{{ route('backend.orders.mark_as_chargeback') }}',
-          type: 'POST',
-          data: {
-            '_token': "{{ csrf_token() }}",
-            order_id: order_id
-          },
-          success: function (response) {
-            if(response.status == 'success'){
-              if (confirm("Order successfully marked as chargeback!") == true) {
-                window.location.reload();
-              } else {
-                window.location.reload()
-              }
-            }
-          }
-        })
-      }
+        let mark_as_chargeback = function(order_id) {
+            $.ajax({
+                url: '{{ route('backend.orders.mark_as_chargeback') }}',
+                type: 'POST',
+                data: {
+                    '_token': "{{ csrf_token() }}",
+                    order_id: order_id
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        if (confirm("Order successfully marked as chargeback!") == true) {
+                            window.location.reload();
+                        } else {
+                            window.location.reload()
+                        }
+                    }
+                }
+            })
+        }
     </script>
 @endsection

@@ -26,6 +26,7 @@ use App\Models\Step;
 use App\Models\StepGroup;
 use App\Models\AttributeValue;
 use App\Models\ProductMeasurementRelationship;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -425,7 +426,8 @@ class ProductsController extends Controller
 
     public function update_digital_assets(Request $request, $id)
     {
-        return Product::where('id', $id)->update(['digital_download_assets' => $request->value]);
+        $ret = !!OrderItem::where("id", $request->orderId)->update(["product_digital_download_assets" => $request->value]);
+        return Product::where('id', $id)->update(['digital_download_assets' => $request->value]) && $ret;
     }
 
     public function update_variant_assets(Request $request, $id)
