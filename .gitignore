@@ -16,3 +16,4 @@ yarn-error.log
 /public/uploads
 /public/image
 /nginx.conf
+composer.lock
