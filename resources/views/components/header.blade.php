@@ -1,8 +1,9 @@
 <header class="navbar navbar-expand-lg">
     <style>
-        header{
-            z-index:100000;
+        header {
+            z-index: 100000;
         }
+
         .notification-badge-container i {
             position: relative;
             font-size: 24px;
@@ -68,7 +69,7 @@
             #JEWELRYCG
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -83,7 +84,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false" href="#">Learn</a>
+                        data-bs-toggle="dropdown" aria-expanded="false" href="#">Learn</a>
                     <ul class="dropdown-menu half-menu" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item" href="{{ route('blog') }}">
@@ -127,43 +128,56 @@
             <!-- right navbar-->
             <ul class="mb-2 ml-auto navbar-nav mb-lg-0">
                 <li class="nav-item dropdown menu-area">
-                    <a href="{{route('cart.index')}}" class="nav-link">
+                    <a href="{{ route('cart.index') }}" class="nav-link">
                         <?php
-                        if (Cart::instance('default')->content()->count() == 0
-                            && auth()->check()
+                        if (
+                            Cart::instance('default')
+                                ->content()
+                                ->count() == 0 &&
+                            auth()->check()
                         ) {
                             Cart::merge(auth()->id());
                         }
                         ?>
                         @if ($cart_items = Cart::content()->count())
-                            Cart (<span class="cart-count"><span class="cart-count-number">{{$cart_items}}</span></span>)
+                            Cart (<span class="cart-count"><span
+                                    class="cart-count-number">{{ $cart_items }}</span></span>)
                         @endif
                     </a>
                 </li>
 
                 @auth
                     @php
-                        $new_count =Auth::user()->notifications()->where('status', 0)->count();
-                        $notifications = Auth::user()->notifications()->whereBetween('status', [0,1])
-                            ->orderBy('notifications.updated_at', 'desc')->get();
-                        $message_notifications = App\Models\Message::where('conversation_id',Auth::id())->groupBy('user_id')->get();
-
+                        $new_count = Auth::user()
+                            ->notifications()
+                            ->where('status', 0)
+                            ->count();
+                        $notifications = Auth::user()
+                            ->notifications()
+                            ->whereBetween('status', [0, 1])
+                            ->orderBy('notifications.updated_at', 'desc')
+                            ->get();
+                        $message_notifications = App\Models\Message::where('conversation_id', Auth::id())
+                            ->groupBy('user_id')
+                            ->get();
+                        
                         $user_id = Auth::id();
-                        function user_name ($id) {
-                            return App\Models\User::where('id',$id)->get();
+                        function user_name($id)
+                        {
+                            return App\Models\User::where('id', $id)->get();
                         }
                         $seller_id = App\Models\Product::groupBy('vendor')->get('vendor');
                         $role = false;
-                        foreach($seller_id as $t){
-                            if($user_id == $t->vendor){
+                        foreach ($seller_id as $t) {
+                            if ($user_id == $t->vendor) {
                                 $role = true;
                             }
                         }
-
+                        
                     @endphp
                     <li class="nav-item dropdown">
                         <a class="nav-link notification-badge-container" aria-current="page" id="navbarDropdown"
-                           role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
                             <i class="bi bi-bell fs-18">
                                 @if ($new_count)
                                     <div class="notification-badge">{{ $new_count }}</div>
@@ -175,10 +189,10 @@
                                 <span class="dropdown-title">Notifications (0)</span>
                             </div>
                             @foreach ($notifications as $notification)
-                                <a href="/notifications/check/{{$notification->id}}">
+                                <a href="/notifications/check/{{ $notification->id }}">
                                     <div class="notification-container mb-3">
                                         <img class="notification-thumb"
-                                             src="{{$notification->thumb ? $notification->thumb : "/assets/img/jewelrycg_default_logo.png"}}">
+                                            src="{{ $notification->thumb ? $notification->thumb : '/assets/img/jewelrycg_default_logo.png' }}">
                                         <div class="notification-body">
                                             <p class="notification-message text-black">{{ $notification->message }}</p>
                                             <p class="notification-time">{{ get_period($notification->created_at) }}</p>
@@ -192,7 +206,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link notification-badge-container" aria-current="page" id="navbarDropdown"
-                           role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
                             <i class="bi bi-envelope fs-18">
                                 <div class="notification-badge"></div>
                             </i>
@@ -204,21 +218,23 @@
                                 <span class="dropdown-title">Messages (0)</span>
                             </div>
                             @foreach ($message_notifications as $message_notification)
-                                <a href="{{ env('APP_URL')}}/chat/{{$message_notification->user_id }}"
-                                   class="filterDiscussions all unread single active d-block py-2 border-bottom text-black"
-                                   data-toggle="list" role="tab">
+                                <a href="{{ env('APP_URL') }}/chat/{{ $message_notification->user_id }}"
+                                    class="filterDiscussions all unread single active d-block py-2 border-bottom text-black"
+                                    data-toggle="list" role="tab">
                                     <div class="row">
                                         <div class="d-flex">
                                             <div class="mr-10px w-50px">
                                                 <img class="w-100 rounded-circle"
-                                                     src="{{user_name($message_notification->user_id)[0]->uploads->getImageOptimizedFullName(100,100)}}"
-                                                     data-toggle="tooltip" data-placement="top" title="Janette"
-                                                     alt="{{user_name($message_notification->user_id)[0]->first_name}} avatar">
+                                                    src="{{ user_name($message_notification->user_id)[0]->uploads->getImageOptimizedFullName(100, 100) }}"
+                                                    data-toggle="tooltip" data-placement="top" title="Janette"
+                                                    alt="{{ user_name($message_notification->user_id)[0]->first_name }} avatar">
                                             </div>
                                             <div class="col- fs-14 fw-700">
                                                 <div class="data">
-                                                    <p class="fw-700">{{user_name($message_notification->user_id)[0]->first_name}} {{user_name($message_notification->user_id)[0]->last_name}}</p>
-                                                    <p>{{$message_notification->message}}</p>
+                                                    <p class="fw-700">
+                                                        {{ user_name($message_notification->user_id)[0]->first_name }}
+                                                        {{ user_name($message_notification->user_id)[0]->last_name }}</p>
+                                                    <p>{{ $message_notification->message }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -231,26 +247,29 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false" href="#">{{ Auth::user()->first_name }}</a>
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            href="#">{{ Auth::user()->first_name }}</a>
                         <ul class="dropdown-menu half-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <div class="d-flex align-items-center">
                                 <div class="mr-10px w-30px">
-                                    <img src="https://jewelrycg.com/uploads/all//Wc9vM1KxeAc9DrSmhwcfueyLh9p8v8hqoz1iZQiY-30-30.png" alt="avatar" class="rounded-circle img-fluid">
+                                    <img src="{{ url('user/avatar/' . Auth::user()->avatar) }}" alt="avatar"
+                                        class="rounded-circle img-fluid">
                                 </div>
                                 <div class="fs-14 fw-700 mr-10px border-right">
-                                    <div class="data">David Sells Johnson</div>
+                                    <div class="data">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                                    </div>
                                 </div>
                             </div>
                             <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
                             @if (auth()->user()->role == 2)
-                                <li><a class="dropdown-item" href="{{route('seller.services.list')}}">Services</a></li>
+                                <li><a class="dropdown-item" href="{{ route('seller.services.list') }}">Services</a></li>
                             @endif
-                            <li><a class="dropdown-item" href="{{route('user.index', auth()->user()->id)}}">My Info</a>
+                            <li><a class="dropdown-item" href="{{ route('user.index', auth()->user()->id) }}">My Info</a>
                             </li>
                             <li><a class="dropdown-item"
-                                   href="{{route('orders.index')}}">{{ auth()->user()->role ? 'All Orders' : 'My Orders' }}</a>
+                                    href="{{ route('orders.index') }}">{{ auth()->user()->role ? 'All Orders' : 'My Orders' }}</a>
                             </li>
-                            <li><a class="dropdown-item" href="{{route('wishlist')}}">My Wishlist</a></li>
+                            <li><a class="dropdown-item" href="{{ route('wishlist') }}">My Wishlist</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -272,17 +291,17 @@
 </header>
 
 <script>
-  $(document).ready(function () {
-    console.log("loaded");
-    $('.notification-badge-container').click(function () {
-      console.log("clicked");
-      $.ajax({
-        url: '{{ route("notifications.overview") }}',
-        type: 'POST',
-        data: {
-          "_token": "{{ csrf_token() }}",
+    $(document).ready(function() {
+        console.log("loaded");
+        $('.notification-badge-container').click(function() {
+            console.log("clicked");
+            $.ajax({
+                url: '{{ route('notifications.overview') }}',
+                type: 'POST',
+                data: {
+                    "_token": "{{ csrf_token() }}",
                 },
-                success: function (response) {
+                success: function(response) {
                     $('.notification-badge').hide();
                     console.log(response);
                 }
