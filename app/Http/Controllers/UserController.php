@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Upload;
 
 class UserController extends Controller
 {
@@ -146,5 +147,18 @@ class UserController extends Controller
     {
         auth()->user()->update(['role' => 4]);
         return redirect()->route('logout');
+    }
+
+    public function avatar($userid)
+    {
+        $user = User::find($userid);
+        $imageName = "none.png";
+        if( $user ) {
+            $upload = Upload::find($user->avatar);
+            if( $upload ) {
+                $imageName = $upload->file_name;
+            }
+        }
+        return response()->file(public_path('uploads/all/'.$imageName));
     }
 }
