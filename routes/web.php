@@ -428,8 +428,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/check/{id}', 'check')->name('check');
         Route::post('/overview', 'overview')->name('overview');
     });
-
-    Route::get('/user/avatar/{userid}', [UserController::class, 'avatar'])->name('avatar');
 });
 
 //services
