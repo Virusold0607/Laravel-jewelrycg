@@ -204,7 +204,7 @@
                                 <span class="dropdown-title">Messages (0)</span>
                             </div>
                             @foreach ($message_notifications as $message_notification)
-                                <a href="{{ env('APP_URL')}}/chat/{{$message_notification->user_id }}"
+                                <a href="/chat/{{$message_notification->user_id }}"
                                    class="filterDiscussions all unread single active d-block py-2 border-bottom text-black"
                                    data-toggle="list" role="tab">
                                     <div class="row">
