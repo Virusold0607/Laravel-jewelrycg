@@ -5,7 +5,8 @@
             <div class="col-xl-11 mx-auto">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h1 class="fw-800">{{ $course->name }}</h1>
+                        <h1 class="fw-800 mb-4">{{ $course->name }}</h1>
+                        <p>{{ $course->description }}</h1>
                     </div>
                     <div class="col-lg-4">
                         <div class="p-3 border mb-4">
