@@ -133,12 +133,13 @@ class OrderController extends Controller
     {
         //
         $order = Order::findOrFail($id);
+        $orderItem = OrderItem::findOrFail($id);
         if($request -> status == 3) {
             Notification::create([
                 'status' => 0,
                 'user_id' => $order->user_id,
                 'thumb' => 0,
-                'message' => 'Item Name has been marked as delivered View details.',
+                'message' => $orderItem->product_name . $orderItem->product_variant_name . ' has been marked as delivered View details.',
                 'link' => '/orders/' . $order->order_id
             ]);
         }
