@@ -225,7 +225,6 @@ class BServicesController extends Controller
         $service = ServicePost::findOrFail($id);
         $data = $request->input();
         $data['user_id'] = Auth::id();
-
         $slug = $request->slug;
 
         if ($slug == '') {
@@ -238,7 +237,13 @@ class BServicesController extends Controller
             $data['slug'] = $this->slugify($slug);
         }
 
-        $service->update($data);
+        $service->name = $data['name'];
+        $service->slug = $data['slug'];
+        $service->status = $data['status'];
+        $service->thumbnail = $data['thumbnail'];
+        $service->published_at = date('Y-m-d H:i:s');
+    
+        $service->update();
 
         ServicePostTag::where('id_service', $service->id)->delete();
         ServicePostCategorie::where('id_post', $service->id)->delete();
