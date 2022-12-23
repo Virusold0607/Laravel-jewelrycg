@@ -14,21 +14,16 @@
                             <a type="button" class="btn btn-primary w-100" href="/courses/checkout/{{$course->id}}">Buy</a>
                         </div>
                         <div class="p-3 border">
-                            <h1 class="text-black">Course Syllabus</h1>
+                            <h1 class="text-black mb-4">Course Syllabus</h1>
                             <div class="course-content-list">
-                                <h3 class="fw-700">First Lesson</h3>
-                                <ul class="list-style-none">
-                                    <li>Lesson 1</li>
-                                    <li>Lesson 2</li>
-                                    <li>Lesson 3</li>
-                                </ul>
-                            </div>
-                            <div class="course-content-list">
-                                <h3 class="fw-700">Second Lesson</h3>
-                                <ul class="list-style-none">
-                                    <li>Lesson 1</li>
-                                    <li>Lesson 2</li>
-                                </ul>
+                                @foreach ($course->lessons as $lesson)
+                                    <h3 class="fw-700">{{ $lesson->name }}</h3>
+                                    <ul>
+                                        @foreach ($lesson->contents as $content)
+                                            <li>{{ $content->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endforeach
                             </div>
                         </div>
                     </div>
