@@ -27,22 +27,6 @@
                             </div>
                         </div>
                     </div>
-                    @foreach ($course->lessons as $lesson)
-                        <div class="col mb-3">
-                            <div class="blog-post-list-container">
-                                <div class="p-2 pt-3">
-                                    <h2 class="fs-18 fw-600 mb-2">
-                                        {{ $lesson->name }}
-                                    </h2>
-                                    @foreach ($lesson->contents as $content)
-                                        <div class="mb-2 opacity-50 article-list-category">
-                                            <div>{{ $content->name }} </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
                 </div>
             </div>
         </div>
