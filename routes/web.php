@@ -512,7 +512,7 @@ Route::get('/filter-product', [ProductController::class, 'filterProduct'])->name
 
 // Products
 Route::middleware(['auth', 'admin'])->resource('products', ProductController::class)->except(['index', 'show']);
-Route::get('product/{slug}', [ProductController::class, 'show'])->name('products.show');
+Route::get('p/{slug}', [ProductController::class, 'show'])->name('products.show');
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 Route::post('products/add_review', [ProductController::class, 'addReview'])->name('products.add_review');
 
