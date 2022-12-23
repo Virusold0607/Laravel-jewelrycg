@@ -8,7 +8,7 @@
                         <h1 class="fw-800">{{ $course->name }}</h1>
                     </div>
                     <div class="col-lg-4">
-                        <div class="p-3 border">
+                        <div class="p-3 border mb-4">
                             <h1 class="text-primary">$99</h1>
                             <a type="button" class="btn btn-primary w-100" href="/courses/checkout/{{$course->id}}">Buy</a>
                         </div>
