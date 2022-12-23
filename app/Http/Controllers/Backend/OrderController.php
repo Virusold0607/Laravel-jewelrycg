@@ -131,6 +131,17 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $order = OrderItem::findOrFail($id);
+        if($request -> status == 3) {
+            Notification::create([
+                'status' => 0,
+                'user_id' => $order->user->id,
+                'thumb' => 0,
+                'message' => $order->product_name .' just delivered your service order #'. $order->order_id .'. View delivery.',
+                'link' => '/orders/' . $order->order_id
+            ]);
+        }
+
         return OrderItem::where('id', $id)->update(['status_fulfillment' => $request->status]);
     }
 
