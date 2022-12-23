@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Mail;
+use App\Models\Notification;
 
 class OrderController extends Controller
 {
@@ -131,13 +132,13 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $order = OrderItem::findOrFail($id);
+        $order = Order::findOrFail($id);
         if($request -> status == 3) {
             Notification::create([
                 'status' => 0,
-                'user_id' => $order->user->id,
+                'user_id' => $order->user_id,
                 'thumb' => 0,
-                'message' => $order->product_name .' just delivered your service order #'. $order->order_id .'. View delivery.',
+                'message' => 'Item Name has been marked as delivered View details.',
                 'link' => '/orders/' . $order->order_id
             ]);
         }
