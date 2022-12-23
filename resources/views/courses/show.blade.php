@@ -41,7 +41,6 @@
                                     @foreach ($lesson->contents as $content)
                                         <div class="mb-2 opacity-50 article-list-category">
                                             <div>{{ $content->name }} </div>
-                                            <div>{{ $content->content }} </div>
                                         </div>
                                     @endforeach
                                 </div>
