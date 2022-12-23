@@ -1,16 +1,18 @@
 <x-app-layout page-title="Courses">
-    <section>
-        <div class="container">
-            <div class="col-xl-11 py-8 mx-auto">
-                <h1 class="fw-800">{{ $course->name }}</h1>
-            </div>
-        </div>
-    </section>
 
-    <section class="bg-white pb-4">
+    <section class="bg-white py-8">
         <div class="container">
             <div class="col-xl-11 mx-auto">
-                <div class="row gutters-10 row-cols-lg-3 row-cols-md-2 row-cols-1">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h1 class="fw-800">{{ $course->name }}</h1>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="p-3 border">
+                            <h1 class="text-primary">$99</h1>
+                            <a type="button" class="btn btn-primary w-100" href="/courses/checkout/{{$course->id}}">Buy</a>
+                        </div>
+                    </div>
                     @foreach ($course->lessons as $lesson)
                         <div class="col mb-3">
                             <div class="blog-post-list-container">
@@ -29,7 +31,6 @@
                         </div>
                     @endforeach
                 </div>
-                <a type="button" class="btn btn-info" href="/courses/checkout/{{$course->id}}">Buy</a>
             </div>
         </div>
     </section>
