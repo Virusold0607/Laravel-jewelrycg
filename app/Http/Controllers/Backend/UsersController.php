@@ -141,7 +141,7 @@ class UsersController extends Controller
         }
         $user->update();
 
-        return redirect()->route('backend.users.list');
+        return redirect()->route('backend.users.edit', $user->id)->with('success','User updated');
     }
 
     /**
