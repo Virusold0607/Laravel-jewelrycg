@@ -107,7 +107,6 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        dd('d');
         return view('backend.users.edit', [
             'user' => User::findOrFail($id)
         ]);
@@ -124,19 +123,16 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
             'role' => ['required'],
         ]);
         
-        $user->name = $request->name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->username = $request->username;
         $user->email = $request->email;
-        $user->address1 = $request->address1;
-        $user->address2 = $request->address2;
-        $user->city = $request->city;
-        $user->state = $request->state;
-        $user->country = $request->country;
-        $user->pin_code = $request->pin_code;
         $user->email_verified_at = ($request->email_verified_at == 1) ? date('Y-m-d h:i:s') : null;
         $user->role = $request->role;
         if($request->password)
