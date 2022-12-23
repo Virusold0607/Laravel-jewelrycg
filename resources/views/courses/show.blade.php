@@ -1,6 +1,6 @@
 <x-app-layout page-title="Courses">
 
-    <section class="bg-white py-8">
+    <section class="bg-white pt-9 pb-8">
         <div class="container">
             <div class="col-xl-10 mx-auto">
                 <div class="row">
