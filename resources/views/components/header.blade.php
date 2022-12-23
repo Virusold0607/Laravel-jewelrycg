@@ -235,7 +235,7 @@
                         <ul class="dropdown-menu half-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <div class="d-flex align-items-center">
                                 <div class="mr-10px w-30px">
-                                    <img src="https://jewelrycg.com/uploads/all//Wc9vM1KxeAc9DrSmhwcfueyLh9p8v8hqoz1iZQiY-30-30.png" alt="avatar" class="rounded-circle img-fluid">
+                                    <img src="{{user_name(Auth::user()->id)[0]->uploads->getImageOptimizedFullName(100,100)}}" alt="avatar" class="rounded-circle img-fluid">
                                 </div>
                                 <div class="fs-14 fw-700 mr-10px border-right">
                                     <div class="data">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
