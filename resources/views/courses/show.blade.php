@@ -2,7 +2,7 @@
 
     <section class="bg-white py-8">
         <div class="container">
-            <div class="col-xl-11 mx-auto">
+            <div class="col-xl-10 mx-auto">
                 <div class="row">
                     <div class="col-lg-8">
                         <h1 class="fw-800 mb-4">{{ $course->name }}</h1>
