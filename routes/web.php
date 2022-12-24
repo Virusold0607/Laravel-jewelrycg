@@ -549,6 +549,7 @@ Route::group(['controller' => CourseController::class, 'prefix' => 'courses', 'a
     Route::get('/checkout/{id}', 'get_billing')->name('billing.get');
     Route::post('/checkout/{id}', 'post_billing')->name('billing.post');
     Route::get('/course/{slug}', 'show')->name('show');
+    Route::get('/take/{slug}', 'take_show')->name('take');
 });
 
 Route::group(['controller' => CartController::class], function () {

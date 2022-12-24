@@ -400,4 +400,14 @@ class CourseController extends Controller
         $order = OrderCourse::with(['course.uploads'])->where('order_id', $id)->first();
         return view('courses.order_detail', ['order' => $order]);
     }
+
+    public function take_show($slug)
+    {
+        $course = Course::where('slug', $slug)
+            ->firstOrFail();
+
+        return view('courses.take.show', compact(
+            'course'
+        ));
+    }
 }
