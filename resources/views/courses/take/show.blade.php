@@ -66,4 +66,4 @@
        $('.description').html(course.lessons[lesson].contents[content].content)
       })
     });
-  </script>
+</script>

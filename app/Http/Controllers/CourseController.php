@@ -13,6 +13,7 @@ use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Stripe\Stripe;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -57,9 +58,10 @@ class CourseController extends Controller
     {
         $course = Course::where('slug', $slug)
             ->firstOrFail();
+        $order = OrderCourse::where('course_id', $course->id)->where('user_id', Auth::id())->firstOrFail();
 
         return view('courses.show', compact(
-            'course'
+            'course','order'
         ));
     }
 
