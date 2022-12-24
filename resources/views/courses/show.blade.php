@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <h1 class="fw-800 mb-4">{{ $course->name }}</h1>
-                        <div class="course-content">{{ !! $course->description !!}}</div>
+                        <div class="course-description">{{ !! $course->description !!}}</div>
                     </div>
                     <div class="col-lg-4">
                         @if ($order->status_payment == 2)
