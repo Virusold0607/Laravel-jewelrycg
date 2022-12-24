@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <h1 class="fw-800 mb-4">{{ $course->name }}</h1>
-                        <div class="course-description">{{ $course->description }}</div>
+                        <div class="course-description"></div>
                     </div>
                     <div class="col-lg-4">
                         @if ($order->status_payment == 2)
@@ -43,8 +43,10 @@
 <script>
 $(function() {
 
-  var order = @php echo json_encode($order) @endphp;
+    var course = @php echo json_encode($course) @endphp;
 
- console.log(order);
+    $(function() {
+        $('.course-description').html(course.description)
+    })
 });
 </script>
