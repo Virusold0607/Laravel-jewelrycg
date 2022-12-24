@@ -57,9 +57,10 @@ class CourseController extends Controller
     {
         $course = Course::where('slug', $slug)
             ->firstOrFail();
+        $order = OrderCourse::where('course_id', $course->id)->firstOrFail();
 
         return view('courses.show', compact(
-            'course'
+            'course','order'
         ));
     }
 
