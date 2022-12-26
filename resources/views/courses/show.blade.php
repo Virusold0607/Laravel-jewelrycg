@@ -9,15 +9,22 @@
                         <div class="course-description"></div>
                     </div>
                     <div class="col-lg-4">
-                        @if ($order->status_payment == 2)
-                        <div class="p-3 border mb-4">
-                            <a type="button" class="btn btn-primary w-100" href="/courses/take/{{$course->slug}}">Take Course</a>
-                        </div>
+                        @if (Auth::check())
+                            @if ($order && $order->status_payment == 2)
+                            <div class="p-3 border mb-4">
+                                <a type="button" class="btn btn-primary w-100" href="/courses/take/{{$course->slug}}">Take Course</a>
+                            </div>
+                            @else
+                            <div class="p-3 border mb-4">
+                                <h1 class="text-primary">$99</h1>
+                                <a type="button" class="btn btn-primary w-100" href="/courses/checkout/{{$course->id}}">Buy</a>
+                            </div>
+                            @endif
                         @else
-                        <div class="p-3 border mb-4">
-                            <h1 class="text-primary">$99</h1>
-                            <a type="button" class="btn btn-primary w-100" href="/courses/checkout/{{$course->id}}">Buy</a>
-                        </div>
+                            <div class="p-3 border mb-4">
+                                <h1 class="text-primary">$99</h1>
+                                <a type="button" class="btn btn-primary w-100" href="/courses/checkout/{{$course->id}}">Buy</a>
+                            </div>
                         @endif
 
                         <div class="p-3 border">
