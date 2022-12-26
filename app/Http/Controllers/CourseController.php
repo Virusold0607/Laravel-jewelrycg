@@ -59,11 +59,21 @@ class CourseController extends Controller
     {
         $course = Course::where('slug', $slug)
             ->firstOrFail();
-        $order = OrderCourse::where('course_id', $course->id)->where('user_id', Auth::id())->firstOrFail();
 
-        return view('courses.show', compact(
-            'course','order'
-        ));
+        if(Auth::check()){
+            $order = OrderCourse::where('course_id', $course->id)->where('user_id', Auth::id())->firstOrFail();
+            return view('courses.show', compact(
+                'course','order'
+            ));
+        }
+        else {
+            return view('courses.show', compact(
+                'course'
+            ));
+        }
+
+
+
     }
 
     public function update(Course $course, CourseStoreRequest $request)
