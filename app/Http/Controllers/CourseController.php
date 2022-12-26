@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\OrderCourse;
 use App\Models\UserAddress;
+use App\Models\CourseLessonHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Stripe\Stripe;
@@ -408,8 +409,26 @@ class CourseController extends Controller
         $course = Course::where('slug', $slug)
             ->firstOrFail();
 
+        $history = CourseLessonHistory::where('user_id', Auth::id())->firstOrFail();
+
+        // dd($history);
+
         return view('courses.take.show', compact(
-            'course'
+            'course','history'
         ));
+    }
+
+    public function complete_lesson($id)
+    {
+        CourseLessonHistory::create([
+            'user_id' => Auth::id(),
+            'lesson_content_id' => $id,
+            'status' => 1,
+        ]);
+
+        // dd($ddd);
+
+        return response(null, 200);
+        // dd("ddd");
     }
 }
