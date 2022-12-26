@@ -14,5 +14,10 @@ class CourseLessonContent extends Model
     public function lesson()
     {
         return $this->belongsTo(CourseLesson::class, 'lesson_id');
-    }        
+    }
+
+    public function history()
+    {
+        return $this->hasOne(CourseLessonHistory::class, 'lesson_content_id');
+    }
 }
