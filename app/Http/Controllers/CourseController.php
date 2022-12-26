@@ -419,12 +419,8 @@ class CourseController extends Controller
         $course = Course::where('slug', $slug)
             ->firstOrFail();
 
-        $history = CourseLessonHistory::where('user_id', Auth::id())->firstOrFail();
-
-        // dd($history);
-
         return view('courses.take.show', compact(
-            'course','history'
+            'course'
         ));
     }
 
