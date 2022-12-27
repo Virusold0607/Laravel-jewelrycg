@@ -8,6 +8,8 @@ use App\Models\Country;
 use App\Models\Coupon;
 use App\Models\Course;
 use App\Models\CourseCategory;
+use App\Models\CourseLesson;
+use App\Models\CourseLessonContent;
 use App\Models\OrderCourse;
 use App\Models\UserAddress;
 use App\Models\CourseLessonHistory;
@@ -419,8 +421,11 @@ class CourseController extends Controller
         $course = Course::where('slug', $slug)
             ->firstOrFail();
 
+        $lesson = CourseLesson::where('course_id', $course->id)->pluck('id')->toArray();
+        $content = CourseLessonContent::whereIn('lesson_id', $lesson)->pluck('id')->toArray();
+        $history = CourseLessonHistory::where('user_id', Auth::id())->whereIn('lesson_content_id', $content)->orderBy('id', 'DESC')->pluck('lesson_content_id')->first();
         return view('courses.take.show', compact(
-            'course'
+            'course', 'history'
         ));
     }
 
