@@ -23,8 +23,8 @@
                         @endforeach
                     </div>
                     <div class="col-lg-8">
-                        <h1 class="fw-800 mb-4 title">{{ $course->name }}</h1>
-                        <p class="description">{{ $displayText }}</p>
+                        <h1 class="fw-800 mb-4 title">{!! $course->name !!}</h1>
+                        <p class="description">{!! $displayText !!}</p>
                         <a class='complete btn btn-light text-uppercase text-right mt-4 float-end' role="button" href="{{ route('courses.complete', ['slug'=>Request::route('slug'), 'content' => $nextId, 'id'=>$currentId]) }}">
                             complete @if ($nextId != $currentId) & continue @endif<i class='bi bi-arrow-right'></i>
                         </a>
