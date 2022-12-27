@@ -6,10 +6,10 @@
                     <div class="col-lg-4">
                         @foreach ($course->lessons as $i => $lesson)
                         <div class="nav-item">
-                            <a class="nav-link nav-link-main dropdown-toggle fs-4 pt-2 pb-2" href="#navbar" role="button" data-bs-toggle="collapse" data-bs-target="#navbar-{{$i}}" aria-expanded="false">
+                            <a class="nav-link nav-link-main dropdown-toggle fs-4 pt-2 pb-2" href="#navbar" role="button" data-bs-toggle="collapse" data-bs-target="#navbar-{{$i}}" aria-expanded="true">
                               <span class="nav-link-title">{{ $lesson->name }}</span>
                             </a>
-                            <div id="navbar-{{$i}}" class="nav-collapse collapse @if($i == 0) show @endif">
+                            <div id="navbar-{{$i}}" class="nav-collapse collapse show">
                                 @foreach ($lesson->contents as $j => $content)
                                 <div class="d-flex align-items-center icon-{{$i}}-{{$j}}">
                                     <a class="nav-link fs-5 lesson" role="button" href="{{ route('courses.take', ['slug'=>Request::route('slug'), 'content' => $content->id]) }}">{{ $content->name }}</a>
