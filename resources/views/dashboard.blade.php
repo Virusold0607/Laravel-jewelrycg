@@ -52,7 +52,7 @@
                     <div class="card-body">
                         <div class="row">
                             @foreach ($purchases as $item)
-                                <div class="col-xl-2 col-lg-3">
+                                <div class="col-xl-6 col-lg-6">
                                     <div class="card">
                                         <div class="card-body">
                                             @if ($item->product_variant == 0)
@@ -90,7 +90,7 @@
                     <div class="card-body">
                         <div class="row">
                             @foreach ($services as $item)
-                                <div class="col-xl-3 col-lg-3">
+                                <div class="col-xl-6 col-lg-6">
                                     <div class="card">
                                         <div class="card-body">
                                             <img src="{{ $item->service->uploads->getImageOptimizedFullName(400) }}"
@@ -120,7 +120,7 @@
                     <div class="card-body">
                         <div class="row">
                             @foreach ($courses as $item)
-                                <div class="col-xl-3 col-lg-3">
+                                <div class="col-xl-6 col-lg-6">
                                     <div class="card">
                                         <div class="card-body">
                                             <img src="{{ $item->course->uploads->getImageOptimizedFullName(400) }}"
