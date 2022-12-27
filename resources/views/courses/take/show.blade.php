@@ -28,12 +28,6 @@
                         <p class="description"></p>
                         <button class='complete btn btn-light text-uppercase text-right mt-4 float-end' role="button"></button>
                     </div>
-                    <div class="col-lg-8">
-                        <h1 class="fw-800 mb-4 title">{{ $course->name }}</h1>
-                        <input type="hidden" class="hidden">
-                        <p class="description"></p>
-                        <button class='complete btn btn-light text-uppercase text-right mt-4 float-end' role="button"></button>
-                    </div>
 
                 </div>
 
@@ -99,6 +93,39 @@
                 $('.hidden').val(course.lessons[lesson].contents[content].id);
                 $(`#navbar-${lesson}`).addClass('show');
             }
+
+
+
+        }else {
+            $.ajax({
+                url: url+"/"+id,
+                method: 'get',
+                success: function(result) {
+
+                    $(`.icon-${lesson}-${content}`).append(icon);
+                    if(course.lessons.length -1 == lesson){
+                        return;
+                    }else if(course.lessons[lesson].contents.length - 1 == content ){
+                        lesson = lesson + 1;
+                        content = 0;
+
+                        $('.title').html(course.lessons[lesson].contents[content].name)
+                        $('.description').html(course.lessons[lesson].contents[content].content)
+                        $('.complete').html(button);
+                        $('.hidden').val(course.lessons[lesson].contents[content].id);
+                        $(`#navbar-${lesson}`).addClass('show');
+                    }else{
+                        content = content + 1;
+
+                        $('.title').html(course.lessons[lesson].contents[content].name)
+                        $('.description').html(course.lessons[lesson].contents[content].content)
+                        $('.complete').html(button);
+                        $('.hidden').val(course.lessons[lesson].contents[content].id);
+                        $(`#navbar-${lesson}`).addClass('show');
+                    }
+            
+                }
+            });
         }
       })
     });
