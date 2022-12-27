@@ -17,7 +17,7 @@
                           <a class="nav-link {{ \Route::currentRouteName() == 'dashboard' ? 'active' :'' }}" href="\dashboard">User Dashboard</a>
                       </li>
                   </ul>
-              </div>            
+              </div>
           @endif
           <div class="row">
               <div class="col-lg-4">
@@ -57,20 +57,17 @@
                                         <div class="card-body">
                                             @if ($item->product_variant == 0)
                                                 <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                    alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
+                                                    alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom" redirect={{ route('orders.show', $item->order_id) }} image-type="order-preview">
                                                 <a href="{{ route('orders.show', $item->order_id) }}">
                                                     <h6>{{ $item->product_name }}</h6>
                                                 </a>
                                             @else
                                                 <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
+                                                alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom" redirect={{ route('orders.show', $item->order_id) }} image-type="order-preview">
                                                 <a href="{{ route('orders.show', $item->order_id) }}">
                                                     <h6>{{ $item->product_name }} - {{ $item->product_variant_name }}</h6>
                                                 </a>
                                             @endif
-                                            <a class="btn btn-primary w-100 mb-2" id="download" href="{{ url('/product/download/') . $item->id }}">
-                                                <i class="bi bi-download"></i> Download
-                                            </a>
                                             <button class="btn btn-danger w-100">
                                                 <i class="bi bi-link"></i> Create Item
                                             </button>
@@ -143,8 +140,18 @@
                     </div>
                 </div>
             </div>
-            
-          </div>  
+
+          </div>
       </div>
   </div>
 </x-app-layout>
+
+<script>
+    $(document).ready(function () {
+        $("img[image-type=order-preview]").click(function (e) {
+            e.preventDefault();
+            let url = $(this).attr("redirect");
+            window.location.href = url;
+        });
+    });
+</script>
