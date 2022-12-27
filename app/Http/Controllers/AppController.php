@@ -66,6 +66,7 @@ class AppController extends Controller
                 return $query->where('user_id', Auth::user()->id);
             }
         )
+            ->orderBy("created_at", "desc")
             ->paginate(4, 'order_items.*', 'product');
 
         $services = ServiceOrder::with('service.uploads')->where('user_id', Auth::user()->id)->paginate(12, '*', 'service');

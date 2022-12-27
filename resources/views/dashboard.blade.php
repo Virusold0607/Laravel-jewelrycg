@@ -56,14 +56,18 @@
                                     <div class="card">
                                         <div class="card-body">
                                             @if ($item->product_variant == 0)
-                                                <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                    alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom" redirect={{ route('orders.show', $item->order_id) }} image-type="order-preview">
+                                                <a href="{{ route('orders.show', $item->order_id) }}">
+                                                    <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
+                                                        alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
+                                                </a>
                                                 <a href="{{ route('orders.show', $item->order_id) }}">
                                                     <h6>{{ $item->product_name }}</h6>
                                                 </a>
                                             @else
-                                                <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom" redirect={{ route('orders.show', $item->order_id) }} image-type="order-preview">
+                                                <a href="{{ route('orders.show', $item->order_id) }}">
+                                                    <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
+                                                        alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
+                                                </a>
                                                 <a href="{{ route('orders.show', $item->order_id) }}">
                                                     <h6>{{ $item->product_name }} - {{ $item->product_variant_name }}</h6>
                                                 </a>
@@ -145,13 +149,3 @@
       </div>
   </div>
 </x-app-layout>
-
-<script>
-    $(document).ready(function () {
-        $("img[image-type=order-preview]").click(function (e) {
-            e.preventDefault();
-            let url = $(this).attr("redirect");
-            window.location.href = url;
-        });
-    });
-</script>
