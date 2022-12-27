@@ -416,30 +416,44 @@ class CourseController extends Controller
         return view('courses.order_detail', ['order' => $order]);
     }
 
-    public function take_show($slug)
+    public function take_show(Request $request, $slug)
     {
         $course = Course::where('slug', $slug)
             ->firstOrFail();
-
+        $displayText = $course->description;
+        $currentId = -1;
+        if($request->has("content")){
+            $currentId = $request->content;
+            $lessonContent = CourseLessonContent::find($request->content);
+            if( $lessonContent ) $displayText = $lessonContent->content;
+        }
         $lesson = CourseLesson::where('course_id', $course->id)->pluck('id')->toArray();
         $content = CourseLessonContent::whereIn('lesson_id', $lesson)->pluck('id')->toArray();
         $history = CourseLessonHistory::where('user_id', Auth::id())->whereIn('lesson_content_id', $content)->orderBy('id', 'DESC')->pluck('lesson_content_id')->first();
+
+        $nextId = $request->content;
+        $key = array_search($request->content, $content);
+        if( $key < count($content) - 1 ) $nextId = $content[$key + 1];
+
         return view('courses.take.show', compact(
-            'course', 'history'
+            'course', 'history', 'displayText', 'currentId', 'nextId'
         ));
     }
 
-    public function complete_lesson($id)
+    public function complete_lesson(Request $request, $id)
     {
-        CourseLessonHistory::create([
+        $obj = [
             'user_id' => Auth::id(),
             'lesson_content_id' => $id,
             'status' => 1,
-        ]);
-
-        // dd($ddd);
-
-        return response(null, 200);
-        // dd("ddd");
+        ];
+        CourseLessonHistory::updateOrCreate($obj, $obj);
+        return redirect(route(
+            "courses.take",
+            [
+                "slug" => $request->slug,
+                "content" => $request->content
+            ]
+        ));
     }
 }
