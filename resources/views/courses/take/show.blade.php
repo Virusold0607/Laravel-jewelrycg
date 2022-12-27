@@ -13,7 +13,7 @@
                                 @foreach ($lesson->contents as $j => $content)
                                 <div class="d-flex align-items-center icon-{{$i}}-{{$j}}">
                                     <a class="nav-link fs-5 lesson" role="button" lesson="{{$i}}" content="{{$j}}">{{ $content->name }}</a>
-                                    @if ($history = $content->history)
+                                    @if ($content->history)
                                     <i class="bi bi-check-lg"></i>
                                     @endif
                                 </div>
@@ -30,6 +30,7 @@
                     </div>
 
                 </div>
+
             </div>
         </div>
     </section>
@@ -41,13 +42,17 @@
         var lesson = 0;
         var content = 0;
         var course = @php echo json_encode($course) @endphp;
+        var history = @php echo json_encode($history) @endphp;
         var button = "complete & continue <i class='bi bi-arrow-right'></i>";
         var icon ="<i class='bi bi-check-lg'></i>";
+
+        console.log(history);
 
         $('.title').html(course.lessons[lesson].contents[content].name)
         $('.description').html(course.lessons[lesson].contents[content].content)
         $('.complete').html(button);
         $('.hidden').val(course.lessons[lesson].contents[content].id);
+        $(`#navbar-${lesson}`).addClass('show');
 
 
 
@@ -68,17 +73,28 @@
         var id = $('.hidden').val();
         var url = "{{ url('courses/take/complete') }}";
         if(course.lessons[lesson].contents[content].history){
-            if(course.lessons[lesson].contents.length - 1 == content ){
+            if(course.lessons.length -1 == lesson){
+                return
+            }else if(course.lessons[lesson].contents.length - 1 == content ){
                 lesson = lesson+1;
+                content = 0;
+                
+                $('.title').html(course.lessons[lesson].contents[content].name)
+                $('.description').html(course.lessons[lesson].contents[content].content)
+                $('.complete').html(button);
+                $('.hidden').val(course.lessons[lesson].contents[content].id);
+                $(`#navbar-${lesson}`).addClass('show');
             }else{
                 content = content+1;
+
+                $('.title').html(course.lessons[lesson].contents[content].name)
+                $('.description').html(course.lessons[lesson].contents[content].content)
+                $('.complete').html(button);
+                $('.hidden').val(course.lessons[lesson].contents[content].id);
+                $(`#navbar-${lesson}`).addClass('show');
             }
 
-            $('.title').html(course.lessons[lesson].contents[content].name)
-            $('.description').html(course.lessons[lesson].contents[content].content)
-            $('.complete').html(button);
-            $('.hidden').val(course.lessons[lesson].contents[content].id);
-            $(`#navbar-${lesson}`).addClass('show');
+
 
         }else {
             $.ajax({
