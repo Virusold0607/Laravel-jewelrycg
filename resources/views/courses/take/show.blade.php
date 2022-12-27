@@ -12,7 +12,7 @@
                             <div id="navbar-{{$i}}" class="nav-collapse collapse @if($i == 0) show @endif">
                                 @foreach ($lesson->contents as $j => $content)
                                 <div class="d-flex align-items-center icon-{{$i}}-{{$j}}">
-                                    <a class="nav-link fs-5 lesson" role="button" lesson="{{$i}}" content="{{$j}}">{{ $content->name }}</a>
+                                    <a class="nav-link fs-5 lesson" role="button" href="{{ route('courses.take', ['slug'=>Request::route('slug'), 'content' => $content->id]) }}">{{ $content->name }}</a>
                                     @if ($content->history)
                                     <i class="bi bi-check-lg"></i>
                                     @endif
@@ -24,9 +24,10 @@
                     </div>
                     <div class="col-lg-8">
                         <h1 class="fw-800 mb-4 title">{{ $course->name }}</h1>
-                        <input type="hidden" class="hidden">
-                        <p class="description"></p>
-                        <button class='complete btn btn-light text-uppercase text-right mt-4 float-end' role="button"></button>
+                        <p class="description">{{ $displayText }}</p>
+                        <a class='complete btn btn-light text-uppercase text-right mt-4 float-end' role="button" href="{{ route('courses.complete', ['slug'=>Request::route('slug'), 'content' => $nextId, 'id'=>$currentId]) }}">
+                            complete @if ($nextId != $currentId) & continue @endif<i class='bi bi-arrow-right'></i>
+                        </a>
                     </div>
 
                 </div>
@@ -35,98 +36,3 @@
         </div>
     </section>
 </x-app-layout>
-
-<script>
-    $(function() {
-
-        var lesson = 0;
-        var content = 0;
-        var course = @php echo json_encode($course) @endphp;
-        var history = @php echo json_encode($history) @endphp;
-        var button = "complete & continue <i class='bi bi-arrow-right'></i>";
-        var icon ="<i class='bi bi-check-lg'></i>";
-
-        console.log(history);
-
-        $('.title').html(course.lessons[lesson].contents[content].name)
-        $('.description').html(course.lessons[lesson].contents[content].content)
-        $('.complete').html(button);
-        $('.hidden').val(course.lessons[lesson].contents[content].id);
-        $(`#navbar-${lesson}`).addClass('show');
-
-
-
-      $(document).on('click', '.lesson', function() {
-        lesson = $(this).attr('lesson');
-        content = $(this).attr('content');
-
-
-
-       $('.title').html(course.lessons[lesson].contents[content].name)
-       $('.description').html(course.lessons[lesson].contents[content].content)
-       $('.complete').html(button);
-       $('.hidden').val(course.lessons[lesson].contents[content].id);
-
-      })
-
-      $('.complete').on('click', function() {
-        var id = $('.hidden').val();
-        var url = "{{ url('courses/take/complete') }}";
-        if(course.lessons[lesson].contents[content].history){
-            if(course.lessons.length -1 == lesson){
-                return
-            }else if(course.lessons[lesson].contents.length - 1 == content ){
-                lesson = lesson+1;
-                content = 0;
-                
-                $('.title').html(course.lessons[lesson].contents[content].name)
-                $('.description').html(course.lessons[lesson].contents[content].content)
-                $('.complete').html(button);
-                $('.hidden').val(course.lessons[lesson].contents[content].id);
-                $(`#navbar-${lesson}`).addClass('show');
-            }else{
-                content = content+1;
-
-                $('.title').html(course.lessons[lesson].contents[content].name)
-                $('.description').html(course.lessons[lesson].contents[content].content)
-                $('.complete').html(button);
-                $('.hidden').val(course.lessons[lesson].contents[content].id);
-                $(`#navbar-${lesson}`).addClass('show');
-            }
-
-
-
-        }else {
-            $.ajax({
-                url: url+"/"+id,
-                method: 'get',
-                success: function(result) {
-
-                    $(`.icon-${lesson}-${content}`).append(icon);
-                    if(course.lessons.length -1 == lesson){
-                        return;
-                    }else if(course.lessons[lesson].contents.length - 1 == content ){
-                        lesson = lesson + 1;
-                        content = 0;
-
-                        $('.title').html(course.lessons[lesson].contents[content].name)
-                        $('.description').html(course.lessons[lesson].contents[content].content)
-                        $('.complete').html(button);
-                        $('.hidden').val(course.lessons[lesson].contents[content].id);
-                        $(`#navbar-${lesson}`).addClass('show');
-                    }else{
-                        content = content + 1;
-
-                        $('.title').html(course.lessons[lesson].contents[content].name)
-                        $('.description').html(course.lessons[lesson].contents[content].content)
-                        $('.complete').html(button);
-                        $('.hidden').val(course.lessons[lesson].contents[content].id);
-                        $(`#navbar-${lesson}`).addClass('show');
-                    }
-            
-                }
-            });
-        }
-      })
-    });
-</script>
