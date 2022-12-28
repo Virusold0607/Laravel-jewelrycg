@@ -91,23 +91,28 @@
                     <div class="card-body">
                         <div class="row">
                             @foreach ($services as $item)
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <img src="{{ $item->service->uploads->getImageOptimizedFullName(400) }}"
-                                            alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
-                                            <a href="/services/{{ $item->slug }}">
-                                                <h6>{{ $item->service->name }} - {{ $item->package_name }}</h6>
-                                            </a>
-                                            {{-- <a class="btn btn-primary" id="download" href="{{ url('/product/download/') . $item->id }}">
-                                                <i class="bi bi-download"></i> Download
-                                            </a> --}}
-                                            <a class="btn btn-primary" href="/services/order/{{$item->order_id}}">
-                                                <i class="bi bi-link"></i> View Order
-                                            </a>
+                                @isset($item->service)
+                                    @isset($item->service->uploads)
+
+                                        <div class="col-xl-6 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <img src="{{ $item->service->uploads->getImageOptimizedFullName(400) }}"
+                                                    alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
+                                                    <a href="/services/{{ $item->slug }}">
+                                                        <h6>{{ $item->service->name }} - {{ $item->package_name }}</h6>
+                                                    </a>
+                                                    {{-- <a class="btn btn-primary" id="download" href="{{ url('/product/download/') . $item->id }}">
+                                                        <i class="bi bi-download"></i> Download
+                                                    </a> --}}
+                                                    <a class="btn btn-primary" href="/services/order/{{$item->order_id}}">
+                                                        <i class="bi bi-link"></i> View Order
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    @endisset
+                                @endisset
                             @endforeach
                         </div>
                         {{$services->appends(Arr::except(Request::query(), 'service'))->links()}}
