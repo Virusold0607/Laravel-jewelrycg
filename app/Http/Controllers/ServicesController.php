@@ -514,7 +514,12 @@ class ServicesController extends Controller
      */
     public function destroy($id)
     {
-        ServicePost::whereId($id)->delete();
+        // ServicePost::whereId($id)->delete();
+        $service = ServicePost::find($id);
+        if( $service ) {
+            $service->status = ServicePost::$DELETED;
+            $service->save();
+        }
         return redirect()->route('seller.services.list');
 
     }

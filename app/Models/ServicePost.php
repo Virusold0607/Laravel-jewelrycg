@@ -12,6 +12,8 @@ class ServicePost extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'services';
+    
+    public static $DELETED = 5;
 
     protected $fillable = [
         "name",
