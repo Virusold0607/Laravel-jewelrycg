@@ -535,22 +535,25 @@ Route::group(['controller' => CartController::class, 'prefix' => 'cart', 'as' =>
 
 // Course
 Route::group(['controller' => CourseController::class, 'prefix' => 'courses', 'as' => 'courses.'], function () {
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/checkout/finish', 'finish')->name('finish');
+        Route::post('/checkout/payment', 'post_payment')->name('payment.post');
+        Route::delete('/checkout/cancel', 'cancel')->name('cancel');
+        Route::post('/checkout/answer', 'answer')->name('answer');
+        Route::post('/checkout/intent/{id}', 'create_payment_intent')->name('intent.post');
+        Route::get('/checkout/payment/{id}', 'get_payment')->name('payment.get');
+        Route::post('/checkout/store/{id}', 'store_order')->name('store');
+        Route::get('/checkout/{id}', 'get_billing')->name('billing.get');
+        Route::post('/checkout/{id}', 'post_billing')->name('billing.post');
+        Route::get('/take/{slug}', 'take_show')->name('take');
+        Route::get('/take/complete/{id}', 'complete_lesson')->name(('complete'));
+    });
     Route::get('/', 'index')->name('index');
     Route::get('/orders', 'orders')->name('orders');
     Route::get('/order/{id}', 'order_detail')->name('order_detail');
     Route::get('/category/{slug}', 'category')->name('category');
-    Route::get('/checkout/finish', 'finish')->name('finish');
-    Route::post('/checkout/payment', 'post_payment')->name('payment.post');
-    Route::delete('/checkout/cancel', 'cancel')->name('cancel');
-    Route::post('/checkout/answer', 'answer')->name('answer');
-    Route::post('/checkout/intent/{id}', 'create_payment_intent')->name('intent.post');
-    Route::get('/checkout/payment/{id}', 'get_payment')->name('payment.get');
-    Route::post('/checkout/store/{id}', 'store_order')->name('store');
-    Route::get('/checkout/{id}', 'get_billing')->name('billing.get');
-    Route::post('/checkout/{id}', 'post_billing')->name('billing.post');
     Route::get('/course/{slug}', 'show')->name('show');
-    Route::get('/take/{slug}', 'take_show')->middleware(['auth'])->name('take');
-    Route::get('/take/complete/{id}', 'complete_lesson')->name(('complete'));
+
 });
 
 Route::group(['controller' => CartController::class], function () {
