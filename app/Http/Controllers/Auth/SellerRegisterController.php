@@ -33,33 +33,43 @@ class SellerRegisterController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'username' => ['required', 'unique:users,username'],
-            'about' => ['required', 'string'],
-        ]);
+        if(Auth::user()){
+            $request->validate([
+                'username' => ['required', 'unique:users,username'],
+                'about' => ['required', 'string'],
+            ]);
+        }
+        else {
+            $request->validate([
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'username' => ['required', 'unique:users,username'],
+                'about' => ['required', 'string'],
+            ]);
 
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'role' => 2,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-        ]);
-
-        $seller = SellersProfile::create([
-            'user_id'   => $user->id,
-            'about'     => $request->about,
-        ]);
-        event(new Registered($user));
-
-        Auth::login($user);
-
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'role' => 2,
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+            ]);
+            Auth::login($user);
+        }
+        $user = Auth::user();
+        if( SellersProfile::where("user_id", $user->id)->count() ){
+            // User already have seller account
+        }
+        else {
+            $seller = SellersProfile::create([
+                'user_id'   => $user->id,
+                'about'     => $request->about,
+            ]);
+            event(new Registered($user));
+        }
         return redirect()->route('seller.dashboard');
-    }    
+    }
 }
