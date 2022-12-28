@@ -549,7 +549,7 @@ Route::group(['controller' => CourseController::class, 'prefix' => 'courses', 'a
     Route::get('/checkout/{id}', 'get_billing')->name('billing.get');
     Route::post('/checkout/{id}', 'post_billing')->name('billing.post');
     Route::get('/course/{slug}', 'show')->name('show');
-    Route::get('/take/{slug}', 'take_show')->name('take');
+    Route::get('/take/{slug}', 'take_show')->middleware(['auth'])->name('take');
     Route::get('/take/complete/{id}', 'complete_lesson')->name(('complete'));
 });
 
@@ -568,7 +568,7 @@ Route::group(['controller' => CartController::class], function () {
 
      Route::get('/chat/{conversation_id}',[ChatController::class, 'create_chat_room'])->name('create_chat_room');
      Route::post('/chat/message_log',[ChatController::class, 'message_log'])->name('chat.message_log');
-  
+
     });
 });
 

@@ -63,7 +63,7 @@ class CourseController extends Controller
             ->firstOrFail();
 
         if(Auth::check()){
-            $order = OrderCourse::where('course_id', $course->id)->where('user_id', Auth::id())->firstOrFail();
+            $order = OrderCourse::where('course_id', $course->id)->where('user_id', Auth::id())->first();
             return view('courses.show', compact(
                 'course','order'
             ));
@@ -73,9 +73,6 @@ class CourseController extends Controller
                 'course'
             ));
         }
-
-
-
     }
 
     public function update(Course $course, CourseStoreRequest $request)
@@ -420,6 +417,15 @@ class CourseController extends Controller
     {
         $course = Course::where('slug', $slug)
             ->firstOrFail();
+        $isPurchased = !!OrderCourse::where([
+            "user_id" => Auth::id(),
+            "course_id" => $course->id
+        ])->count();
+        if( $isPurchased == false ) {
+            return redirect()->route("courses.show", [
+                "slug" => $slug
+            ]);
+        }
         $displayText = $course->description;
         $currentId = -1;
         if($request->has("content")){
