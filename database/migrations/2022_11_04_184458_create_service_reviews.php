@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->integer('rating')->default(0);
-            $table->text('review');
+            $table->text('review')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
