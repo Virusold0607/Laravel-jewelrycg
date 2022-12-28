@@ -16,13 +16,13 @@
                             </div>
                             @else
                             <div class="p-3 border mb-4">
-                                <h1 class="text-primary">$99</h1>
+                                <h1 class="text-primary">${{ $course->price }}</h1>
                                 <a type="button" class="btn btn-primary w-100" href="/courses/checkout/{{$course->id}}">Buy</a>
                             </div>
                             @endif
                         @else
                             <div class="p-3 border mb-4">
-                                <h1 class="text-primary">$99</h1>
+                                <h1 class="text-primary">${{ $course->price }}</h1>
                                 <a type="button" class="btn btn-primary w-100" href="/courses/checkout/{{$course->id}}">Buy</a>
                             </div>
                         @endif
