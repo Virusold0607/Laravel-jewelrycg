@@ -17,7 +17,7 @@
 
         <form method="POST" action="{{ route('seller.signup.store') }}" id="registerForm">
             @csrf
-
+            @if (!Auth::user())
             <!-- Name -->
             <div class="row">
                 <div class="col-6">
@@ -39,7 +39,7 @@
                 <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')"
                     required />
             </div>
-
+            @endif
             <!-- Username -->
             <div class="mt-4">
                 <x-label for="username" :value="__('Username')" />
@@ -48,6 +48,7 @@
                     required />
             </div>
 
+            @if (!Auth::user())
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
@@ -63,12 +64,13 @@
                 <x-input id="password_confirmation" class="block w-full mt-1" type="password"
                     name="password_confirmation" required />
             </div>
+            @endif
             <!-- About -->
             <div class="mt-4">
                 <x-label for="about" :value="__('About')" />
 
                 <textarea name="about" class="form-control block w-full mt-1" id="about" required>{{old('about')}}</textarea>
-            </div>            
+            </div>
             <div class="d-flex align-items-center justify-content-between mt-4">
                 <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
