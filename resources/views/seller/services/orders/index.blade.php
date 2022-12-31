@@ -16,19 +16,19 @@
                         <div class="card-header">
                             <ul class="nav nav-tabs seller-nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link {{ $tab == "active" ? "active" : "" }}" href="?tab=active">ACTIVE</a>
+                                    <a class="nav-link {{ $tab == "active" ? "active" : "" }}" href="?tab=active">Active</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ $tab == "late" ? "active" : "" }}" href="?tab=late">LATE</a>
+                                    <a class="nav-link {{ $tab == "late" ? "active" : "" }}" href="?tab=late">Late</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ $tab == "delivered" ? "active" : "" }}" href="?tab=delivered">DELIVERED</a>
+                                    <a class="nav-link {{ $tab == "delivered" ? "active" : "" }}" href="?tab=delivered">Delivered</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ $tab == "completed" ? "active" : "" }}" href="?tab=completed">COMPLETED</a>
+                                    <a class="nav-link {{ $tab == "completed" ? "active" : "" }}" href="?tab=completed">Completed</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ $tab == "canceled" ? "active" : "" }}" href="?tab=canceled">CANCELLED</a>
+                                    <a class="nav-link {{ $tab == "canceled" ? "active" : "" }}" href="?tab=canceled">Cancelled</a>
                                 </li>
                             </ul>
                         </div>
