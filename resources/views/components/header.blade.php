@@ -240,26 +240,32 @@
                                 <div class="fs-14 mr-10px border-right">
                                     <div class="data fw-700">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
                                     <div class="data">@username</div>
+                                    <div class="data"><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></div>
                                 </div>
                             </div>
                             <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
                             @if (auth()->user()->role == 2)
                                 <li><a class="dropdown-item" href="{{route('seller.services.list')}}">Services</a></li>
                             @endif
-                            <li><a class="dropdown-item" href="{{route('user.index', auth()->user()->id)}}">My Info</a>
+                            
                             </li>
                             <li><a class="dropdown-item"
                                    href="{{route('orders.index')}}">{{ auth()->user()->role ? 'All Orders' : 'My Orders' }}</a>
                             </li>
                             <li><a class="dropdown-item" href="{{route('wishlist')}}">My Wishlist</a></li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                             
-                            <li> <div class="border-bottom w-100"></div> </li>
-                            <div class="d-flex align-items-center p-3 border-bottom">
-                            <ul>
-                                <li><a class="dropdown-item" href="#">Help</a></li>
-                                <li><a class="dropdown-item" href="#">Send Feedback</a></li>
-                            </ul>
+                            
+                            <div class="seperated-menu d-flex p-3 border-top">
+                                <ul>
+                                    <li><a class="dropdown-item" href="{{route('user.index', auth()->user()->id)}}">Settings</a>
+                                </ul>
+                            </div>
+
+                            <div class="seperated-menu d-flex p-3 border-top">
+                                <ul>
+                                    <li><a class="dropdown-item" href="#">Help</a></li>
+                                    <li><a class="dropdown-item" href="#">Send Feedback</a></li>
+                                </ul>
                             </div>
                         </ul>
                     </li>
