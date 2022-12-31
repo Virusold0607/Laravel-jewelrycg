@@ -43,7 +43,7 @@
                 <div class="col-lg-3">
                     <div class="card m-0">
                         <div class="card-body">
-                            <div class="seller-side-nav">
+                            <div class="settings-side-nav">
                                 <a class="nav-link {{ $tab == "account" ? "active" : "" }}" href="/user/edit?tab=account" class="w-100 d-block mb-2 ">Account</a>
                                 <a class="nav-link {{ $tab == "security" ? "active" : "" }}" href="{{route('user.update.password')}}" class="w-100 d-block mb-2 ">Security</a>
                                 <a class="nav-link {{ $tab == "address" ? "active" : "" }}" href="/user/edit?tab=address">Address</a>
