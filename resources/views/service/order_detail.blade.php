@@ -48,18 +48,14 @@
     <div class="container">
         <div class="col-lg-11 col-md-10 py-9 mx-auto checkout-wrap">
             <div class="row">
-                @include('includes.validation-form')
-                @if (session('success'))
-                    <h4 class="text-center text-primary mt-3">
-                        {{session('success')}}
-                    </h4>
-                @endif
-                @if (session('error'))
-                    <h4 class="text-center text-danger mt-3">
-                        {{session('error')}}
-                    </h4>
-                @endif
                 <div class="col-9">
+                    @include('includes.validation-form')
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">{{session('success')}}</div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger" role="alert">{{session('error')}}</div>
+                    @endif
                     <div class="card mb-4">
                         <div class="card-body">
                             @if ($order->status == 0)
