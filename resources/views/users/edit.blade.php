@@ -38,13 +38,7 @@
                         @method('put')
 
                         @if ($errors->any())
-                            <div class="row justify-content-center mb-3">
-                                <div class="card col-12">
-                                    <div class="card-body">
-                                        @include('includes.validation-form')
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="alert alert-danger" role="alert">@include('includes.validation-form')</div>
                         @endif
 
                         @if (session('success'))
