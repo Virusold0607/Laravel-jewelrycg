@@ -31,17 +31,12 @@
             </div>
             <div class="col-xl-4 col-lg-6 col-md-8 mr-auto">
                 @if (session('success'))
-                  <h4 class="text-center text-primary mt-3">
-                      {{session('success')}}
-                  </h4>
+                    <div class="alert alert-success" role="alert">{{session('success')}}</div>
                 @endif
                 @if (session('error'))
-                  <h4 class="text-center text-danger mt-3">
-                      {{session('error')}}
-                  </h4>
+                    <div class="alert alert-danger" role="alert">{{session('error')}}</div>
                 @endif
  
-   
                 <form action="{{ route('seller.profile.post') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card mb-4">
