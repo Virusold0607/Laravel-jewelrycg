@@ -255,9 +255,11 @@
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                             
                             <li> <div class="border-bottom w-100"></div> </li>
-                            <div class="border-top">
+                            <div class="d-flex align-items-center p-3 border-bottom">
+                            <ul>
                                 <li><a class="dropdown-item" href="#">Help</a></li>
                                 <li><a class="dropdown-item" href="#">Send Feedback</a></li>
+                            </ul>
                             </div>
                         </ul>
                     </li>
