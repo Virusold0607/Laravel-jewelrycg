@@ -384,6 +384,6 @@ class SellerController extends Controller
             $user->save();
         }
 
-        return redirect()->back()->with("success", "Saved data");
+        return redirect()->back()->with("success", "Seller profile successfully updated.");
     }
 }
