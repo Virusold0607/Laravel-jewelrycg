@@ -995,7 +995,7 @@ class ServicesController extends Controller
             'link' => '/seller/order_detail/' . $order->order_id
         ]);
 
-        return redirect()->back()->with("success", "Submit message to " . $seller->first_name . " " . $seller->last_name);
+        return redirect()->back()->with("success", "Revision successfully requested.");
     }
 
     public function service_review_get($id)
