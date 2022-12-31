@@ -597,17 +597,17 @@ button.remove-item-btn:after {
 }
 
 /* Seller */
-.seller-side-nav a {
+.seller-side-nav a, settings-side-nav a {
   padding:10px;
   border: 1px solid transparent;
 }
-.seller-side-nav a:hover {
+.seller-side-nav a:hover, settings-side-nav a:hover {
   background: #f5f5f5;
   color: #000000;
   border-radius: 6px;
   border: 1px solid #ccc;
 }
-.seller-side-nav a.active {
+.seller-side-nav a.active, settings-side-nav a.active {
   background: #0069d9;
   border: 1px solid #0069d9;
   padding: 10px;
