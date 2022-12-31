@@ -600,6 +600,12 @@ button.remove-item-btn:after {
 .seller-side-nav a {
   padding:15px;
 }
+.seller-side-nav a:hover {
+  background: #f5f5f5;
+  color: #000000;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
 .seller-side-nav a.active {
   background: #0069d9;
   padding: 15px;
