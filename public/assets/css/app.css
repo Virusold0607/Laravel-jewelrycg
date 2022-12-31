@@ -614,9 +614,17 @@ button.remove-item-btn:after {
   color: #ffffff;
   border-radius: 6px;
 }
-
-.seller-nav-tabs .active{
-  border: 1px solid #000 !important;
+.nav.nav-tabs.seller-nav-tabs {
+  border: 0 !important;
+}
+.seller-nav-tabs a {
+  border: 1px solid #0069d9 !important;
+  margin-right: 10px;
+}
+.seller-nav-tabs a.active{
+  background: #0069d9;
+  border: 1px solid #0069d9 !important;
+  color: #ffffff;
   border-radius: 6px !important;
   margin-right:10px
 }
