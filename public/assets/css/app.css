@@ -608,6 +608,7 @@ button.remove-item-btn:after {
 }
 .seller-side-nav a.active {
   background: #0069d9;
+  border: 1px solid #0069d9;
   padding: 15px;
   color: #ffffff;
   border-radius: 6px;
