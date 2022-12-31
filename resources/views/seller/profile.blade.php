@@ -45,28 +45,28 @@
                   <form action="{{ route('seller.profile.post') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card mb-4">
-                      <h1 class="card-header">Seller Information</h1>
-                      <div class="row flex-row">
-                        <div class="card-body">
-                          <div class="mb-2">
-                              <label for="slogan">Slogan:</label>
-                              <input type="text" name="slogan" id="slogan" value="{{ old('slogan') ?? $seller->slogan }}"
-                                  class="form-control">
-                          </div>
-                          <div class="mb-2">
-                              <label for="about">About:</label>
-                              <input type="text" name="about" id="about" value="{{ old('about') ?? $seller->about }}"
-                                  class="form-control">
-                          </div>
-                          <div class="mb-2">
-                              <label for="name">Default Payment Method:</label>
-                              <select class="form-control" id="method" name="method" data-live-search="true" data-container="body">
-                                @foreach ($payment_methods as $method)
-                                    <option value="{{$method->id}}" data-id="{{$method->id}}" {{ $method->id == $seller->default_payment_method ? "selected" : "" }}>{{$method->name}}</option>
-                                @endforeach
-                            </select>
-                          </div>
-                        </div>
+                        <div class="card-header">Seller Information</div>
+                        <div class="row flex-row">
+                            <div class="card-body">
+                            <div class="mb-2">
+                                <label for="slogan">Slogan:</label>
+                                <input type="text" name="slogan" id="slogan" value="{{ old('slogan') ?? $seller->slogan }}"
+                                    class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <label for="about">About:</label>
+                                <input type="text" name="about" id="about" value="{{ old('about') ?? $seller->about }}"
+                                    class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <label for="name">Default Payment Method:</label>
+                                <select class="form-control" id="method" name="method" data-live-search="true" data-container="body">
+                                    @foreach ($payment_methods as $method)
+                                        <option value="{{$method->id}}" data-id="{{$method->id}}" {{ $method->id == $seller->default_payment_method ? "selected" : "" }}>{{$method->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            </div>
 
                         <div class="card mb-4 p-0">
                             <div class="card-header">Avatar</div>
