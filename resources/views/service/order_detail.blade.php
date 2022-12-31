@@ -389,7 +389,7 @@
                         </div>
                     @endif
                     <div class="card mb-4 order-details">
-                        <div class="card-body">
+                        <div class="card-header">
                             <div class="row">
                                 <div class="col-3">
                                     <img src="{{ $order->service->uploads->getImageOptimizedFullName(150) }}" alt=""
@@ -400,6 +400,8 @@
                                 </span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-body">
                             <div class="d-flex flex-row mb-1 justify-content-between">
                                 <span>Status</span>
                                 <span>{{ Config::get('constants.service_order_status')[$order->status] }}</span>
