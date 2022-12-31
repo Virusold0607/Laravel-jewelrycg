@@ -233,12 +233,13 @@
                         <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false" href="#">{{ Auth::user()->first_name }}</a>
                         <ul class="dropdown-menu small-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center p-3 border-bottom">
                                 <div class="mr-10px w-30px">
                                     <img src="{{user_name(Auth::user()->id)[0]->uploads->getImageOptimizedFullName(100,100)}}" alt="avatar" class="rounded-circle img-fluid">
                                 </div>
                                 <div class="fs-14 fw-700 mr-10px border-right">
                                     <div class="data">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
+                                    <div class="data">@username</div>
                                 </div>
                             </div>
                             <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
