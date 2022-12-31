@@ -7,18 +7,6 @@
 
   <div class="py-9">
       <div class="container">
-          @if (auth()->user()->role == 2)
-              <div class="header mb-4">
-                  <ul class="nav nav-pills">
-                      <li class="nav-item">
-                          <a class="nav-link {{ \Route::currentRouteName() == 'seller.dashboard' ? 'active' :'' }}" href="\seller\dashboard">Seller Dashboard</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link {{ \Route::currentRouteName() == 'dashboard' ? 'active' :'' }}" href="\dashboard">User Dashboard</a>
-                      </li>
-                  </ul>
-              </div>
-          @endif
           <div class="row">
               <div class="col-lg-4">
                   <div class="card py-3">
