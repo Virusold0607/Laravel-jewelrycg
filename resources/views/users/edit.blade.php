@@ -18,71 +18,72 @@
             height: 100%;
         }
     </style>
-    <div class="container">
-        <div class="row">
-        <!--
-            <div class="w-20 py-9">
-                <nav class="navbar bg-light navbar-light">
-                    <div class="container-fluid">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
+    <div class="py-9">    
+        <div class="container">
+            <div class="row">
+            <!--
+                <div class="w-20 py-9">
+                    <nav class="navbar bg-light navbar-light">
+                        <div class="container-fluid">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $tab == "account" ? "active" : "" }}" href="/user/edit?tab=account" class="w-100 d-block mb-2 ">Account</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $tab == "security" ? "active" : "" }}" href="{{route('user.update.password')}}" class="w-100 d-block mb-2 ">Security</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $tab == "address" ? "active" : "" }}" href="/user/edit?tab=address">Address</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+    -->
+                <div class="col-lg-3">
+                    <div class="card m-0">
+                        <div class="card-body">
+                            <div class="seller-side-nav">
                                 <a class="nav-link {{ $tab == "account" ? "active" : "" }}" href="/user/edit?tab=account" class="w-100 d-block mb-2 ">Account</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link {{ $tab == "security" ? "active" : "" }}" href="{{route('user.update.password')}}" class="w-100 d-block mb-2 ">Security</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link {{ $tab == "address" ? "active" : "" }}" href="/user/edit?tab=address">Address</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
--->
-            <div class="col-lg-3">
-                <div class="card m-0">
-                    <div class="card-body">
-                        <div class="seller-side-nav">
-                            <a class="nav-link {{ $tab == "account" ? "active" : "" }}" href="/user/edit?tab=account" class="w-100 d-block mb-2 ">Account</a>
-                            <a class="nav-link {{ $tab == "security" ? "active" : "" }}" href="{{route('user.update.password')}}" class="w-100 d-block mb-2 ">Security</a>
-                            <a class="nav-link {{ $tab == "address" ? "active" : "" }}" href="/user/edit?tab=address">Address</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-8 py-9 mx-auto">
-                <form action="{{ route('user.update.'.$tab) }}" method="post">
-                    @csrf
-                    @method('put')
+                <div class="col-xl-4 col-lg-6 col-md-8 py-9 mx-auto">
+                    <form action="{{ route('user.update.'.$tab) }}" method="post">
+                        @csrf
+                        @method('put')
 
-                    @if ($errors->any())
-                        <div class="row justify-content-center mb-3">
-                            <div class="card col-12">
+                        @if ($errors->any())
+                            <div class="row justify-content-center mb-3">
+                                <div class="card col-12">
+                                    <div class="card-body">
+                                        @include('includes.validation-form')
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                        @if (session('success'))
+                            <h4 class="text-success mt-3">
+                                {{session('success')}}
+                            </h4>
+                        @endif
+                        {{-- {{ dd($countries) }} --}}
+                        <x-user-info-main :edit="true" :user="auth()->user()" :countries="$countries" :shipping="$shipping" :billing="$billing" :tab="$tab" />
+                        <div class="d-flex justify-content-end mt-3">
+                            <div class="card">
                                 <div class="card-body">
-                                    @include('includes.validation-form')
+                                    <button type="submit" class="btn btn-outline-primary">Save</button>
                                 </div>
                             </div>
                         </div>
-                    @endif
-                    @if (session('success'))
-                        <h4 class="text-success mt-3">
-                            {{session('success')}}
-                        </h4>
-                    @endif
-                    {{-- {{ dd($countries) }} --}}
-                    <x-user-info-main :edit="true" :user="auth()->user()" :countries="$countries" :shipping="$shipping" :billing="$billing" :tab="$tab" />
-                    <div class="d-flex justify-content-end mt-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <button type="submit" class="btn btn-outline-primary">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-      
+    </div>      
 <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
 <script>
 Dropzone.autoDiscover = false;
