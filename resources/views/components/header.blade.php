@@ -248,7 +248,7 @@
                                 <div class="seperated-menu d-flex p-3 border-top">
                                     <ul>
                                     <div class="seller-menu-title text-uppercase fs-14 pb-2 fw-700 w-100">Seller</div>
-                                        <li><a class="dropdown-item" href="/dashboard">Seller Dashboard</a></li>
+                                        <li><a class="dropdown-item" href="{{route('seller.dashboard')}}">Seller Dashboard</a></li>
                                         <li><a class="dropdown-item" href="{{route('seller.services.list')}}">Services</a></li>
                                     </ul>
                                 </div>
