@@ -50,25 +50,25 @@
                 <div class="card">
                     <div class="card-header">Your Purchases</div>
                     <div class="card-body">
-                        <div class="row">
+                        <div class="card-body-content">
                             @foreach ($purchases as $item)
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-lg-4 col-6 mb-2">
+                                            <div class="col-4">
                                                 @if ($item->product_variant == 0)
                                                     <a href="{{ route('orders.show', $item->order_id) }}">
                                                         <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                            alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
+                                                            alt="{{ $item->product_name }}" class="w-100">
                                                     </a>
                                                 @else
                                                     <a href="{{ route('orders.show', $item->order_id) }}">
                                                         <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                            alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
+                                                            alt="{{ $item->product_name }} - {{ $item->product_variant_name }}" class="w-100">
                                                     </a>
                                                 @endif
                                             </div>
-                                            <div class="col-lg-4 col-6 mb-2">
+                                            <div class="col-4">
                                                 @if ($item->product_variant == 0)
                                                     <a href="{{ route('orders.show', $item->order_id) }}" class="fw-600 text-black">
                                                         <h6>{{ $item->product_name }}</h6>
@@ -80,36 +80,10 @@
                                                 @endif
                                             </div>
                                             
-                                            <div class="col-lg-4 col-6 ml-auto">
-                                                <a href="#" class="btn btn-primary">View Order</a>
+                                            <div class="col-4">
+                                                <a href="{{ route('orders.show', $item->order_id) }}" class="btn btn-primary mb-2">View Order</a>
+                                                <a href="{{ route('orders.show', $item->order_id) }}" class="btn btn-danger">create</a>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            @if ($item->product_variant == 0)
-                                                <a href="{{ route('orders.show', $item->order_id) }}">
-                                                    <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                        alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
-                                                </a>
-                                                <a href="{{ route('orders.show', $item->order_id) }}">
-                                                    <h6>{{ $item->product_name }}</h6>
-                                                </a>
-                                            @else
-                                                <a href="{{ route('orders.show', $item->order_id) }}">
-                                                    <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                        alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
-                                                </a>
-                                                <a href="{{ route('orders.show', $item->order_id) }}">
-                                                    <h6>{{ $item->product_name }} - {{ $item->product_variant_name }}</h6>
-                                                </a>
-                                            @endif
-                                            <button class="btn btn-danger w-100">
-                                                <i class="bi bi-link"></i> Create Item
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
