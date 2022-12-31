@@ -132,7 +132,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="col-4">
-                                                        <a href="/services/order/{{$item->order_id}}" class="btn btn-primary">View Course</a>
+                                                        <a href="/services/order/{{$item->order_id}}" class="btn btn-primary">View Order</a>
                                                     </div>
                                                 </div>
                                             </div>
