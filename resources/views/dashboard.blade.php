@@ -98,13 +98,13 @@
                 <div class="card">
                     <div class="card-header">Your Service Orders</div>
                     <div class="card-body">
-                        <div class="row">
+                        <div class="card-body-content">
                             @foreach ($services as $item)
                                 @isset($item->service)
                                     @isset($item->service->uploads)
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="card-body-content">
+                                                <div class="row">
                                                     <div class="col-4">
                                                         <a href="/services/order/{{$item->order_id}}" class="fw-600 text-black">
                                                             <img src="{{ $item->service->uploads->getImageOptimizedFullName(400) }}"
