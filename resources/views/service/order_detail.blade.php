@@ -360,10 +360,8 @@
                 <div class="col-3">
                     @if ($order->status == 1 || $order->status == 2)
                         <div class="card mb-4 time-left">
+                            <div class="card-header" id="count_title">Time left to deliver</div>
                             <div class="card-body">
-                                <div class="col-md-12" id="count_title">
-                                    Time left to deliver
-                                </div>
                                 <div class="col-md-12 d-flex justify-content-between align-items-center my-2">
                                     <div class="d-flex flex-column align-items-center" style="width: 23%;">
                                         <h5 id="count_day">00</h5>
