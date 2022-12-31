@@ -12,21 +12,11 @@
     </x-slot>
     <div class="py-9">
         <div class="container">
-            <div class="seller-dash-nav mb-4">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link {{ \Route::currentRouteName() == 'seller.dashboard' ? 'active' :'' }}" href="{{ route('seller.dashboard') }}">Seller Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ \Route::currentRouteName() == 'dashboard' ? 'active' :'' }}" href="{{ route('dashboard') }}">User Dashboard</a>
-                    </li>
-                </ul>
-            </div>
             <div class="row">
-                <div class="col-3">
+                <div class="col-lg-3">
                     <x-dashboard-side-bar />
                 </div>
-                <div class="col-9">
+                <div class="col-lg-9">
                 @if (session('success'))
                 <h4 class="text-center text-primary mt-3">
                     {{session('success')}}
