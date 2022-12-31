@@ -104,7 +104,7 @@
                                     @isset($item->service->uploads)
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="row">
+                                                <div class="card-body-content">
                                                     <div class="col-4">
                                                         <a href="/services/order/{{$item->order_id}}" class="fw-600 text-black">
                                                             <img src="{{ $item->service->uploads->getImageOptimizedFullName(400) }}"
@@ -113,12 +113,9 @@
                                                     </div>
                                                     <div class="col-4">
                                                         <a href="/services/order/{{$item->order_id}}" class="fw-600 text-black">
-                                                            <h6>{{ $item->service->name }} - {{ $item->package_name }}</h6>
-                                                            <h6>Package: {{ $item->package_name }}</h6>
-                                                            <h6>Total amount / Status</h6>
-                                                            <span>
-                                                                ${{number_format($item->package_price / 100, 2)}} /
-                                                                @if ($item->status == 0)
+                                                            <h6>{{ $item->service->name }}</h6>
+                                                            <h6>Package: {{ $item->package_name }} / ${{number_format($item->package_price / 100, 2)}}</h6>
+                                                            <h6>Status: @if ($item->status == 0)
                                                                 Pending Requirements
                                                                 @elseif ($item->status == 1)
                                                                 Pending
@@ -131,7 +128,7 @@
                                                                 @elseif ($item->status == 5)
                                                                 <span>Completed</span>
                                                                 @endif
-                                                            </span>
+                                                            </h6>
                                                         </a>
                                                     </div>
                                                     <div class="col-4">
