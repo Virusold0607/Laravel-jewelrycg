@@ -102,42 +102,41 @@
                             @foreach ($services as $item)
                                 @isset($item->service)
                                     @isset($item->service->uploads)
-
-                                        <div class="col-xl-6 col-lg-6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <img src="{{ $item->service->uploads->getImageOptimizedFullName(400) }}"
-                                                    alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
-                                                    <a href="/services/{{ $item->slug }}">
-                                                        <h6>{{ $item->service->name }} - {{ $item->package_name }}</h6>
-                                                    </a>
-                                                    <div class="fw-600">Date placed</div>
-                                                    <span>{{ date('F d, Y', strtotime($item->created_at)) }}</span>
-                                                    <div class="fw-600">Package</div>
-                                                    <span>{{ $item->package_name }}</span>
-                                                    <div class="fw-600">Total amount / Status</div>
-                                                    <span>
-                                                        ${{number_format($item->package_price / 100, 2)}} /
-                                                        @if ($item->status == 0)
-                                                        Pending Requirements
-                                                        @elseif ($item->status == 1)
-                                                        Pending
-                                                        @elseif ($item->status == 2)
-                                                        Revision
-                                                        @elseif ($item->status == 3)
-                                                        Cancelled</span>
-                                                        @elseif ($item->status == 4)
-                                                        <span>Delivered</span>
-                                                        @elseif ($item->status == 5)
-                                                        <span>Completed</span>
-                                                        @endif
-                                                    </span>
-                                                    {{-- <a class="btn btn-primary" id="download" href="{{ url('/product/download/') . $item->id }}">
-                                                        <i class="bi bi-download"></i> Download
-                                                    </a> --}}
-                                                    <a class="btn btn-primary" href="/services/order/{{$item->order_id}}">
-                                                        <i class="bi bi-link"></i> View Order
-                                                    </a>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <a href="/services/order/{{$item->order_id}}" class="fw-600 text-black">
+                                                            <img src="{{ $item->service->uploads->getImageOptimizedFullName(400) }}"
+                                                    alt="{{ $item->service->name }} - {{ $item->package_name }}" class="w-100 border">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <a href="/services/order/{{$item->order_id}}" class="fw-600 text-black">
+                                                            <h6>{{ $item->service->name }} - {{ $item->package_name }}</h6>
+                                                            <h6>Package: {{ $item->package_name }}</h6>
+                                                            <h6>Total amount / Status</h6>
+                                                            <span>
+                                                                ${{number_format($item->package_price / 100, 2)}} /
+                                                                @if ($item->status == 0)
+                                                                Pending Requirements
+                                                                @elseif ($item->status == 1)
+                                                                Pending
+                                                                @elseif ($item->status == 2)
+                                                                Revision
+                                                                @elseif ($item->status == 3)
+                                                                Cancelled</span>
+                                                                @elseif ($item->status == 4)
+                                                                <span>Delivered</span>
+                                                                @elseif ($item->status == 5)
+                                                                <span>Completed</span>
+                                                                @endif
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <a href="/services/order/{{$item->order_id}}" class="btn btn-primary">View Course</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
