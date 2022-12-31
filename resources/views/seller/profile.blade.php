@@ -40,9 +40,9 @@
                       {{session('error')}}
                   </h4>
                 @endif
-              <div>
-                <div class="container">
-                  <form action="{{ route('seller.profile.post') }}" method="post" enctype="multipart/form-data">
+ 
+   
+                <form action="{{ route('seller.profile.post') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card mb-4">
                         <div class="card-header">Seller Information</div>
@@ -71,21 +71,20 @@
                         <div class="card mb-4 p-0">
                             <div class="card-header">Avatar</div>
                             <div class="card-body">
-                              <input type="hidden" name="avatar" class="avatar" id="avatar" value="{{ $seller->user->avatar }}">
-                              <div>
+                                <input type="hidden" name="avatar" class="avatar" id="avatar" value="{{ $seller->user->avatar }}">
+                                <div>
                                 <div class="dropzone" id="avatar_dropzone"></div>
-                              </div>
+                                </div>
                             </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Save Changes</button>
-                      </div>
+                        </div>
                     </div>
-                  </form>
-                </div>
-              </div>
+                </form>
+                
             </div>
-        </div>
+        </div><!-- end .row -->
     </div>
 </div>
   
