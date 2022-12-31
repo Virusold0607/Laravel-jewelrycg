@@ -67,7 +67,7 @@ class UserController extends Controller
             $user->update(['avatar' => $req->input('avatar')]);
         }
 
-        return redirect()->route('user.edit', ['tab' => "account"])->with("success", "Account updated!");
+        return redirect()->route('user.edit', ['tab' => "account"])->with("success", "Account successfully updated.");
     }
 
     public function update_address(UpdateAddressRequest $req)
