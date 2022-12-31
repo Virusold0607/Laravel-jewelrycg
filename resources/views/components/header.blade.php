@@ -236,7 +236,7 @@
                         <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false" href="#">{{ Auth::user()->first_name }}</a>
                         <ul class="dropdown-menu small-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <div class="d-flex align-items-center py-3">
+                            <div class="d-flex align-items-center py-2">
                                 <div class="mr-10px w-40px">
                                     <img src="{{user_name(Auth::user()->id)[0]->uploads->getImageOptimizedFullName(100,100)}}" alt="avatar" class="rounded-circle img-fluid">
                                 </div>
@@ -248,7 +248,7 @@
                             </div>
 
                             @if (auth()->user()->role == 2)
-                                <div class="seperated-menu d-flex py-3 border-top">
+                                <div class="seperated-menu d-flex py-2 border-top">
                                     <ul>
                                     <div class="seller-menu-title text-uppercase fs-14 pb-2 fw-700 w-100">Seller</div>
                                         <li><a class="dropdown-item" href="{{route('seller.dashboard')}}">Seller Dashboard</a></li>
@@ -260,7 +260,7 @@
                                 </div>
                             @endif
                             
-                            <div class="seperated-menu d-flex py-3 border-top">
+                            <div class="seperated-menu d-flex py-2 border-top">
                                 <ul>
                                     <li><a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a></li>
                                     <li>
@@ -270,13 +270,13 @@
                                 </ul>
                             </div>
                             
-                            <div class="seperated-menu d-flex py-3 border-top">
+                            <div class="seperated-menu d-flex py-2 border-top">
                                 <ul>
                                     <li><a class="dropdown-item" href="{{route('user.index', auth()->user()->id)}}">Settings</a></li>
                                 </ul>
                             </div>
 
-                            <div class="seperated-menu d-flex py-3 border-top">
+                            <div class="seperated-menu d-flex py-2 border-top">
                                 <ul>
                                     <li><a class="dropdown-item" href="#">Help</a></li>
                                     <li><a class="dropdown-item" href="#">Send Feedback</a></li>
