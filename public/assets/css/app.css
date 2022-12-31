@@ -620,13 +620,19 @@ button.remove-item-btn:after {
 .seller-nav-tabs a {
   border: 1px solid #0069d9 !important;
   margin-right: 10px;
+  border-radius: 6px !important;
 }
-.seller-nav-tabs a.active{
-  background: #0069d9;
+.seller-nav-tabs a.active {
+  background-color: #0069d9;
   border: 1px solid #0069d9 !important;
   color: #ffffff;
   border-radius: 6px !important;
   margin-right:10px
+}
+.seller-nav-tabs a:hover {
+  background-color: #0069d9;
+  border: 1px solid #0069d9 !important;
+  color: #ffffff;
 }
 /*file manager */
 .file-manager-item {
