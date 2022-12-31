@@ -256,7 +256,7 @@
                             
                             <div class="seperated-menu d-flex p-3 border-top">
                                 <ul>
-                                    <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a></li>
                                     <li>
                                         <a class="dropdown-item" href="{{route('orders.index')}}">{{ auth()->user()->role ? 'All Orders' : 'My Orders' }}</a>
                                     </li>
