@@ -237,8 +237,8 @@
                                 <div class="mr-10px w-30px">
                                     <img src="{{user_name(Auth::user()->id)[0]->uploads->getImageOptimizedFullName(100,100)}}" alt="avatar" class="rounded-circle img-fluid">
                                 </div>
-                                <div class="fs-14 fw-700 mr-10px border-right">
-                                    <div class="data">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
+                                <div class="fs-14 mr-10px border-right">
+                                    <div class="data fw-700">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
                                     <div class="data">@username</div>
                                 </div>
                             </div>
@@ -252,15 +252,13 @@
                                    href="{{route('orders.index')}}">{{ auth()->user()->role ? 'All Orders' : 'My Orders' }}</a>
                             </li>
                             <li><a class="dropdown-item" href="{{route('wishlist')}}">My Wishlist</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                             
                             <li> <div class="border-bottom w-100"></div> </li>
-                            
-                            <li><a class="dropdown-item" href="#">Help</a></li>
-                            <li><a class="dropdown-item" href="#">Send Feedback</a></li>
+                            <div class="border-top">
+                                <li><a class="dropdown-item" href="#">Help</a></li>
+                                <li><a class="dropdown-item" href="#">Send Feedback</a></li>
+                            </div>
                         </ul>
                     </li>
                 @else
