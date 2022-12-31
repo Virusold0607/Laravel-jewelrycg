@@ -29,7 +29,7 @@
             <div class="col-lg-3">
                 <x-dashboard-side-bar />
             </div>
-            <div class="col-lg-9">
+            <div class="col-xl-4 col-lg-6 col-md-8 mr-auto">
                 @if (session('success'))
                   <h4 class="text-center text-primary mt-3">
                       {{session('success')}}
