@@ -398,9 +398,12 @@
                                 <div class="col-9">
                                     <h4>{{ $order->service->name }}</h4>
                                     <span class="d-block rounded border" data-item-id="{{ $order->id }}">
-                                    {{ 'Status: ' . Config::get('constants.service_order_status')[$order->status] }}
                                 </span>
                                 </div>
+                            </div>
+                            <div class="d-flex flex-row mb-1 justify-content-between">
+                                <span>Status</span>
+                                <span>{{ Config::get('constants.service_order_status')[$order->status] }}</span>
                             </div>
                             <div class="d-flex flex-row mb-1 justify-content-between">
                                 <span>Ordered from</span>
