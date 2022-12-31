@@ -396,8 +396,7 @@
                                          class="thumbnail border w-100">
                                 </div>
                                 <div class="col-9">
-                                    <h4>{{ $order->service->name }}</h4>
-                                    <span class="d-block rounded border" data-item-id="{{ $order->id }}">
+                                    <div class="fs-18 fw-700">{{ $order->service->name }}</div>
                                 </span>
                                 </div>
                             </div>
