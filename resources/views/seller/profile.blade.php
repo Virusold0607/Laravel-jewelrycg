@@ -46,17 +46,14 @@
                     @csrf
                     <div class="card mb-4">
                         <div class="card-header">Seller Information</div>
-                        <div class="row flex-row">
-                            <div class="card-body">
+                        <div class="card-body">
                             <div class="mb-2">
                                 <label for="slogan">Slogan:</label>
-                                <input type="text" name="slogan" id="slogan" value="{{ old('slogan') ?? $seller->slogan }}"
-                                    class="form-control">
+                                <input type="text" name="slogan" id="slogan" value="{{ old('slogan') ?? $seller->slogan }}" class="form-control">
                             </div>
                             <div class="mb-2">
                                 <label for="about">About:</label>
-                                <input type="text" name="about" id="about" value="{{ old('about') ?? $seller->about }}"
-                                    class="form-control">
+                                <input type="text" name="about" id="about" value="{{ old('about') ?? $seller->about }}" class="form-control">
                             </div>
                             <div class="mb-2">
                                 <label for="name">Default Payment Method:</label>
@@ -66,19 +63,19 @@
                                     @endforeach
                                 </select>
                             </div>
-                            </div>
 
-                        <div class="card mb-4 p-0">
-                            <div class="card-header">Avatar</div>
-                            <div class="card-body">
-                                <input type="hidden" name="avatar" class="avatar" id="avatar" value="{{ $seller->user->avatar }}">
-                                <div>
-                                <div class="dropzone" id="avatar_dropzone"></div>
+
+                            <div class="mb-2">
+                                <div class="card-header">Avatar</div>
+                                <div class="card-body">
+                                    <input type="hidden" name="avatar" class="avatar" id="avatar" value="{{ $seller->user->avatar }}">
+                                    <div>
+                                    <div class="dropzone" id="avatar_dropzone"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </div>
                 </form>
