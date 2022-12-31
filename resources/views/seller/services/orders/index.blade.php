@@ -14,7 +14,7 @@
                 <div class="col-lg-9">
                     <div class="card">
                         <div class="card-header">
-                            <ul class="nav nav-tabs mb-2">
+                            <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a class="nav-link {{ $tab == "active" ? "active" : "" }}" href="?tab=active">ACTIVE</a>
                                 </li>
