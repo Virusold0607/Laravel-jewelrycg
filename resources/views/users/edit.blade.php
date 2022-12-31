@@ -20,15 +20,16 @@
     </style>
     <div class="container">
         <div class="row">
+        <!--
             <div class="w-20 py-9">
                 <nav class="navbar bg-light navbar-light">
                     <div class="container-fluid">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link {{ $tab == "account" ? "active" : "" }}" href="/user/edit?tab=account">Account</a>
+                                <a class="nav-link {{ $tab == "account" ? "active" : "" }}" href="/user/edit?tab=account" class="w-100 d-block mb-2 ">Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ $tab == "security" ? "active" : "" }}" href="{{route('user.update.password')}}">Security</a>
+                                <a class="nav-link {{ $tab == "security" ? "active" : "" }}" href="{{route('user.update.password')}}" class="w-100 d-block mb-2 ">Security</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ $tab == "address" ? "active" : "" }}" href="/user/edit?tab=address">Address</a>
@@ -36,6 +37,18 @@
                         </ul>
                     </div>
                 </nav>
+            </div>
+-->
+            <div class="col-lg-3">
+                <div class="card m-0">
+                    <div class="card-body">
+                        <div class="seller-side-nav">
+                            <a class="nav-link {{ $tab == "account" ? "active" : "" }}" href="/user/edit?tab=account" class="w-100 d-block mb-2 ">Account</a>
+                            <a class="nav-link {{ $tab == "security" ? "active" : "" }}" href="{{route('user.update.password')}}" class="w-100 d-block mb-2 ">Security</a>
+                            <a class="nav-link {{ $tab == "address" ? "active" : "" }}" href="/user/edit?tab=address">Address</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-xl-4 col-lg-6 col-md-8 py-9 mx-auto">
                 <form action="{{ route('user.update.'.$tab) }}" method="post">
