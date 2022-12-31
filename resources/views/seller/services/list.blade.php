@@ -19,8 +19,10 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-header">
                             <a class="btn btn-primary" href="{{route('seller.services.create')}}">Create Service</a>
+                        </div>
+                        <div class="card-body">
                             <div class="datatable-custom position-relative">
                                 <table class="table table-lg table-thead-bordered table-nowrap table-align-middle card-table dataTable table-responsive no-footer">
                                     <thead class="thead-light">
