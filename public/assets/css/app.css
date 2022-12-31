@@ -598,7 +598,7 @@ button.remove-item-btn:after {
 
 /* Seller */
 .seller-side-nav a {
-  padding:15px;
+  padding:10px;
   border: 1px solid transparent;
 }
 .seller-side-nav a:hover {
@@ -610,7 +610,7 @@ button.remove-item-btn:after {
 .seller-side-nav a.active {
   background: #0069d9;
   border: 1px solid #0069d9;
-  padding: 15px;
+  padding: 10px;
   color: #ffffff;
   border-radius: 6px;
 }
