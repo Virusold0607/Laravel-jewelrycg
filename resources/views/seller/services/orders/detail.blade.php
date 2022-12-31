@@ -51,7 +51,7 @@
                 <div class="col-9">
                     @include('includes.validation-form')
                     @if (session('success'))
-                        <div class="alert alert-success" role="alert">{{session('success')}}</div>
+                        <!--<div class="alert alert-success" role="alert">{{session('success')}}</div>-->
                     @endif
                     <div class="card mb-4">
                         <div class="card-body">
