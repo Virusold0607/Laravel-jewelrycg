@@ -1037,7 +1037,7 @@ class ServicesController extends Controller
             $notification->link = "/seller/order_detail/" . $order->order_id;
             $notification->save();
 
-            return redirect()->route('services.order_detail', $order->order_id)->with('success', 'You successfully left a reviewed.');
+            return redirect()->route('services.order_detail', $order->order_id)->with('success', 'You successfully left a review.');
         } else {
             $notification = new Notification();
             $notification->message = $order->service->postauthor->full_name . ' has left you a review on service order #' . $order->order_id . '.';
@@ -1045,7 +1045,7 @@ class ServicesController extends Controller
             $notification->link = "/services/order/" . $order->order_id;
             $notification->save();
 
-            return redirect()->route('seller.service.order.detail', $order->order_id)->with('success', 'You successfully left a reviewed.');
+            return redirect()->route('seller.service.order.detail', $order->order_id)->with('success', 'You successfully left a review.');
         }
     }
 }
