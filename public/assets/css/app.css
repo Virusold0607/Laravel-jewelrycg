@@ -99,6 +99,9 @@ header ul.dropdown-menu.show a.dropdown-item:focus, header ul.dropdown-menu.show
 header a.nav-link.active, header a.nav-link:hover {
   color: #0057ff !important;
 }
+header ul.dropdown-menu.small-menu {
+  min-width: 250px;
+}
 header ul.dropdown-menu.half-menu {
   min-width: 400px;
 }
