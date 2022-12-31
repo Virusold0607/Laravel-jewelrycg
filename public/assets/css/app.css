@@ -596,6 +596,17 @@ button.remove-item-btn:after {
   margin-left: .5rem;
 }
 
+/* Seller */
+.seller-side-nav a {
+  padding:15px;
+}
+.seller-side-nav a.active {
+  background: #0069d9;
+  padding: 15px;
+  color: #ffffff;
+  border-radius: 6px;
+}
+
 /*file manager */
 .file-manager-item {
   cursor: pointer;
