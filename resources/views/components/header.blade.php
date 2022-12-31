@@ -249,7 +249,10 @@
                                     <ul>
                                     <div class="seller-menu-title text-uppercase fs-14 pb-2 fw-700 w-100">Seller</div>
                                         <li><a class="dropdown-item" href="{{route('seller.dashboard')}}">Seller Dashboard</a></li>
-                                        <li><a class="dropdown-item" href="{{route('seller.services.list')}}">Services</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('seller.profile') }}">Seller Profile Settings</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('seller.service.orders') }}">My Orders</a></li>
+                                        <li><a class="dropdown-item" href="{{route('seller.services.list')}}">My Services</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('seller.transaction.history') }}">Wallet History</a></li>
                                     </ul>
                                 </div>
                             @endif
