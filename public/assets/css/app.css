@@ -615,6 +615,11 @@ button.remove-item-btn:after {
   border-radius: 6px;
 }
 
+.seller-nav-tabs .active{
+  border: 1px solid #000 !important;
+  border-radius: 6px !important;
+  margin-right:10px
+}
 /*file manager */
 .file-manager-item {
   cursor: pointer;
