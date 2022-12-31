@@ -59,12 +59,12 @@
                                                 @if ($item->product_variant == 0)
                                                     <a href="{{ route('orders.show', $item->order_id) }}">
                                                         <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                            alt="{{ $item->product_name }}" class="w-100">
+                                                            alt="{{ $item->product_name }}" class="w-100 border">
                                                     </a>
                                                 @else
                                                     <a href="{{ route('orders.show', $item->order_id) }}">
                                                         <img src="{{ $item->uploads->getImageOptimizedFullName(400) }}"
-                                                            alt="{{ $item->product_name }} - {{ $item->product_variant_name }}" class="w-100">
+                                                            alt="{{ $item->product_name }} - {{ $item->product_variant_name }}" class="w-100 border">
                                                     </a>
                                                 @endif
                                             </div>
@@ -81,8 +81,8 @@
                                             </div>
                                             
                                             <div class="col-4">
-                                                <a href="{{ route('orders.show', $item->order_id) }}" class="btn btn-primary mb-2">View Order</a>
-                                                <a href="{{ route('orders.show', $item->order_id) }}" class="btn btn-danger">create</a>
+                                                <a href="{{ route('orders.show', $item->order_id) }}" class="btn btn-primary mb-2 w-100">View Order</a>
+                                                <a href="{{ route('orders.show', $item->order_id) }}" class="btn btn-danger w-100">create</a>
                                             </div>
                                         </div>
                                     </div>
