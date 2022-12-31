@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-6 col-md-8 py-9 mx-auto">
+                <div class="col-xl-4 col-lg-6 col-md-8 mr-auto">
                     <form action="{{ route('user.update.'.$tab) }}" method="post">
                         @csrf
                         @method('put')
