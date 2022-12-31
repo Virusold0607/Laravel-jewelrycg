@@ -154,22 +154,24 @@
                 <div class="card">
                     <div class="card-header">Your Course Orders</div>
                     <div class="card-body">
-                        <div class="row">
+                        <div class="card-body-content">
                             @foreach ($courses as $item)
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <img src="{{ $item->course->uploads->getImageOptimizedFullName(400) }}"
-                                            alt="" style="width: 100%;" class="mb-3 pb-3 border-bottom">
-                                            <a href="/courses/course/{{ $item->course->slug }}">
-                                                <h6>{{ $item->course->name }}</h6>
-                                            </a>
-                                            {{-- <a class="btn btn-primary" id="download" href="{{ url('/product/download/') . $item->id }}">
-                                                <i class="bi bi-download"></i> Download
-                                            </a> --}}
-                                            <a class="btn btn-primary" href="/courses/course/{{ $item->course->slug }}">
-                                                <i class="bi bi-link"></i> View Course
-                                            </a>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <a href="/courses/course/{{ $item->course->slug }}" class="fw-600 text-black">
+                                                    <img src="{{ $item->course->uploads->getImageOptimizedFullName(400) }}" alt="{{ $item->course->name }}" class="w-100 border">
+                                                </a>
+                                            </div>
+                                            <div class="col-4">
+                                                <a href="/courses/course/{{ $item->course->slug }}" class="fw-600 text-black">
+                                                    <h6>{{ $item->course->name }}</h6>
+                                                </a>
+                                            </div>
+                                            <div class="col-4">
+                                                <a href="/courses/course/{{ $item->course->slug }}" class="btn btn-primary">View Course</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
