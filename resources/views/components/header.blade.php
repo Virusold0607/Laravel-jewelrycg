@@ -234,30 +234,34 @@
                            data-bs-toggle="dropdown" aria-expanded="false" href="#">{{ Auth::user()->first_name }}</a>
                         <ul class="dropdown-menu small-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <div class="d-flex align-items-center p-3 border-bottom">
-                                <div class="mr-10px w-30px">
+                                <div class="mr-10px w-40px">
                                     <img src="{{user_name(Auth::user()->id)[0]->uploads->getImageOptimizedFullName(100,100)}}" alt="avatar" class="rounded-circle img-fluid">
                                 </div>
                                 <div class="fs-14 mr-10px border-right">
-                                    <div class="data fw-700">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
-                                    <div class="data">@username</div>
-                                    <div class="data"><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></div>
+                                    <div class="data fw-700 pb-1">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
+                                    <div class="data pb-1">@username</div>
+                                    <div class="data"><a class="text-primary" href="{{ route('logout') }}">Logout</a></div>
                                 </div>
                             </div>
-                            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+
                             @if (auth()->user()->role == 2)
                                 <li><a class="dropdown-item" href="{{route('seller.services.list')}}">Services</a></li>
                             @endif
                             
-                            </li>
-                            <li><a class="dropdown-item"
-                                   href="{{route('orders.index')}}">{{ auth()->user()->role ? 'All Orders' : 'My Orders' }}</a>
-                            </li>
-                            <li><a class="dropdown-item" href="{{route('wishlist')}}">My Wishlist</a></li>
-                            
+                        
+                            <div class="seperated-menu d-flex p-3 border-top">
+                                <ul>
+                                    <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{route('orders.index')}}">{{ auth()->user()->role ? 'All Orders' : 'My Orders' }}</a>
+                                    </li>
+                                    <!--<li><a class="dropdown-item" href="{{route('wishlist')}}">My Wishlist</a></li>-->
+                                </ul>
+                            </div>
                             
                             <div class="seperated-menu d-flex p-3 border-top">
                                 <ul>
-                                    <li><a class="dropdown-item" href="{{route('user.index', auth()->user()->id)}}">Settings</a>
+                                    <li><a class="dropdown-item" href="{{route('user.index', auth()->user()->id)}}">Settings</a></li>
                                 </ul>
                             </div>
 
