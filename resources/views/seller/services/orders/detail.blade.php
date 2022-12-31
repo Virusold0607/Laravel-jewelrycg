@@ -241,11 +241,9 @@
                 </div>
                 <div class="col-3">
                     <div class="card mb-4 time-left">
+                        <div class="card-header" id="count_title">Time left to deliver</div>
                         <div class="card-body">
                             @if ($order->status == 1 || $order->status == 2)
-                                <div class="col-md-12" id="count_title">
-                                    Time left to deliver
-                                </div>
                                 <div class="col-md-12 d-flex justify-content-between align-items-center my-2">
                                     <div class="d-flex flex-column align-items-center" style="width: 23%;">
                                         <h5 id="count_day">00</h5>
@@ -298,18 +296,21 @@
                         </div>
                     </div>
                     <div class="card mb-4 order-details">
-                        <div class="card-body">
-                            <div class="row">
+                        <div class="card-header">
+                            <div class="row mb-3">
                                 <div class="col-3">
                                     <img src="{{ $order->service->uploads->getImageOptimizedFullName(150) }}" alt=""
                                          class="thumbnail border w-100">
                                 </div>
                                 <div class="col-9">
-                                    <h4>{{ $order->service->name }}</h4>
-                                    <span class="d-block rounded border" data-item-id="{{ $order->id }}">
-                                      {{ 'Status: ' . Config::get('constants.service_order_status')[$order->status] }}
-                                  </span>
+                                    <div class="fs-18 fw-700">{{ $order->service->name }}</div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex flex-row mb-1 justify-content-between">
+                                <span>Status</span>
+                                <span>{{ Config::get('constants.service_order_status')[$order->status] }}</span>
                             </div>
                             <div class="d-flex flex-row mb-1 justify-content-between">
                                 <span>Ordered from</span>
