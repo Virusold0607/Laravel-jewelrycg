@@ -245,10 +245,15 @@
                             </div>
 
                             @if (auth()->user()->role == 2)
-                                <li><a class="dropdown-item" href="{{route('seller.services.list')}}">Services</a></li>
+                                <div class="seperated-menu d-flex p-3 border-top">
+                                    <div class="seller-menu-title fw-700 ">Seller</div>
+                                    <ul>
+                                        <li><a class="dropdown-item" href="/dashboard">Seller Dashboard</a></li>
+                                        <li><a class="dropdown-item" href="{{route('seller.services.list')}}">Services</a></li>
+                                    </ul>
+                                </div>
                             @endif
                             
-                        
                             <div class="seperated-menu d-flex p-3 border-top">
                                 <ul>
                                     <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
