@@ -256,6 +256,10 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                            
+                            <div class="border-bottom w-100"></div>
+                            <li><a class="dropdown-item" href="#">Help</a></li>
+                            <li><a class="dropdown-item" href="#">Send Feedback</a></li>
                         </ul>
                     </li>
                 @else
