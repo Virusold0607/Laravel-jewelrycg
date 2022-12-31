@@ -20,7 +20,7 @@
                 <div class="col-lg-9">
                     <div class="card">
                         <div class="card-body">
-                            <a class="btn btn-primary" type="button" href="{{route('seller.services.create')}}">Create Service</a>
+                            <a class="btn btn-primary" href="{{route('seller.services.create')}}">Create Service</a>
                             <div class="datatable-custom position-relative">
                                 <table class="table table-lg table-thead-bordered table-nowrap table-align-middle card-table dataTable table-responsive no-footer">
                                     <thead class="thead-light">
