@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-6 col-md-8 py-9 mr-auto">
+            <div class="col-xl-4 col-lg-6 col-md-8 mr-auto">
                 
                 @if (session('success'))
                 <div class="alert alert-success" role="alert">{{session('success')}}</div>
