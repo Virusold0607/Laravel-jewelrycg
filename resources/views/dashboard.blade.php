@@ -120,7 +120,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="col-4">
-                                                        <a href="/services/order/{{$item->order_id}}" class="btn btn-primary">View</a>
+                                                        <a href="/services/order/{{$item->order_id}}" class="btn btn-primary w-100">View</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,7 +154,7 @@
                                                 </a>
                                             </div>
                                             <div class="col-4">
-                                                <a href="/courses/course/{{ $item->course->slug }}" class="btn btn-primary">View</a>
+                                                <a href="/courses/course/{{ $item->course->slug }}" class="btn btn-primary w-100">View</a>
                                             </div>
                                         </div>
                                     </div>
