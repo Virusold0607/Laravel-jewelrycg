@@ -71,7 +71,6 @@
         .navbar-container{
             display: grid !important;
             grid-template-columns: repeat(2, auto) !important;
-            border-bottom: 1px solid rgb(243,243,244);
         }
         .header-menu-action a.nav-link{
             padding:5px !important;
