@@ -1,5 +1,5 @@
-<header class="">
-    <nav class="navbar bg-white navbar-expand-lg container" aria-label="Light offcanvas navbar">
+<header>
+    <nav class="navbar bg-white navbar-expand-lg container p-0" aria-label="Light offcanvas navbar">
         <div class="container navbar-container">
             <div class="d-flex align-items-center">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
