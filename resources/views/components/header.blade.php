@@ -118,10 +118,10 @@
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">
                             <img src="{{ asset('img/logo.png') }}" width="50" height="50" alt="logo">
-                            <img class="logo"
-                                 src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"
-                                 data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"
-                                 alt="District Gurus">
+{{--                            <img class="logo"--}}
+{{--                                 src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
+{{--                                 data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
+{{--                                 alt="District Gurus">--}}
                             #JEWELRYCG
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
