@@ -66,6 +66,7 @@
         .header-menu-action{
             display: grid;
             grid-template-columns: repeat(4, auto);
+            align-items: center;
         }
         .navbar-container{
             display: grid !important;
@@ -79,27 +80,10 @@
             top: 2em !important;
         }
 
-        @media screen and (max-width:570px) {
-            .navbar-brand{
-                font-size: 13px;
-            }
-            .header-menu-action a.nav-link{
-                padding:0 !important;
 
-                font-size:13px !important;
-            }
-            .header-icon-response::before,.header-icon-response::after{
-                font-size: 13px;
-            }
-            .auth-btn{
-                font-size: 13px;
-                padding: 6px 22px !important;
-
-            }
-        }
     </style>
-    <nav class="navbar bg-white navbar-expand-lg continer" aria-label="Light offcanvas navbar">
-        <div class="container-fluid navbar-container">
+    <nav class="navbar bg-white navbar-expand-lg container" aria-label="Light offcanvas navbar">
+        <div class="container navbar-container">
             <div class="d-flex align-items-center">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
@@ -128,7 +112,7 @@
 
                     </div>
                     <div class="offcanvas-body">
-                        <ul class="mb-2 navbar-nav mb-lg-0">
+                        <ul class="navbar-nav">
                             <li class="nav-item menu-area d-none">
                                 <a class="nav-link" href="{{ route('index') }}">Home</a>
                             </li>
