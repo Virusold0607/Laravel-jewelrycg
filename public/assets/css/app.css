@@ -53,9 +53,7 @@ header {
   background: #ffffff;
   color: #000000;
   padding: 0 !important;
-  border-bottom: 0 !important;
-  -webkit-box-shadow: inset 0px -1px 0px #f3f3f4;
-  box-shadow: inset 0px -1px 0px #f3f3f4;
+  border-bottom: 1px solid #eeeeee !important;
   position: fixed !important;
   z-index: 1000;
   width: 100%;
