@@ -66,6 +66,7 @@
         .header-menu-action{
             display: grid;
             grid-template-columns: repeat(4, auto);
+            align-items: center;
         }
         .navbar-container{
             display: grid !important;
@@ -79,24 +80,7 @@
             top: 2em !important;
         }
 
-        @media screen and (max-width:570px) {
-            .navbar-brand{
-                font-size: 13px;
-            }
-            .header-menu-action a.nav-link{
-                padding:0 !important;
 
-                font-size:13px !important;
-            }
-            .header-icon-response::before,.header-icon-response::after{
-                font-size: 13px;
-            }
-            .auth-btn{
-                font-size: 13px;
-                padding: 6px 22px !important;
-
-            }
-        }
     </style>
     <nav class="navbar bg-white navbar-expand-lg container" aria-label="Light offcanvas navbar">
         <div class="container navbar-container">
