@@ -41,12 +41,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.1.0/trumbowyg.min.js"></script>
-        
+
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         {{ $scripts ?? null }}
         <!--<script src="{{asset('js/func_util.js')}}" defer></script>-->
-        
+
         <!-- for chat -->
     </head>
     <body>
@@ -60,9 +60,9 @@
         <!-- Page Footer -->
         <x-footer/>
         {{-- <x-chat-view/> --}}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
         @yield('js')
-        
+
         <!-- JS Plugins Init. -->
         <script>
             function deletevarient(id) {

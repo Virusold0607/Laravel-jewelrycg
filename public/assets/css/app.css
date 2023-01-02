@@ -123,8 +123,9 @@ button.navbar-toggler {
   padding: 15px 0;
   color: #000000 !important;
   font-size: 2rem;
+    margin-right: 15px;
 }
-// show medium or smaller browser
+ /* show medium or smaller browser */
 @media (max-width: 990px) {
   header a.nav-link {
     padding: 15px 0 !important;
@@ -139,7 +140,7 @@ button.navbar-toggler {
 .auth-btn {
   border-radius: 50px;
   padding: 8px 25px !important;
-  margin-top: 18px;
+  /*margin-top: 18px;*/
   border: 1px solid #e8e8e8;
   font-weight: 500 !important;
   font-size: 14px !important;
@@ -559,14 +560,14 @@ button.remove-item-btn:after {
   width: fit-content;
   min-width: 50px;
   border: solid 1px var(--primary);
-  color: var(--primary);  
+  color: var(--primary);
   cursor: pointer;
 }
 .text-attribute:hover,
 .text-attribute.active{
   color: #fff;
   background-color: #007bff;
-  outline: solid 2px #007bff !important;  
+  outline: solid 2px #007bff !important;
 }
 .color-attribute{
   width: 30px;
