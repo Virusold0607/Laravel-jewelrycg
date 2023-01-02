@@ -98,8 +98,8 @@
             }
         }
     </style>
-    <nav class="navbar bg-white navbar-expand-lg continer" aria-label="Light offcanvas navbar">
-        <div class="container-fluid navbar-container">
+    <nav class="navbar bg-white navbar-expand-lg container" aria-label="Light offcanvas navbar">
+        <div class="container navbar-container">
             <div class="d-flex align-items-center">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
