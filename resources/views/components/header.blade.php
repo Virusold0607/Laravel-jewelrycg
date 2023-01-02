@@ -91,6 +91,11 @@
             .header-icon-response::before,.header-icon-response::after{
                 font-size: 13px;
             }
+            .auth-btn{
+                font-size: 13px;
+                padding: 6px 22px !important;
+
+            }
         }
     </style>
     <nav class="navbar bg-white navbar-expand-lg continer" aria-label="Light offcanvas navbar">
