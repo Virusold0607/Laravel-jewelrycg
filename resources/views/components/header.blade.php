@@ -112,7 +112,7 @@
 
                     </div>
                     <div class="offcanvas-body">
-                        <ul class="mb-2 navbar-nav mb-lg-0">
+                        <ul class="navbar-nav">
                             <li class="nav-item menu-area d-none">
                                 <a class="nav-link" href="{{ route('index') }}">Home</a>
                             </li>
