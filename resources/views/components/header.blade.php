@@ -106,11 +106,11 @@
                     <i class="bi bi-list"></i>
                 </button>
                 <a class="navbar-brand fw-800" href="{{ route('index') }}">
-                    <img src="{{ asset('img/logo.png') }}" width="50" height="50" alt="logo">
-                    <img class="logo"
-                         src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"
-                         data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"
-                         alt="District Gurus">
+{{--                    <img src="{{ asset('img/logo.png') }}" width="50" height="50" alt="logo">--}}
+{{--                    <img class="logo"--}}
+{{--                         src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
+{{--                         data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
+{{--                         alt="District Gurus">--}}
                     #JEWELRYCG
                 </a>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarLight"
