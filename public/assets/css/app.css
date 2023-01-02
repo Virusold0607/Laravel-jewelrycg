@@ -110,6 +110,17 @@ header ul.dropdown-menu.small-menu {
 header ul.dropdown-menu.half-menu {
   min-width: 400px;
 }
+
+@media screen and (max-width: 578px) {
+    header ul.dropdown-menu.small-menu {
+        min-width: 250px;
+    }
+    header ul.dropdown-menu.half-menu {
+        min-width: 280px;
+    }
+}
+
+
 header ul.dropdown-menu.full-menu {
   min-width: 600px;
 }
