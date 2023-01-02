@@ -80,7 +80,7 @@
                 </div>
             </div>
             <nav>
-                <ul class="mb-2 ml-auto navbar-nav mb-lg-0 header-menu-action">
+                <ul class="ml-auto navbar-nav header-menu-action">
                     <li class="nav-item dropdown menu-area">
                         <a href="{{route('cart.index')}}" class="nav-link">
                             <?php
