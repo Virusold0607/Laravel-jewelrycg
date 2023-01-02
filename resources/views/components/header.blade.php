@@ -1,8 +1,6 @@
 <header class="">
     <style>
-        header {
-            z-index: 100000;
-        }
+
 
         .notification-badge-container i {
             position: relative;
