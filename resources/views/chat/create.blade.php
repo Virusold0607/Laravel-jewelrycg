@@ -440,7 +440,7 @@
 
                     $('document').ready(function () {
 
-                        $("#content").animate({scrollTop: $('#content').prop("scrollHeight")}, 10); // Scroll the chat output div
+                        $(".chat-messages").animate({scrollTop: $('.chat-messages').prop("scrollHeight")}, 10); // Scroll the chat output div
 
                         $('.filterDiscussions').click(function () {
 
@@ -531,7 +531,7 @@
                             $(this).val('');
                             $(`#shortmsg_${client_id}`).text(chat_msg);
                             // $("#content").animate({ scrollTop: $("#content").height()+20  }, 1000);
-                            $("#content").animate({scrollTop: $('#content').prop("scrollHeight")}, 10); // Scroll the chat output div
+                            $(".chat-messages").animate({scrollTop: $('.chat-messages').prop("scrollHeight")}, 10); // Scroll the chat output div
                         }
                     });
 
@@ -617,7 +617,7 @@
                                         </div>`
 
                                     $('#chat-content').append(msg); // Append the new message received
-                                    $("#content").animate({scrollTop: $('#content').prop("scrollHeight")}, 10); // Scroll the chat output div
+                                    $(".chat-messages").animate({scrollTop: $('.chat-messages').prop("scrollHeight")}, 10); // Scroll the chat output div
                                     break;
                                 case 'socket':
                                     $('#chat-content').append(data.msg);
@@ -769,7 +769,7 @@
                          </div>
                                 </div>`;
                 $('#chat-content').append(msg); // Append the new message received
-                $("#content").animate({scrollTop: $('#content').prop("scrollHeight")}, 10); // Scroll the chat output div
+                $(".chat-messages").animate({scrollTop: $('.chat-messages').prop("scrollHeight")}, 10); // Scroll the chat output div
 
             }
         }
