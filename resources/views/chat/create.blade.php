@@ -135,7 +135,7 @@
                                         data-toggle="tooltip" data-placement="top" title="Janette"
                                         alt="avatar"
                                         class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
+                                    <div class="flex-grow-1 ml-10px">
                                         {{users_name($info->conversation_id)[0]->first_name}} {{users_name($info->conversation_id)[0]->last_name}}
                                         <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
                                     </div>
