@@ -107,7 +107,8 @@
             function users_name($id){
                 return \App\Models\User::where('id',$id)->get();
             }
-        @endphp
+//        @endphp
+
         <input type="hidden" id="user_name" value="{{auth()->user()->first_name.' '.auth()->user()->last_name}}"/>
         <input type="hidden" id="seller" value="{{$conversation_id}}" />
         <div class="container p-0">
@@ -150,13 +151,14 @@
                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
-                                    <img  src="{{Auth::user()->uploads->getImageOptimizedFullName(100,100)}}" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar"
+                                    <img  src="{{users_name($conversation_id)->first()->uploads->getImageOptimizedFullName(100,100)}}" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar"
                                          class="rounded-circle mr-1"  width="40" height="40">
                                 </div>
-                                <div class="flex-grow-1 pl-3">
 
-                                    <strong>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
+                                <div class="flex-grow-1 pl-3">
+                                    <strong>{{users_name($conversation_id)->first()->first_name}} {{users_name($conversation_id)->first()->last_name}}</strong>
                                     <div class="text-muted small"><em>Active now.</em></div>
+
                                 </div>
                                 <div>
                                     <button class="btn btn-primary btn-lg mr-1 px-3">
@@ -204,7 +206,7 @@
                                                             <div>
                                                                 <img  src="{{Auth::user()->uploads->getImageOptimizedFullName(100,100)}}"
                                                                       class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                                                <div class="text-muted small text-nowrap mt-2">{{$content->updated_at}}</div>
+                                                                <div class="text-muted small text-nowrap mt-2">{{date('g:i a',strtotime($content->updated_at))}}</div>
                                                             </div>
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                                                 <div class="font-weight-bold mb-1">You</div>
@@ -216,10 +218,10 @@
                                                             <div>
                                                                 <img src="{{users_name($info->conversation_id)[0]->uploads->getImageOptimizedFullName(100,100)}}"
                                                                      class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                                                <div class="text-muted small text-nowrap mt-2">{{$content->updated_at}}</div>
+                                                                <div class="text-muted small text-nowrap mt-2">{{date('g:i A',strtotime($content->updated_at))}}</div>
                                                             </div>
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                                <div class="font-weight-bold mb-1">Sharon Lessman</div>
+                                                                <div class="font-weight-bold mb-1">{{users_name($content->conversation_id)->first()->first_name}} {{users_name($content->conversation_id)->first()->last_name}}</div>
                                                                 {{$content->message}}
                                                             </div>
                                                         </div>
@@ -320,16 +322,18 @@
                             // });
                         })
                     });
-
+                    function formatAMPM(date) {
+                        var hours = date.getHours();
+                        var minutes = date.getMinutes();
+                        var ampm = hours >= 12 ? 'pm' : 'am';
+                        hours = hours % 12;
+                        hours = hours ? hours : 12; // the hour '0' should be '12'
+                        minutes = minutes < 10 ? '0'+minutes : minutes;
+                        var strTime = hours + ':' + minutes + ' ' + ampm;
+                        return strTime;
+                    }
                     function getDateFormat() {
-                        var d = new Date,
-                            dformat = [d.getFullYear(),
-                                    d.getMonth()+1,
-                                    d.getDate()
-                                ].join('-')+' '+
-                                [d.getHours(),
-                                    d.getMinutes()].join(':');
-                        return dformat;
+                        return formatAMPM(new Date);
                     }
 
                     // Bind onkeyup event after connection
