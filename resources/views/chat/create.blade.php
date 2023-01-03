@@ -155,7 +155,7 @@
                                          class="rounded-circle mr-1"  width="40" height="40">
                                 </div>
 
-                                <div class="flex-grow-1 pl-3">
+                                <div class="flex-grow-1 px-2">
                                     <strong>{{users_name($conversation_id)->first()->first_name}} {{users_name($conversation_id)->first()->last_name}}</strong>
                                     <div class="text-muted small"><em>Active now.</em></div>
 
