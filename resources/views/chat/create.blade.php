@@ -242,8 +242,11 @@
                                 <div class="input-group">
                                     <input form="uploadFileForm" type="text" id="chat_input" class="form-control" class="form-control"
                                            placeholder="Start typing for reply...">
-
                                     <button class="btn btn-primary">Send</button>
+                                    <button type="button" class="btn uploadFile">
+                                        <i class="fa fa-link"
+                                           aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
 
