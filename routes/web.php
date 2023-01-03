@@ -428,6 +428,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/check/{id}', 'check')->name('check');
         Route::post('/overview', 'overview')->name('overview');
     });
+
+    Route::post('/api-upload-file', [UploadController::class, 'apiUpload'])->name('api_upload');
 });
 
 //services

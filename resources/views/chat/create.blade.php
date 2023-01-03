@@ -1,26 +1,45 @@
 <x-app-layout page-title="Messages">
+    <meta name="_token" content="{{csrf_token()}}"/>
+    <link rel="stylesheet" href="{{ asset('dropzone/css/dropzone.css') }}">
     @section('css')
         <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
         <style>
             .dropzone {
                 border-radius: 25px;
-                width: 132px;
                 overflow: hidden;
-                padding: 4px;
                 background: transparent;
+                display: flex;
+                border: none !important;
+                width: 100%;
+                flex-direction: column;
+                padding: 20px 0 !important;
+                min-height: unset !important;
             }
-            .dropzone .dz-preview{
+
+            .dropzone-items {
+                margin-bottom: 10px;
+            }
+
+            .dropzone-panel {
+                display: grid;
+                grid-template-columns: auto max(14%, 100px) max(14%, 100px);
+            }
+
+            .dropzone .dz-preview {
                 margin: 0;
             }
 
             .dz-image img {
                 width: 100%;
             }
+
             .list-group > a:hover {
                 background: #f0f2f5
             }
 
-
+            .dropzone .dz-message {
+                display: none;
+            }
 
             .data > span {
                 margin-right: 10px;
@@ -97,8 +116,62 @@
                 background-color: #fff;
                 border: 1px solid rgba(0, 0, 0, .125);
             }
-            .messages{
+
+            .messages {
                 padding: 30px;
+            }
+
+            .wm-200px {
+                /*max-width: 200px;*/
+            }
+
+            .dropzone.dropzone-queue .dropzone-item {
+                display: flex;
+                align-items: center;
+                margin-top: 0.75rem;
+                border-radius: 0.65rem;
+                padding: 0.5rem 1rem;
+                background-color: #f5f8fa;
+            }
+
+            .dropzone.dropzone-queue .dropzone-item .dropzone-file {
+                flex-grow: 1;
+            }
+
+            .dropzone.dropzone-queue .dropzone-item .dropzone-file .dropzone-filename {
+                font-size: .9rem;
+                font-weight: 500;
+                color: #7e8299;
+                text-overflow: ellipsis;
+                margin-right: 0.5rem;
+            }
+
+            .dropzone.dropzone-queue .dropzone-item .dropzone-file .dropzone-error {
+                margin-top: 0.25rem;
+                font-size: .9rem;
+                font-weight: 400;
+                color: #f1416c;
+                text-overflow: ellipsis;
+            }
+
+            .dropzone.dropzone-queue .dropzone-item .dropzone-toolbar {
+                margin-left: 1rem;
+                display: flex;
+                flex-wrap: nowrap;
+            }
+
+            .dropzone.dropzone-queue .dropzone-item .dropzone-toolbar .dropzone-cancel, .dropzone.dropzone-queue .dropzone-item .dropzone-toolbar .dropzone-delete, .dropzone.dropzone-queue .dropzone-item .dropzone-toolbar .dropzone-start {
+                height: 25px;
+                width: 25px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: color .2s ease, background-color .2s ease;
+            }
+
+            .dropzone.dropzone-queue .dropzone-item .dropzone-progress {
+                width: 15%;
             }
         </style>
     @endsection
@@ -110,7 +183,7 @@
 //        @endphp
 
         <input type="hidden" id="user_name" value="{{auth()->user()->first_name.' '.auth()->user()->last_name}}"/>
-        <input type="hidden" id="seller" value="{{$conversation_id}}" />
+        <input type="hidden" id="seller" value="{{$conversation_id}}"/>
         <div class="container p-0">
             <h1 class="h3 mb-3">Messages</h1>
             <div class="card">
@@ -125,7 +198,9 @@
                             </div>
                         </div>
                         @foreach($side_info as $info)
-                            <a href="#" class="list-group-item list-group-item-action border-0 filterDiscussions all unread single active"  data-toggle="list" role="tab" data-id="{{$info->conversation_id}}">
+                            <a href="#"
+                               class="list-group-item list-group-item-action border-0 filterDiscussions all unread single active"
+                               data-toggle="list" role="tab" data-id="{{$info->conversation_id}}">
                                 <div class="badge bg-success float-right">
                                     <span>{{$info->cnt > 0 ? $info->cnt : '' }}</span>
                                 </div>
@@ -151,8 +226,10 @@
                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
-                                    <img  src="{{users_name($conversation_id)->first()->uploads->getImageOptimizedFullName(100,100)}}" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar"
-                                         class="rounded-circle mr-1"  width="40" height="40">
+                                    <img
+                                        src="{{users_name($conversation_id)->first()->uploads->getImageOptimizedFullName(100,100)}}"
+                                        data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar"
+                                        class="rounded-circle mr-1" width="40" height="40">
                                 </div>
 
                                 <div class="flex-grow-1 px-2">
@@ -204,9 +281,12 @@
                                                     @if(Auth::id() == $content->user_id)
                                                         <div class="chat-message-right pb-4">
                                                             <div class="ml-10px">
-                                                                <img  src="{{Auth::user()->uploads->getImageOptimizedFullName(100,100)}}"
-                                                                      class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                                                <div class="text-muted small text-nowrap mt-2">{{date('g:i a',strtotime($content->updated_at))}}</div>
+                                                                <img
+                                                                    src="{{Auth::user()->uploads->getImageOptimizedFullName(100,100)}}"
+                                                                    class="rounded-circle mr-1" alt="Chris Wood"
+                                                                    width="40" height="40">
+                                                                <div
+                                                                    class="text-muted small text-nowrap mt-2">{{date('g:i a',strtotime($content->updated_at))}}</div>
                                                             </div>
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                                                 <div class="font-weight-bold mb-1">You</div>
@@ -216,23 +296,29 @@
                                                     @else
                                                         <div class="chat-message-left pb-4">
                                                             <div class="mr-10px">
-                                                                <img src="{{users_name($info->conversation_id)[0]->uploads->getImageOptimizedFullName(100,100)}}"
-                                                                     class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                                                <div class="text-muted small text-nowrap mt-2">{{date('g:i A',strtotime($content->updated_at))}}</div>
+                                                                <img
+                                                                    src="{{users_name($info->conversation_id)[0]->uploads->getImageOptimizedFullName(100,100)}}"
+                                                                    class="rounded-circle mr-1" alt="Sharon Lessman"
+                                                                    width="40" height="40">
+                                                                <div
+                                                                    class="text-muted small text-nowrap mt-2">{{date('g:i A',strtotime($content->updated_at))}}</div>
                                                             </div>
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                                <div class="font-weight-bold mb-1">{{users_name($content->conversation_id)->first()->first_name}} {{users_name($content->conversation_id)->first()->last_name}}</div>
+                                                                <div
+                                                                    class="font-weight-bold mb-1">{{users_name($content->conversation_id)->first()->first_name}} {{users_name($content->conversation_id)->first()->last_name}}</div>
                                                                 {{$content->message}}
                                                             </div>
                                                         </div>
                                                     @endif
                                                 @endif
                                             @endforeach
+
+                                            <div id="media-upload-previews">
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-
 
                             </div>
                         </div>
@@ -240,14 +326,61 @@
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <div class="position-relative w-100">
                                 <div class="input-group">
-                                    <input form="uploadFileForm" type="text" id="chat_input" class="form-control" class="form-control"
-                                           placeholder="Start typing for reply...">
-                                    <button class="btn btn-primary">Send</button>
-                                    <button type="button" class="btn uploadFile">
-                                        <i class="fa fa-link"
-                                           aria-hidden="true"></i>
-                                    </button>
+
+                                    <div class="dropzone dropzone-queue mb-2" id="kt_dropzonejs_example_3">
+                                        <!--begin::Controls-->
+
+                                        <div class="dropzone-items wm-200px">
+                                            <div class="dropzone-item" style="display:none">
+                                                <!--begin::File-->
+                                                <div class="dropzone-file">
+                                                    <div class="dropzone-filename" title="some_image_file_name.jpg">
+                                                        <span data-dz-name>some_image_file_name.jpg</span>
+                                                        <strong>(<span data-dz-size>340kb</span>)</strong>
+                                                    </div>
+
+                                                    <div class="dropzone-error" data-dz-errormessage></div>
+                                                </div>
+                                                <!--end::File-->
+
+                                                <!--begin::Progress-->
+                                                <div class="dropzone-progress">
+                                                    <div class="progress">
+                                                        <div
+                                                            class="progress-bar bg-primary"
+                                                            role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                                            aria-valuenow="0" data-dz-uploadprogress>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="dropzone-toolbar">
+                                                    <span class="dropzone-delete" data-dz-remove><i
+                                                            class="bi bi-x fs-1"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropzone-panel mb-lg-0 mb-2">
+                                            <input form="uploadFileForm" type="text" id="chat_input"
+                                                   class="form-control" class="form-control"
+                                                   placeholder="Start typing for reply...">
+                                            <button class="btn btn-primary">Send</button>
+                                            <button type="button" class="btn dropzone-select uploadFile">
+                                                <i class="fa fa-link"
+                                                   aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
                                 </div>
+                                {{--                                <div class="input-group">--}}
+                                {{--                                    <input form="uploadFileForm" type="text" id="chat_input" class="form-control" class="form-control"--}}
+                                {{--                                           placeholder="Start typing for reply...">--}}
+                                {{--                                    <button class="btn btn-primary">Send</button>--}}
+                                {{--                                    <button type="button" class="btn uploadFile">--}}
+                                {{--                                        <i class="fa fa-link"--}}
+                                {{--                                           aria-hidden="true"></i>--}}
+                                {{--                                    </button>--}}
+                                {{--                                </div>--}}
                             </div>
 
                         </div>
@@ -256,6 +389,9 @@
             </div>
         </div>
 
+        <!--begin::Form-->
+
+        <!--end::Form-->
         <div class="container">
 
             @section('js')
@@ -279,16 +415,13 @@
                     })
 
                     $('document').ready(function () {
-                        $('.uploadFile').click(function (){
-                            document.getElementById('fileUpload').click();
-                        });
 
                         $("#content").animate({scrollTop: $('#content').prop("scrollHeight")}, 10); // Scroll the chat output div
 
-                        $('.filterDiscussions').click(function(){
+                        $('.filterDiscussions').click(function () {
 
                             client_id = $(this).attr('data-id');
-                            $(location).attr('href',`{{env('APP_URL')}}/chat/${client_id}`);
+                            $(location).attr('href', `{{env('APP_URL')}}/chat/${client_id}`);
                             // windows.location.href(`http://localhost/jewelrycg/public/chat/${client_id}`);
                             // $.ajax({
                             //     type: 'GET',
@@ -325,31 +458,37 @@
                             // });
                         })
                     });
+
                     function formatAMPM(date) {
                         var hours = date.getHours();
                         var minutes = date.getMinutes();
                         var ampm = hours >= 12 ? 'pm' : 'am';
                         hours = hours % 12;
                         hours = hours ? hours : 12; // the hour '0' should be '12'
-                        minutes = minutes < 10 ? '0'+minutes : minutes;
+                        minutes = minutes < 10 ? '0' + minutes : minutes;
                         var strTime = hours + ':' + minutes + ' ' + ampm;
                         return strTime;
                     }
+
                     function getDateFormat() {
                         return formatAMPM(new Date);
+                    }
+
+                    function getMsgBy(message) {
+                        return JSON.stringify({
+                            'type': 'chat',
+                            'user_id': '{{auth()->id()}}',
+                            'user_name': '{{auth()->user()->first_name.' '.auth()->user()->last_name}}',
+                            'chat_msg': message,
+                            'conversation_id': client_id,
+                        })
                     }
 
                     // Bind onkeyup event after connection
                     $('#chat_input').on('keyup', function (e) {
                         if (e.keyCode === 13 && !e.shiftKey) {
                             let chat_msg = $(this).val();
-                            let msg = JSON.stringify({
-                                'type': 'chat',
-                                'user_id': '{{auth()->id()}}',
-                                'user_name': '{{auth()->user()->first_name.' '.auth()->user()->last_name}}',
-                                'chat_msg': chat_msg,
-                                'conversation_id' : client_id,
-                            })
+                            let msg = getMsgBy(chat_msg);
                             sendMessage(msg);
                             let content = `
                                     <div class="chat-message-right pb-4">
@@ -363,20 +502,22 @@
                                         ${chat_msg}
                                     </div>
                                 </div>
-`;                    $('#chat-content').append(content);
+`;
+                            $('#chat-content').append(content);
                             $(this).val('');
                             $(`#shortmsg_${client_id}`).text(chat_msg);
                             // $("#content").animate({ scrollTop: $("#content").height()+20  }, 1000);
                             $("#content").animate({scrollTop: $('#content').prop("scrollHeight")}, 10); // Scroll the chat output div
                         }
                     });
+
                     function sendMessage(msg) {
                         if (channel) {
                             console.log(channel);
                             console.log('clientid: ', client_id);
                             channel.publish('chat-' + client_id, msg);
 
-                            $.ajax({
+                            return $.ajax({
                                 type: 'POST',
                                 url: "{{ route('chat.message_log') }}",
                                 data: {
@@ -384,26 +525,26 @@
                                     "_token": '{{ csrf_token() }}'
                                 },
                                 dataType: "json",
-                                success: (result) => {
-
-                                },
-                                error: (resp) => {
+                            }).then(res => {
+                                return res
+                            })
+                                .catch((resp) => {
                                     var result = resp.responseJSON;
                                     if (result.errors && result.message) {
                                         alert(result.message);
                                         return;
                                     }
-                                }
-                            });
+                                });
                         }
                     }
+
                     function handleReceivedMessage(msg) {
                         const data = JSON.parse(msg.data);
 
-                        if(data.conversation_id == {{auth()->id()}}){
+                        if (data.conversation_id == {{auth()->id()}}) {
                             switch (data.type) {
                                 case 'chat':
-                                    const msg =  `<div class="chat-message-left pb-4">
+                                    const msg = `<div class="chat-message-left pb-4">
                                 <div>
                                     <img src="{{asset('assets/img/avatar.png')}}"
                                          class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
@@ -422,11 +563,147 @@
                                     $('#chat-content').append(data.msg);
                                     console.log("Received " + data.msg);
                                     break;
-                            }}
+                            }
+                        }
                     }
                 </script>
         </div>
     </section>
+
+    <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
+    <script>
+        Dropzone.autoDiscover = false;
+        // set the dropzone container id
+        const id = "#kt_dropzonejs_example_3";
+        const dropzone = document.querySelector(id);
+
+        // set the preview element template
+        var previewNode = dropzone.querySelector(".dropzone-item");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
+
+        var myDropzone = new Dropzone(id, { // Make the whole body a dropzone
+            method: 'post',
+            url: "{{ route('api_upload') }}",
+            dictDefaultMessage: "",
+            paramName: "file",
+            maxFiles: 13,
+            parallelUploads: 20,
+            maxFilesize: 5, // Max filesize in MB
+            previewTemplate: previewTemplate,
+            // acceptedFiles: "image/*",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            previewsContainer: id + " .dropzone-items", // Define the container to display the previews
+            clickable: id + " .dropzone-select" // Define the element that should be used as click trigger to select files.
+        });
+
+        myDropzone.on("addedfile", function (file) {
+
+            // Hookup the start button
+            const dropzoneItems = dropzone.querySelectorAll('.dropzone-item');
+            dropzoneItems.forEach(dropzoneItem => {
+                dropzoneItem.style.display = '';
+            });
+        });
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function (progress) {
+            const progressBars = dropzone.querySelectorAll('.progress-bar');
+            progressBars.forEach(progressBar => {
+                progressBar.style.width = progress + "%";
+            });
+        });
+
+        myDropzone.on("success", async function (file, responseText) {
+            let message = getMsgBy(`upload_ids:${responseText.id}`);
+            let res = await sendMessage(message)
+            if(res.result){
+                renderMessageAfterUploadFile(res)
+            }
+        })
+
+        myDropzone.on("thumbnail", function (file, dataUrl) {
+
+        });
+
+        myDropzone.on("sending", function (file) {
+            // Show the total progress bar when upload starts
+            const progressBars = dropzone.querySelectorAll('.progress-bar');
+            progressBars.forEach(progressBar => {
+                progressBar.style.opacity = "1";
+            });
+        });
+
+        // Hide the total progress bar when nothing"s uploading anymore
+        myDropzone.on("complete", function (progress, res) {
+            const progressBars = dropzone.querySelectorAll('.dz-complete');
+
+            setTimeout(function () {
+                progressBars.forEach(progressBar => {
+                    progressBar.querySelector('.progress-bar').style.opacity = "1";
+                    progressBar.querySelector('.progress').style.opacity = "100";
+                });
+            }, 300);
+
+        });
+
+
+        function renderMessageAfterUploadFile(res)
+        {
+
+            if(res.upload_file)
+            {
+              let user = res.user;
+                let file = res.file;
+                let msg = ` <div class="chat-message-right pb-4">
+                                    <div>
+                                        <img src="${userImageUrl}"
+                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                        <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                        <div class="font-weight-bold mb-1">You</div>
+
+                                  `
+                if (file.type == "image")
+                {
+                    msg+=`   <img src="${res.upload_file}" width="100" height="100" />`;
+                }else{
+                    msg+= `<p>${res.upload_file}</p>`
+                }
+                msg+=`  </div>
+                                </div>`;
+                $('#chat-content').append(msg); // Append the new message received
+                $("#content").animate({scrollTop: $('#content').prop("scrollHeight")}, 10); // Scroll the chat output div
+
+            }
+
+
+
+        }
+
+        // myDropzone.on("removedfile",function(file) {
+        //     $.ajax({
+        //         url: `/seller/file/destroy/${avatar.id}`,
+        //         type: 'POST',
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        //         },
+        //         success: function(result) {
+        //             var last = $("#avatar");
+        //             last.val("")
+        //             $(file.previewElement).remove();
+        //         },
+        //         error: function(error) {
+        //             return false;
+        //         }
+        //     });
+        // })
+
+    </script>
     @endsection
 </x-app-layout>
 

@@ -109,4 +109,9 @@ class User extends Authenticatable implements MustVerifyEmail
             return '-';
         }
     }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->uploads->getImageOptimizedFullName(100,100);
+    }
 }
