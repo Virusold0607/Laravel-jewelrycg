@@ -310,7 +310,7 @@
                                                                 <div class="font-weight-bold mb-1">You</div>
                                                                 @if(getChatMessage($content->message)["file"])
                                                                     <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
-                                                                     <a href="{{getChatMessage($content->message)["link_download"]}}"><i class="fa fa-download"></i></a>
+                                                                     <a   href="{{getChatMessage($content->message)["link_download"]}}" class="w-100 d-block"><i class="bi bi-download"></i></a>
                                                                 @else
                                                                 {{$content->message}}
                                                                 @endif
@@ -331,7 +331,7 @@
                                                                     class="font-weight-bold mb-1">{{users_name($content->conversation_id)->first()->first_name}} {{users_name($content->conversation_id)->first()->last_name}}</div>
                                                                 @if(getChatMessage($content->message)["file"])
                                                                     <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
-                                                                    <a href="{{getChatMessage($content->message)["link_download"]}}"><i class="fa fa-download"></i></a>
+                                                                    <a href="{{getChatMessage($content->message)["link_download"]}}" class="w-100 d-block"><i class="bi bi-download"></i></a>
                                                                 @else
                                                                     {{$content->message}}
                                                                 @endif
@@ -397,9 +397,9 @@
                                             <input form="uploadFileForm" type="text" id="chat_input"
                                                    class="form-control" class="form-control"
                                                    placeholder="Start typing for reply...">
-                                            <button class="btn btn-primary dropzone-upload">Send</button>
+                                            <button class="btn btn-primary dropzone-upload mx-2">Send</button>
 
-                                            <a class="dropzone-select btn btn-sm  me-2"><i class="fa fa-link"
+                                            <a class="dropzone-select btn btn-sm  btn-dark"><i class="fa fa-link"
                                                                                                       aria-hidden="true"></i></a>
                                             <a class="dropzone-upload btn btn-sm btn-light-primary me-2 d-none">Upload All</a>
                                             <a class="dropzone-remove-all btn btn-sm btn-light-primary d-none">Remove All</a>
@@ -609,7 +609,7 @@
                                     if(chatFileInfo.file)
                                     {
                                         msg+=`   <img src="${chatFileInfo.path}" width="100" height="100" />`;
-                                        msg+=`    <a href="${chatFileInfo.link_download}"><i class="fa fa-download"></i></a>`;
+                                        msg+=`    <a href="${chatFileInfo.link_download}" class="w-100 d-block"><i class="bi bi-download"></i></a>`;
                                     }else{
                                         msg +=`${data.chat_msg}`;
                                     }
@@ -765,7 +765,7 @@
                     msg+= `<p>${res.upload_file}</p>`
                 }
                 msg+=`
-                         <a href="${res.link_download}"><i class="fa fa-download"></i></a>
+                         <a href="${res.link_download}"class="w-100 d-block"><i class="bi bi-download"></i></a>
                          </div>
                                 </div>`;
                 $('#chat-content').append(msg); // Append the new message received
