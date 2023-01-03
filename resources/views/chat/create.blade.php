@@ -1,8 +1,6 @@
 <x-app-layout page-title="Messages">
     @section('css')
-        <link rel="stylesheet" href="{{ asset('assets/css/swipe.min.css') }}" data-hs-appearance="default" as="style" type="text/css">
         <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
-        <link rel="stylesheet" href="{{ asset('dropzone/css/dropzone.css') }}">
         <style>
             .dropzone {
                 border-radius: 25px;
@@ -139,7 +137,6 @@
                                     <div class="flex-grow-1 ml-3">
                                         {{users_name($info->conversation_id)[0]->first_name}} {{users_name($info->conversation_id)[0]->last_name}}
                                         <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-                                        <p id="shortmsg_{{$info->conversation_id}}">{{$info->message}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -241,38 +238,14 @@
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <div class="position-relative w-100">
                                 <div class="input-group">
-                                    <div class="card mb-4 p-0">
-                                        <div class="card-body">
-                                            <div class="col-md-6">
-                                                <!-- Card -->
-
-                                                <input type="hidden" name="avatar" class="avatar" id="avatar" value="">
-                                                <div>
-                                                    <div class="dropzone" id="avatar_dropzone"></div>
-                                                </div>
-
-                                                <!-- End Card -->
-                                            </div>
-                                        </div>
-                                    </div>
                                     <input form="uploadFileForm" type="text" id="chat_input" class="form-control" class="form-control"
                                            placeholder="Start typing for reply...">
-                                    <a class="btn emoticons" style="padding-top:18px;"><i class="fas fa-smile"
-                                                                                          aria-hidden="false"></i></a>
-                                    <button type="button" class="btn send"><i class="fa fa-paper-plane"
-                                                                              aria-hidden="true"></i></button>
-                                    <button type="button" class="btn uploadFile">
-                                        <i class="fa fa-link"
-                                           aria-hidden="true"></i>
-                                    </button>
 
+                                    <button class="btn btn-primary">Send</button>
                                 </div>
                             </div>
 
                         </div>
-                        <form action="" id="uploadFileForm" enctype="multipart/form-data">
-                            <input type="file" name="file" id="fileUpload" accept="image/*," multiple style="display:none" />
-                        </form>
                     </div>
                 </div>
             </div>
@@ -444,63 +417,6 @@
                                     break;
                             }}
                     }
-                </script>
-                <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
-                <script>
-                    Dropzone.autoDiscover = false;
-                    var avatar = {!! json_encode(auth()->user()->uploads) !!}
-                        var avatarDropzone;
-                    $(document).ready(function() {
-                        $("#avatar_dropzone").dropzone({
-                            method:'post',
-                            url: "{{ route('seller.file.thumb') }}",
-                            dictDefaultMessage: "Select photos",
-                            paramName: "file",
-                            maxFilesize: 2,
-                            maxFiles: 1,
-                            clickable: true,
-                            addRemoveLinks: true,
-                            acceptedFiles: "image/*",
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            },
-                            init: function () {
-                                avatarDropzone = this;
-
-                                if(avatar.id) {
-                                    var mockFile = { name: avatar.file_original_name + "." + avatar.extension, size: avatar.file_size };
-
-                                    avatarDropzone.emit("addedfile", mockFile);
-                                    avatarDropzone.emit("thumbnail", mockFile, `{{asset("/uploads/all")}}/${avatar.file_name}`);
-                                    avatarDropzone.emit("complete", mockFile);
-                                }
-                            },
-                            success: (file, response) => {
-                                var last = $("#avatar");
-
-                                last.val(response.id)
-                                avatar = response;
-                                // ONLY DO THIS IF YOU KNOW WHAT YOU'RE DOING!
-                            },
-                            removedfile: function(file) {
-                                $.ajax({
-                                    url: `/seller/file/destroy/${avatar.id}`,
-                                    type: 'POST',
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                    },
-                                    success: function(result) {
-                                        var last = $("#avatar");
-                                        last.val("")
-                                        $(file.previewElement).remove();
-                                    },
-                                    error: function(error) {
-                                        return false;
-                                    }
-                                });
-                            }
-                        })
-                    });
                 </script>
         </div>
     </section>
