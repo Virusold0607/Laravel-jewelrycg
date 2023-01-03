@@ -87,7 +87,6 @@ class ChatController extends Controller
         $side_info = DB::select(DB::raw($query));
         $chat_content = DB::select(DB::raw('SELECT * FROM `messages` WHERE (user_id='.$user_id.' AND conversation_id='.$conversation_id.') OR (user_id='.$conversation_id.' AND conversation_id='.$user_id.');'));
 
-
         return view('chat.create', compact('side_info','chat_content','conversation_id','user_id'));
     }
 
@@ -112,10 +111,33 @@ class ChatController extends Controller
             'message_log'  => $message_log,
             "upload_file" => $isUploadFile && $file ? $file->getFileFullPath() :'',
             "file" => $file,
+            "link_download" => $isUploadFile && $file ?  route('download_file',$file->id) : "",
             "user"=>[
                 "full_name" => $user->full_name,
                 'image_url' => $user->image_url
             ]
+        ]);
+    }
+
+    public function getChatInFormationBy(Request $request)
+    {
+
+        $file = Upload::find($request->file_id);
+        $user = User::find($request->user_id);
+        $conversation = User::find($request->conversation_id);
+
+        return response()->json([
+            "file" => $file,
+            "user"=>[
+                "full_name" => $user->full_name,
+                'image_url' => $user->image_url
+            ],
+            "conversation"=>[
+                "full_name" => $conversation->full_name,
+                'image_url' => $conversation->image_url
+            ],
+            "link_download" => $request->file_id ? route('download_file',$request->file_id) :"",
+            'path'=> $request->file_id ? $file->getFileFullPath() :""
         ]);
     }
 }

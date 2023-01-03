@@ -430,6 +430,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::post('/api-upload-file', [UploadController::class, 'apiUpload'])->name('api_upload');
+    Route::get('/download-upload-file/{id}', [UploadController::class, 'downloadFile'])->name('download_file');
 });
 
 //services
@@ -573,6 +574,7 @@ Route::group(['controller' => CartController::class], function () {
 
      Route::get('/chat/{conversation_id}',[ChatController::class, 'create_chat_room'])->name('create_chat_room');
      Route::post('/chat/message_log',[ChatController::class, 'message_log'])->name('chat.message_log');
+     Route::post('/chat/information',[ChatController::class, 'getChatInFormationBy'])->name('chat.information');
 
     });
 });

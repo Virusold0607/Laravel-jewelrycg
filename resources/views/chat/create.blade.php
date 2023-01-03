@@ -180,6 +180,24 @@
             function users_name($id){
                 return \App\Models\User::where('id',$id)->get();
             }
+
+             function getChatMessage($message){
+                $chatMessArr = explode(":",$message);
+                $isUploadFile = isset($chatMessArr[0]) && $chatMessArr[0] == "upload_ids" && isset($chatMessArr[1]);
+                $file = "";
+                if ($isUploadFile)
+                {
+                    $file = \App\Models\Upload::find($chatMessArr[1]);
+                }
+
+                return [
+                        "upload_file" => $isUploadFile && $file ? $file->getFileFullPath() :'',
+                        "file" => $file,
+                        "link_download" => $isUploadFile && $file ?  route('download_file',$file->id) : "",
+                ];
+            }
+
+
 //        @endphp
 
         <input type="hidden" id="user_name" value="{{auth()->user()->first_name.' '.auth()->user()->last_name}}"/>
@@ -290,7 +308,12 @@
                                                             </div>
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                                                 <div class="font-weight-bold mb-1">You</div>
+                                                                @if(getChatMessage($content->message)["file"])
+                                                                    <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
+                                                                     <a href="{{getChatMessage($content->message)["link_download"]}}"><i class="fa fa-download"></i></a>
+                                                                @else
                                                                 {{$content->message}}
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     @else
@@ -306,7 +329,12 @@
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
                                                                 <div
                                                                     class="font-weight-bold mb-1">{{users_name($content->conversation_id)->first()->first_name}} {{users_name($content->conversation_id)->first()->last_name}}</div>
-                                                                {{$content->message}}
+                                                                @if(getChatMessage($content->message)["file"])
+                                                                    <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
+                                                                    <a href="{{getChatMessage($content->message)["link_download"]}}"><i class="fa fa-download"></i></a>
+                                                                @else
+                                                                    {{$content->message}}
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     @endif
@@ -323,13 +351,15 @@
                             </div>
                         </div>
 
+
+
+                        <!--begin::Form-->
+                        <!--end::Form-->
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <div class="position-relative w-100">
                                 <div class="input-group">
-
-                                    <div class="dropzone dropzone-queue mb-2" id="kt_dropzonejs_example_3">
+                                    <div class="dropzone dropzone-queue mb-2" id="kt_dropzonejs_example_2">
                                         <!--begin::Controls-->
-
                                         <div class="dropzone-items wm-200px">
                                             <div class="dropzone-item" style="display:none">
                                                 <!--begin::File-->
@@ -348,39 +378,35 @@
                                                     <div class="progress">
                                                         <div
                                                             class="progress-bar bg-primary"
-                                                            role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                                                            aria-valuenow="0" data-dz-uploadprogress>
+                                                            role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-dz-uploadprogress>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::Progress-->
+
+                                                <!--begin::Toolbar-->
                                                 <div class="dropzone-toolbar">
-                                                    <span class="dropzone-delete" data-dz-remove><i
-                                                            class="bi bi-x fs-1"></i></span>
+                                                    <span class="dropzone-start"><i class="bi bi-play-fill fs-3"></i></span>
+                                                    <span class="dropzone-cancel" data-dz-remove style="display: none;"><i class="bi bi-x fs-3"></i></span>
+                                                    <span class="dropzone-delete" data-dz-remove><i class="bi bi-x fs-1"></i></span>
                                                 </div>
+                                                <!--end::Toolbar-->
                                             </div>
                                         </div>
                                         <div class="dropzone-panel mb-lg-0 mb-2">
                                             <input form="uploadFileForm" type="text" id="chat_input"
                                                    class="form-control" class="form-control"
                                                    placeholder="Start typing for reply...">
-                                            <button class="btn btn-primary">Send</button>
-                                            <button type="button" class="btn dropzone-select uploadFile">
-                                                <i class="fa fa-link"
-                                                   aria-hidden="true"></i>
-                                            </button>
+                                            <button class="btn btn-primary dropzone-upload">Send</button>
+
+                                            <a class="dropzone-select btn btn-sm  me-2"><i class="fa fa-link"
+                                                                                                      aria-hidden="true"></i></a>
+                                            <a class="dropzone-upload btn btn-sm btn-light-primary me-2 d-none">Upload All</a>
+                                            <a class="dropzone-remove-all btn btn-sm btn-light-primary d-none">Remove All</a>
                                         </div>
                                     </div>
-
                                 </div>
-                                {{--                                <div class="input-group">--}}
-                                {{--                                    <input form="uploadFileForm" type="text" id="chat_input" class="form-control" class="form-control"--}}
-                                {{--                                           placeholder="Start typing for reply...">--}}
-                                {{--                                    <button class="btn btn-primary">Send</button>--}}
-                                {{--                                    <button type="button" class="btn uploadFile">--}}
-                                {{--                                        <i class="fa fa-link"--}}
-                                {{--                                           aria-hidden="true"></i>--}}
-                                {{--                                    </button>--}}
-                                {{--                                </div>--}}
+
                             </div>
 
                         </div>
@@ -389,9 +415,7 @@
             </div>
         </div>
 
-        <!--begin::Form-->
 
-        <!--end::Form-->
         <div class="container">
 
             @section('js')
@@ -538,24 +562,60 @@
                         }
                     }
 
-                    function handleReceivedMessage(msg) {
-                        const data = JSON.parse(msg.data);
+                    function getChatFileInformation(file_id, user_id, conversation_id) {
+                          return $.ajax({
+                            type: 'POST',
+                            url: "{{ route('chat.information') }}",
+                            data: {
+                                file_id,
+                                user_id,
+                                conversation_id,
+                                "_token": '{{ csrf_token() }}'
+                            },
+                            dataType: "json",
+                        }).then(res => {
+                            return res
+                        })
+                            .catch((resp) => {
+                                var result = resp.responseJSON;
+                                if (result.errors && result.message) {
+                                    alert(result.message);
+                                    return;
+                                }
+                            });
+                    }
 
+                    async function handleReceivedMessage(msg) {
+                        const data = JSON.parse(msg.data);
+                        let msgArr = data.chat_msg.split(':');
+                        console.log(data)
                         if (data.conversation_id == {{auth()->id()}}) {
+                            let isFile = msgArr?.[0] == "upload_ids" && msgArr?.[1];
+
                             switch (data.type) {
                                 case 'chat':
-                                    const msg = `<div class="chat-message-left pb-4">
+                                    let chatFileInfo = await getChatFileInformation( msgArr?.[1], data.user_id, data.conversation_id)
+
+                                    let conversation = chatFileInfo.conversation;
+                                    let msg = `<div class="chat-message-left pb-4">
                                 <div>
-                                    <img src="{{asset('assets/img/avatar.png')}}"
+                                    <img src="${conversation.image_url}"
                                          class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                         <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
                                 </div>
                                 <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                    <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                    ${data.chat_msg}
-                                </div>
-                            </div>
+                                    <div class="font-weight-bold mb-1">${conversation.full_name}</div>
                         `;
+                                    if(chatFileInfo.file)
+                                    {
+                                        msg+=`   <img src="${chatFileInfo.path}" width="100" height="100" />`;
+                                        msg+=`    <a href="${chatFileInfo.link_download}"><i class="fa fa-download"></i></a>`;
+                                    }else{
+                                        msg +=`${data.chat_msg}`;
+                                    }
+                                    msg += `  </div>
+                                        </div>`
+
                                     $('#chat-content').append(msg); // Append the new message received
                                     $("#content").animate({scrollTop: $('#content').prop("scrollHeight")}, 10); // Scroll the chat output div
                                     break;
@@ -573,8 +633,9 @@
     <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
     <script>
         Dropzone.autoDiscover = false;
+
         // set the dropzone container id
-        const id = "#kt_dropzonejs_example_3";
+        const id = "#kt_dropzonejs_example_2";
         const dropzone = document.querySelector(id);
 
         // set the preview element template
@@ -590,23 +651,26 @@
             paramName: "file",
             maxFiles: 13,
             parallelUploads: 20,
-            maxFilesize: 5, // Max filesize in MB
-            previewTemplate: previewTemplate,
-            // acceptedFiles: "image/*",
+            maxFilesize: 5, // Max filesize'
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
+            previewTemplate: previewTemplate,
+            autoQueue: false, // Make sure the files aren't queued until manually added
             previewsContainer: id + " .dropzone-items", // Define the container to display the previews
-            clickable: id + " .dropzone-select" // Define the element that should be used as click trigger to select files.
+            clickable: id + " .dropzone-select", // Define the element that should be used as click trigger to select files.
+            acceptedFiles: ".jpeg,.jpg,.png,.gif"
         });
 
         myDropzone.on("addedfile", function (file) {
-
             // Hookup the start button
+            file.previewElement.querySelector(id + " .dropzone-start").onclick = function () { myDropzone.enqueueFile(file); };
             const dropzoneItems = dropzone.querySelectorAll('.dropzone-item');
             dropzoneItems.forEach(dropzoneItem => {
                 dropzoneItem.style.display = '';
             });
+            dropzone.querySelector('.dropzone-upload').style.display = "inline-block";
+            dropzone.querySelector('.dropzone-remove-all').style.display = "inline-block";
         });
 
         // Update the total progress bar
@@ -617,6 +681,58 @@
             });
         });
 
+        myDropzone.on("sending", function (file) {
+            // Show the total progress bar when upload starts
+            const progressBars = dropzone.querySelectorAll('.progress-bar');
+            progressBars.forEach(progressBar => {
+                progressBar.style.opacity = "1";
+            });
+            // And disable the start button
+            file.previewElement.querySelector(id + " .dropzone-start").setAttribute("disabled", "disabled");
+        });
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("complete", function (progress) {
+            const progressBars = dropzone.querySelectorAll('.dz-complete');
+
+            setTimeout(function () {
+                progressBars.forEach(progressBar => {
+                    progressBar.querySelector('.progress-bar').style.opacity = "1";
+                    progressBar.querySelector('.progress').style.opacity = "1";
+                    progressBar.querySelector('.dropzone-start').style.opacity = "100";
+                });
+            }, 300);
+        });
+
+        // Setup the buttons for all transfers
+        dropzone.querySelector(".dropzone-upload").addEventListener('click', function () {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+        });
+
+        // Setup the button for remove all files
+        dropzone.querySelector(".dropzone-remove-all").addEventListener('click', function () {
+            dropzone.querySelector('.dropzone-upload').style.display = "block";
+            dropzone.querySelector('.dropzone-remove-all').style.display = "none";
+            myDropzone.removeAllFiles(true);
+        });
+
+        // On all files completed upload
+        myDropzone.on("queuecomplete", function (progress) {
+            const uploadIcons = dropzone.querySelectorAll('.dropzone-upload');
+            uploadIcons.forEach(uploadIcon => {
+                uploadIcon.style.display = "block";
+            });
+        });
+
+        // On all files removed
+        myDropzone.on("removedfile", function (file) {
+            if (myDropzone.files.length < 1) {
+                dropzone.querySelector('.dropzone-upload').style.display = "block";
+                dropzone.querySelector('.dropzone-remove-all').style.display = "none";
+            }
+        });
+
+
         myDropzone.on("success", async function (file, responseText) {
             let message = getMsgBy(`upload_ids:${responseText.id}`);
             let res = await sendMessage(message)
@@ -624,31 +740,6 @@
                 renderMessageAfterUploadFile(res)
             }
         })
-
-        myDropzone.on("thumbnail", function (file, dataUrl) {
-
-        });
-
-        myDropzone.on("sending", function (file) {
-            // Show the total progress bar when upload starts
-            const progressBars = dropzone.querySelectorAll('.progress-bar');
-            progressBars.forEach(progressBar => {
-                progressBar.style.opacity = "1";
-            });
-        });
-
-        // Hide the total progress bar when nothing"s uploading anymore
-        myDropzone.on("complete", function (progress, res) {
-            const progressBars = dropzone.querySelectorAll('.dz-complete');
-
-            setTimeout(function () {
-                progressBars.forEach(progressBar => {
-                    progressBar.querySelector('.progress-bar').style.opacity = "1";
-                    progressBar.querySelector('.progress').style.opacity = "100";
-                });
-            }, 300);
-
-        });
 
 
         function renderMessageAfterUploadFile(res)
@@ -666,7 +757,6 @@
                                     </div>
                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                         <div class="font-weight-bold mb-1">You</div>
-
                                   `
                 if (file.type == "image")
                 {
@@ -674,15 +764,14 @@
                 }else{
                     msg+= `<p>${res.upload_file}</p>`
                 }
-                msg+=`  </div>
+                msg+=`
+                         <a href="${res.link_download}"><i class="fa fa-download"></i></a>
+                         </div>
                                 </div>`;
                 $('#chat-content').append(msg); // Append the new message received
                 $("#content").animate({scrollTop: $('#content').prop("scrollHeight")}, 10); // Scroll the chat output div
 
             }
-
-
-
         }
 
         // myDropzone.on("removedfile",function(file) {
