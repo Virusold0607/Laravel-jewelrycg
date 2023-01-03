@@ -203,7 +203,7 @@
                                                 @if($content->message != null)
                                                     @if(Auth::id() == $content->user_id)
                                                         <div class="chat-message-right pb-4">
-                                                            <div>
+                                                            <div class="ml-10px">
                                                                 <img  src="{{Auth::user()->uploads->getImageOptimizedFullName(100,100)}}"
                                                                       class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
                                                                 <div class="text-muted small text-nowrap mt-2">{{date('g:i a',strtotime($content->updated_at))}}</div>
@@ -215,7 +215,7 @@
                                                         </div>
                                                     @else
                                                         <div class="chat-message-left pb-4">
-                                                            <div>
+                                                            <div class="mr-10px">
                                                                 <img src="{{users_name($info->conversation_id)[0]->uploads->getImageOptimizedFullName(100,100)}}"
                                                                      class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                                                 <div class="text-muted small text-nowrap mt-2">{{date('g:i A',strtotime($content->updated_at))}}</div>
