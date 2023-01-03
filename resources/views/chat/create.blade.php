@@ -137,7 +137,6 @@
                                     <div class="flex-grow-1 ml-3">
                                         {{users_name($info->conversation_id)[0]->first_name}} {{users_name($info->conversation_id)[0]->last_name}}
                                         <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-                                        <p id="shortmsg_{{$info->conversation_id}}">{{$info->message}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -247,9 +246,6 @@
                             </div>
 
                         </div>
-                        <form action="" id="uploadFileForm" enctype="multipart/form-data">
-                            <input type="file" name="file" id="fileUpload" accept="image/*," multiple style="display:none" />
-                        </form>
                     </div>
                 </div>
             </div>
