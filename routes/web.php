@@ -623,6 +623,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
+// contact
+
+Route::group(['prefix' => 'contactus', 'name' => 'contactus.', 'controller' => \App\Http\Controllers\ContactController::class], function () {
+    Route::get('/', 'index')->name('index');
+});
+
 // track order page
 Route::get('trackorder', [OrderController::class, 'trackOrder'])->name('track.order');
 Route::get('seller/signup', [SellerRegisterController::class, 'create'])->name('seller.signup.create');
