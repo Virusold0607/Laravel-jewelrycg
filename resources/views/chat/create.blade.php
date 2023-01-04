@@ -408,7 +408,7 @@
 
                                                 <!--begin::Toolbar-->
                                                 <div class="dropzone-toolbar">
-                                                    <span class="dropzone-start"><i class="bi bi-play-fill fs-3"></i></span>
+                                                    <span class="dropzone-start"><i class="bi d-none bi-play-fill fs-3"></i></span>
                                                     <span class="dropzone-cancel" data-dz-remove style="display: none;"><i class="bi bi-x fs-3"></i></span>
                                                     <span class="dropzone-delete" data-dz-remove><i class="bi bi-x fs-1"></i></span>
                                                 </div>
@@ -417,7 +417,8 @@
                                         </div>
                                         <div class="dropzone-panel mb-lg-0 mb-2">
                                             <input form="uploadFileForm" type="text" id="chat_input"
-                                                   class="form-control" class="form-control"
+                                                   class="form-control"
+                                                   autocomplete="off"
                                                    placeholder="Start typing for reply...">
                                             <button class="btn btn-primary dropzone-upload mx-2">Send</button>
 
@@ -530,32 +531,42 @@
                         })
                     }
 
+                    $(document).on('click', '.dropzone-upload', function () {
+                        senChatMessageWith($('#chat_input').val())
+                    })
                     // Bind onkeyup event after connection
                     $('#chat_input').on('keyup', function (e) {
                         if (e.keyCode === 13 && !e.shiftKey) {
                             let chat_msg = $(this).val();
-                            let msg = getMsgBy(chat_msg);
+                            senChatMessageWith(chat_msg);
+                        }
+                    });
+
+                    function senChatMessageWith(message) {
+                        if(message)
+                        {
+                            let msg = getMsgBy(message);
                             sendMessage(msg);
                             let content = `
                                     <div class="chat-message-right pb-4">
-                                    <div>
+                                    <div class="ml-10px">
                                         <img src="${userImageUrl}"
                                              class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
                                         <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
                                     </div>
                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                         <div class="font-weight-bold mb-1">You</div>
-                                        ${chat_msg}
+                                        ${message}
                                     </div>
                                 </div>
 `;
                             $('#chat-content').append(content);
-                            $(this).val('');
-                            $(`#shortmsg_${client_id}`).text(chat_msg);
+                            $('#chat_input').val('');
                             // $("#content").animate({ scrollTop: $("#content").height()+20  }, 1000);
                             $(".chat-messages").animate({scrollTop: $('.chat-messages').prop("scrollHeight")}, 10); // Scroll the chat output div
+
                         }
-                    });
+                    }
 
                     function sendMessage(msg) {
                         if (channel) {
@@ -620,7 +631,7 @@
 
                                     let conversation = chatFileInfo.conversation;
                                     let msg = `<div class="chat-message-left pb-4">
-                                <div>
+                                <div class="mr-10px">
                                     <img src="${conversation.image_url}"
                                          class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                         <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
@@ -781,7 +792,7 @@
               let user = res.user;
                 let file = res.file;
                 let msg = ` <div class="chat-message-right pb-4">
-                                    <div>
+                                    <div class="ml-10px">
                                         <img src="${userImageUrl}"
                                              class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
                                         <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
