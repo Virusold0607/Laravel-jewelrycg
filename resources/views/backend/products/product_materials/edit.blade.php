@@ -395,7 +395,7 @@
       let add_metal_product_materials = function () {
         let metal_attribute_values = $('#metal_attribute_values_select').val().length ? $('#metal_attribute_values_select').val() : [0]
         let metal_material_type_value = $('#metal_material_type_select').val();
-        debugger
+        // debugger
         for (let i = 0; i < metal_attribute_values.length; i++) {
           new_html = '';
           /* if product_material already existed */
