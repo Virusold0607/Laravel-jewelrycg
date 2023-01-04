@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <div class="card m-0">
+                <div class="card mb-4">
                     <div class="card-body">
                         <div class="settings-side-nav">
                             <a class="nav-link w-100 d-block mb-2 {{ $tab == "account" ? "active" : "" }}" href="/user/{{Auth::id()}}?tab=account">Account</a>
