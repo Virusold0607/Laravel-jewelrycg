@@ -86,7 +86,7 @@ class ChatController extends Controller
         $is_created_chat_room = Message::where(['user_id' => $user_id, 'conversation_id' => $conversation_id])
                                         ->groupBy('user_id')
                                         ->count();
-        $this->message->seenAll($user_id,$conversation_id);
+        $this->message->seenAll($conversation_id,$user_id);
 
         if($is_created_chat_room == 0){
             $message = new Message;
@@ -95,31 +95,20 @@ class ChatController extends Controller
             $message->save();
         }
 
+        $query = '
+SELECT `conversation_id` as user_id,"0" as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and conversation_id!= '.$user_id.' GROUP By `conversation_id`
+UNION ALL
+SELECT a.user_id,b.cnt FROM
+            (SELECT `user_id` FROM `messages` WHERE `conversation_id` = '.$user_id.' and user_id != '.$user_id.'
+GROUP BY (user_id))as a
+            LEFT JOIN
+            (SELECT `user_id`, COUNT(*)
+            as cnt FROM `messages` WHERE `conversation_id` = '.$user_id.' and user_id != '.$user_id.'
 
+             and is_seen=0  GROUP BY (user_id)
+            )as b
+            on a.user_id = b.user_id';
 
-//      $query='SELECT a.conversation_id,b.cnt FROM
-//            (SELECT `conversation_id` FROM `messages` WHERE `user_id` = '.$user_id.'  GROUP BY (conversation_id))as a
-//            LEFT JOIN
-//            (SELECT `conversation_id`, COUNT(*) as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and is_seen=0  GROUP BY (conversation_id)
-//            )as b
-//            on a.conversation_id = b.conversation_id';
-//        SELECT `user_id` FROM `messages` WHERE `conversation_id` = 7 and user_id!=7 GROUP By `user_id`
-//        $query='SELECT a.conversation_id,b.cnt FROM
-//            (SELECT `conversation_id` FROM `messages` WHERE `user_id` = '.$user_id.'  GROUP BY (conversation_id))as a
-//            LEFT JOIN
-//            (SELECT `conversation_id`, COUNT(*) as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and is_seen=0  GROUP BY (conversation_id)
-//            )as b
-//            on a.conversation_id = b.conversation_id';
-
-        $query = 'SELECT
-a.user_id,b.cnt
-from
-(SELECT `user_id` FROM `messages` WHERE `conversation_id` =  '.$user_id.' and user_id!='.$user_id.' GROUP By `user_id`) as a
-INNER JOIN
-(SELECT `user_id` ,COUNT(*) as cnt FROM `messages` WHERE `conversation_id` = '.$user_id.' and user_id!='.$user_id.'
-and  is_seen=0 GROUP By `user_id`) as b
-on a.user_id = b.user_id
-';
 
         $side_info = DB::select(DB::raw($query));
         $chat_content = DB::select(DB::raw('SELECT * FROM `messages` WHERE (user_id='.$user_id.' AND conversation_id='.$conversation_id.') OR (user_id='.$conversation_id.' AND conversation_id='.$user_id.'); '));
