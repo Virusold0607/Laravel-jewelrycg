@@ -94,7 +94,8 @@ class ChatController extends Controller
         }
 
         $this->message->seenAll($user_id,$conversation_id);
-        $query='SELECT a.conversation_id,b.cnt FROM
+
+      $query='SELECT a.conversation_id,b.cnt FROM
             (SELECT `conversation_id` FROM `messages` WHERE `user_id` = '.$user_id.'  GROUP BY (conversation_id))as a
             LEFT JOIN
             (SELECT `conversation_id`, COUNT(*) as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and is_seen=0  GROUP BY (conversation_id)
