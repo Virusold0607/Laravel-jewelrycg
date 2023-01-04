@@ -225,25 +225,25 @@
                         </div>
                         @foreach($side_info as $info)
                             <a href="#"
-                               class="list-group-item list-group-item-action border-0 filterDiscussions all unread single {{$conversation_id== $info->conversation_id ?"active":""}}"
-                               data-toggle="list" role="tab" data-id="{{$info->conversation_id}}">
+                               class="list-group-item list-group-item-action border-0 filterDiscussions all unread single {{$conversation_id== $info->user_id ?"active":""}}"
+                               data-toggle="list" role="tab" data-id="{{$info->user_id}}">
                                 <div class="badge bg-success float-right">
                                     <span>{{$info->cnt > 0 ? $info->cnt :  0}}</span>
                                 </div>
                                 <div class="d-flex align-items-start">
                                     <img
-                                        src="{{optional(optional(users_name($info->conversation_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
+                                        src="{{optional(optional(users_name($info->user_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
                                         data-toggle="tooltip" data-placement="top" title="Janette"
                                         alt="avatar"
                                         class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                     <div class="flex-grow-1 ml-10px">
-                                        {{optional(users_name($info->conversation_id)->first())->full_name}}
+                                        {{optional(users_name($info->user_id)->first())->full_name}}
                                         <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
                                     </div>
                                 </div>
                             </a>
                             <input type="hidden" name="client_id" id="client_id"
-                                   value="{{$info->conversation_id}}"/>
+                                   value="{{$info->user_id}}"/>
                         @endforeach
                         <hr class="d-block d-lg-none mt-1 mb-0">
                     </div>
