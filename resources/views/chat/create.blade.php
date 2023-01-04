@@ -4,6 +4,14 @@
     @section('css')
         <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
         <style>
+            .text-overflow-1{
+                display: -webkit-box !important;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                width: 100%;
+            }
             .dropzone {
                 border-radius: 25px;
                 overflow: hidden;
@@ -224,12 +232,12 @@
                                 </div>
                                 <div class="d-flex align-items-start">
                                     <img
-                                        src="{{users_name($info->conversation_id)[0]->uploads->getImageOptimizedFullName(100,100)}}"
+                                        src="{{optional(optional(users_name($info->conversation_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
                                         data-toggle="tooltip" data-placement="top" title="Janette"
                                         alt="avatar"
                                         class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                     <div class="flex-grow-1 ml-10px">
-                                        {{users_name($info->conversation_id)[0]->first_name}} {{users_name($info->conversation_id)[0]->last_name}}
+                                        {{optional(users_name($info->conversation_id)->first())->full_name}}
                                         <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
                                     </div>
                                 </div>
@@ -245,13 +253,13 @@
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
                                     <img
-                                        src="{{users_name($conversation_id)->first()->uploads->getImageOptimizedFullName(100,100)}}"
+                                        src="{{optional(optional(users_name($conversation_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
                                         data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar"
                                         class="rounded-circle mr-1" width="40" height="40">
                                 </div>
 
                                 <div class="flex-grow-1 px-2">
-                                    <strong>{{users_name($conversation_id)->first()->first_name}} {{users_name($conversation_id)->first()->last_name}}</strong>
+                                    <strong>{{optional(users_name($conversation_id)->first())->full_name}}</strong>
                                     <div class="text-muted small"><em>Active now.</em></div>
 
                                 </div>
@@ -309,7 +317,14 @@
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                                                 <div class="font-weight-bold mb-1">You</div>
                                                                 @if(getChatMessage($content->message)["file"])
-                                                                    <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
+                                                                    @if(getChatMessage($content->message)["file"]->type =="image")
+                                                                        <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
+                                                                    @else
+                                                                        <p  class="text-overflow-1"
+                                                                            title="{{getChatMessage($content->message)["file"]->file_original_name.".".getChatMessage($content->message)["file"]->extension}}">
+                                                                            {{getChatMessage($content->message)["file"]->file_original_name.".".getChatMessage($content->message)["file"]->extension}}
+                                                                        </p>
+                                                                    @endif
                                                                      <a   href="{{getChatMessage($content->message)["link_download"]}}" class="w-100 d-block"><i class="bi bi-download"></i></a>
                                                                 @else
                                                                 {{$content->message}}
@@ -320,7 +335,7 @@
                                                         <div class="chat-message-left pb-4">
                                                             <div class="mr-10px">
                                                                 <img
-                                                                    src="{{users_name($info->conversation_id)[0]->uploads->getImageOptimizedFullName(100,100)}}"
+                                                                    src="{{optional(optional(users_name($info->conversation_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
                                                                     class="rounded-circle mr-1" alt="Sharon Lessman"
                                                                     width="40" height="40">
                                                                 <div
@@ -330,7 +345,14 @@
                                                                 <div
                                                                     class="font-weight-bold mb-1">{{users_name($content->conversation_id)->first()->first_name}} {{users_name($content->conversation_id)->first()->last_name}}</div>
                                                                 @if(getChatMessage($content->message)["file"])
-                                                                    <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
+                                                                    @if(getChatMessage($content->message)["file"]->type =="image")
+                                                                        <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
+                                                                    @else
+                                                                        <p  class="text-overflow-1"
+                                                                            title="{{getChatMessage($content->message)["file"]->file_original_name.".".getChatMessage($content->message)["file"]->extension}}">
+                                                                            {{getChatMessage($content->message)["file"]->file_original_name.".".getChatMessage($content->message)["file"]->extension}}
+                                                                        </p>
+                                                                    @endif
                                                                     <a href="{{getChatMessage($content->message)["link_download"]}}" class="w-100 d-block"><i class="bi bi-download"></i></a>
                                                                 @else
                                                                     {{$content->message}}
@@ -608,8 +630,18 @@
                         `;
                                     if(chatFileInfo.file)
                                     {
-                                        msg+=`   <img src="${chatFileInfo.path}" width="100" height="100" />`;
+                                        let file = chatFileInfo.file;
+                                        if (file.type == "image")
+                                        {
+                                            msg+=`   <img src="${chatFileInfo.path}" width="100" height="100" />`;
+                                        }else{
+                                            msg+= ` <p  class="text-overflow-1"
+                                                title="${file['file_original_name']}.${file['extension']}">
+                                            ${file['file_original_name']}.${file['extension']}</p>
+                                            `
+                                        }
                                         msg+=`    <a href="${chatFileInfo.link_download}" class="w-100 d-block"><i class="bi bi-download"></i></a>`;
+
                                     }else{
                                         msg +=`${data.chat_msg}`;
                                     }
@@ -659,7 +691,6 @@
             autoQueue: false, // Make sure the files aren't queued until manually added
             previewsContainer: id + " .dropzone-items", // Define the container to display the previews
             clickable: id + " .dropzone-select", // Define the element that should be used as click trigger to select files.
-            acceptedFiles: ".jpeg,.jpg,.png,.gif"
         });
 
         myDropzone.on("addedfile", function (file) {
@@ -762,7 +793,10 @@
                 {
                     msg+=`   <img src="${res.upload_file}" width="100" height="100" />`;
                 }else{
-                    msg+= `<p>${res.upload_file}</p>`
+                    msg+= ` <p  class="text-overflow-1"
+                        title="${file['file_original_name']}.${file['extension']}">
+                    ${file['file_original_name']}.${file['extension']}</p>
+                `
                 }
                 msg+=`
                          <a href="${res.link_download}"class="w-100 d-block"><i class="bi bi-download"></i></a>
