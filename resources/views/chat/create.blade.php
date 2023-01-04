@@ -443,6 +443,171 @@
 
             @section('js')
                 <script src="https://cdn.ably.com/lib/ably.min-1.js"></script>
+                <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
+                <script>
+                    Dropzone.autoDiscover = false;
+
+                    // set the dropzone container id
+                    const id = "#kt_dropzonejs_example_2";
+                    const dropzone = document.querySelector(id);
+
+                    // set the preview element template
+                    var previewNode = dropzone.querySelector(".dropzone-item");
+                    previewNode.id = "";
+                    var previewTemplate = previewNode.parentNode.innerHTML;
+                    previewNode.parentNode.removeChild(previewNode);
+
+                    var myDropzone = new Dropzone(id, { // Make the whole body a dropzone
+                        method: 'post',
+                        url: "{{ route('api_upload') }}",
+                        dictDefaultMessage: "",
+                        paramName: "file",
+                        maxFiles: 13,
+                        parallelUploads: 20,
+                        maxFilesize: 256, // Max filesize'
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                        },
+                        previewTemplate: previewTemplate,
+                        autoQueue: false, // Make sure the files aren't queued until manually added
+                        previewsContainer: id + " .dropzone-items", // Define the container to display the previews
+                        clickable: id + " .dropzone-select", // Define the element that should be used as click trigger to select files.
+                    });
+
+                    myDropzone.on("addedfile", function (file) {
+                        // Hookup the start button
+                        file.previewElement.querySelector(id + " .dropzone-start").onclick = function () { myDropzone.enqueueFile(file); };
+                        const dropzoneItems = dropzone.querySelectorAll('.dropzone-item');
+                        dropzoneItems.forEach(dropzoneItem => {
+                            dropzoneItem.style.display = '';
+                        });
+                        dropzone.querySelector('.dropzone-upload').style.display = "inline-block";
+                        dropzone.querySelector('.dropzone-remove-all').style.display = "inline-block";
+                    });
+
+                    // Update the total progress bar
+                    myDropzone.on("totaluploadprogress", function (progress) {
+                        const progressBars = dropzone.querySelectorAll('.progress-bar');
+                        progressBars.forEach(progressBar => {
+                            progressBar.style.width = progress + "%";
+                        });
+                    });
+
+                    myDropzone.on("sending", function (file) {
+                        // Show the total progress bar when upload starts
+                        const progressBars = dropzone.querySelectorAll('.progress-bar');
+                        progressBars.forEach(progressBar => {
+                            progressBar.style.opacity = "1";
+                        });
+                        // And disable the start button
+                        file.previewElement.querySelector(id + " .dropzone-start").setAttribute("disabled", "disabled");
+                    });
+
+                    // Hide the total progress bar when nothing's uploading anymore
+                    myDropzone.on("complete", function (progress) {
+                        const progressBars = dropzone.querySelectorAll('.dz-complete');
+
+                        setTimeout(function () {
+                            progressBars.forEach(progressBar => {
+                                progressBar.querySelector('.progress-bar').style.opacity = "1";
+                                progressBar.querySelector('.progress').style.opacity = "1";
+                                progressBar.querySelector('.dropzone-start').style.opacity = "100";
+                            });
+                        }, 300);
+                    });
+
+                    // Setup the buttons for all transfers
+                    dropzone.querySelector(".dropzone-upload").addEventListener('click', function () {
+                        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+                    });
+
+                    // Setup the button for remove all files
+                    dropzone.querySelector(".dropzone-remove-all").addEventListener('click', function () {
+                        dropzone.querySelector('.dropzone-upload').style.display = "block";
+                        dropzone.querySelector('.dropzone-remove-all').style.display = "none";
+                        myDropzone.removeAllFiles(true);
+                    });
+
+                    // On all files completed upload
+                    myDropzone.on("queuecomplete", function (progress) {
+                        const uploadIcons = dropzone.querySelectorAll('.dropzone-upload');
+                        uploadIcons.forEach(uploadIcon => {
+                            uploadIcon.style.display = "block";
+                        });
+                    });
+
+                    // On all files removed
+                    myDropzone.on("removedfile", function (file) {
+                        if (myDropzone.files.length < 1) {
+                            dropzone.querySelector('.dropzone-upload').style.display = "block";
+                            dropzone.querySelector('.dropzone-remove-all').style.display = "none";
+                        }
+                    });
+
+
+                    myDropzone.on("success", async function (file, responseText) {
+                        let message = getMsgBy(`upload_ids:${responseText.id}`);
+                        let res = await sendMessage(message)
+                        if(res.result){
+                            renderMessageAfterUploadFile(res)
+                        }
+                    })
+
+
+                    function renderMessageAfterUploadFile(res)
+                    {
+
+                        if(res.upload_file)
+                        {
+                            let user = res.user;
+                            let file = res.file;
+                            let msg = ` <div class="chat-message-right pb-4">
+                                    <div class="ml-10px">
+                                        <img src="${userImageUrl}"
+                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                        <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                        <div class="font-weight-bold mb-1">You</div>
+                                  `
+                            if (file.type == "image")
+                            {
+                                msg+=`   <img src="${res.upload_file}" width="100" height="100" />`;
+                            }else{
+                                msg+= ` <p  class="text-overflow-1"
+                        title="${file['file_original_name']}.${file['extension']}">
+                    ${file['file_original_name']}.${file['extension']}</p>
+                `
+                            }
+                            msg+=`
+                         <a href="${res.link_download}"class="w-100 d-block"><i class="bi bi-download"></i></a>
+                         </div>
+                                </div>`;
+                            $('#chat-content').append(msg); // Append the new message received
+                            $(".chat-messages").animate({scrollTop: $('.chat-messages').prop("scrollHeight")}, 10); // Scroll the chat output div
+
+                        }
+                    }
+
+                    // myDropzone.on("removedfile",function(file) {
+                    //     $.ajax({
+                    //         url: `/seller/file/destroy/${avatar.id}`,
+                    //         type: 'POST',
+                    //         headers: {
+                    //             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    //         },
+                    //         success: function(result) {
+                    //             var last = $("#avatar");
+                    //             last.val("")
+                    //             $(file.previewElement).remove();
+                    //         },
+                    //         error: function(error) {
+                    //             return false;
+                    //         }
+                    //     });
+                    // })
+
+                </script>
                 <script type="text/javascript">
 
                     const userImageUrl = @json(Auth::user()->uploads->getImageOptimizedFullName(100,100));
@@ -539,6 +704,7 @@
                         if (e.keyCode === 13 && !e.shiftKey) {
                             let chat_msg = $(this).val();
                             senChatMessageWith(chat_msg);
+                            dropzone.querySelector(".dropzone-upload").click();
                         }
                     });
 
@@ -621,7 +787,6 @@
                     async function handleReceivedMessage(msg) {
                         const data = JSON.parse(msg.data);
                         let msgArr = data.chat_msg.split(':');
-                        console.log(data)
                         if (data.conversation_id == {{auth()->id()}}) {
                             let isFile = msgArr?.[0] == "upload_ids" && msgArr?.[1];
 
@@ -673,171 +838,7 @@
         </div>
     </section>
 
-    <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
-    <script>
-        Dropzone.autoDiscover = false;
 
-        // set the dropzone container id
-        const id = "#kt_dropzonejs_example_2";
-        const dropzone = document.querySelector(id);
-
-        // set the preview element template
-        var previewNode = dropzone.querySelector(".dropzone-item");
-        previewNode.id = "";
-        var previewTemplate = previewNode.parentNode.innerHTML;
-        previewNode.parentNode.removeChild(previewNode);
-
-        var myDropzone = new Dropzone(id, { // Make the whole body a dropzone
-            method: 'post',
-            url: "{{ route('api_upload') }}",
-            dictDefaultMessage: "",
-            paramName: "file",
-            maxFiles: 13,
-            parallelUploads: 20,
-            maxFilesize: 256, // Max filesize'
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            },
-            previewTemplate: previewTemplate,
-            autoQueue: false, // Make sure the files aren't queued until manually added
-            previewsContainer: id + " .dropzone-items", // Define the container to display the previews
-            clickable: id + " .dropzone-select", // Define the element that should be used as click trigger to select files.
-        });
-
-        myDropzone.on("addedfile", function (file) {
-            // Hookup the start button
-            file.previewElement.querySelector(id + " .dropzone-start").onclick = function () { myDropzone.enqueueFile(file); };
-            const dropzoneItems = dropzone.querySelectorAll('.dropzone-item');
-            dropzoneItems.forEach(dropzoneItem => {
-                dropzoneItem.style.display = '';
-            });
-            dropzone.querySelector('.dropzone-upload').style.display = "inline-block";
-            dropzone.querySelector('.dropzone-remove-all').style.display = "inline-block";
-        });
-
-        // Update the total progress bar
-        myDropzone.on("totaluploadprogress", function (progress) {
-            const progressBars = dropzone.querySelectorAll('.progress-bar');
-            progressBars.forEach(progressBar => {
-                progressBar.style.width = progress + "%";
-            });
-        });
-
-        myDropzone.on("sending", function (file) {
-            // Show the total progress bar when upload starts
-            const progressBars = dropzone.querySelectorAll('.progress-bar');
-            progressBars.forEach(progressBar => {
-                progressBar.style.opacity = "1";
-            });
-            // And disable the start button
-            file.previewElement.querySelector(id + " .dropzone-start").setAttribute("disabled", "disabled");
-        });
-
-        // Hide the total progress bar when nothing's uploading anymore
-        myDropzone.on("complete", function (progress) {
-            const progressBars = dropzone.querySelectorAll('.dz-complete');
-
-            setTimeout(function () {
-                progressBars.forEach(progressBar => {
-                    progressBar.querySelector('.progress-bar').style.opacity = "1";
-                    progressBar.querySelector('.progress').style.opacity = "1";
-                    progressBar.querySelector('.dropzone-start').style.opacity = "100";
-                });
-            }, 300);
-        });
-
-        // Setup the buttons for all transfers
-        dropzone.querySelector(".dropzone-upload").addEventListener('click', function () {
-            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
-        });
-
-        // Setup the button for remove all files
-        dropzone.querySelector(".dropzone-remove-all").addEventListener('click', function () {
-            dropzone.querySelector('.dropzone-upload').style.display = "block";
-            dropzone.querySelector('.dropzone-remove-all').style.display = "none";
-            myDropzone.removeAllFiles(true);
-        });
-
-        // On all files completed upload
-        myDropzone.on("queuecomplete", function (progress) {
-            const uploadIcons = dropzone.querySelectorAll('.dropzone-upload');
-            uploadIcons.forEach(uploadIcon => {
-                uploadIcon.style.display = "block";
-            });
-        });
-
-        // On all files removed
-        myDropzone.on("removedfile", function (file) {
-            if (myDropzone.files.length < 1) {
-                dropzone.querySelector('.dropzone-upload').style.display = "block";
-                dropzone.querySelector('.dropzone-remove-all').style.display = "none";
-            }
-        });
-
-
-        myDropzone.on("success", async function (file, responseText) {
-            let message = getMsgBy(`upload_ids:${responseText.id}`);
-            let res = await sendMessage(message)
-            if(res.result){
-                renderMessageAfterUploadFile(res)
-            }
-        })
-
-
-        function renderMessageAfterUploadFile(res)
-        {
-
-            if(res.upload_file)
-            {
-              let user = res.user;
-                let file = res.file;
-                let msg = ` <div class="chat-message-right pb-4">
-                                    <div class="ml-10px">
-                                        <img src="${userImageUrl}"
-                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                        <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
-                                    </div>
-                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                        <div class="font-weight-bold mb-1">You</div>
-                                  `
-                if (file.type == "image")
-                {
-                    msg+=`   <img src="${res.upload_file}" width="100" height="100" />`;
-                }else{
-                    msg+= ` <p  class="text-overflow-1"
-                        title="${file['file_original_name']}.${file['extension']}">
-                    ${file['file_original_name']}.${file['extension']}</p>
-                `
-                }
-                msg+=`
-                         <a href="${res.link_download}"class="w-100 d-block"><i class="bi bi-download"></i></a>
-                         </div>
-                                </div>`;
-                $('#chat-content').append(msg); // Append the new message received
-                $(".chat-messages").animate({scrollTop: $('.chat-messages').prop("scrollHeight")}, 10); // Scroll the chat output div
-
-            }
-        }
-
-        // myDropzone.on("removedfile",function(file) {
-        //     $.ajax({
-        //         url: `/seller/file/destroy/${avatar.id}`,
-        //         type: 'POST',
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-        //         },
-        //         success: function(result) {
-        //             var last = $("#avatar");
-        //             last.val("")
-        //             $(file.previewElement).remove();
-        //         },
-        //         error: function(error) {
-        //             return false;
-        //         }
-        //     });
-        // })
-
-    </script>
     @endsection
 </x-app-layout>
 
