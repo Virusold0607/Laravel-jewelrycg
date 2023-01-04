@@ -34,6 +34,8 @@
             <div class="card">
                 <div class="card-header"><h3>Add Product</h3></div>
                 <div class="card-body">
+                    @include('includes.validation-form')
+                    
                     <form action="{{ route('seller.product.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -45,7 +47,6 @@
                                     </div>
                                     <!-- End Header -->
                                     <div class="card-body">
-                                        @include('includes.validation-form')
                                         <div class="mb-4">
                                             <label for="productNameLabel" class="form-label">Name </label>
                                             <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
