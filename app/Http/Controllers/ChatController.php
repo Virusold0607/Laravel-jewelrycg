@@ -96,8 +96,7 @@ class ChatController extends Controller
         }
 
         $query = '
-SELECT `conversation_id` as user_id,"0" as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and conversation_id!= '.$user_id.' GROUP By `conversation_id`
-UNION ALL
+
 SELECT a.user_id,b.cnt FROM
             (SELECT `user_id` FROM `messages` WHERE `conversation_id` = '.$user_id.' and user_id != '.$user_id.'
 GROUP BY (user_id))as a
@@ -107,7 +106,13 @@ GROUP BY (user_id))as a
 
              and is_seen=0  GROUP BY (user_id)
             )as b
-            on a.user_id = b.user_id';
+            on a.user_id = b.user_id
+
+        UNION
+        SELECT `conversation_id` as user_id,"0" as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and conversation_id!= '.$user_id.' GROUP By `conversation_id`
+
+        '
+        ;
 
 
         $side_info = DB::select(DB::raw($query));
