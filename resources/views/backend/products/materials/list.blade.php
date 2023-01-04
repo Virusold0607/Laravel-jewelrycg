@@ -231,7 +231,7 @@
               '<td>' + material_typename + '</td>' +
               '<input type="hidden" class="form-control" id="product_material_id" name="product_material_id[]" value="" />' +
               '<input type="hidden" name="diamond_amount[]" class="form-control" value="" />' +
-              '<td><input type="number" name="material_weight[]" class="form-control" value="' + $('#modalAddMaterial' + material_id + ' #txtMaterialWeight_' + attributeValueIds[i]).val() + '" /></td>' +
+              '<td><input type="number" step="0.01" inputmode="decimal" name="material_weight[]" class="form-control" value="' + $('#modalAddMaterial' + material_id + ' #txtMaterialWeight_' + attributeValueIds[i]).val() + '" /></td>' +
               '<td class="text-center action">' +
               '<input type="hidden" class="form-control" id="diamond_id" name="diamond_id[]" value="" />' +
               '<input type="hidden" class="form-control" id="material_type_id" name="material_type_id[]" value="' + material_type_id + '" />' +
