@@ -787,7 +787,7 @@
                     async function handleReceivedMessage(msg) {
                         const data = JSON.parse(msg.data);
                         let msgArr = data.chat_msg.split(':');
-                        if (data.conversation_id == {{auth()->id()}}) {
+                        if (data.conversation_id == {{auth()->id()}} && data.user_id == {{$conversation_id}}) {
                             let isFile = msgArr?.[0] == "upload_ids" && msgArr?.[1];
 
                             switch (data.type) {
