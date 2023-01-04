@@ -8,6 +8,6 @@
 
 @if ($errors->any())
     @foreach ($errors->all() as $error)
-        <div class="alert alert-success alert-dismissible fade show" role="alert">{{ $error }}</div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ $error }}</div>
     @endforeach
 @endif
