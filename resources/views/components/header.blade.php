@@ -75,6 +75,9 @@
                             <li class="nav-item menu-area">
                                 <a class="nav-link" href="{{ route('services.all') }}">Hire a Pro</a>
                             </li>
+                            <li class="nav-item menu-area">
+                                <a class="nav-link " href="{{ route('contactus.index') }}">Contact Us</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

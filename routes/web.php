@@ -625,7 +625,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 // contact
 
-Route::group(['prefix' => 'contactus', 'name' => 'contactus.', 'controller' => \App\Http\Controllers\ContactController::class], function () {
+Route::prefix('contactus')->name('contactus.')->controller(\App\Http\Controllers\ContactController::class)->group(function () {
     Route::get('/', 'index')->name('index');
 });
 
