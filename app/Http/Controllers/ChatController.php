@@ -86,6 +86,8 @@ class ChatController extends Controller
         $is_created_chat_room = Message::where(['user_id' => $user_id, 'conversation_id' => $conversation_id])
                                         ->groupBy('user_id')
                                         ->count();
+        $this->message->seenAll($user_id,$conversation_id);
+
         if($is_created_chat_room == 0){
             $message = new Message;
             $message->user_id = $user_id;
@@ -93,7 +95,7 @@ class ChatController extends Controller
             $message->save();
         }
 
-        $this->message->seenAll($user_id,$conversation_id);
+
 
       $query='SELECT a.conversation_id,b.cnt FROM
             (SELECT `conversation_id` FROM `messages` WHERE `user_id` = '.$user_id.'  GROUP BY (conversation_id))as a
