@@ -93,7 +93,7 @@
                 value="{{ old('country') ?? ($shipping->country ?? '') }}"
             >
                 <option value="">Choose Country</option>
-                @foreach(config('countries') as $country)
+                @foreach($countries as $country)
                     <option {{ (old('country') ?? ($shipping->country ?? '')) == $country["name"] ?"selected" :""}}
                             value="{{$country["name"]}}">{{$country["name"]}}</option>
                 @endforeach
@@ -140,7 +140,7 @@
             value="{{ old('country') ?? ($billing->country ?? '') }}"
             >
                 <option value="">Choose Country</option>
-                @foreach(config('countries') as $country)
+                @foreach($countries as $country)
                     <option {{ (old('country') ?? ($billing->country ?? '')) == $country["name"] ?"selected" :""}}
                             value="{{$country["name"]}}">{{$country["name"]}}</option>
                 @endforeach
