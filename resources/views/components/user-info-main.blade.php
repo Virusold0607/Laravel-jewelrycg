@@ -94,8 +94,8 @@
             >
                 <option value="">Choose Country</option>
                 @foreach($countries as $country)
-                    <option {{ (old('country') ?? ($shipping->country ?? '')) == $country["name"] ?"selected" :""}}
-                            value="{{$country["name"]}}">{{$country["name"]}}</option>
+                    <option {{ (old('country') ?? ($shipping->country ?? '')) == $country["code"] ?"selected" :""}}
+                            value="{{$country["code"]}}">{{$country["name"]}}</option>
                 @endforeach
             </select>
         </div>
@@ -141,8 +141,8 @@
             >
                 <option value="">Choose Country</option>
                 @foreach($countries as $country)
-                    <option {{ (old('country') ?? ($billing->country ?? '')) == $country["name"] ?"selected" :""}}
-                            value="{{$country["name"]}}">{{$country["name"]}}</option>
+                    <option {{ (old('country') ?? ($billing->country ?? '')) == $country["code"] ?"selected" :""}}
+                            value="{{$country["code"]}}">{{$country["name"]}}</option>
                 @endforeach
             </select>
         </div>
