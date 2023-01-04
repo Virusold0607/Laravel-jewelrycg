@@ -198,7 +198,7 @@
                                     <div class="fs-14 mr-10px border-right">
                                         <div
                                             class="data fw-700 pb-1">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
-                                        <div class="data pb-1">@username</div>
+                                        <div class="data pb-1">{{ Auth::user()->username ? "@".Auth::user()->username :"@username" }}</div>
                                         <div class="data"><a class="text-primary" href="{{ route('logout') }}">Sign out</a>
                                         </div>
                                     </div>
