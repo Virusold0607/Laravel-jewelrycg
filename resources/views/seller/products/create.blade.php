@@ -233,12 +233,13 @@
                                 <div class="card mb-3 mb-4">
                                     <!-- Header -->
                                     <div class="card-header">
-                                        <h4 class="card-header-title mb-0">3D Model</h4>
+                                        <h4 class="card-header-title mb-0">3D Model AR Preview</h4>
                                     </div>
                                     <!-- End Header -->
                 
                                     <!-- Body -->
                                     <div class="card-body">
+                                        <p class="text-danger">Please export your 3D Model file fully assembled then convert it to a .glb file and upload it here. All layers should be assembled, all materials should be visible. <a href="#">learn more.</a></p>
                                         <div class="imagePreview img-thumbnail p-2">
                                             <img id="3dFilePreview" src="" style="width: 100%">
                                         </div>                                        
@@ -257,6 +258,7 @@
                 
                                     <!-- Body -->
                                     <div class="card-body">
+                                    <p class="text-danger">Please make sure your thumbnail matches the thumbnail color scheme and format. Learn more on how to achieve the needed look. <a href="#">learn more.</a></p>
                                         <div class="imagePreview img-thumbnail p-2">
                                             <img id="thumbnailPreview" src="" style="width: 100%">
                                         </div>
