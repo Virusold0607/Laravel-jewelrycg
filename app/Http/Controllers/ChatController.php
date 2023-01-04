@@ -96,7 +96,7 @@ class ChatController extends Controller
         }
 
         $query = '
-
+SELECT   c.user_id , max(cnt) as cnt from (
 SELECT a.user_id,b.cnt FROM
             (SELECT `user_id` FROM `messages` WHERE `conversation_id` = '.$user_id.' and user_id != '.$user_id.'
 GROUP BY (user_id))as a
@@ -107,15 +107,16 @@ GROUP BY (user_id))as a
              and is_seen=0  GROUP BY (user_id)
             )as b
             on a.user_id = b.user_id
-
-        UNION
-        SELECT `conversation_id` as user_id,"0" as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and conversation_id!= '.$user_id.' GROUP By `conversation_id`
-
+        UNION ALL
+        SELECT `conversation_id` as user_id,"0" as cnt FROM `messages` WHERE `user_id` = '.$user_id.'
+         and conversation_id!= '.$user_id.' GROUP By `conversation_id`
+         )as c GROUP BY c.user_id
         '
         ;
 
 
         $side_info = DB::select(DB::raw($query));
+        dd($side_info);
         $chat_content = DB::select(DB::raw('SELECT * FROM `messages` WHERE (user_id='.$user_id.' AND conversation_id='.$conversation_id.') OR (user_id='.$conversation_id.' AND conversation_id='.$user_id.'); '));
         return view('chat.create', compact('side_info','chat_content','conversation_id','user_id'));
     }
