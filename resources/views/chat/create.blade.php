@@ -228,7 +228,7 @@
                                class="list-group-item list-group-item-action border-0 filterDiscussions all unread single {{$conversation_id== $info->conversation_id ?"active":""}}"
                                data-toggle="list" role="tab" data-id="{{$info->conversation_id}}">
                                 <div class="badge bg-success float-right">
-                                    <span>{{$info->cnt > 0 ? $info->cnt : '' }}</span>
+                                    <span>{{$info->cnt && $info->cnt > 0 ? $info->cnt : 0 }}</span>
                                 </div>
                                 <div class="d-flex align-items-start">
                                     <img
@@ -242,8 +242,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <input type="hidden" name="client_id" id="client_id"
-                                   value="{{$info->id}}"/>
+
                         @endforeach
                         <hr class="d-block d-lg-none mt-1 mb-0">
                     </div>
