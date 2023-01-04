@@ -335,7 +335,7 @@
                                                         <div class="chat-message-left pb-4">
                                                             <div class="mr-10px">
                                                                 <img
-                                                                    src="{{optional(optional(users_name($info->conversation_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
+                                                                    src="{{optional(optional(users_name($content->conversation_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
                                                                     class="rounded-circle mr-1" alt="Sharon Lessman"
                                                                     width="40" height="40">
                                                                 <div
