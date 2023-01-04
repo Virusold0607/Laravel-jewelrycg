@@ -12,13 +12,13 @@
         .dropzone .dz-preview{
             margin: 0;
         }
-        
+
         .dz-image img{
             width: 100%;
             height: 100%;
         }
     </style>
-    <div class="py-9">    
+    <div class="py-9">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -44,7 +44,7 @@
                         @if (session('success'))
                         <div class="alert alert-success" role="alert">{{session('success')}}</div>
                         @endif
-                        {{-- {{ dd($countries) }} --}}
+{{--                         {{ dd($countries) }}--}}
                         <x-user-info-main :edit="true" :user="auth()->user()" :countries="$countries" :shipping="$shipping" :billing="$billing" :tab="$tab" />
                         <div class="d-flex justify-content-end mt-3">
                             <div class="card">
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-    </div>      
+    </div>
 <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
 <script>
 Dropzone.autoDiscover = false;
