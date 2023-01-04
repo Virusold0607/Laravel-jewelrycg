@@ -116,7 +116,6 @@ GROUP BY (user_id))as a
 
 
         $side_info = DB::select(DB::raw($query));
-        dd($side_info);
         $chat_content = DB::select(DB::raw('SELECT * FROM `messages` WHERE (user_id='.$user_id.' AND conversation_id='.$conversation_id.') OR (user_id='.$conversation_id.' AND conversation_id='.$user_id.'); '));
         return view('chat.create', compact('side_info','chat_content','conversation_id','user_id'));
     }
