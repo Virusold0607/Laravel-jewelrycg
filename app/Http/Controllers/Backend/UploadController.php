@@ -564,7 +564,7 @@ class UploadController extends Controller
     }
     public function downloadFile($id)
     {
-        $project_attachment = Upload::find($id);
+        $project_attachment = Upload::find(base64_decode($id));
         try{
             $file_path = public_path("uploads/all/".$project_attachment->file_name);
             return Response::download($file_path);

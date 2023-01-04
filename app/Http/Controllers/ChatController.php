@@ -111,7 +111,7 @@ class ChatController extends Controller
             'message_log'  => $message_log,
             "upload_file" => $isUploadFile && $file ? $file->getFileFullPath() :'',
             "file" => $file,
-            "link_download" => $isUploadFile && $file ?  route('download_file',$file->id) : "",
+            "link_download" => $isUploadFile && $file ?  route('download_file',base64_encode($file->id)) : "",
             "user"=>[
                 "full_name" => $user->full_name,
                 'image_url' => $user->image_url
@@ -136,7 +136,7 @@ class ChatController extends Controller
                 "full_name" => $conversation->full_name,
                 'image_url' => $conversation->image_url
             ],
-            "link_download" => $request->file_id ? route('download_file',$request->file_id) :"",
+            "link_download" => $request->file_id ? route('download_file',base64_encode($request->file_id)) :"",
             'path'=> $request->file_id ? $file->getFileFullPath() :""
         ]);
     }

@@ -201,7 +201,7 @@
                 return [
                         "upload_file" => $isUploadFile && $file ? $file->getFileFullPath() :'',
                         "file" => $file,
-                        "link_download" => $isUploadFile && $file ?  route('download_file',$file->id) : "",
+                        "link_download" => $isUploadFile && $file ?  route('download_file',base64_encode($file->id)) : "",
                 ];
             }
 
