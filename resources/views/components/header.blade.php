@@ -91,7 +91,7 @@
                             }
                             ?>
                             @if ($cart_items = Cart::content()->count())
-                                Cart (<span class="cart-count"><span class="cart-count-number">{{$cart_items}}</span></span>)
+                                <i class="bi bi-cart"></i> (<span class="cart-count"><span class="cart-count-number">{{$cart_items}}</span></span>)
                             @endif
                         </a>
                     </li>
