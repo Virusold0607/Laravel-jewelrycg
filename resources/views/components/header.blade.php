@@ -75,9 +75,6 @@
                             <li class="nav-item menu-area">
                                 <a class="nav-link" href="{{ route('services.all') }}">Hire a Pro</a>
                             </li>
-                            <li class="nav-item menu-area">
-                                <a class="nav-link " href="{{ route('contactus.index') }}">Contact Us</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -247,7 +244,7 @@
                                 <div class="seperated-menu d-flex py-2 border-top">
                                     <ul>
                                         <li><a class="dropdown-item" href="#">Help</a></li>
-                                        <li><a class="dropdown-item" href="#">Send Feedback</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('contactus.index') }}">Send Feedback</a></li>
                                     </ul>
                                 </div>
                             </ul>

@@ -683,7 +683,7 @@
             paramName: "file",
             maxFiles: 13,
             parallelUploads: 20,
-            maxFilesize: 5, // Max filesize'
+            maxFilesize: 256, // Max filesize'
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
