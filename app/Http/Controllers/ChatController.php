@@ -97,16 +97,31 @@ class ChatController extends Controller
 
 
 
-      $query='SELECT a.conversation_id,b.cnt FROM
-            (SELECT `conversation_id` FROM `messages` WHERE `user_id` = '.$user_id.'  GROUP BY (conversation_id))as a
-            LEFT JOIN
-            (SELECT `conversation_id`, COUNT(*) as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and is_seen=0  GROUP BY (conversation_id)
-            )as b
-            on a.conversation_id = b.conversation_id';
+//      $query='SELECT a.conversation_id,b.cnt FROM
+//            (SELECT `conversation_id` FROM `messages` WHERE `user_id` = '.$user_id.'  GROUP BY (conversation_id))as a
+//            LEFT JOIN
+//            (SELECT `conversation_id`, COUNT(*) as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and is_seen=0  GROUP BY (conversation_id)
+//            )as b
+//            on a.conversation_id = b.conversation_id';
+//        SELECT `user_id` FROM `messages` WHERE `conversation_id` = 7 and user_id!=7 GROUP By `user_id`
+//        $query='SELECT a.conversation_id,b.cnt FROM
+//            (SELECT `conversation_id` FROM `messages` WHERE `user_id` = '.$user_id.'  GROUP BY (conversation_id))as a
+//            LEFT JOIN
+//            (SELECT `conversation_id`, COUNT(*) as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and is_seen=0  GROUP BY (conversation_id)
+//            )as b
+//            on a.conversation_id = b.conversation_id';
 
+        $query = 'SELECT
+a.user_id,b.cnt
+from
+(SELECT `user_id` FROM `messages` WHERE `conversation_id` =  '.$user_id.' and user_id!='.$user_id.' GROUP By `user_id`) as a
+INNER JOIN
+(SELECT `user_id` ,COUNT(*) as cnt FROM `messages` WHERE `conversation_id` = '.$user_id.' and user_id!='.$user_id.'
+and  is_seen=0 GROUP By `user_id`) as b
+on a.user_id = b.user_id
+';
 
         $side_info = DB::select(DB::raw($query));
-
         $chat_content = DB::select(DB::raw('SELECT * FROM `messages` WHERE (user_id='.$user_id.' AND conversation_id='.$conversation_id.') OR (user_id='.$conversation_id.' AND conversation_id='.$user_id.'); '));
         return view('chat.create', compact('side_info','chat_content','conversation_id','user_id'));
     }
