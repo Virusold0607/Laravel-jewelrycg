@@ -12,7 +12,19 @@ use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
-     public function create(Request $request)
+
+    protected Message $message;
+
+    /**
+     * @param Message $message
+     */
+    public function __construct(Message $message)
+    {
+        $this->message = $message;
+    }
+
+
+    public function create(Request $request)
         {
             $seller = $request->seller;
             $user_id = Auth::user()->id;
@@ -69,8 +81,8 @@ class ChatController extends Controller
 
     public function create_chat_room(Request $request,$conversation_id) {
 
-
-        $user_id = Auth::user()->id;
+        $user = Auth::user();
+        $user_id = $user->id;
         $is_created_chat_room = Message::where(['user_id' => $user_id, 'conversation_id' => $conversation_id])
                                         ->groupBy('user_id')
                                         ->count();
@@ -81,12 +93,19 @@ class ChatController extends Controller
             $message->save();
         }
 
-        $query = 'SELECT id, user_id, messages.conversation_id, message, messages.updated_at, recent_update.cnt FROM messages JOIN (SELECT COUNT(*) AS cnt, MAX(updated_at) updated_at, conversation_id FROM messages WHERE user_id ='.$user_id.'  GROUP BY conversation_id) AS recent_update ON recent_update.conversation_id = messages.`conversation_id` AND recent_update.updated_at = messages.`updated_at` ';
+        $this->message->seenAll($user_id,$conversation_id);
+
+      $query='SELECT a.conversation_id,b.cnt FROM
+            (SELECT `conversation_id` FROM `messages` WHERE `user_id` = '.$user_id.'  GROUP BY (conversation_id))as a
+            LEFT JOIN
+            (SELECT `conversation_id`, COUNT(*) as cnt FROM `messages` WHERE `user_id` = '.$user_id.' and is_seen=0  GROUP BY (conversation_id)
+            )as b
+            on a.conversation_id = b.conversation_id';
 
 
         $side_info = DB::select(DB::raw($query));
-        $chat_content = DB::select(DB::raw('SELECT * FROM `messages` WHERE (user_id='.$user_id.' AND conversation_id='.$conversation_id.') OR (user_id='.$conversation_id.' AND conversation_id='.$user_id.'); '));
 
+        $chat_content = DB::select(DB::raw('SELECT * FROM `messages` WHERE (user_id='.$user_id.' AND conversation_id='.$conversation_id.') OR (user_id='.$conversation_id.' AND conversation_id='.$user_id.'); '));
         return view('chat.create', compact('side_info','chat_content','conversation_id','user_id'));
     }
 
