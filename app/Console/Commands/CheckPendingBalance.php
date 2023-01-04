@@ -30,7 +30,7 @@ class CheckPendingBalance extends Command
      */
     public function handle()
     {
-        $pendingBalances = SellersWalletHistory::where('type', 'add')->where('status', 5)->get();
+        $pendingBalances = SellersWalletHistory::where('type', 'add')->where('status', 0)->get();
         foreach ($pendingBalances as $pending) {
             if (Carbon::now()->diffInDays($pending->updated_at->startOfDay()) == 14) {
                 $wallet = SellersProfile::where('user_id', $pending->user_id)->first();
