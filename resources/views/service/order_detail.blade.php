@@ -48,7 +48,7 @@
     <div class="container">
         <div class="col-lg-11 col-md-10 py-9 mx-auto checkout-wrap">
             <div class="row">
-                <div class="col-9">
+                <div class="col-lg-9">
                     @include('includes.validation-form')
                     @if (session('success'))
                         <!--<div class="alert alert-success" role="alert">{{session('success')}}</div>-->
@@ -380,7 +380,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3">
                     @if ($order->status == 1 || $order->status == 2)
                         <div class="card mb-4 time-left">
                             <div class="card-header" id="count_title">Time left to deliver</div>
