@@ -265,4 +265,22 @@ class Product extends Model
     {
         return $this->hasMany(ProductMeasurementRelationship::class, 'product_id', 'id');
     }
+
+    public function formatPriceFor($products)
+    {
+        $products->each(function ($product) {
+            $count = ProductsVariant::where('product_id', $product->id)->count();
+            $maxPrice = ProductsVariant::where('product_id', $product->id)->max('variant_price');
+            $minPrice = ProductsVariant::where('product_id', $product->id)->min('variant_price');
+            if ($count) {
+                if ($minPrice != $maxPrice) {
+                    $product->price = "$" . number_format($minPrice / 100, 2) . " - $" . number_format($maxPrice / 100, 2);
+                } else {
+                    $product->price = "$" . number_format($minPrice / 100, 2);
+                }
+            } else {
+                $product->price = "$" . number_format($product->price / 100, 2);
+            }
+        });
+    }
 }

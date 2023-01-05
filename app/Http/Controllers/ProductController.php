@@ -21,6 +21,16 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    protected Product $product;
+
+    /**
+     * @param Product $product
+     */
+    public function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
+
     public function searchCategory(Request $req)
     {
         $products = Product::searchWithImages($req->q, $req->category);
@@ -44,6 +54,7 @@ class ProductController extends Controller
         }
 
         $products = Product::searchWithImages($req->q, $req->category);
+        $this->product->formatPriceFor($products);
         $categories = ProductsCategorie::whereNull('parent_id')->get();
 
         $attributes = Attribute::has('values')->select('id', 'name', 'type')->get();
@@ -223,7 +234,7 @@ class ProductController extends Controller
             ->get();
 
         $attributes = Attribute::all();
-        
+
         return view('products.show', compact(
             'product', 'uploads', 'variants', 'maxPrice', 'minPrice',
             'product_reviewable', 'user_product_review', 'review_count',
