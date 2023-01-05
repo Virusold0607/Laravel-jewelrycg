@@ -166,14 +166,20 @@
                                             Are you pleased with the delivery and ready to approve it?
                                         </div>
                                         <div class="card-body">
-                                            <div class="d-flex flex-row">
+                                            <div class="row">
                                                 <form action="{{ route('services.order_complete') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="order_id" value="{{$order->id}}">
-                                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseSubmit" role="button" aria-expanded="false" aria-controls="collapseSubmit">I approve delivery</a>
-                                                    @if ($order->revisions)
-                                                        <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#messageModal">I'm not ready yet</button>
-                                                    @endif
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseSubmit" role="button" aria-expanded="false" aria-controls="collapseSubmit">I approve delivery</a>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            @if ($order->revisions)
+                                                                <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#messageModal">I'm not ready yet</button>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                     <div class="collapse" id="collapseSubmit">
                                                         <div class="card card-body mt-3">
                                                             <p class="text-danger">Are you sure you approve the delivery?</p>
