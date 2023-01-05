@@ -23,7 +23,7 @@ class Upload extends Model
     private $fileUploadPath = '';
     private $fileManagerThumbnailWidth = 100;
     private $fileManagerThumbnailSuffix = '';
-
+    const UPLOAD_PATH = "/uploads/all/";
     public function __construct()
     {
         $this->fileUploadPath = Config::get('constants.file_upload_path');
@@ -48,7 +48,7 @@ class Upload extends Model
         if (file_exists(public_path($this->fileUploadPath . "/" . $filename))) {
             return asset($this->fileUploadPath . "/" . $filename);
         }
-        return asset('/assets/img/' . $this->file_name . '?width=' . $width . '&height=' . $height);
+        return asset(self::UPLOAD_PATH. $this->file_name . '?width=' . $width . '&height=' . $height);
     }
 
     // public function getImageCacheFullName($width = 0) {
