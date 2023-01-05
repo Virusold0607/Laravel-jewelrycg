@@ -93,9 +93,8 @@
                             }
                             ?>
                             @if ($cart_items = Cart::content()->count())
-                                Cart (<span class="cart-count"><span
-                                        class="cart-count-number">{{$cart_items}}</span></span>
-                                )
+
+                                <i class="bi bi-cart"></i> (<span class="cart-count"><span class="cart-count-number">{{$cart_items}}</span></span>)
                             @endif
                         </a>
                     </li>
@@ -200,7 +199,7 @@
                                             src="{{user_name(Auth::user()->id)[0]->uploads->getImageOptimizedFullName(100,100)}}"
                                             alt="avatar" class="rounded-circle img-fluid">
                                     </div>
-                                    <div class="fs-14 mr-10px border-right">
+                                    <div class="fs-14 mr-10px">
                                         <div
                                             class="data fw-700 pb-1">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
                                         <div
