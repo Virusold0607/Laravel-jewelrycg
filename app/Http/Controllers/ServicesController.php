@@ -952,6 +952,7 @@ class ServicesController extends Controller
 
     public function order_complete(Request $request)
     {
+        $sellersWalletHistoryStatusComplete = 1;
         $order_id = $request->order_id;
 
         $order = ServiceOrder::with('service')->where('id', $order_id)->where('user_id', Auth::id())->firstOrFail();
@@ -959,7 +960,7 @@ class ServicesController extends Controller
         $order->update();
 
         $history = SellersWalletHistory::where('order_id', $order->id)->where('sale_type', 1)->firstOrFail();
-        $history->status = 0;
+        $history->status = $sellersWalletHistoryStatusComplete;
         $history->save();
 
         $seller = User::findOrFail($order->service->user_id);
