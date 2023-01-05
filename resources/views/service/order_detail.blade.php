@@ -497,7 +497,7 @@
                     url: "{{ route('seller.file.store') }}",
                     dictDefaultMessage: "Select File",
                     paramName: "file",
-                    maxFilesize: 2,
+                    maxFilesize: 256,
                     clickable: true,
                     addRemoveLinks: true,
                     headers: {
