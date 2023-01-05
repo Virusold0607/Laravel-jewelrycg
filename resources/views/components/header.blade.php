@@ -7,11 +7,11 @@
                     <i class="bi bi-list"></i>
                 </button>
                 <a class="navbar-brand fw-800" href="{{ route('index') }}">
-{{--                    <img src="{{ asset('img/logo.png') }}" width="50" height="50" alt="logo">--}}
-{{--                    <img class="logo"--}}
-{{--                         src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
-{{--                         data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
-{{--                         alt="District Gurus">--}}
+                    {{--                    <img src="{{ asset('img/logo.png') }}" width="50" height="50" alt="logo">--}}
+                    {{--                    <img class="logo"--}}
+                    {{--                         src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
+                    {{--                         data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
+                    {{--                         alt="District Gurus">--}}
                     #JEWELRYCG
                 </a>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarLight"
@@ -19,10 +19,10 @@
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">
                             <img src="{{ asset('img/logo.png') }}" width="50" height="50" alt="logo">
-{{--                            <img class="logo"--}}
-{{--                                 src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
-{{--                                 data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
-{{--                                 alt="District Gurus">--}}
+                            {{--                            <img class="logo"--}}
+                            {{--                                 src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
+                            {{--                                 data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
+                            {{--                                 alt="District Gurus">--}}
                             #JEWELRYCG
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -37,7 +37,8 @@
                                 <a class="nav-link active" href="{{ route('shop_index') }}">3D Models</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button"
+                                <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown"
+                                   role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false" href="#">Learn</a>
                                 <ul class="dropdown-menu half-menu" aria-labelledby="navbarDropdown">
                                     <li>
@@ -61,7 +62,8 @@
                                                 </div>
                                                 <div class="col-auto w-80">
                                                     <div class="mb-2 w-100 fw-800">Browse our courses</div>
-                                                    <div class="w-100">Learn how to create jewelry & start a business.</div>
+                                                    <div class="w-100">Learn how to create jewelry & start a business.
+                                                    </div>
                                                 </div>
                                             </div>
                                         </a>
@@ -91,7 +93,8 @@
                             }
                             ?>
                             @if ($cart_items = Cart::content()->count())
-                                Cart (<span class="cart-count"><span class="cart-count-number">{{$cart_items}}</span></span>
+                                Cart (<span class="cart-count"><span
+                                        class="cart-count-number">{{$cart_items}}</span></span>
                                 )
                             @endif
                         </a>
@@ -102,8 +105,7 @@
                             $new_count =Auth::user()->notifications()->where('status', 0)->count();
                             $notifications = Auth::user()->notifications()->whereBetween('status', [0,1])
                                 ->orderBy('notifications.updated_at', 'desc')->get();
-                            $message_notifications = App\Models\Message::where('conversation_id',Auth::id())->groupBy('user_id')->get();
-
+                            $message_notifications = app(\App\Models\Message::class)->getChatMessageOfUserLogin();
                             $user_id = Auth::id();
                             function user_name ($id) {
                                 return App\Models\User::where('id',$id)->get();
@@ -160,26 +162,28 @@
                                     <span class="dropdown-title">Messages (0)</span>
                                 </div>
                                 @foreach ($message_notifications as $message_notification)
-                                    <a href="/chat/{{$message_notification->user_id }}"
-                                       class="filterDiscussions all unread single active d-block py-2 border-bottom text-black"
-                                       data-toggle="list" role="tab">
-                                        <div class="row">
-                                            <div class="d-flex">
-                                                <div class="mr-10px w-50px">
-                                                    <img class="w-100 rounded-circle"
-                                                         src="{{user_name($message_notification->user_id)[0]->uploads->getImageOptimizedFullName(100,100)}}"
-                                                         data-toggle="tooltip" data-placement="top" title="Janette"
-                                                         alt="{{user_name($message_notification->user_id)[0]->first_name}} avatar">
-                                                </div>
-                                                <div class="col- fs-14 fw-700">
-                                                    <div class="data">
-                                                        <p class="fw-700">{{user_name($message_notification->user_id)[0]->first_name}} {{user_name($message_notification->user_id)[0]->last_name}}</p>
-                                                        <p>{{$message_notification->message}}</p>
+                                    @if(user_name($message_notification->user_id)->first())
+                                        <a href="/chat/{{$message_notification->user_id }}"
+                                           class="filterDiscussions all unread single active d-block py-2 border-bottom text-black"
+                                           data-toggle="list" role="tab">
+                                            <div class="row">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="mr-10px w-50px">
+                                                        <img class="w-100 rounded-circle"
+                                                             src="{{optional(optional(user_name($message_notification->user_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
+                                                             data-toggle="tooltip" data-placement="top" title="Janette"
+                                                             alt="{{optional(user_name($message_notification->user_id)->first())->first_name}} avatar">
+                                                    </div>
+                                                    <div class="col- fs-14 fw-700 d-flex align-items-center">
+                                                            <p class="fw-700 mb-0 mr-5px">{{optional(user_name($message_notification->user_id)->first())->full_name}}</p>
+                                                            <div class="badge bg-success float-right">
+                                                                <span>{{$message_notification->cnt > 0 ? $message_notification->cnt :  0}}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    @endif
                                 @endforeach
                             </ul>
                         </li>
@@ -187,7 +191,8 @@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false" href="#">{{ Auth::user()->first_name }}</a>
+                               data-bs-toggle="dropdown" aria-expanded="false"
+                               href="#">{{ Auth::user()->first_name }}</a>
                             <ul class="dropdown-menu small-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <div class="d-flex align-items-center py-2">
                                     <div class="mr-10px w-40px">
@@ -198,8 +203,10 @@
                                     <div class="fs-14 mr-10px border-right">
                                         <div
                                             class="data fw-700 pb-1">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
-                                        <div class="data pb-1">{{ Auth::user()->username ? "@".Auth::user()->username :"@username" }}</div>
-                                        <div class="data"><a class="text-primary" href="{{ route('logout') }}">Sign out</a>
+                                        <div
+                                            class="data pb-1">{{ Auth::user()->username ? "@".Auth::user()->username :"@username" }}</div>
+                                        <div class="data"><a class="text-primary" href="{{ route('logout') }}">Sign
+                                                out</a>
                                         </div>
                                     </div>
                                 </div>
@@ -211,13 +218,15 @@
                                             </div>
                                             <li><a class="dropdown-item" href="{{route('seller.dashboard')}}">Seller
                                                     Dashboard</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('seller.profile') }}">Seller Profile
+                                            <li><a class="dropdown-item" href="{{ route('seller.profile') }}">Seller
+                                                    Profile
                                                     Settings</a></li>
                                             <li><a class="dropdown-item" href="{{ route('seller.service.orders') }}">My
                                                     Orders</a></li>
                                             <li><a class="dropdown-item" href="{{route('seller.services.list')}}">My
                                                     Services</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('seller.transaction.history') }}">Wallet
+                                            <li><a class="dropdown-item"
+                                                   href="{{ route('seller.transaction.history') }}">Wallet
                                                     History</a></li>
                                         </ul>
                                     </div>
@@ -244,7 +253,8 @@
                                 <div class="seperated-menu d-flex py-2 border-top">
                                     <ul>
                                         <li><a class="dropdown-item" href="#">Help</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('contactus.index') }}">Send Feedback</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('contactus.index') }}">Send
+                                                Feedback</a></li>
                                     </ul>
                                 </div>
                             </ul>
