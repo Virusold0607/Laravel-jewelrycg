@@ -116,6 +116,7 @@
                                           src="{{ asset('uploads/all/') }}/{{ $product->modelpreview->file_name }}"
                                           poster="{{ asset('assets/img/placeholder.jpg') }}" ar-scale="auto"
                                           poster="assets/img/placeholder.jpg" loading="lazy"
+                                          camera-orbit="{{$product->product_3dpreview_xyz}}"
                                           ar-modes="webxr scene-viewer quick-look" shadow-intensity="0" camera-controls
                                           auto-rotate></model-viewer>
                         </div>
