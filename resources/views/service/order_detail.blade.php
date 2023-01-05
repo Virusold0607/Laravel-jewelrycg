@@ -171,10 +171,10 @@
                                                     @csrf
                                                     <input type="hidden" name="order_id" value="{{$order->id}}">
                                                     <div class="row">
-                                                        <div class="col-6">
+                                                        <div class="col-auto mb-2">
                                                             <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseSubmit" role="button" aria-expanded="false" aria-controls="collapseSubmit">I approve delivery</a>
                                                         </div>
-                                                        <div class="col-6">
+                                                        <div class="col-auto">
                                                             @if ($order->revisions)
                                                                 <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#messageModal">I'm not ready yet</button>
                                                             @endif
@@ -185,10 +185,10 @@
                                                             <p class="text-danger">Are you sure you approve the delivery?</p>
 
                                                             <div class="row">
-                                                                <div class="col-6">
+                                                                <div class="col-auto mb-2">
                                                                     <button class="btn btn-primary" type="submit">Yes, I approve delivery</button>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-auto">
                                                                     <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSubmit" aria-expanded="false" aria-controls="collapse Submit">Not Yet</button>
                                                                 </div>
                                                             </div>
