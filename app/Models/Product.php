@@ -40,6 +40,7 @@ class Product extends Model
         'step_type',
         'step_group',
         'steps',
+        'product_3dpreview_xyz'
     ];
 
     /*
