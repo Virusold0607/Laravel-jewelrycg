@@ -83,6 +83,10 @@ class ChatController extends Controller
 
         $user = Auth::user();
         $user_id = $user->id;
+        if ($user_id == $conversation_id)
+        {
+            return abort(404);
+        }
         $is_created_chat_room = Message::where(['user_id' => $user_id, 'conversation_id' => $conversation_id])
                                         ->groupBy('user_id')
                                         ->count();
@@ -170,4 +174,6 @@ GROUP BY (user_id))as a
             'path'=> $request->file_id ? $file->getFileFullPath() :""
         ]);
     }
+
+
 }
