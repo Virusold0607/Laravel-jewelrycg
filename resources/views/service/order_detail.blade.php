@@ -136,7 +136,7 @@
                                 @if (count($deliveries) > 0)
                                     <div class="timeline-item pb-3 mb-3 border-bottom">
                                         <i class="bi bi-clipboard-check p-1"></i>
-                                        <span class=""><b>{{ $seller->first_name . " " . $seller->last_name }}</b> dellvered the order {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
+                                        <span class=""><b>{{ $seller->first_name . " " . $seller->last_name }}</b> delivered the order {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
                                     </div>
                                 @endif
                             @endif
