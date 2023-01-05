@@ -170,17 +170,8 @@
                                                 <form action="{{ route('services.order_complete') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="order_id" value="{{$order->id}}">
-                                                    <a
-                                                        class="btn btn-primary"
-                                                        data-bs-toggle="collapse"
-                                                        href="#collapseSubmit"
-                                                        role="button"
-                                                        aria-expanded="false"
-                                                        aria-controls="collapseSubmit"
-                                                    >
-                                                        Yes, I approve delivery
-                                                    </a>
-g                                                    @if ($order->revisions)
+                                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseSubmit" role="button" aria-expanded="false" aria-controls="collapseSubmit">Yes, I approve delivery</a>
+                                                    @if ($order->revisions)
                                                         <div>
                                                             <button type="button" class="btn btn-primary"
                                                                     data-bs-toggle="collapse"
@@ -193,7 +184,7 @@ g                                                    @if ($order->revisions)
                                                         <div class="card card-body">
                                                             <p class="text-danger">Are you sure you approve the
                                                                 delivery?</p>
-                                                            <div>
+
                                                                 <button class="btn btn-primary"
                                                                         style="width:150px;"
                                                                         type="submit">Yes, I approve
