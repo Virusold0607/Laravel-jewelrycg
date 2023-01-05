@@ -332,10 +332,11 @@
                                                             </div>
                                                         </div>
                                                     @else
+
                                                         <div class="chat-message-left pb-4">
                                                             <div class="mr-10px">
                                                                 <img
-                                                                    src="{{optional(optional(users_name($content->conversation_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
+                                                                    src="{{optional(optional(users_name($content->user_id)->first())->uploads)->getImageOptimizedFullName(100,100)}}"
                                                                     class="rounded-circle mr-1" alt="Sharon Lessman"
                                                                     width="40" height="40">
                                                                 <div
@@ -343,7 +344,7 @@
                                                             </div>
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
                                                                 <div
-                                                                    class="font-weight-bold mb-1">{{users_name($content->conversation_id)->first()->first_name}} {{users_name($content->conversation_id)->first()->last_name}}</div>
+                                                                    class="font-weight-bold mb-1">{{users_name($content->user_id)->first()->full_name}}</div>
                                                                 @if(getChatMessage($content->message)["file"])
                                                                     @if(getChatMessage($content->message)["file"]->type =="image")
                                                                         <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
@@ -728,7 +729,6 @@
 `;
                             $('#chat-content').append(content);
                             $('#chat_input').val('');
-                            // $("#content").animate({ scrollTop: $("#content").height()+20  }, 1000);
                             $(".chat-messages").animate({scrollTop: $('.chat-messages').prop("scrollHeight")}, 10); // Scroll the chat output div
 
                         }
@@ -795,14 +795,15 @@
                                     let chatFileInfo = await getChatFileInformation( msgArr?.[1], data.user_id, data.conversation_id)
 
                                     let conversation = chatFileInfo.conversation;
+                                    let user = chatFileInfo.user;
                                     let msg = `<div class="chat-message-left pb-4">
                                 <div class="mr-10px">
-                                    <img src="${conversation.image_url}"
+                                    <img src="${user.image_url}"
                                          class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                         <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
                                 </div>
                                 <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                    <div class="font-weight-bold mb-1">${conversation.full_name}</div>
+                                    <div class="font-weight-bold mb-1">${user.full_name}</div>
                         `;
                                     if(chatFileInfo.file)
                                     {
