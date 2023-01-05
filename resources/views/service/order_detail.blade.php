@@ -172,13 +172,7 @@
                                                     <input type="hidden" name="order_id" value="{{$order->id}}">
                                                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseSubmit" role="button" aria-expanded="false" aria-controls="collapseSubmit">Yes, I approve delivery</a>
                                                     @if ($order->revisions)
-                                                        <div>
-                                                            <button type="button" class="btn btn-primary"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target="#messageModal">
-                                                                I'm not ready yet
-                                                            </button>
-                                                        </div>
+                                                        <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#messageModal">I'm not ready yet</button>
                                                     @endif
                                                     <div class="collapse" id="collapseSubmit">
                                                         <div class="card card-body">
@@ -200,11 +194,9 @@
                                                                 >
                                                                     Not Yet
                                                                 </button>
-                                                            </div>
 
                                                         </div>
                                                     </div>
-
                                                 </form>
                                             </div>
                                         </div>
