@@ -252,6 +252,7 @@ class ProductsController extends Controller
      */
     public function update(ProductStoreRequest $req, $product)
     {
+
         $counter = Product::where('slug', $req->slug)->count();
         $sep = ($counter == 0) ? '' : '-' . $counter + 1;
         $tags = (array)$req->input('tags');
@@ -268,6 +269,7 @@ class ProductsController extends Controller
         $data['product_attributes'] = $attributes;
         $data['product_attribute_values'] = $values;
         $data['category'] = $req->get('category');
+
         if ($req->slug == "") {
             $data['slug'] = str_replace(" ", "-", strtolower($req->name)) . $sep;
         }
@@ -276,7 +278,7 @@ class ProductsController extends Controller
         $product->update($data);
         ProductTagsRelationship::where('id_product', $product->id)->delete();
 
-        // product material 
+        // product material
         /*if (isset($data['product_material_id'])) {
             $product_material_id = $data['product_material_id'];
         }
