@@ -4,7 +4,7 @@
     @endsection
         <div class="container py-9">
             <div class="row">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12 text-center pb-6">
                     <h1 class="fw-600 h4">Send Us A Message</h1>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-8 mx-auto">
