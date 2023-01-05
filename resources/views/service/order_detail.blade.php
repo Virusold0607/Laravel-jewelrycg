@@ -170,31 +170,22 @@
                                                 <form action="{{ route('services.order_complete') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="order_id" value="{{$order->id}}">
-                                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseSubmit" role="button" aria-expanded="false" aria-controls="collapseSubmit">Yes, I approve delivery</a>
+                                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseSubmit" role="button" aria-expanded="false" aria-controls="collapseSubmit">I approve delivery</a>
                                                     @if ($order->revisions)
                                                         <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#messageModal">I'm not ready yet</button>
                                                     @endif
                                                     <div class="collapse" id="collapseSubmit">
-                                                        <div class="card card-body">
-                                                            <p class="text-danger">Are you sure you approve the
-                                                                delivery?</p>
+                                                        <div class="card card-body mt-3">
+                                                            <p class="text-danger">Are you sure you approve the delivery?</p>
 
-                                                                <button class="btn btn-primary"
-                                                                        style="width:150px;"
-                                                                        type="submit">Yes, I approve
-                                                                </button>
-                                                                <button
-                                                                    class="btn btn-danger"
-                                                                    type="button"
-                                                                    style="width:150px;"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target="#collapseSubmit"
-                                                                    aria-expanded="false"
-                                                                    aria-controls="collapseSubmit"
-                                                                >
-                                                                    Not Yet
-                                                                </button>
-
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <button class="btn btn-primary" type="submit">Yes, I approve delivery</button>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSubmit" aria-expanded="false" aria-controls="collapse Submit">Not Yet</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
