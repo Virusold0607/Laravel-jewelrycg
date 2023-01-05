@@ -4,12 +4,11 @@
     @endsection
         <div class="container py-9">
             <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 class="fw-600 h4">Send Us A Message</h1>
+                </div>
                 <div class="col-xl-4 col-lg-6 col-md-8 mx-auto">
                     <form>
-                            <h1 class="contact100-form-title">
-                            Send Us A Message
-                            </h1>
-
                         <div class="row">
                             <div class="form-group col-6" data-validate="Type first name">
                                 <label class="mb-1" for="first-name">First name</label>
