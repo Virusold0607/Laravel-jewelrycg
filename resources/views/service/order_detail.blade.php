@@ -166,7 +166,6 @@
                                                 <form action="{{ route('services.order_complete') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="order_id" value="{{$order->id}}">
-                                                    <p>
                                                         <a
                                                             class="btn btn-primary"
                                                             data-bs-toggle="collapse"
@@ -177,7 +176,6 @@
                                                         >
                                                             Yes, I approve delivery
                                                         </a>
-                                                    </p>
                                                     <div class="collapse" id="collapseSubmit">
                                                         <div class="card card-body">
                                                             <p class="text-danger">Are you sure you approve the delivery?</p>
@@ -204,10 +202,12 @@
                                             </form>
                                                 <div style="width: 10px"></div>
                                                 @if ($order->revisions)
-                                                    <button type="button" class="btn btn-primary"
-                                                            data-bs-toggle="collapse" data-bs-target="#messageModal">
-                                                        I'm not ready yet
-                                                    </button>
+                                                  <div>
+                                                      <button type="button" class="btn btn-primary"
+                                                              data-bs-toggle="collapse" data-bs-target="#messageModal">
+                                                          I'm not ready yet
+                                                      </button>
+                                                  </div>
                                                 @endif
                                             </div>
                                         </div>
