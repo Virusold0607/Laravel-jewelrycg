@@ -166,10 +166,42 @@
                                                 <form action="{{ route('services.order_complete') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="order_id" value="{{$order->id}}">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        Yes, I approve delivery
-                                                    </button>
-                                                </form>
+                                                    <p>
+                                                        <a
+                                                            class="btn btn-primary"
+                                                            data-bs-toggle="collapse"
+                                                            href="#collapseSubmit"
+                                                            role="button"
+                                                            aria-expanded="false"
+                                                            aria-controls="collapseSubmit"
+                                                        >
+                                                            Yes, I approve delivery
+                                                        </a>
+                                                    </p>
+                                                    <div class="collapse" id="collapseSubmit">
+                                                        <div class="card card-body">
+                                                            <p class="text-danger">Are you sure you approve the delivery?</p>
+                                                            <div>
+                                                                <button class="btn btn-primary"
+                                                                        style="width:150px;"
+                                                                        type="submit">Yes, I approve</button>
+                                                                <button
+                                                                    class="btn btn-danger"
+                                                                    type="button"
+                                                                    style="width:150px;"
+                                                                    data-bs-toggle="collapse"
+                                                                    data-bs-target="#collapseSubmit"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="collapseSubmit"
+                                                                >
+                                                                    Not Yet
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                            </form>
                                                 <div style="width: 10px"></div>
                                                 @if ($order->revisions)
                                                     <button type="button" class="btn btn-primary"
