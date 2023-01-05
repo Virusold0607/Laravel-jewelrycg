@@ -281,7 +281,7 @@ class SellerController extends Controller
             'link' => '/services/order/' . $order->order_id
         ]);
 
-        return redirect()->back()->with("success", "Your service successfuly delivered!");
+        return redirect()->back()->with("success", "You have successfuly delivered the service!");
     }
 
     public function withdraw()
