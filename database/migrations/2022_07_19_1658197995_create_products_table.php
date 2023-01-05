@@ -41,6 +41,9 @@ class CreateProductsTable extends Migration
 					$table->integer('digital_download_assets_limit',)->nullable();
 					$table->string('product_attributes')->nullable();
 					$table->string('product_attribute_values')->nullable();
+					$table->integer('step_type')->default(0);
+            		$table->integer('step_group')->nullable()->default(0);
+            		$table->string('steps')->nullable()->default('');
 					$table->string('meta_title')->nullable();
 					$table->text('meta_description')->nullable();
 					$table->datetime('published_at')->nullable();
