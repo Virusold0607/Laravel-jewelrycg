@@ -251,9 +251,8 @@
 
                                 <div class="seperated-menu d-flex py-2 border-top">
                                     <ul>
-                                        <li><a class="dropdown-item" href="#">Help</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('contactus.index') }}">Send
-                                                Feedback</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('contactus.index') }}">Help</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('contactus.index') }}">Send Feedback</a></li>
                                     </ul>
                                 </div>
                             </ul>
