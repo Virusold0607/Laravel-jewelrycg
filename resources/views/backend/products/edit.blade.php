@@ -491,7 +491,7 @@
                                 <span class="badge btn-success mb-2"> 3d model attached </span>
                             </div>
                             <div class="w-100">
-                                <span class="mb-2">{{$product->modelpreview->file_original_name . "." . $product->modelpreview->extension}}</span>
+                                <span class="mb-2 d-block">{{$product->modelpreview->file_original_name . "." . $product->modelpreview->extension}}</span>
                             </div>
                         @else
                             <div class="w-100">
@@ -502,7 +502,7 @@
                         <label class="btn text-primary p-0" id="getFileManagerModel">Select 3d model</label>
                             <input class="d-none" id="fileManagerModelId" value="{{ $product->product_3dpreview }}" name="product_3dpreview">
                             <div class="form-group mt-2">
-                                <p>Position</p>
+                                <span class="mb-2">Position</span>
                                 <input type="text" class="form-control" value="{{ $product->product_3dpreview_xyz }}" placeholder="Example 0.04139deg 127.6deg" name="product_3dpreview_xyz">
                             </div>
                     </div>
