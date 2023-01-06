@@ -14,7 +14,7 @@
                                     <div id="navbar-{{$i}}" class="nav-collapse collapse show">
                                         @foreach ($lesson->contents as $j => $content)
                                         <div class="d-flex align-items-center icon-{{$i}}-{{$j}}">
-                                            <a class="nav-link fs-16 fw-700 lesson" role="button" href="{{ route('courses.take', ['slug'=>Request::route('slug'), 'content' => $content->id]) }}">{{ $content->name }}</a>
+                                            <a class="nav-link fs-16 fw-700 lesson @if ($content->history) text-success @endif" role="button" href="{{ route('courses.take', ['slug'=>Request::route('slug'), 'content' => $content->id]) }}">{{ $content->name }}</a>
                                             @if ($content->history)
                                             <i class="bi bi-check-lg text-success ml-5px"></i>
                                             @endif
