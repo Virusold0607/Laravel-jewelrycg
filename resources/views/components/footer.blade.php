@@ -40,10 +40,10 @@
                     </h4>
                     <ul class="list-unstyled">
                         <ul class="list-unstyled">
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">F.A.Q.s</a></li>
+                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/knowledge-base/faqs">F.A.Q.s</a></li>
                             <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Guides</a></li>
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Contact Us</a></li>
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Knowledge Base</a></li>
+                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/contact-us">Contact Us</a></li>
+                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/knowledge-base">Knowledge Base</a></li>
                         </ul>
                     </ul>
                 </div>
