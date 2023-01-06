@@ -487,10 +487,16 @@
                     <div class="card-body">
                         
                         @if ($product->product_3dpreview != null)
-                            <span class="badge btn-success mb-2"> 3d model attached </span>
-                            <span class="mb-2">{{$product->modelpreview->file_original_name . "." . $product->modelpreview->extension}}</span>
+                            <div class="w-100">
+                                <span class="badge btn-success mb-2"> 3d model attached </span>
+                            </div>
+                            <div class="w-100">
+                                <span class="mb-2">{{$product->modelpreview->file_original_name . "." . $product->modelpreview->extension}}</span>
+                            </div>
                         @else
-                            <span class="badge btn-danger mb-2"> No 3d model attached</span>
+                            <div class="w-100">
+                                <span class="badge btn-danger mb-2"> No 3d model attached</span>
+                            </div>
                         @endif
 
                         <label class="btn text-primary p-0" id="getFileManagerModel">Select 3d model</label>
