@@ -16,7 +16,7 @@
                                         <div class="d-flex align-items-center icon-{{$i}}-{{$j}}">
                                             <a class="nav-link fs-16 fw-700 lesson" role="button" href="{{ route('courses.take', ['slug'=>Request::route('slug'), 'content' => $content->id]) }}">{{ $content->name }}</a>
                                             @if ($content->history)
-                                            <i class="bi bi-check-lg text-success"></i>
+                                            <i class="bi bi-check-lg text-success ml-5px"></i>
                                             @endif
                                         </div>
                                         @endforeach
