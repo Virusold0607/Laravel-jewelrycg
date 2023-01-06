@@ -496,6 +496,7 @@
                             <label class="btn text-primary p-0" id="getFileManagerModel">Select 3d model</label>
                             <input class="d-none" id="fileManagerModelId" value="{{ $product->product_3dpreview }}" name="product_3dpreview">
                             <div class="form-group mt-2">
+                                <p>Position</p>
                                 <input type="text" class="form-control" value="{{ $product->product_3dpreview_xyz }}" placeholder="Example 0.04139deg 127.6deg" name="product_3dpreview_xyz">
                             </div>
                     </div>
