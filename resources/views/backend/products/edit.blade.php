@@ -493,12 +493,10 @@
                             <span class="badge btn-danger"> No 3d model attached</span>
                             @endif
                             </p>
-                            <label class="btn text-primary mt-2 p-0" id="getFileManagerModel">Select 3d model</label>
+                            <label class="btn text-primary p-0" id="getFileManagerModel">Select 3d model</label>
                             <input class="d-none" id="fileManagerModelId" value="{{ $product->product_3dpreview }}" name="product_3dpreview">
-                            <div class="form-group">
-                                <input type="text" class="form-control" value="{{ $product->product_3dpreview_xyz }}"
-                                       placeholder="Example 0.04139deg 127.6deg"
-                                       name="product_3dpreview_xyz">
+                            <div class="form-group mt-2">
+                                <input type="text" class="form-control" value="{{ $product->product_3dpreview_xyz }}" placeholder="Example 0.04139deg 127.6deg" name="product_3dpreview_xyz">
                             </div>
                     </div>
                 </div>
