@@ -17,3 +17,4 @@ yarn-error.log
 /public/image
 /nginx.conf
 composer.lock
+/public/ckfinder/userfiles
