@@ -9,10 +9,10 @@
                 <div class="mt-3 mb-5 d-block">
                     <ul class="list-inline social fw-600">
                         <li class="list-inline-item">
-                            <a href="https://www.twitter.com/districtties" target="_blank" class="twitter"><i class="bi bi-twitter fs-20"></i></a>
+                            <a href="https://www.twitter.com/jewelrycg_" target="_blank" class="twitter"><i class="bi bi-twitter fs-20"></i></a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="https://www.instagram.com/districtties/" target="_blank" class="instagram"><i class="bi bi-instagram fs-20"></i></a>
+                            <a href="https://www.instagram.com/jewelrycgmodels" target="_blank" class="instagram"><i class="bi bi-instagram fs-20"></i></a>
                         </li>
                         <li class="list-inline-item">
                             <a href="https://www.youtube.com/channel/UCrkR2WMyGEmo2p2Zfx3nYqw" target="_blank" class="youtube"><i class="bi bi-youtube fs-20"></i></a>
@@ -26,10 +26,10 @@
                         Resources
                     </h4>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Cookie Policy</a></li>
-                        <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Return Policy</a></li>
-                        <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Privacy Policy</a></li>
-                        <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Terms & Conditions</a></li>
+                        <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/cookie-policy">Cookie Policy</a></li>
+                        <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/legal/return-policy">Return Policy</a></li>
+                        <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/legal/privacy-policy">Privacy Policy</a></li>
+                        <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/legal/terms-conditions">Terms & Conditions</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,10 +40,10 @@
                     </h4>
                     <ul class="list-unstyled">
                         <ul class="list-unstyled">
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">F.A.Q.s</a></li>
+                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/knowledge-base/faqs">F.A.Q.s</a></li>
                             <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Guides</a></li>
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Contact Us</a></li>
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Knowledge Base</a></li>
+                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/contact-us">Contact Us</a></li>
+                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/knowledge-base">Knowledge Base</a></li>
                         </ul>
                     </ul>
                 </div>

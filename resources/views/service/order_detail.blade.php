@@ -48,7 +48,7 @@
     <div class="container">
         <div class="col-lg-11 col-md-10 py-9 mx-auto checkout-wrap">
             <div class="row">
-                <div class="col-9">
+                <div class="col-lg-9">
                     @include('includes.validation-form')
                     @if (session('success'))
                         <!--<div class="alert alert-success" role="alert">{{session('success')}}</div>-->
@@ -71,13 +71,15 @@
                         <div class="card-body">
                             <div class="timeline-item pb-3 mb-3 border-bottom">
                                 <i class="bi bi-clipboard-check p-1"></i>
-                                <span class="">You placed the order {{ date('F d, Y h:i A', strtotime($order->created_at)) }}</span>
+                                <span
+                                    class="">You placed the order {{ date('F d, Y h:i A', strtotime($order->created_at)) }}</span>
                             </div>
                             @if ($order->status != 0)
                                 @if (count($requirements) > 0)
                                     <div class="timeline-item pb-3 mb-3 border-bottom">
                                         <i class="bi bi-clipboard-check p-1"></i>
-                                        <span class="">You sent the requirements {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
+                                        <span
+                                            class="">You sent the requirements {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
                                     </div>
                                 @endif
 
@@ -122,17 +124,19 @@
                             @if ($order->status != 0)
                                 <div class="timeline-item pb-3 mb-3 border-bottom">
                                     <i class="bi bi-clipboard-check p-1"></i>
-                                    <span class="">The order started {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
+                                    <span
+                                        class="">The order started {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
                                 </div>
                                 <div class="timeline-item pb-3 mb-3 border-bottom">
                                     <i class="bi bi-clipboard-check p-1"></i>
-                                    <span class="">Your delivery date was updated to {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
+                                    <span
+                                        class="">Your delivery date was updated to {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
                                 </div>
 
                                 @if (count($deliveries) > 0)
                                     <div class="timeline-item pb-3 mb-3 border-bottom">
                                         <i class="bi bi-clipboard-check p-1"></i>
-                                        <span class=""><b>{{ $seller->first_name . " " . $seller->last_name }}</b> dellvered the order {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
+                                        <span class=""><b>{{ $seller->first_name . " " . $seller->last_name }}</b> delivered the order {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
                                     </div>
                                 @endif
                             @endif
@@ -162,21 +166,35 @@
                                             Are you pleased with the delivery and ready to approve it?
                                         </div>
                                         <div class="card-body">
-                                            <div class="d-flex flex-row">
+                                            <div class="row">
                                                 <form action="{{ route('services.order_complete') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="order_id" value="{{$order->id}}">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        Yes, I approve delivery
-                                                    </button>
+                                                    <div class="row">
+                                                        <div class="col-auto mb-2">
+                                                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseSubmit" role="button" aria-expanded="false" aria-controls="collapseSubmit">I approve delivery</a>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            @if ($order->revisions)
+                                                                <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#messageModal">I'm not ready yet</button>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="collapse" id="collapseSubmit">
+                                                        <div class="card card-body mt-3">
+                                                            <p class="text-danger">Are you sure you approve the delivery?</p>
+
+                                                            <div class="row">
+                                                                <div class="col-auto mb-2">
+                                                                    <button class="btn btn-primary" type="submit">Yes, I approve delivery</button>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSubmit" aria-expanded="false" aria-controls="collapse Submit">Not Yet</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </form>
-                                                <div style="width: 10px"></div>
-                                                @if ($order->revisions)
-                                                    <button type="button" class="btn btn-primary"
-                                                            data-bs-toggle="collapse" data-bs-target="#messageModal">
-                                                        I'm not ready yet
-                                                    </button>
-                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -212,7 +230,8 @@
                                 @elseif ($order->status != 5)
                                     <div class="timeline-item pb-3 mb-3 border-bottom">
                                         <i class="bi bi-clipboard-check p-1"></i>
-                                        <span class="">You requested a revision on this delivery {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
+                                        <span
+                                            class="">You requested a revision on this delivery {{ date('F d, Y h:i A', strtotime($order->original_delivery_time)) }}</span>
                                     </div>
                                     <div class="card">
                                         <div class="card-header">Revision #{{$key + 1}}</div>
@@ -231,7 +250,8 @@
                                 @if (count($order->review))
                                     <div class="timeline-item pb-3 mb-3 border-bottom">
                                         <i class="bi bi-clipboard-check p-1"></i>
-                                        <span class="">You left a review to service at {{ date('F d, Y h:i A', strtotime($order->review[0]->created_at)) }}</span>
+                                        <span
+                                            class="">You left a review to service at {{ date('F d, Y h:i A', strtotime($order->review[0]->created_at)) }}</span>
                                     </div>
                                     <div class="card">
                                         <div class="card-header">
@@ -241,10 +261,10 @@
                                             <div class="rate pb-3">
                                                 @for ($i = 5; $i > 0; $i--)
                                                     <input
-                                                            type="radio" id="star{!! $i !!}" class="rate" name="rating1"
-                                                            value="{!! $i !!}"
-                                                            {{ $order->review[0]->rating == $i ? "checked" : "" }}
-                                                            disabled
+                                                        type="radio" id="star{!! $i !!}" class="rate" name="rating1"
+                                                        value="{!! $i !!}"
+                                                        {{ $order->review[0]->rating == $i ? "checked" : "" }}
+                                                        disabled
                                                     />
                                                     <label for="star{!! $i !!}">{{ $i }}</label>
                                                 @endfor
@@ -268,10 +288,10 @@
                                                 <div class="rate pb-3">
                                                     @for ($i = 5; $i > 0; $i--)
                                                         <input
-                                                                type="radio" id="star{!! $i !!}" class="rate"
-                                                                name="rating2" value="{!! $i !!}"
-                                                                {{ $order->review[1]->rating == $i ? "checked" : "" }}
-                                                                disabled
+                                                            type="radio" id="star{!! $i !!}" class="rate"
+                                                            name="rating2" value="{!! $i !!}"
+                                                            {{ $order->review[1]->rating == $i ? "checked" : "" }}
+                                                            disabled
                                                         />
                                                         <label for="star{!! $i !!}">{{ $i }}</label>
                                                     @endfor
@@ -303,8 +323,9 @@
                                             <input type="hidden" name="order_id" value="{{ $order->id }}">
                                             @foreach ($requirements as $requirement)
                                                 <div class="mb-3">
-                                                    <label class="fs-4 mb-2 {{ $requirement->required ? "required" : "" }}"
-                                                           for="answer-{{$requirement->id}}">- {{ $requirement->question }}</label>
+                                                    <label
+                                                        class="fs-4 mb-2 {{ $requirement->required ? "required" : "" }}"
+                                                        for="answer-{{$requirement->id}}">- {{ $requirement->question }}</label>
                                                     @if($requirement->type == 0)
                                                         <div class="form-group">
                                                             <textarea type="text" class="form-control"
@@ -313,29 +334,35 @@
                                                                       placeholder="Type question here" {{ $requirement->required ? "required" : "" }}></textarea>
                                                         </div>
                                                     @elseif($requirement->type == 1)
-                                                        <div class="form-group {{ $requirement->required ? "required" : "" }}">
+                                                        <div
+                                                            class="form-group {{ $requirement->required ? "required" : "" }}">
                                                             <input class="answer" type="hidden"
                                                                    id="answer-{{$requirement->id}}"
                                                                    data-id="{{$requirement->id}}" name="answer[]">
-                                                            <div class="form-control invalid attach-dropzone dropzone attach-{{$requirement->id}}"
-                                                                 data-id="{{$requirement->id}}"></div>
+                                                            <div
+                                                                class="form-control invalid attach-dropzone dropzone attach-{{$requirement->id}}"
+                                                                data-id="{{$requirement->id}}"></div>
                                                         </div>
                                                     @elseif($requirement->type == 2)
-                                                        <div class="form-group {{ $requirement->required ? "required" : "" }}">
+                                                        <div
+                                                            class="form-group {{ $requirement->required ? "required" : "" }}">
                                                             <input class="answer" type="hidden"
                                                                    id="answer-{{$requirement->id}}"
                                                                    data-id="{{$requirement->id}}" name="answer[]">
                                                             @foreach($requirement->choices as $key => $choice)
-                                                                <div class="select-option form-row-between invalid single">{{$choice->choice}}</div>
+                                                                <div
+                                                                    class="select-option form-row-between invalid single">{{$choice->choice}}</div>
                                                             @endforeach
                                                         </div>
                                                     @else
-                                                        <div class="form-group {{ $requirement->required ? "required" : "" }}">
+                                                        <div
+                                                            class="form-group {{ $requirement->required ? "required" : "" }}">
                                                             <input class="answer" type="hidden"
                                                                    id="answer-{{$requirement->id}}"
                                                                    data-id="{{$requirement->id}}" name="answer[]">
                                                             @foreach($requirement->choices as $key => $choice)
-                                                                <div class="select-option form-row-between invalid multi">{{$choice->choice}}</div>
+                                                                <div
+                                                                    class="select-option form-row-between invalid multi">{{$choice->choice}}</div>
                                                             @endforeach
                                                         </div>
                                                     @endif
@@ -353,7 +380,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3">
                     @if ($order->status == 1 || $order->status == 2)
                         <div class="card mb-4 time-left">
                             <div class="card-header" id="count_title">Time left to deliver</div>
@@ -391,7 +418,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="fs-18 fw-700">{{ $order->service->name }}</div>
-                                </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -425,156 +452,156 @@
     @section('js')
         <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
         <script>
-          $('#message').trumbowyg();
+            $('#message').trumbowyg();
 
-          var countDownDate = new Date("{{ $order->original_delivery_time }}".replace(" ", "T")).getTime()
+            var countDownDate = new Date("{{ $order->original_delivery_time }}".replace(" ", "T")).getTime()
 
-          function padLeadingZeros(num, size) {
-            if (!num) return "00";
-            if (num < 0) return "00";
-            var s = num + "";
-            while (s.length < size) s = "0" + s;
-            return s;
-          }
-
-          var x = setInterval(function () {
-
-            // Get today's date and time
-            var now = new Date().getTime();
-
-            // Find the distance between now and the count down date
-            var distance = countDownDate - now;
-
-            // Time calculations for days, hours, minutes and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            $('#count_day').text(padLeadingZeros(days, 2));
-            $('#count_hour').text(padLeadingZeros(hours, 2));
-            $('#count_min').text(padLeadingZeros(minutes, 2));
-            $('#count_sec').text(padLeadingZeros(seconds, 2));
-            // If the count down is finished, write some text
-            if (distance < 0) {
-              clearInterval(x);
-              $('#count_title').text("Delivery time has already passed");
+            function padLeadingZeros(num, size) {
+                if (!num) return "00";
+                if (num < 0) return "00";
+                var s = num + "";
+                while (s.length < size) s = "0" + s;
+                return s;
             }
-          }, 1000);
 
-          var uploadedFileData = [];
-          Dropzone.autoDiscover = false;
-          $(document).ready(function () {
-            $(".attach-dropzone").dropzone({
-              method: 'post',
-              url: "{{ route('seller.file.store') }}",
-              dictDefaultMessage: "Select File",
-              paramName: "file",
-              maxFilesize: 2,
-              clickable: true,
-              addRemoveLinks: true,
-              headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-              },
-              success: function (file, response) {
-                var answerInput = $($(this)[0].element).parent().find(".answer");
-                var inputDiv = $($(this)[0].element).parent().find(".attach-dropzone");
-                var lastFiles = answerInput.val() ? answerInput.val().split(',') : [];
-                lastFiles.push(response.id);
+            var x = setInterval(function () {
 
-                answerInput.val(lastFiles.join(','));
-                response.requirementId = answerInput.data("id");
-                uploadedFileData.push(response);
-                inputDiv.removeClass("invalid").removeClass("valid").addClass("valid");
-              },
-              removedfile: function (file) {
-                var answerInput = $($(this)[0].element).parent().find(".answer");
-                var inputDiv = $($(this)[0].element).parent().find(".attach-dropzone");
-                for (var i = 0; i < uploadedFileData.length; ++i) {
-                  if (!uploadedFileData[i]) {
-                    continue;
-                  }
-                  if (uploadedFileData[i].file_original_name + "." + uploadedFileData[i].extension == file.name && uploadedFileData[i].requirementId == answerInput.data("id")) {
-                    $.ajax({
-                      url: `/seller/file/destroy/${uploadedFileData[i].id}`,
-                      type: 'POST',
-                      headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                      },
-                      success: function (result) {
-                        var lastValue = answerInput.val().split(',');
-                        var removed = lastValue.filter((item) => item != uploadedFileData[i].id);
-                        answerInput.val(removed);
-                        $(file.previewElement).remove();
-                        uploadedFileData.splice(i, 1)
+                // Get today's date and time
+                var now = new Date().getTime();
 
-                        if (removed.length == 0) {
-                          inputDiv.removeClass("invalid").removeClass("valid").addClass("invalid");
-                        }
-                      },
-                      error: function (error) {
-                        return false;
-                      }
-                    });
-                    break;
-                  }
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                $('#count_day').text(padLeadingZeros(days, 2));
+                $('#count_hour').text(padLeadingZeros(hours, 2));
+                $('#count_min').text(padLeadingZeros(minutes, 2));
+                $('#count_sec').text(padLeadingZeros(seconds, 2));
+                // If the count down is finished, write some text
+                if (distance < 0) {
+                    clearInterval(x);
+                    $('#count_title').text("Delivery time has already passed");
                 }
-              }
+            }, 1000);
+
+            var uploadedFileData = [];
+            Dropzone.autoDiscover = false;
+            $(document).ready(function () {
+                $(".attach-dropzone").dropzone({
+                    method: 'post',
+                    url: "{{ route('seller.file.store') }}",
+                    dictDefaultMessage: "Select File",
+                    paramName: "file",
+                    maxFilesize: 256,
+                    clickable: true,
+                    addRemoveLinks: true,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    success: function (file, response) {
+                        var answerInput = $($(this)[0].element).parent().find(".answer");
+                        var inputDiv = $($(this)[0].element).parent().find(".attach-dropzone");
+                        var lastFiles = answerInput.val() ? answerInput.val().split(',') : [];
+                        lastFiles.push(response.id);
+
+                        answerInput.val(lastFiles.join(','));
+                        response.requirementId = answerInput.data("id");
+                        uploadedFileData.push(response);
+                        inputDiv.removeClass("invalid").removeClass("valid").addClass("valid");
+                    },
+                    removedfile: function (file) {
+                        var answerInput = $($(this)[0].element).parent().find(".answer");
+                        var inputDiv = $($(this)[0].element).parent().find(".attach-dropzone");
+                        for (var i = 0; i < uploadedFileData.length; ++i) {
+                            if (!uploadedFileData[i]) {
+                                continue;
+                            }
+                            if (uploadedFileData[i].file_original_name + "." + uploadedFileData[i].extension == file.name && uploadedFileData[i].requirementId == answerInput.data("id")) {
+                                $.ajax({
+                                    url: `/seller/file/destroy/${uploadedFileData[i].id}`,
+                                    type: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                                    },
+                                    success: function (result) {
+                                        var lastValue = answerInput.val().split(',');
+                                        var removed = lastValue.filter((item) => item != uploadedFileData[i].id);
+                                        answerInput.val(removed);
+                                        $(file.previewElement).remove();
+                                        uploadedFileData.splice(i, 1)
+
+                                        if (removed.length == 0) {
+                                            inputDiv.removeClass("invalid").removeClass("valid").addClass("invalid");
+                                        }
+                                    },
+                                    error: function (error) {
+                                        return false;
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                    }
+                })
+
+                $('.select-option.multi').click(function () {
+                    $(this).toggleClass("selected")
+                    if ($(this).parent().find('.selected').length == 0) {
+                        $(this).parent().children().addClass("invalid")
+                    } else {
+                        $(this).parent().children().removeClass("invalid")
+                    }
+
+                    setInput(this);
+                })
+
+                $('.select-option.single').click(function () {
+                    if ($(this).hasClass("selected")) {
+                        $(this).parent().children().removeClass("selected")
+                    } else {
+                        $(this).parent().children().removeClass("selected")
+                        $(this).addClass("selected")
+                    }
+
+                    if ($(this).parent().find('.selected').length == 0) {
+                        $(this).parent().children().addClass("invalid")
+                    } else {
+                        $(this).parent().children().removeClass("invalid")
+                    }
+
+                    setInput(this);
+                })
+
+                $('#question-form').submit(function (event) {
+                    if ($(this).find('.required .invalid').length) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    $(this).addClass('was-validated');
+                })
             })
 
-            $('.select-option.multi').click(function () {
-              $(this).toggleClass("selected")
-              if ($(this).parent().find('.selected').length == 0) {
-                $(this).parent().children().addClass("invalid")
-              } else {
-                $(this).parent().children().removeClass("invalid")
-              }
-
-              setInput(this);
-            })
-
-            $('.select-option.single').click(function () {
-              if ($(this).hasClass("selected")) {
-                $(this).parent().children().removeClass("selected")
-              } else {
-                $(this).parent().children().removeClass("selected")
-                $(this).addClass("selected")
-              }
-
-              if ($(this).parent().find('.selected').length == 0) {
-                $(this).parent().children().addClass("invalid")
-              } else {
-                $(this).parent().children().removeClass("invalid")
-              }
-
-              setInput(this);
-            })
-
-            $('#question-form').submit(function (event) {
-              if ($(this).find('.required .invalid').length) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-
-              $(this).addClass('was-validated');
-            })
-          })
-
-          function setInput(item) {
-            var inputItem = $(item).parent().find('input.answer');
-            items = $(item).parent().find('.selected');
-            if (items.length == 0) {
-              inputItem.val("");
-            } else if (items.length == 1) {
-              inputItem.val(items.text());
-            } else {
-              itemTexts = [];
-              for (const one of items) {
-                itemTexts.push($(one).text());
-              }
-              inputItem.val(itemTexts.join(','));
+            function setInput(item) {
+                var inputItem = $(item).parent().find('input.answer');
+                items = $(item).parent().find('.selected');
+                if (items.length == 0) {
+                    inputItem.val("");
+                } else if (items.length == 1) {
+                    inputItem.val(items.text());
+                } else {
+                    itemTexts = [];
+                    for (const one of items) {
+                        itemTexts.push($(one).text());
+                    }
+                    inputItem.val(itemTexts.join(','));
+                }
             }
-          }
         </script>
     @endsection
 

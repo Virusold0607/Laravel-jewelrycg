@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 class UserInfoMain extends Component
 {
 
-    public function __construct(public bool $edit = false, public User $user, public $shipping, public $billing, public $tab = "account")
+    public function __construct(public bool $edit = false, public User $user,public $countries,public $shipping, public $billing, public $tab = "account")
     {
     }
 

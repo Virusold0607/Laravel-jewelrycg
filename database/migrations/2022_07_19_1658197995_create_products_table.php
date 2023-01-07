@@ -35,11 +35,15 @@ class CreateProductsTable extends Migration
 					$table->string('product_thumbnail')->nullable();
 					$table->text('product_images')->nullable();
 					$table->text('product_3dpreview')->nullable();
+					$table->string('product_3dpreview_xyz',)->nullable();
 					$table->text('digital_download_assets')->nullable();
 					$table->integer('digital_download_assets_count',)->nullable();
 					$table->integer('digital_download_assets_limit',)->nullable();
 					$table->string('product_attributes')->nullable();
 					$table->string('product_attribute_values')->nullable();
+					$table->integer('step_type')->default(0);
+            		$table->integer('step_group')->nullable()->default(0);
+            		$table->string('steps')->nullable()->default('');
 					$table->string('meta_title')->nullable();
 					$table->text('meta_description')->nullable();
 					$table->datetime('published_at')->nullable();

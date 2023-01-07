@@ -479,23 +479,32 @@
                 <div class="card mb-3 mb-4">
                     <!-- Header -->
                     <div class="card-header">
-                        <h4 class="card-header-title mb-0">3D Model</h4>
+                        <h4 class="card-header-title mb-0">3D Model AR Preview</h4>
                     </div>
                     <!-- End Header -->
 
                     <!-- Body -->
                     <div class="card-body">
-                        <p>
-                            @if ($product->product_3dpreview != null)
-                                <span class="badge btn-success"> 3d model attached </span>
-                        <p>{{$product->modelpreview->file_original_name . "." . $product->modelpreview->extension}}</p>
+                        
+                        @if ($product->product_3dpreview != null)
+                            <div class="w-100">
+                                <span class="badge btn-success mb-2"> 3d model attached </span>
+                            </div>
+                            <div class="w-100">
+                                <span class="mb-2 d-block">{{$product->modelpreview->file_original_name . "." . $product->modelpreview->extension}}</span>
+                            </div>
                         @else
-                            <span class="badge btn-danger"> No 3d model attached</span>
-                            @endif
-                            </p>
-                            <label class="btn text-primary mt-2 p-0" id="getFileManagerModel">Select 3d model</label>
-                            <input type="d-none" id="fileManagerModelId" value="{{ $product->product_3dpreview }}"
-                                   name="product_3dpreview">
+                            <div class="w-100">
+                                <span class="badge btn-danger mb-2"> No 3d model attached</span>
+                            </div>
+                        @endif
+
+                        <label class="btn text-primary p-0" id="getFileManagerModel">Select 3d model</label>
+                            <input class="d-none" id="fileManagerModelId" value="{{ $product->product_3dpreview }}" name="product_3dpreview">
+                            <div class="form-group mt-2">
+                                <span class="mb-2">Position</span>
+                                <input type="text" class="form-control" value="{{ $product->product_3dpreview_xyz }}" placeholder="Example 0.04139deg 127.6deg" name="product_3dpreview_xyz">
+                            </div>
                     </div>
                 </div>
                 <!-- Card -->

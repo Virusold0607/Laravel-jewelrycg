@@ -28,10 +28,10 @@
                         @endif
 
                         <div class="p-3 border">
-                            <h1 class="text-black mb-4">Course Syllabus</h1>
+                            <h1 class="text-black fs-20 fw-700 text-uppercase border-bottom pb-2 mb-4">Course Syllabus</h1>
                             <div class="course-content-list">
                                 @foreach ($course->lessons as $lesson)
-                                    <h3 class="fw-700">{{ $lesson->name }}</h3>
+                                    <h3 class="fs-20 fw-700">{{ $lesson->name }}</h3>
                                     <ul>
                                         @foreach ($lesson->contents as $content)
                                             <li>{{ $content->name }}</li>

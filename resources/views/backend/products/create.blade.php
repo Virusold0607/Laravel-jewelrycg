@@ -341,7 +341,7 @@ $arrSelected = explode(',', old('steps'));
                 <div class="card mb-3 mb-4">
                     <!-- Header -->
                     <div class="card-header">
-                        <h4 class="card-header-title mb-0">3D Model</h4>
+                        <h4 class="card-header-title mb-0">3D Model AR Preview</h4>
                     </div>
                     <!-- End Header -->
 

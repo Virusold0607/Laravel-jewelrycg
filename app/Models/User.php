@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Message;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Message;
 use Laravel\Sanctum\HasApiTokens;
 use Stripe\Service\OrderService;
 
@@ -108,5 +108,15 @@ class User extends Authenticatable implements MustVerifyEmail
         else {
             return '-';
         }
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->uploads->getImageOptimizedFullName(100,100);
+    }
+
+    public function chatMessages()
+    {
+        return $this->hasMany(Message::class,'user_id');
     }
 }

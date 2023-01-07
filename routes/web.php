@@ -428,6 +428,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/check/{id}', 'check')->name('check');
         Route::post('/overview', 'overview')->name('overview');
     });
+
+    Route::post('/api-upload-file', [UploadController::class, 'apiUpload'])->name('api_upload');
+    Route::get('/download-upload-file/{id}', [UploadController::class, 'downloadFile'])->name('download_file');
 });
 
 //services
@@ -571,6 +574,7 @@ Route::group(['controller' => CartController::class], function () {
 
      Route::get('/chat/{conversation_id}',[ChatController::class, 'create_chat_room'])->name('create_chat_room');
      Route::post('/chat/message_log',[ChatController::class, 'message_log'])->name('chat.message_log');
+     Route::post('/chat/information',[ChatController::class, 'getChatInFormationBy'])->name('chat.information');
 
     });
 });
@@ -617,6 +621,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/disable', 'disable')->name('disable');
         Route::get('/{id_user}', 'index')->name('index');
     });
+});
+
+// contact
+
+Route::prefix('contact-us')->name('contactus.')->controller(\App\Http\Controllers\ContactController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
 });
 
 // track order page

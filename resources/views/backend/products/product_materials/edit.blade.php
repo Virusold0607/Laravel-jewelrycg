@@ -134,7 +134,7 @@
                                            value="{{ $product_material->product_attribute_value_id }}">
                                 </td>
                                 <td>
-                                    <input type="number" name="material_weight[]"
+                                    <input type="number" inputmode="decimal" step="0.01" name="material_weight[]"
                                            value="{{ $product_material->material_weight }}" class="form-control">
                                 </td>
                                 <td>
@@ -395,7 +395,7 @@
       let add_metal_product_materials = function () {
         let metal_attribute_values = $('#metal_attribute_values_select').val().length ? $('#metal_attribute_values_select').val() : [0]
         let metal_material_type_value = $('#metal_material_type_select').val();
-        debugger
+        // debugger
         for (let i = 0; i < metal_attribute_values.length; i++) {
           new_html = '';
           /* if product_material already existed */
@@ -415,7 +415,7 @@
               '<input type="hidden" name="metal_product_attribute_value_id[]" value="' + metal_attribute_values[i] + '">' +
               '</td>';
 
-            new_html += '<td><input class="form-control" type="number" name="material_weight[]" value="0"></td>'
+            new_html += '<td><input class="form-control" inputmode="decimal" type="number" step="0.01" name="material_weight[]" value="0"></td>'
             new_html += '<td><button class="form-control btn btn-danger btn-sm" onclick="delete_current_metal_row(this)">Delete</button></td>'
 
             new_html += '</tr>';

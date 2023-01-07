@@ -2,7 +2,7 @@
 <div class="card mb-4 p-0">
     <div class="card-header">User Information</div>
     <div class="card-body">
-        @if ($edit) 
+        @if ($edit)
             <div class="mb-2">
                 <label for="name">First Name:</label>
                 <input type="text" name="first_name" id="first_name" value="{{ old('first_name') ?? $user->first_name }}"
@@ -89,9 +89,15 @@
         </div>
         <div class="mb-2">
             <label for="shipping_country">Country:</label>
-            <input {{ $edit ? null : 'disabled' }} type="text" name="shipping_country" id="shipping_country"
+            <select name="shipping_country" id="shipping_country" class="form-control" {{ $edit ? null : 'disabled' }}
                 value="{{ old('country') ?? ($shipping->country ?? '') }}"
-                placeholder="{{ $shipping->country ?? '' }}" class="form-control">
+            >
+                <option value="">Choose Country</option>
+                @foreach($countries as $country)
+                    <option {{ (old('country') ?? ($shipping->country ?? '')) == $country["code"] ?"selected" :""}}
+                            value="{{$country["code"]}}">{{$country["name"]}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 </div><!-- end shipping-address-->
@@ -130,9 +136,15 @@
         </div>
         <div class="mb-2">
             <label for="billing_country">Country:</label>
-            <input {{ $edit ? null : 'disabled' }} type="text" name="billing_country" id="billing_country"
-                value="{{ old('country') ?? ($billing->country ?? '') }}"
-                placeholder="{{ $billing->country ?? '' }}" class="form-control">
+            <select name="billing_country" id="billing_country" class="form-control" {{ $edit ? null : 'disabled' }}
+            value="{{ old('country') ?? ($billing->country ?? '') }}"
+            >
+                <option value="">Choose Country</option>
+                @foreach($countries as $country)
+                    <option {{ (old('country') ?? ($billing->country ?? '')) == $country["code"] ?"selected" :""}}
+                            value="{{$country["code"]}}">{{$country["name"]}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 </div><!-- end billing-address-->
