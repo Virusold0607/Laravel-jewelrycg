@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="desc">Post:</label>
-                            <textarea name="post" id="desc" rows="3" class="form-control">
+                            <textarea name="post"  rows="3" class="form-control editor">
                                 {{ $post->post }}
                             </textarea>
                         </div>
@@ -177,6 +177,59 @@
 @endsection
 
 @section('js_content')
+    <script src="{{ asset('ckeditor-build/classic-ckeditor5/build/ckeditor.js') }}"></script>
+    <script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
+    <script>
+        createInlineEditor(".editor")
+        function createInlineEditor (selector) {
+            return new Promise(((resolve, reject) => {
+                ClassicEditor.create(document.querySelector(selector), {
+                    toolbar: [
+                        'heading',
+                        'CKFinder',
+                        '|',
+                        'bold',
+                        'italic',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'indent',
+                        'outdent',
+                        '|',
+                        'code',
+                        'codeBlock',
+                        'imageUpload',
+                        'blockQuote',
+                        'insertTable',
+                        'mediaEmbed',
+                        'undo',
+                        'redo'
+                    ],
+                    image: {
+                        toolbar: [
+                            'imageTextAlternative',
+                            'imageStyle:full',
+                            'imageStyle:side'
+                        ]
+                    },
+
+                    ckfinder: {
+                        openerMethod: 'popup',
+                        uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+                        options: {
+                            resourceType: 'Images',
+                        }
+                    }
+                }).then(data => resolve(data)).catch(error => reject(error))
+                    .catch( function( error ) {
+                        console.error( error );
+                    } );
+
+            }))
+        }
+
+    </script>
     <script>
         $(document).ready(function() {
             $('#desc').trumbowyg();
