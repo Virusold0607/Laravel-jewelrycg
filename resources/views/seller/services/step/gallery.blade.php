@@ -41,26 +41,22 @@
                     <input type="hidden" id="gallery" name="gallery" value="{{ null !== old('gallery') ? old('gallery') : (isset($data->gallery) ? $data->gallery : "") }}">
                     @include('includes.validation-form')
                     <div class="card mb-3 mb-4">
-                        <div class="mb-4">
-                            <label for="name" class="w-100 mb-2 fw-700">Thumbnail</label>
-                            <p>Select a thumbnail for your service 16:9 aspect ratio</p>
-                        </div>
-
-                        <!-- Body -->
                         <div class="card-body">
+                            <div class="mb-4">
+                                <label for="name" class="w-100 mb-2 fw-700">Thumbnail</label>
+                                <p>Select a thumbnail for your service 16:9 aspect ratio</p>
+                            </div>
                             <div id="thumbnail">
                                 <div class="dropzone" id="thumbnail_dropzone"></div>
                             </div>
                         </div>
                     </div>
                     <div class="card mb-4">
-                        <div class="mb-4">
-                            <label for="name" class="w-100 mb-2 fw-700">Gallery</label>
-                            <p>Attract the attention of potential clients by showcasing visual examples of your services.</p>
-                        </div>
-
-                        <!-- Body -->
                         <div class="card-body">
+                            <div class="mb-4">
+                                <label for="name" class="w-100 mb-2 fw-700">Gallery</label>
+                                <p>Attract the attention of potential clients by showcasing visual examples of your services.</p>
+                            </div>
                             <div id="gallery_container">
                                 <div class="dropzone" id="gallery_dropzone">
                                 </div>
