@@ -45,22 +45,23 @@
 
             </div>
         </div>
-
-        <div class="row justify-content-center justify-content-sm-between">
-            <div class="col">
-            <a class="btn btn-danger" href="{{route('seller.services.list')}}">Cancel</a>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="justify-content-center justify-content-sm-between">
+                    <div class="col">
+                        <a class="btn btn-danger" href="{{route('seller.services.list')}}">Cancel</a>
+                    </div>
+                    <!-- End Col -->
+                    <div class="col-auto">
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-primary">Save & Continue</button>
+                        </div>
+                    </div>
+                    <!-- End Col -->
+                </div>
             </div>
-            <!-- End Col -->
-
-            <div class="col-auto">
-            <div class="d-flex gap-3">
-                <!-- <button type="button" class="btn btn-light">Save Draft</button> -->
-                <button type="submit" class="btn btn-primary">Save & Continue</button>
-            </div>
-            </div>
-            <!-- End Col -->
         </div>
-        <!-- End Card -->
+
       </div>
     </form>
 
