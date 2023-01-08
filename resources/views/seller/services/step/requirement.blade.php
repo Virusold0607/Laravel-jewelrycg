@@ -125,7 +125,9 @@
                   <input type="hidden" name="service_id" id="service_id" value="{{$post_id}}" >
                   @include('includes.validation-form')
 
-                  <label class="fs-4 mb-2">Questions</label>
+                  <div class="mb-4">
+                      <label for="name" class="w-100 mb-2 fw-700">Your Questions</label>
+                  </div>
                   <table class="table table-hover">
                     <thead>
                       <tr>
