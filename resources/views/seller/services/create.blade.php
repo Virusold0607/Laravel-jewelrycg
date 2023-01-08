@@ -75,11 +75,6 @@
                 }
 
             </style>
-            <div class="page-header">
-                <div class="row align-items-end">
-                    <h1 class="page-header-title">{{ isset($data->name) ? "Edit Service" : "Create Service" }}</h1>
-                </div>
-            </div>
             <div class="card">
                 <div class="card-body">
                     <div class="row">
