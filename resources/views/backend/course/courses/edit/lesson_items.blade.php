@@ -41,7 +41,7 @@
                         @forelse ($lesson->contents as $lesson_content)
                             <tr>
                                 <td>{{ $lesson_content->name }}</td>
-                                <td>{{ $lesson_content->content }}</td>
+                                <td><?php echo $lesson_content->content; ?></td>
                                 <td class='text-center action'>
                                     <button type="button" class="btn btn-sm btn-info me-1 btn-edit-content"
                                         data-bs-toggle="modal" data-bs-target="#modalEditLessonContent"

@@ -17,7 +17,7 @@
 
                 <div class="mb-3">
                     <label for="txaLessonContentContent" class="col-form-label">Content:</label>
-                    <textarea class="form-control" id="txaLessonContentContent"></textarea>
+                    <textarea class="form-control modal-editor" id="txaLessonContentContent"></textarea>
                 </div>
             </div>
 
@@ -32,8 +32,57 @@
 
 @push('lesson_scripts')
 <script>
+    createInlineEditor(".modal-editor").then((editor) => {
+        document.editor = editor
+    })
+    function createInlineEditor (selector) {
+        return new Promise(((resolve, reject) => {
+            ClassicEditor.create(document.querySelector(selector), {
+                toolbar: [
+                    'heading',
+                    'CKFinder',
+                    '|',
+                    'bold',
+                    'italic',
+                    'link',
+                    'bulletedList',
+                    'numberedList',
+                    '|',
+                    'indent',
+                    'outdent',
+                    '|',
+                    'code',
+                    'codeBlock',
+                    'imageUpload',
+                    'blockQuote',
+                    'insertTable',
+                    'mediaEmbed',
+                    'undo',
+                    'redo'
+                ],
+                image: {
+                    toolbar: [
+                        'imageTextAlternative',
+                        'imageStyle:full',
+                        'imageStyle:side'
+                    ]
+                },
+
+                ckfinder: {
+                    openerMethod: 'popup',
+                    uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+                    options: {
+                        resourceType: 'Images',
+                    }
+                }
+            }).then(data => resolve(data)).catch(error => reject(error))
+                .catch( function( error ) {
+                    console.error( error );
+                } );
+
+        }))
+    }
 $(document).ready(function() {
-    var wyg = $('#modalEditLessonContent #txaLessonContentContent').trumbowyg();
 
     $('body').on('click', '.btn-edit-content', function() {
         cur_lesson_id = $(this).data('lesson-id');
@@ -42,12 +91,12 @@ $(document).ready(function() {
         var lesson_content_content = $(this).data('content');
 
         $('#modalEditLessonContent #txtLessonContentName').val(lesson_content_name);
-        wyg.trumbowyg('html', lesson_content_content);
+        document.editor.setData(lesson_content_content);
     });
 
     $('body').on('click', '#btnUpdateLessonContent', function() {
         var lesson_content_name = $('#modalEditLessonContent #txtLessonContentName').val();
-        var lesson_content_content = $('#modalEditLessonContent #txaLessonContentContent').val();
+        var lesson_content_content = document.editor.getData();
 
         $.ajax({
             type: 'POST',
