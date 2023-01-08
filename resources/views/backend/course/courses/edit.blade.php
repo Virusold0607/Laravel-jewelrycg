@@ -56,7 +56,7 @@
 
                     <div class="mb-2">
                         <label for="txtDescription" class="w-100 mb-2">Description:</label>
-                        <textarea type="text" name="description" id="txtDescription" class="form-control">{{ $course->description }}</textarea>
+                        <textarea type="text" name="description" id="txtDescription" class="form-contro editorl">{{ $course->description }}</textarea>
                     </div>
                     
                     <div class="mb-2">
@@ -118,9 +118,63 @@
 @endsection
 
 @section('js_content')
+<script src="{{ asset('ckeditor-build/classic-ckeditor5/build/ckeditor.js') }}"></script>
+<script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
+<script>
+    createInlineEditor(".editor")
+    function createInlineEditor (selector) {
+        return new Promise(((resolve, reject) => {
+            ClassicEditor.create(document.querySelector(selector), {
+                toolbar: [
+                    'heading',
+                    'CKFinder',
+                    '|',
+                    'bold',
+                    'italic',
+                    'link',
+                    'bulletedList',
+                    'numberedList',
+                    '|',
+                    'indent',
+                    'outdent',
+                    '|',
+                    'code',
+                    'codeBlock',
+                    'imageUpload',
+                    'blockQuote',
+                    'insertTable',
+                    'mediaEmbed',
+                    'undo',
+                    'redo'
+                ],
+                image: {
+                    toolbar: [
+                        'imageTextAlternative',
+                        'imageStyle:full',
+                        'imageStyle:side'
+                    ]
+                },
+
+                ckfinder: {
+                    openerMethod: 'popup',
+                    uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+                    options: {
+                        resourceType: 'Images',
+                    }
+                }
+            }).then(data => resolve(data)).catch(error => reject(error))
+                .catch( function( error ) {
+                    console.error( error );
+                } );
+
+        }))
+    }
+
+</script>
+
 <script>
 $(document).ready(function() {
-    $('#txtDescription').trumbowyg();
+    //$('#txtDescription').trumbowyg();
 
     $(".imgAdd").click(function() {
         $(this).closest(".row").find('.imgAdd').before(
@@ -177,16 +231,8 @@ $(document).ready(function() {
 });
 </script>
 
-<script src="{{ asset('assets/vendor/quill/dist/quill.min.js') }}"></script>
-<script src="{{ asset('assets/js/hs.quill.js') }}"></script>
 
-<script>
-(function() {
-    // INITIALIZATION OF QUILLJS EDITOR
-    // =======================================================
-    HSCore.components.HSQuill.init('.js-quill')
-});
-</script>
+
 
 @stack('lesson_scripts')
 @endsection
