@@ -94,6 +94,7 @@
                         <div class="col-lg-4">
                           <div class="card">
                             <div class="card-body">
+                              <label for="name" class="w-100 mb-2 fw-700 text-uppercase">Multiple Choice</label>
                               <label for="name" class="w-100 mb-2 fw-700">Does the client have any reference images or sketches to share?</label>
                               <p>Logo / sketches / screenshots</p>
                             </div>
@@ -102,6 +103,7 @@
                         <div class="col-lg-4">
                           <div class="card">
                             <div class="card-body">
+                              <label for="name" class="w-100 mb-2 fw-700 text-uppercase">Multiple Choice</label>
                               <label for="name" class="w-100 mb-2 fw-700">Do you have any special requests or requirements for the design?</label>
                               <p>Incorporating gemstones / enamel</p>
                             </div>
@@ -110,6 +112,7 @@
                         <div class="col-lg-4">
                           <div class="card">
                             <div class="card-body">
+                              <label for="name" class="w-100 mb-2 fw-700 text-uppercase">Multiple Choice</label>
                               <label for="name" class="w-100 mb-2 fw-700">Is the client open to design suggestions or do they have a specific design in mind?</label>
                               <p>Yes / No</p>
                             </div>
