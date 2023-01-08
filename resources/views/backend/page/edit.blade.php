@@ -38,7 +38,7 @@
 
                             <div class="col-md-12">
                                 <label for="desc">Post:</label>
-                                <textarea name="post" id="desc" rows="3" class="form-control">
+                                <textarea name="post" id="desc" rows="3" class="form-control editor">
                                     {{ $page->post }}
                                 </textarea>
                             </div>
@@ -146,66 +146,57 @@
 @endsection
 
 @section('js_content')
+    <script src="{{ asset('ckeditor-build/classic-ckeditor5/build/ckeditor.js') }}"></script>
+    <script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            $('#desc').trumbowyg();
-            $('#meta_description').trumbowyg();
-        })
-        $(".imgAdd").click(function() {
-            $(this).closest(".row").find('.imgAdd').before(
-                '<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>'
-            );
-        });
-        $(document).on("click", "i.del", function() {
-            $(this).parent().remove();
-        });
-        $(function() {
-            $(document).on("change", ".uploadFile", function() {
-                var uploadFile = $(this);
-                var files = !!this.files ? this.files : [];
-                if (!files.length || !window.FileReader)
-                    return; // no file selected, or no FileReader support
+        createInlineEditor(".editor")
+        function createInlineEditor (selector) {
+            return new Promise(((resolve, reject) => {
+                ClassicEditor.create(document.querySelector(selector), {
+                    toolbar: [
+                        'heading',
+                        'CKFinder',
+                        '|',
+                        'bold',
+                        'italic',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'indent',
+                        'outdent',
+                        '|',
+                        'code',
+                        'codeBlock',
+                        'imageUpload',
+                        'blockQuote',
+                        'insertTable',
+                        'mediaEmbed',
+                        'undo',
+                        'redo'
+                    ],
+                    image: {
+                        toolbar: [
+                            'imageTextAlternative',
+                            'imageStyle:full',
+                            'imageStyle:side'
+                        ]
+                    },
 
-                if (/^image/.test(files[0].type)) { // only image file
-                    var reader = new FileReader(); // instance of the FileReader
-                    reader.readAsDataURL(files[0]); // read the local file
-
-                    reader.onloadend = function() { // set image data as background of div
-                        //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
-                        uploadFile.closest(".imgUp").find('.imagePreview').css("background-image",
-                            "url(" + this.result + ")");
-                    }
-                }
-
-            });
-            $('.select2').select2({
-
-                tags: true,
-                maximumSelectionLength: 100,
-                tokenSeparators: [','],
-                placeholder: "Select or type keywords",
-            })
-
-
-            $('#getFileManager').click(function () {
-                $.ajax({
-                    url: "{{ route('backend.file.show') }}",
-                    success: function (data) {
-                        if (!$.trim($('#fileManagerContainer').html()))
-                            $('#fileManagerContainer').html(data);
-
-                        $('#fileManagerModal').modal('show');
-
-                        const getSelectedItem = function (selectedId, filePath) {
-
-                            $('#fileManagerId').val(selectedId);
-                            $('#fileManagerPreview').attr('src', filePath);
+                    ckfinder: {
+                        openerMethod: 'popup',
+                        uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+                        options: {
+                            resourceType: 'Images',
                         }
-
-                        setSelectedItemsCB(getSelectedItem, $('#fileManagerId').val() == '' ? [] : [$('#fileManagerId').val()], false);
                     }
-                })
-            });
-        });
+                }).then(data => resolve(data)).catch(error => reject(error))
+                    .catch( function( error ) {
+                        console.error( error );
+                    } );
+
+            }))
+        }
+
     </script>
 @endsection
