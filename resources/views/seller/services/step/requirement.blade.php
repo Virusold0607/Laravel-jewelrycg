@@ -80,7 +80,7 @@
 
 <form action="{{ route('seller.services.requirement') }}" method="post" enctype="multipart/form-data">
   <div class="row">
-      <div class="col-md-12">
+      <div class="col-xl-6 col-lg-8 mx-auto">
           @csrf
           <div class="card col-md-12 mb-4">
               <!-- Header -->
@@ -170,21 +170,26 @@
       </div>
   </div>
 
-  <div class="row justify-content-center justify-content-sm-between">
-      <div class="col">
-      <a type="button" class="btn btn-danger" href="{{route('seller.services.list')}}">Cancel</a>
-      </div>
-      <!-- End Col -->
+  <div class="row">
+      <div class="col-xl-6 col-lg-8 mx-auto">
+        <div class="row justify-content-center justify-content-sm-between">
+            <div class="col">
+            <a class="btn btn-danger" href="{{route('seller.services.list')}}">Cancel</a>
+            </div>
+            <!-- End Col -->
 
-      <div class="col-auto">
-      <div class="d-flex flex-column gap-3">
-          <!-- <button type="button" class="btn btn-light">Save Draft</button> -->
-          <button type="submit" class="btn btn-primary">Save & Continue</button>
-          <a type="button" class="btn btn-light" href="{{"/seller/services/create/".($step-1)."/".$post_id}}">Back</a> 
+            <div class="col-auto">
+            <div class="d-flex flex-column gap-3">
+                <!-- <button type="button" class="btn btn-light">Save Draft</button> -->
+                <button type="submit" class="btn btn-primary">Save & Continue</button>
+                <a class="btn btn-light" href="{{"/seller/services/create/".($step-1)."/".$post_id}}">Back</a> 
+            </div>
+            </div>
+            <!-- End Col -->
+        </div>
       </div>
-      </div>
-      <!-- End Col -->
-  </div>
+     </div>    
+
   <!-- End Card -->
 </div>
 </form>
