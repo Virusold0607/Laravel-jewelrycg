@@ -30,12 +30,11 @@
         <div class="col-xl-6 col-lg-8 mx-auto">
             @csrf
             <div class="card col-md-12 mb-4">
-                <!-- Header -->
-                <div class="card-header">
-                    <h4 class="card-header-title mb-0">Service information</h4>
-                </div>
-                <!-- End Header -->
                 <div class="card-body">
+                    <div class="mb-4">
+                        <label for="name" class="w-100 mb-2 fw-700">Highlight your service with a gallery of your work</label>
+                        <p>Present a range of your work to motivate buyers to opt for your Service</p>
+                    </div>
                     <input type="hidden" name="service_id" id="service_id" value="{{$post_id}}" >
                     <input type="hidden" name="step" id="name" value="{{$step}}" class="form-control">
                     <input type="hidden" id="thumb" name="thumb" value="{{ null !== old('thumb') ? old('thumb') : (isset($data->thumbnail) ? $data->thumbnail : "") }}">
