@@ -56,7 +56,7 @@
 
                     <div class="mb-2">
                         <label for="txtDescription" class="w-100 mb-2">Description:</label>
-                        <textarea type="text" name="description" id="txtDescription" class="form-contro editorl">{{ $course->description }}</textarea>
+                        <textarea type="text" name="description" id="txtDescription" class="form-control editor">{{ $course->description }}</textarea>
                     </div>
                     
                     <div class="mb-2">
