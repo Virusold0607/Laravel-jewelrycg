@@ -147,14 +147,14 @@
                         </div>
                     </th>
                 @endif
-                {{-- <th class="table-column-ps-0">
+                <th class="table-column-ps-0">
                     <div class="btn-group" role="group" aria-label="Edit group">
-                        <a class="btn btn-white pull-right" href="javascript:;"
+                        <a class="btn btn-white pull-right pt-0" href="javascript:;"
                             onclick="deletevarient({{ $k }})">
                             <i class="bi-trash"></i>
                         </a>
                     </div>
-                </th> --}}
+                </th>
             </tr>
         @empty
             <tr>
