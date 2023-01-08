@@ -94,24 +94,24 @@
                         <div class="col-lg-4">
                           <div class="card">
                             <div class="card-body">
-                              <label for="name" class="w-100 mb-2 fw-700">Get all the information you need from buyers to get started</label>
-                              <p>Add questions to help buyers provide you with exactly what you need to start working on their order.</p>
+                              <label for="name" class="w-100 mb-2 fw-700">Does the client have any reference images or sketches to share?</label>
+                              <p>Logo / sketches / screenshots</p>
                             </div>
                           </div>
                         </div>
                         <div class="col-lg-4">
                           <div class="card">
                             <div class="card-body">
-                              <label for="name" class="w-100 mb-2 fw-700">Get all the information you need from buyers to get started</label>
-                              <p>Add questions to help buyers provide you with exactly what you need to start working on their order.</p>
+                              <label for="name" class="w-100 mb-2 fw-700">Do you have any special requests or requirements for the design?</label>
+                              <p>Incorporating gemstones / enamel</p>
                             </div>
                           </div>
                         </div>
                         <div class="col-lg-4">
                           <div class="card">
                             <div class="card-body">
-                              <label for="name" class="w-100 mb-2 fw-700">Get all the information you need from buyers to get started</label>
-                              <p>Add questions to help buyers provide you with exactly what you need to start working on their order.</p>
+                              <label for="name" class="w-100 mb-2 fw-700">Is the client open to design suggestions or do they have a specific design in mind?</label>
+                              <p>Yes / No</p>
                             </div>
                           </div>
                         </div>
