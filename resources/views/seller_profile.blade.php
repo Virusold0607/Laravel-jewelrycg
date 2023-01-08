@@ -33,7 +33,7 @@
                       <div class="card-body">
                         <img src="{{ $product->uploads->getImageOptimizedFullName(400,400) }}" alt="{{ $product->name }}" class="border w-100 img-fluid">
                         <h5 class="my-3">{{ $product->name }}</h5>
-                        <p class="text-muted mb-1">{{ $product->description }}</p>
+                        <!--<p class="text-muted mb-1">{{ $product->description }}</p>-->
                         <p class="text-muted mb-4">{{ $product->product_category->name }}</p>
                       </div>
                     </div>
