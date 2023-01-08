@@ -33,8 +33,10 @@
                       <div class="card-body">
                         <img src="{{ $product->uploads->getImageOptimizedFullName(400,400) }}" alt="{{ $product->name }}" class="border w-100 img-fluid">
                         <h5 class="my-3">{{ $product->name }}</h5>
-                        <!--<p class="text-muted mb-1">{{ $product->description }}</p>-->
+                        <!--
+                        <p class="text-muted mb-1">{{ $product->description }}</p>
                         <p class="text-muted mb-4">{{ $product->product_category->name }}</p>
+                        -->
                       </div>
                     </div>
                   </div>
@@ -53,8 +55,10 @@
                     <div class="card-body">
                       <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" alt="{{ $service->name }}" class="border w-100 img-fluid">
                       <h5 class="my-3">{{ $service->name }}</h5>
-                      <!--<p class="text-muted mb-1">{{ $service->description }}</p>-->
+                      <!--
+                      <p class="text-muted mb-1">{{ $service->description }}</p>
                       <p class="text-muted mb-4">{{ join(',' , array_map(function ($item) {return $item['category']['category_name'];}, $service->categories->toArray())) }}</p>
+                      -->
                     </div>
                   </div>
                 </div>
