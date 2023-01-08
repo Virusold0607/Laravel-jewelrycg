@@ -1,6 +1,6 @@
     <form action="{{ route('seller.services.store') }}" method="post" enctype="multipart/form-data">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xl-6 col-lg-8 col-md-8 mx-auto">
                 @csrf
                 <div class="card col-md-12 mb-4">
                     <div class="card-body">
