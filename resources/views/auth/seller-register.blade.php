@@ -39,7 +39,6 @@
                 <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')"
                     required />
             </div>
-            @endif
             <!-- Username -->
             <div class="mt-4">
                 <x-label for="username" :value="__('Username')" />
@@ -47,8 +46,6 @@
                 <x-input id="username" class="block w-full mt-1" type="text" name="username" :value="old('username')"
                     required />
             </div>
-
-            @if (!Auth::user())
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />

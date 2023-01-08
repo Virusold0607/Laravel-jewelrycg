@@ -35,7 +35,6 @@ class SellerRegisterController extends Controller
     {
         if(Auth::user()){
             $request->validate([
-                'username' => ['required', 'unique:users,username'],
                 'about' => ['required', 'string'],
             ]);
         }
