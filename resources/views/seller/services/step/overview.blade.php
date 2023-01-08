@@ -48,7 +48,7 @@
 
         <div class="row justify-content-center justify-content-sm-between">
             <div class="col">
-            <a type="button" class="btn btn-danger" href="{{route('seller.services.list')}}">Cancel</a>
+            <a class="btn btn-danger" href="{{route('seller.services.list')}}">Cancel</a>
             </div>
             <!-- End Col -->
 
