@@ -3,11 +3,6 @@
             <div class="col-md-12">
                 @csrf
                 <div class="card col-md-12 mb-4">
-                    <!-- Header -->
-                    <div class="card-header">
-                        <h4 class="card-header-title mb-0">Service information</h4>
-                    </div>
-                    <!-- End Header -->
                     <div class="card-body">
                         <input type="hidden" name="step" id="name" value="{{$step}}" class="form-control">
                         <input type="hidden" name="service_id" id="service_id" value="{{$post_id}}" >
