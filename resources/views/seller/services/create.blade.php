@@ -1,12 +1,6 @@
 <x-app-layout>
     <meta name="_token" content="{{csrf_token()}}" />
     <link rel="stylesheet" href="{{ asset('dropzone/css/dropzone.css') }}">
-    <style>
-        .pur {
-            width: 100%;
-            margin-bottom: 8px;
-        }
-    </style>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -83,18 +77,22 @@
             </style>
             <div class="page-header">
                 <div class="row align-items-end">
-                    <h1 class="page-header-title">{{ isset($data->name) ? "Edit Service" : "Create Srevice" }}</h1>
+                    <h1 class="page-header-title">{{ isset($data->name) ? "Edit Service" : "Create Service" }}</h1>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="list-unstyled multi-steps">
-                        <li class="{{$step == 0 ? 'is-active': ''}}">Overview</li>
-                        <li class="{{$step == 1 ? 'is-active': ''}}">Pricing</li>
-                        <li class="{{$step == 2 ? 'is-active': ''}}">Requirement</li>
-                        <li class="{{$step == 3 ? 'is-active': ''}}">Gallery</li>
-                        <li class="{{$step == 4 ? 'is-active': ''}}">Review</li>
-                    </ul>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="list-unstyled multi-steps">
+                                <li class="{{$step == 0 ? 'is-active': ''}}">Overview</li>
+                                <li class="{{$step == 1 ? 'is-active': ''}}">Pricing</li>
+                                <li class="{{$step == 2 ? 'is-active': ''}}">Requirement</li>
+                                <li class="{{$step == 3 ? 'is-active': ''}}">Gallery</li>
+                                <li class="{{$step == 4 ? 'is-active': ''}}">Review</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
