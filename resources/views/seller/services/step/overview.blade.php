@@ -72,7 +72,6 @@
     <script>
         var createChecks = [];
 
-        $('#desc').trumbowyg();
 
         function removepreviewappended(id) {
             createChecks = jQuery.grep(createChecks, function(value) {
