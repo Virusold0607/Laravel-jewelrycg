@@ -46,8 +46,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div class="justify-content-center justify-content-sm-between">
+            <div class="col-xl-6 col-lg-8 col-md-8 mx-auto">
+                <div class="row justify-content-center justify-content-sm-between">
                     <div class="col">
                         <a class="btn btn-danger" href="{{route('seller.services.list')}}">Cancel</a>
                     </div>
