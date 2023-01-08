@@ -8,26 +8,12 @@
                         <input type="hidden" name="service_id" id="service_id" value="{{$post_id}}" >
                         @include('includes.validation-form')
                         <div class="mb-2">
-                            <label for="name" class="w-100 mb-2">Name:</label>
+                            <label for="name" class="w-100 mb-2">Service title</label>
                             <input type="text" name="name" id="name" value="{{ null !== old('name') ? old('name') : (isset($data->name) ? $data->name : "") }}" class="form-control">
                         </div>
-                        <div class="mb-2">
-                            <label for="desc" class="w-100 mb-2">Service:</label>
-                            <textarea name="content" id="desc" rows="6" class="form-control">{{ null !== old('content') ? old('content') : (isset($data->content) ? $data->content : "") }}</textarea>
-                        </div>
-                        <!-- <div class="mb-4 col-12">
-                            <div class="col-12">
-                                <label class="mb-2" for="">Status</label>
-                                <select class="selectpicker w-100" name="status">
-                                    <option value="1" selected>Published</option>
-                                    <option value="2" >Draft</option>
-                                    <option value="3" >Pending Review</option>
-                                </select>
-                            </div>
-                        </div> -->
-
                         <div class="mb-4 col-12">
                             <label for="category" class="w-100 mb-2">Category</label>
+                            <p>Select the appropriate category for your service.</p>
                             <div class="col-4">
                                 <select class="selectpicker form-control" name="categories[]" data-live-search="true" data-container="body">
                                     @foreach ($categories as $category)
@@ -40,8 +26,14 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="mb-2">
+                            <label for="desc" class="w-100 mb-2">Description</label>
+                            <p>Provide a detailed description of your service.</p>
+                            <textarea name="content" id="desc" rows="6" class="form-control">{{ null !== old('content') ? old('content') : (isset($data->content) ? $data->content : "") }}</textarea>
+                        </div>
                         <div class="mb-4">
-                            <label for="name" class="w-100 mb-2">Tags:</label>
+                            <label for="name" class="w-100 mb-2">Tags</label>
+                            <p>Include relevant keywords in the tags for your Service to help it be more easily discovered by potential customers.</p>
                             <select  name="tags[]" id="tags" value="" class="form-control select2"  multiple="multiple" style="width: 100%;">
                                 @foreach ($tags as $tag)
                                     <option value='{{ $tag->id }}' {{ isset($data->tag_ids) ? (count($data->tag_ids) ? (in_array($tag->id, $data->tag_ids) ? "selected" : "" ): "" ) : "" }}> {{ $tag->name }} </option>
