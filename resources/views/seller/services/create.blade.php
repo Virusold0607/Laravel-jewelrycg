@@ -84,7 +84,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <ul class="list-unstyled multi-steps">
+                            <ul class="list-unstyled multi-steps mb-0">
                                 <li class="{{$step == 0 ? 'is-active': ''}}">Overview</li>
                                 <li class="{{$step == 1 ? 'is-active': ''}}">Pricing</li>
                                 <li class="{{$step == 2 ? 'is-active': ''}}">Requirement</li>
