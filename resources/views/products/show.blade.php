@@ -27,7 +27,6 @@
                                 <div class="fs-20 fw-600">{{ $product->name }}</div>
                                 <div class="link">
                                     <span><a href="/u/{{$product->user->username}}">{{$product->user->username}}</a></span>
-                                    <span> • Follow • Hire Us</span>
                                 </div>
                             </div>
                         </div>
