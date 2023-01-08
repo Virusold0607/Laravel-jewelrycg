@@ -89,6 +89,11 @@
               </div>
               <!-- End Header -->
               <div class="card-body">
+                  <div class="mb-4">
+                      <label for="name" class="w-100 mb-2 fw-700">Get all the information you need from buyers to get started</label>
+                      <p>Add questions to help buyers provide you with exactly what you need to start working on their order.</p>
+                  </div>
+                  
                   <input type="hidden" name="step" id="name" value="{{$step}}" class="form-control">
                   <input type="hidden" name="service_id" id="service_id" value="{{$post_id}}" >
                   @include('includes.validation-form')
