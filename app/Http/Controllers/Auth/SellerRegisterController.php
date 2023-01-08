@@ -35,6 +35,8 @@ class SellerRegisterController extends Controller
     {
         if(Auth::user()){
             $request->validate([
+                'business_name' => ['required', 'string'],
+                'slogan' => ['required', 'string'],
                 'about' => ['required', 'string'],
             ]);
         }
@@ -45,6 +47,8 @@ class SellerRegisterController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'username' => ['required', 'unique:users,username'],
+                'business_name' => ['required', 'string'],
+                'slogan' => ['required', 'string'],
                 'about' => ['required', 'string'],
             ]);
 
@@ -65,6 +69,8 @@ class SellerRegisterController extends Controller
         else {
             $seller = SellersProfile::create([
                 'user_id'   => $user->id,
+                'business_name' => $request->business_name,
+                'slogan' => $request->slogan,
                 'about'     => $request->about,
             ]);
             event(new Registered($user));

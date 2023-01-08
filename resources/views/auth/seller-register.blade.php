@@ -62,6 +62,20 @@
                     name="password_confirmation" required />
             </div>
             @endif
+            <!-- Business Name -->
+            <div class="mt-4">
+                <x-label for="business_name" :value="__('Business Name')" />
+
+                <x-input id="business_name" class="block w-full mt-1" type="text" name="business_name" :value="old('business_name')"
+                    required />
+            </div>
+            <!-- Slogan -->
+            <div class="mt-4">
+                <x-label for="slogan" :value="__('Slogan')" />
+
+                <x-input id="slogan" class="block w-full mt-1" type="text" name="slogan" :value="old('slogan')"
+                    required />
+            </div>
             <!-- About -->
             <div class="mt-4">
                 <x-label for="about" :value="__('About')" />
