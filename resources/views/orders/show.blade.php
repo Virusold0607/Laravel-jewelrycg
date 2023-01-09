@@ -68,16 +68,14 @@
                                         @if (!$item->productVariant->has('asset') || $item->productVariant->asset->file_name == 'none')
                                             File unavailable. Please contact support.
                                         @else
-                                            <a href="javascript:;" class="order_asset_download btn btn-sm btn-primary"
-                                            data-order-item-id="{{ $item->id }}">
+                                            <a href="{{'/uploads/all/'.$item->productVariant->asset->file_name}}" class="btn btn-sm btn-primary" download="{{$item->productVariant->asset->file_original_name.$item->productVariant->asset->extension}}">
                                                 <i class="bi bi-download mr-10px"></i> Download</a>
                                         @endif
                                     @else
                                         @if (!$item->product_digital_download_assets)
                                             File unavailable. Please contact support.
                                         @else
-                                            <a href="javascript:;" class="order_asset_download btn btn-sm btn-primary"
-                                                data-order-item-id="{{ $item->id }}">
+                                            <a href="{{'/uploads/all/'.$item->product->digital->file_name}}" class="btn btn-sm btn-primary" download="$item->product->digital->file_original_name.$item->product->digital->extension">
                                                 <i class="bi bi-download mr-10px"></i> Download</a>
                                         @endif
                                     @endif
@@ -146,15 +144,4 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            $(function() {
-
-                $(".order_asset_download").click(function() {
-                    document.location.replace("{{ route('download') }}" + "?order_item_id=" + $(this).attr(
-                        'data-order-item-id'));
-                });
-            })
-        </script>
-
 </x-app-layout>
