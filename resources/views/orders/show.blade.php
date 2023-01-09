@@ -68,14 +68,15 @@
                                         @if (!$item->productVariant->has('asset') || $item->productVariant->asset->file_name == 'none')
                                             File unavailable. Please contact support.
                                         @else
-                                            <a href="{{'/uploads/all/'.$item->productVariant->asset->file_name}}" class="btn btn-sm btn-primary" download="{{$item->productVariant->asset->file_original_name.$item->productVariant->asset->extension}}">
+                                            <a href="{{route('download').'/?upload_id='.$item->productVariant->asset->id}}" class="btn btn-sm btn-primary">
+
                                                 <i class="bi bi-download mr-10px"></i> Download</a>
                                         @endif
                                     @else
                                         @if (!$item->product_digital_download_assets)
                                             File unavailable. Please contact support.
                                         @else
-                                            <a href="{{'/uploads/all/'.$item->product->digital->file_name}}" class="btn btn-sm btn-primary" download="$item->product->digital->file_original_name.$item->product->digital->extension">
+                                            <a href="{{route('download').'/?upload_id='.$item->product->digital->id}}" class="btn btn-sm btn-primary">
                                                 <i class="bi bi-download mr-10px"></i> Download</a>
                                         @endif
                                     @endif
@@ -144,4 +145,5 @@
                 </div>
             </div>
         </div>
+
 </x-app-layout>
