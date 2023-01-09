@@ -225,7 +225,7 @@ button.navbar-toggler {
 }
 .auth-btn {
   border-radius: 50px;
-  padding: 8px 25px !important;
+  padding: 8px 15px !important;
   /*margin-top: 18px;*/
   border: 1px solid #e8e8e8;
   font-weight: 500 !important;
