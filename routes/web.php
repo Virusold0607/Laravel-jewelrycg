@@ -584,6 +584,7 @@ Route::resource('cart', CartController::class)->only(['index', 'store', 'destroy
 // Auth
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('/product_download/{order_id}/{upload_id}', [ProductController::class, 'download'])->name('download');
     Route::get('/product_download', [ProductController::class, 'download'])->name('download');
 
     Route::group(['prefix' => 'email/verify', 'as' => 'verification.', 'controller' => VerifyEmailController::class], function () {
