@@ -52,18 +52,20 @@
             <div class="seller-services-card-body">
               <div class="row">
                 @foreach ($services as $service)
-                <div class="mb-4 col-lg-3">
-                  <div class="card">
-                    <div class="card-body">
-                      <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" alt="{{ $service->name }}" class="border w-100 mb-3 img-fluid">
-                      <h5>{{ $service->name }}</h5>
-                      <!--
-                      <p class="text-muted mb-1">{{ $service->description }}</p>
-                      <p class="text-muted mb-4">{{ join(',' , array_map(function ($item) {return $item['category']['category_name'];}, $service->categories->toArray())) }}</p>
-                      -->
-                    </div>
-                  </div>
-                </div>
+                    @if ($service->status === 1)
+                        <div class="mb-4 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                            <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" alt="{{ $service->name }}" class="border w-100 mb-3 img-fluid">
+                            <h5>{{ $service->name }}</h5>
+                            <!--
+                            <p class="text-muted mb-1">{{ $service->description }}</p>
+                            <p class="text-muted mb-4">{{ join(',' , array_map(function ($item) {return $item['category']['category_name'];}, $service->categories->toArray())) }}</p>
+                            -->
+                            </div>
+                        </div>
+                        </div>
+                    @endif
                 @endforeach
               </div>
               {{$services->appends(Arr::except(Request::query(), 'service'))->links()}}
