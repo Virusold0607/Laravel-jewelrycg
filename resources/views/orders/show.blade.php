@@ -25,7 +25,7 @@
                                         $status = 'Unfulfilled';
                                     }
                                 }
-
+                                
                                 echo $status;
                             @endphp
                         </div>
@@ -68,16 +68,16 @@
                                         @if (!$item->productVariant->has('asset') || $item->productVariant->asset->file_name == 'none')
                                             File unavailable. Please contact support.
                                         @else
-                                            <a href="javascript:;" class="order_asset_download btn btn-sm btn-primary"
-                                            data-order-item-id="{{ $item->id }}">
+                                            <a href="javascript:;" class="variant_download btn btn-sm btn-primary"
+                                                data-variant-id="{{ $item->product_variant }}">
                                                 <i class="bi bi-download mr-10px"></i> Download</a>
                                         @endif
                                     @else
                                         @if (!$item->product_digital_download_assets)
                                             File unavailable. Please contact support.
                                         @else
-                                            <a href="javascript:;" class="order_asset_download btn btn-sm btn-primary"
-                                                data-order-item-id="{{ $item->id }}">
+                                            <a href="javascript:;" class="product_download btn btn-sm btn-primary"
+                                                data-product-id="{{ $item->product_id }}">
                                                 <i class="bi bi-download mr-10px"></i> Download</a>
                                         @endif
                                     @endif
@@ -149,10 +149,14 @@
 
         <script>
             $(function() {
+                $(".variant_download").click(function() {
+                    document.location.replace("{{ route('download') }}" + "?variant_id=" + $(this).attr(
+                        'data-variant-id'));
+                });
 
-                $(".order_asset_download").click(function() {
-                    document.location.replace("{{ route('download') }}" + "?order_item_id=" + $(this).attr(
-                        'data-order-item-id'));
+                $(".product_download").click(function() {
+                    document.location.replace("{{ route('download') }}" + "?product_id=" + $(this).attr(
+                        'data-product-id'));
                 });
             })
         </script>
