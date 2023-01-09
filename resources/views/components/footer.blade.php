@@ -3,7 +3,6 @@
         <div class="row">
             <div class="text-left col-lg-4">
                 <a href="{{ route('index') }}" class="text-black fs-24 fw-700 d-block">
-                    <!--<img class="footer-logo" src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png" data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png" alt="District Gurus" height="20"> -->
                     #JewelryCG
                 </a>
                 <div class="mt-3 mb-5 d-block">
@@ -35,15 +34,21 @@
             </div>
             <div class="mb-4 col-6 col-lg-2 col-md-3">
                 <div class="text-left">
-                    <h4 class="mb-3 fs-13 text-uppercase fw-700">
-                        Support
-                    </h4>
+                    <h4 class="mb-3 fs-13 text-uppercase fw-700">Support</h4>
                     <ul class="list-unstyled">
                         <ul class="list-unstyled">
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/knowledge-base/faqs">F.A.Q.s</a></li>
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="#">Guides</a></li>
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/contact-us">Contact Us</a></li>
-                            <li class="mb-2"><a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/knowledge-base">Knowledge Base</a></li>
+                            <li class="mb-2">
+                                <a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/knowledge-base/faqs">F.A.Q.s</a>
+                            </li>
+                            <li class="mb-2">
+                                <a class="opacity-50 hov-opacity-100 text-reset" href="#">Guides</a>
+                            </li>
+                            <li class="mb-2">
+                                <a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/contact-us">Contact Us</a>
+                            </li>
+                            <li class="mb-2">
+                                <a class="opacity-50 hov-opacity-100 text-reset" href="https://jewelrycg.com/knowledge-base">Knowledge Base</a>
+                            </li>
                         </ul>
                     </ul>
                 </div>
@@ -54,28 +59,26 @@
                         My Account
                     </h4>
                     <ul class="list-unstyled">
-                        <li class="mb-2"> <a class="opacity-50 hov-opacity-100 text-reset" href="">
-                                    Login
-                                </a> </li>
-                        <li class="mb-2"> <a class="opacity-50 hov-opacity-100 text-reset" href="#">
-                                Order History
-                            </a> </li>
-                        <li class="mb-2"> <a class="opacity-50 hov-opacity-100 text-reset" href="#">
-                                My Wishlist
-                            </a> </li>
-                        <li class="mb-2"> <a class="opacity-50 hov-opacity-100 text-reset" href="#">
-                                Track Order
-                            </a> </li>
+                        <li class="mb-2"> 
+                            <a class="opacity-50 hov-opacity-100 text-reset" href="">Login</a> 
+                        </li>
+                        <li class="mb-2"> 
+                            <a class="opacity-50 hov-opacity-100 text-reset" href="#">Order History</a> 
+                        </li>
+                        <li class="mb-2"> 
+                            <a class="opacity-50 hov-opacity-100 text-reset" href="#">My Wishlist</a> 
+                        </li>
+                        <li class="mb-2"> 
+                            <a class="opacity-50 hov-opacity-100 text-reset" href="#">Track Order</a> 
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="col-6 col-lg-2 col-md-3">
                 <div class="text-left">
-                    <h4 class="mb-3 fs-13 text-uppercase fw-700">
-                            Be A Seller
-                        </h4> <a href="/seller/signup" class="shadow-md btn btn-primary btn-sm">
-                            Apply Now
-                        </a> </div>
+                    <h4 class="mb-3 fs-13 text-uppercase fw-700">Be A Seller</h4> 
+                    <a href="/seller/signup" class="shadow-md btn btn-primary btn-sm">Apply Now</a> 
+                </div>
             </div>
         </div>
     </div>
