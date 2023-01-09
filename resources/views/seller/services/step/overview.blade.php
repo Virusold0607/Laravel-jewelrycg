@@ -17,9 +17,9 @@
                             <div class="col-4">
                                 <select class="selectpicker form-control" name="categories[]" data-live-search="true" data-container="body">
                                     @foreach ($categories as $category)
-                                        <option 
-                                            value="{{$category->id}}" 
-                                            data-tokens="{{$category->category_name}}" 
+                                        <option
+                                            value="{{$category->id}}"
+                                            data-tokens="{{$category->category_name}}"
                                             {{ isset($data->categories) ? (count($data->categories) ? ($data->categories[0]->id_category === $category->id ? "selected" : ""): "") : "" }}
                                         >{{$category->category_name}}</option>
                                     @endforeach
@@ -29,7 +29,7 @@
                         <div class="mb-4">
                             <label for="desc" class="w-100 mb-2 fw-700">Description</label>
                             <p>Provide a detailed description of your service.</p>
-                            <textarea name="content" id="desc" rows="6" class="form-control">{{ null !== old('content') ? old('content') : (isset($data->content) ? $data->content : "") }}</textarea>
+                            <textarea name="content" rows="6" class="form-control editor">{{ null !== old('content') ? old('content') : (isset($data->content) ? $data->content : "") }}</textarea>
                         </div>
                         <div class="mb-4">
                             <label for="name" class="w-100 mb-2 fw-700">Tags</label>
@@ -69,7 +69,57 @@
     </div>
 
 @section('js')
+    <script src="{{ asset('ckeditor-build/classic-ckeditor5/build/ckeditor.js') }}"></script>
+    <script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
     <script>
+        createInlineEditor(".editor")
+        function createInlineEditor (selector) {
+            return new Promise(((resolve, reject) => {
+                ClassicEditor.create(document.querySelector(selector), {
+                    toolbar: [
+                        'heading',
+                        'CKFinder',
+                        '|',
+                        'bold',
+                        'italic',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'indent',
+                        'outdent',
+                        '|',
+                        'code',
+                        'codeBlock',
+                        'imageUpload',
+                        'blockQuote',
+                        'insertTable',
+                        'mediaEmbed',
+                        'undo',
+                        'redo'
+                    ],
+                    image: {
+                        toolbar: [
+                            'imageTextAlternative',
+                            'imageStyle:full',
+                            'imageStyle:side'
+                        ]
+                    },
+
+                    ckfinder: {
+                        openerMethod: 'popup',
+                        uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+                        options: {
+                            resourceType: 'Images',
+                        }
+                    }
+                }).then(data => resolve(data)).catch(error => reject(error))
+                    .catch( function( error ) {
+                        console.error( error );
+                    } );
+
+            }))
+        }
         var createChecks = [];
 
 
