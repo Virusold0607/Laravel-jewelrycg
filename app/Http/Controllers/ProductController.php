@@ -244,13 +244,14 @@ class ProductController extends Controller
 
     public function download(Request $request)
     {
-        $order_item = OrderItem::find($request->order_item_id);
-        if ($order_item->product_variant === "0") {
-            $product = Product::find($order_item->product_id);
+        if ($request->has('product_id')) {
+            $product = Product::find($request->product_id);
+
             return response()->download(public_path('uploads/all/') . $product->digital->file_name, $product->getDigitalOriginalFileName());
         } else {
-            $product_variant = ProductsVariant::find($order_item->product_variant);
-            return response()->download(public_path('uploads/all/') . $product_variant->asset->file_name, $product_variant->getAssetOriginalFileName());
+            $productVariant = ProductsVariant::find($request->variant_id);
+
+            return response()->download(public_path('uploads/all/') . $productVariant->asset->file_name, $productVariant->getAssetOriginalFileName());
         }
     }
 
