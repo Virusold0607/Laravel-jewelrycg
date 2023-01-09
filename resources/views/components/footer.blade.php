@@ -1,7 +1,7 @@
 <section class="py-5 text-center border-gray-200 footer footer-widget border-top">
     <div class="container">
         <div class="row">
-            <div class="text-left col-lg-6 col-xl-4">
+            <div class="text-left col-lg-4">
                 <a href="{{ route('index') }}" class="text-black fs-24 fw-700 d-block">
                     <!--<img class="footer-logo" src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png" data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png" alt="District Gurus" height="20"> -->
                     #JewelryCG
@@ -20,7 +20,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mb-4 col-6 col-lg-2 col-md-4 ml-xl-auto">
+            <div class="mb-4 col-6 col-lg-2 col-md-3 ml-xl-auto">
                 <div class="text-left">
                     <h4 class="mb-3 fs-13 text-uppercase fw-700">
                         Resources
@@ -33,7 +33,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mb-4 col-6 col-lg-2 col-md-4">
+            <div class="mb-4 col-6 col-lg-2 col-md-3">
                 <div class="text-left">
                     <h4 class="mb-3 fs-13 text-uppercase fw-700">
                         Support
@@ -48,7 +48,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-6 col-lg-2 col-md-4">
+            <div class="col-6 col-lg-2 col-md-3">
                 <div class="text-left">
                     <h4 class="mb-3 fs-13 text-uppercase fw-700">
                         My Account
@@ -69,7 +69,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-6 col-lg-2 col-md-4">
+            <div class="col-6 col-lg-2 col-md-3">
                 <div class="text-left">
                     <h4 class="mb-3 fs-13 text-uppercase fw-700">
                             Be A Seller
@@ -87,7 +87,7 @@
         <div class="row align-items-center">
             <div class="col-12">
                 <div class="text-left">
-                    &copy; Jewelry CG 2022. All Rights Reserved
+                    &copy; Jewelry CG 2023. All Rights Reserved
                 </div>
             </div>
         </div>
