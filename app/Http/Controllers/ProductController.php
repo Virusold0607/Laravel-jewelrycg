@@ -245,7 +245,7 @@ class ProductController extends Controller
     public function download(Request $request)
     {
         $upload = Upload::find($request->upload_id);
-        return response()->download(public_path('uploads/all/') . $upload->file_name, $upload->file_original_name.$upload->extension);
+        return response()->download(public_path('uploads/all/') . $upload->file_name, $upload->file_original_name.".".$upload->extension);
     }
 
     public function addReview(Request $request)
