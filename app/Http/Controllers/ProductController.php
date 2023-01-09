@@ -244,15 +244,8 @@ class ProductController extends Controller
 
     public function download(Request $request)
     {
-        if ($request->has('product_id')) {
-            $product = Product::find($request->product_id);
-
-            return response()->download(public_path('uploads/all/') . $product->digital->file_name, $product->getDigitalOriginalFileName());
-        } else {
-            $productVariant = ProductsVariant::find($request->variant_id);
-
-            return response()->download(public_path('uploads/all/') . $productVariant->asset->file_name, $productVariant->getAssetOriginalFileName());
-        }
+        $upload = Upload::find($request->upload_id);
+        return response()->download(public_path('uploads/all/') . $upload->file_name, $upload->file_original_name.$upload->extension);
     }
 
     public function addReview(Request $request)
