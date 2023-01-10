@@ -127,7 +127,7 @@
                                     @endif
                                 </i>
                             </a>
-                            <ul class="dropdown-menu half-menu dropdown-menu-end content-max-scroll" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu half-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <div class="dropdown-header pb-2 mb-3 border-bottom">
                                     <span class="dropdown-title">Notifications (0)</span>
                                 </div>
