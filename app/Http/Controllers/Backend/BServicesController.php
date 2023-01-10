@@ -273,7 +273,6 @@ class BServicesController extends Controller
      */
     public function destroy($id)
     {
-        // ServicePost::whereId($id)->delete();
         $service = ServicePost::find($id);
         $service->status = 4;
         $service->save();
