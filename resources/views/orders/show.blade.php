@@ -68,7 +68,7 @@
                                         @if (!$item->productVariant->has('asset') || $item->productVariant->asset->file_name == 'none')
                                             File unavailable. Please contact support.
                                         @else
-                                            <a href="{{route('download').'/'.Crypt::encryptString($order->id).'/'.Crypt::encryptString($item->productVariant->asset->id)}}" class="btn btn-sm btn-primary">
+                                            <a href="{{route('download').'/'.$order->id.'/'.Crypt::encryptString($item->productVariant->asset->id)}}" class="btn btn-sm btn-primary">
 
                                                 <i class="bi bi-download mr-10px"></i> Download</a>
                                         @endif
@@ -76,7 +76,7 @@
                                         @if (!$item->product_digital_download_assets)
                                             File unavailable. Please contact support.
                                         @else
-                                            <a href="{{route('download').'/'.Crypt::encryptString($order->id).'/'.Crypt::encryptString($item->product->digital->id)}}" class="btn btn-sm btn-primary">
+                                            <a href="{{route('download').'/'.$order->id.'/'.Crypt::encryptString($item->product->digital->id)}}" class="btn btn-sm btn-primary">
                                                 <i class="bi bi-download mr-10px"></i> Download</a>
                                         @endif
                                     @endif

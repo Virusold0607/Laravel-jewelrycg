@@ -245,9 +245,8 @@ class ProductController extends Controller
 
     public function download(Request $request)
     {
-        $order_id = Crypt::decryptString($request->order_id);
         $upload_id = Crypt::decryptString($request->upload_id);
-        $order = Order::find($order_id);
+        $order = Order::find($request->order_id);
         if ($order) {
             $upload = Upload::find($upload_id);
             return response()->download(public_path('uploads/all/') . $upload->file_name, $upload->file_original_name.".".$upload->extension);
