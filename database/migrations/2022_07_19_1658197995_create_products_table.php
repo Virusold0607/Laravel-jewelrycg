@@ -11,7 +11,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
 
 					$table->id();
-					$table->integer('status',)->nullable();
+					$table->integer('status',)->nullable(); //1 active , 2 pending review, 3 draft, 4 denied, 5 archived.
 					$table->integer('vendor',)->nullable();
 					$table->string('name');
 					$table->text('description')->nullable();
