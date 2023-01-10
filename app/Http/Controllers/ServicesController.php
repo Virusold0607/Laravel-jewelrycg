@@ -108,7 +108,6 @@ class ServicesController extends Controller
         for ($i = 0; $i < count($data->tags); $i++) {
             array_push($tag_ids, $data->tags[$i]->id_tag);
         }
-
         $data->tag_ids = $tag_ids;
         $data->galleries = $galleries;
 

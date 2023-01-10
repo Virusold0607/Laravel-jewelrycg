@@ -20,7 +20,7 @@
                                 <a href="/u/{{ $service->postauthor->username }}">
                                     <img id="fileManagerPreview" src="{{ $service->postauthor->uploads->getImageOptimizedFullName(30,30) }}" class="product-seller rounded-circle h-60px mr-5px">
                                 </a>
-                                
+
                                 <div class="product-details-title px-2">
                                     <div class="fs-20 fw-600">{{$service->name}}</div>
                                     <div class="link">
@@ -37,9 +37,10 @@
                         <div class="carousel mb-6">
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
+                                    {{count($service->galleries)}}
                                     @for ($i = 0; $i < count($service->galleries); ++$i)
                                         <div class="carousel-item {{ $i == 0 ? "active" : "" }}">
-                                            <img src="/uploads/all/{{$service->galleries[$i]->file_name}}"
+                                            <img src="{{$service->galleries[$i]->getImageOptimizedFullName(1280,700) }}"
                                                  class="d-block w-100 border" alt="..."/>
                                         </div>
                                     @endfor
@@ -56,7 +57,7 @@
                                     @for ($i = 0; $i < count($service->galleries); ++$i)
                                         <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}"
                                             class="{{$i == 0 ? "active": "" }}">
-                                            <img src="/uploads/all/{{$service->galleries[$i]->file_name}}"
+                                            <img src="{{$service->galleries[$i]->getImageOptimizedFullName(1280,700) }}"
                                                  class="d-block w-100 border">
                                         </li>
                                     @endfor
