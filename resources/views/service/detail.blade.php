@@ -26,10 +26,8 @@
                                     <div class="link">
                                         <span class="mr-10px"><a href="/u/{{ $service->postauthor->username }}">{{ $service->postauthor->username }}</a></span>
                                         @if ($service->count > 0)
-                                            <div class="ml-10px">
-                                                <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
-                                                <span class="text-secondary">({{$service->count}})</span>
-                                            </div>
+                                        <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
+                                        <span class="text-secondary">({{$service->count}})</span>
                                         @endif
                                     </div>
                                 </div>
