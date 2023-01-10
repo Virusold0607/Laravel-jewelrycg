@@ -423,8 +423,12 @@ class ProductsController extends Controller
 
     public function recover($id)
     {
-        Product::withTrashed()->find($id)->restore();
-        return redirect()->route('backend.products.trash');
+        $product = Product::where('status', 5)->find($id);
+        if ($product) {
+            $product->status = 2;
+            $product->save();
+        }
+        return redirect()->route('backend.products.archive');
     }
 
     public function update_digital_assets(Request $request, $id)

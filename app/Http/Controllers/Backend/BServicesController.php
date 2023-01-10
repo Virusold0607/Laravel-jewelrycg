@@ -282,7 +282,11 @@ class BServicesController extends Controller
 
     public function recover($id)
     {
-        ServicePost::withTrashed()->find($id)->restore();
-        return redirect()->route('backend.services.trash');
+        $service = ServicePost::where('status', 4)->find($id);
+        if ($service) {
+            $service->status = 3;
+            $service->save();
+        }
+        return redirect()->route('backend.services.archive');
     }
 }
