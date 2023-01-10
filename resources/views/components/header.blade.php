@@ -127,10 +127,11 @@
                                     @endif
                                 </i>
                             </a>
-                            <ul class="dropdown-menu half-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu half-menu dropdown-menu-end content-max-scroll" aria-labelledby="navbarDropdown">
                                 <div class="dropdown-header pb-2 mb-3 border-bottom">
                                     <span class="dropdown-title">Notifications (0)</span>
                                 </div>
+                                <div class="content-max-scroll">
                                 @foreach ($notifications as $notification)
                                     <a href="/notifications/check/{{$notification->id}}">
                                         <div class="notification-container mb-3">
@@ -143,6 +144,7 @@
                                         </div>
                                     </a>
                                 @endforeach
+                                </div>
                             </ul>
                         </li>
 
@@ -160,6 +162,7 @@
                                 <div class="dropdown-header pb-2 mb-2 border-bottom">
                                     <span class="dropdown-title">Messages (0)</span>
                                 </div>
+                                <div class="content-max-scroll">
                                 @foreach ($message_notifications as $message_notification)
                                     @if(user_name($message_notification->user_id)->first())
                                         <a href="/chat/{{$message_notification->user_id }}"
@@ -184,6 +187,7 @@
                                         </a>
                                     @endif
                                 @endforeach
+                                </div>
                             </ul>
                         </li>
 
