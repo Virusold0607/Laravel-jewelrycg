@@ -10,7 +10,7 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <div class="py-9">
+    <div class="service-container col-lg-8 col-md-10 py-9 mx-auto">
         <div class="container">
             <div class="col-xl-10 mx-auto">
                 <div class="row">
