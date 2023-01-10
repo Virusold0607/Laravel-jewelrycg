@@ -14,18 +14,18 @@ class ImageSizeFilter implements FilterInterface
         $height = 100;
 
         if (Request::has('width') && Request::get('width') != 0 && Request::has('height') && Request::get('height') != 0)
-            return $image->crop(Request::get('width'), Request::get('height'));
+            return $image->resize(Request::get('width'), Request::get('height'));
 
         if (Request::has('width') && Request::get('width') != 0 && !Request::has('height'))
-            return $image->crop(Request::get('width'), null, function ($constraint) {
+            return $image->resize(Request::get('width'), null, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
         if (Request::has('height') && Request::get('height') != 0 && !Request::has('width'))
-            return $image->crop(null, Request::get('height'), function ($constraint) {
+            return $image->resize(null, Request::get('height'), function ($constraint) {
                 $constraint->aspectRatio();
             });
 
-        return $image->crop($width, $height);
+        return $image->resize($width, $height);
     }
 }
