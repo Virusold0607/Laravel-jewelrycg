@@ -24,7 +24,13 @@
                                 <div class="product-details-title px-2">
                                     <div class="fs-20 fw-600">{{$service->name}}</div>
                                     <div class="link">
-                                        <span><a href="/u/{{ $service->postauthor->username }}">{{ $service->postauthor->username }}</a></span>
+                                        <span class="mr-10px"><a href="/u/{{ $service->postauthor->username }}">{{ $service->postauthor->username }}</a></span>
+                                        @if ($service->count > 0)
+                                            <div class="ml-10px">
+                                                <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $service->rating ?: "0.0" }}</span>
+                                                <span class="text-secondary">({{$service->count}})</span>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
