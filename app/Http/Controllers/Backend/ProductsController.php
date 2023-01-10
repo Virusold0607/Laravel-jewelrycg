@@ -41,7 +41,7 @@ class ProductsController extends Controller
     public function index()
     {
         return view('backend.products.list', [
-            'products' => Product::with('product_category')->orderBy('id', 'DESC')->get()
+            'products' => Product::where('status', '!=', 5)->with('product_category')->orderBy('id', 'DESC')->get()
         ]);
     }
 
@@ -416,7 +416,8 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        $product->delete();
+        $product->status = 5;
+        $product->save();
         return redirect()->route('backend.products.list');
     }
 

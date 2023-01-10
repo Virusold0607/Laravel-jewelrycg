@@ -24,7 +24,7 @@ class BServicesController extends Controller
     public function index()
     {
         return view('backend.service.services.list', [
-            'services' => ServicePost::with(['categories', 'postauthor'])->orderBy('id', 'DESC')->get(),
+            'services' => ServicePost::where('status', '!=', 4)->with(['categories', 'postauthor'])->orderBy('id', 'DESC')->get(),
         ]);
     }
 
@@ -242,7 +242,7 @@ class BServicesController extends Controller
         $service->status = $data['status'];
         $service->thumbnail = $data['thumbnail'];
         $service->published_at = date('Y-m-d H:i:s');
-    
+
         $service->update();
 
         ServicePostTag::where('id_service', $service->id)->delete();
@@ -273,7 +273,10 @@ class BServicesController extends Controller
      */
     public function destroy($id)
     {
-        ServicePost::whereId($id)->delete();
+        // ServicePost::whereId($id)->delete();
+        $service = ServicePost::find($id);
+        $service->status = 4;
+        $service->save();
         return redirect()->route('backend.services.list');
 
     }
