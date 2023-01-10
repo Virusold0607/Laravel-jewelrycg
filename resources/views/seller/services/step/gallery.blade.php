@@ -4,7 +4,7 @@
     }
     .modal-body{
         overflow: auto;
-    }    
+    }
     .check-option {
         right: 4px;
         top: 4px;
@@ -19,7 +19,7 @@
     #thumbnail .dropzone .dz-preview{
         margin: 0;
     }
-    
+
     .dz-image img{
         width: 100%;
         height: 100%;
@@ -81,7 +81,7 @@
                 <div class="col-auto">
                 <div class="d-flex flex-column gap-3">
                     <button type="submit" class="btn btn-primary">Save & Continue</button>
-                    <a class="btn btn-light" href="{{"/seller/services/create/".($step-1)."/".$post_id}}">Back</a> 
+                    <a class="btn btn-light" href="{{"/seller/services/create/".($step-1)."/".$post_id}}">Back</a>
                 </div>
                 </div>
                 <!-- End Col -->
@@ -167,7 +167,7 @@
             },
             init: function () {
                 galleryDropzone = this;
-                
+
                 for (const gallery of galleries) {
                     if(!gallery) {
                         continue;
@@ -195,7 +195,8 @@
                     if(!galleries[i]) {
                         continue;
                     }
-                    if(galleries[i].file_original_name + "." + galleries[i].extension==file.name) {
+                    console.error(file, galleries[i]);
+                    if(file.name.includes(galleries[i].file_original_name)) {
                         $.ajax({
                             url: `/seller/file/destroy/${galleries[i].id}`,
                             type: 'POST',
