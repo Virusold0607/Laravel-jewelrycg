@@ -40,7 +40,7 @@
                                     {{count($service->galleries)}}
                                     @for ($i = 0; $i < count($service->galleries); ++$i)
                                         <div class="carousel-item {{ $i == 0 ? "active" : "" }}">
-                                            <img src="{{$service->galleries[$i]->getImageOptimizedFullName(1280,700) }}"
+                                            <img src="{{$service->galleries[$i]->uploads->getImageOptimizedFullName(1280,700) }}"
                                                  class="d-block w-100 border" alt="..."/>
                                         </div>
                                     @endfor
@@ -57,7 +57,7 @@
                                     @for ($i = 0; $i < count($service->galleries); ++$i)
                                         <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}"
                                             class="{{$i == 0 ? "active": "" }}">
-                                            <img src="{{$service->galleries[$i]->getImageOptimizedFullName(1280,700) }}"
+                                            <img src="{{$service->galleries[$i]->uploads->getImageOptimizedFullName(1280,700) }}"
                                                  class="d-block w-100 border">
                                         </li>
                                     @endfor
