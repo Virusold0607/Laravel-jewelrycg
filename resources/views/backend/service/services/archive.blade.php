@@ -1,10 +1,10 @@
-@extends('backend.layouts.app', ['activePage' => 'services', 'title' => 'All service', 'navName' => 'servicetrash', 'activeButton' => 'service'])
+@extends('backend.layouts.app', ['activePage' => 'services', 'title' => 'All service', 'navName' => 'servicearchive', 'activeButton' => 'service'])
 
 @section('content')
 <div class="page-header">
     <div class="row align-items-center mb-3">
         <div class="col-sm mb-2 mb-sm-0">
-            <h1 class="page-header-title">Trash <span class="badge bg-soft-dark text-dark ms-2">72,031</span></h1>
+            <h1 class="page-header-title">Archived Services <span class="badge bg-soft-dark text-dark ms-2">72,031</span></h1>
         </div>
         <!-- End Col -->
     </div>
@@ -42,10 +42,10 @@
                                             </div>
                                         </td>
                                         <td>{{ $service->id }}</td>
-                                       
+
                                         <td>{{ $service->name }}</td>
                                         <td>{{ $service->slug }}</td>
-                                        <td>{{ $service->serviceauthor->name }}</td>
+                                        <td>{{ $service->postauthor->username }}</td>
                                         <td>
                                             @foreach($service->categories as $category_info)
                                                 <p><span class="badge btn-info"> {{$category_info->category->category_name}} </span>  </p>
@@ -53,13 +53,13 @@
                                         </td>
                                         <td>
                                                 <a class="btn btn-dark btn-sm" href="{{ route('backend.services.recover', $service->id)}}"> <i class="bi-restore"></i> Restore </a>
-                                              
+
                                         </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                         
+
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         data: 'id',
                         name: 'id'
                     },
-                   
+
                     {
                         data: 'name',
                         name: 'name'

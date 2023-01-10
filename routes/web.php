@@ -113,7 +113,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::get('/', [ProductsController::class, 'index'])->name('list');
         Route::get('/pending', [ProductsController::class, 'pending'])->name('pending.list');
         Route::get('/active', [ProductsController::class, 'active'])->name('active.list');
-        Route::get('/trash', [ProductsController::class, 'trash'])->name('trash');
+        Route::get('/archive', [ProductsController::class, 'archive'])->name('archive');
         Route::get('/trash/recover/{id}', [ProductsController::class, 'recover'])->name('recover');
         Route::get('/create', [ProductsController::class, 'create'])->name('create');
         Route::get('/edit/{id}', [ProductsController::class, 'edit'])->name('edit');
@@ -189,7 +189,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     //services routes
     Route::group(['prefix' => 'service/services', 'as' => 'services.'], function () {
         Route::get('/', [BServicesController::class, 'index'])->name('list');
-        Route::get('/trash', [BServicesController::class, 'trash'])->name('trash');
+        Route::get('/archive', [BServicesController::class, 'archive'])->name('archive');
         Route::get('/trash/recover/{id}', [BServicesController::class, 'recover'])->name('recover');
         Route::get('/create/{step?}/{post_id?}', [BServicesController::class, 'create'])->name('create');
         Route::get('/edit/{id}', [BServicesController::class, 'edit'])->name('edit');

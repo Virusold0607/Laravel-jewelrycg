@@ -67,7 +67,7 @@
                   <a class="nav-link @if($navName == 'allservice') active @endif" href="{{ route('backend.services.list') }}">{{ __("All service") }}</a>
                   <a class="nav-link @if($navName == 'servicecategories') active @endif" href="{{ route('backend.service.categories.list') }}">{{ __("Categories") }}</a>
                   <a class="nav-link @if($navName == 'servicetags') active @endif" href="{{ route('backend.service.tags.list') }}">{{ __("Tags") }}</a>
-                  <!-- <a class="nav-link @if($navName == 'servicetrash') active @endif" href="{{ route('backend.services.trash') }}">{{ __("Trash") }}</a> -->
+                  <a class="nav-link @if($navName == 'servicearchive') active @endif" href="{{ route('backend.services.archive') }}">{{ __("Archived Services") }}</a>
                 </div>
               </div>
               <!-- End Collapse -->
@@ -115,7 +115,7 @@
                   <a class="nav-link @if($navName == 'addstep_group') active @endif" href="{{ route('backend.step_groups.create') }}">{{ __("Create step group") }}</a>
                 </div>
               </div>
-              
+
               <div class="nav-item">
                 <a class="nav-link nav-link-main dropdown-toggle " href="#navbarVerticalMenuAllMaterialMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuAllMaterialMenu" aria-expanded="false" aria-controls="navbarVerticalMenuAllMaterialMenu">
                   <i class="bi-folder2-open nav-icon"></i>
@@ -175,7 +175,7 @@
                   <a class="nav-link @if($navName == 'allproducts') active @endif" href="{{ route('backend.products.list') }}">{{ __("All Products") }}</a>
                   <a class="nav-link @if($navName == 'activeproducts') active @endif" href="{{ route('backend.products.active.list') }}">{{ __("Active Products") }}</a>
                   <a class="nav-link @if($navName == 'pendingproducts') active @endif" href="{{ route('backend.products.pending.list') }}">
-                    <span class="nav-link-title">{{ __("Pending Products") }} 
+                    <span class="nav-link-title">{{ __("Pending Products") }}
                       @if (pending_count())
                         <span class="badge bg-primary rounded-pill ms-1">{{ pending_count() }}</span>
                       @endif
@@ -185,7 +185,7 @@
                   <a class="nav-link @if($navName == 'attributes') active @endif " href="{{route('backend.products.attributes.list')}}">{{ __("Attributes") }}</a>
                   <a class="nav-link @if($navName == 'productscategories') active @endif" href="{{ route('backend.products.categories.list') }}">{{ __("Categories") }}</a>
                   <a class="nav-link @if($navName == 'productstags') active @endif" href="{{ route('backend.products.tags.list') }}">{{ __("Tags") }}</a>
-                  <a class="nav-link @if($navName == 'productstrash') active @endif" href="{{ route('backend.products.trash') }}">{{ __("Trash") }}</a>
+                  <a class="nav-link @if($navName == 'productsarchive') active @endif" href="{{ route('backend.products.archive') }}">{{ __("Archived Products") }}</a>
                 </div>
               </div>
               <!-- End Collapse -->
@@ -215,7 +215,7 @@
                   <a class="nav-link @if($navName == 'addcoupon') active @endif" href="{{ route('backend.coupons.create') }}">{{ __("Create coupon") }}</a>
                 </div>
               </div>
-              
+
               <!-- Collapse -->
               <div class="nav-item">
                 <a class="nav-link nav-link-main dropdown-toggle " href="#navbarVerticalMenuAllWithdrawMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuAllWithdrawMenu" aria-expanded="false" aria-controls="navbarVerticalMenuAllWithdrawMenu">
@@ -226,7 +226,7 @@
                 <div id="navbarVerticalMenuAllWithdrawMenu" class="nav-collapse collapse @if($activePage == 'withdraws') show @endif" data-bs-parent="#navbarVerticalMenuPagesMenu">
                   <a class="nav-link @if($navName == 'withdrawmethods') active @endif" href="{{ route('backend.withdraws.method') }}">{{ __("Withdraw Methods") }}</a>
                   <a class="nav-link @if($navName == 'withdraws') active @endif" href="{{ route('backend.withdraws.list') }}">
-                    <span class="nav-link-title">{{ __("Withdraws") }} 
+                    <span class="nav-link-title">{{ __("Withdraws") }}
                       @if (new_withdraw_count())
                         <span class="badge bg-primary rounded-pill ms-1">{{ new_withdraw_count() }}</span>
                       @endif
