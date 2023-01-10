@@ -67,10 +67,10 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function trash()
+    public function archive()
     {
-        return view('backend.products.trash', [
-            'products' => Product::onlyTrashed()->orderBy('id', 'DESC')->get()
+        return view('backend.products.archive', [
+            'products' => Product::where('status', 5)->orderBy('id', 'DESC')->get()
         ]);
     }
 

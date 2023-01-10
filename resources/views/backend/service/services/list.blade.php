@@ -61,7 +61,7 @@
                             <td>{{ $service->postauthor->first_name }} {{ $service->postauthor->last_name }}</td>
                             <td>
                                 @foreach($service->categories as $category_info)
-                                    <span>{{$category_info->category->category_name}}</span> 
+                                    <span>{{$category_info->category->category_name}}</span>
                                 @endforeach
                             </td>
                             <td>
@@ -73,7 +73,7 @@
                                         <div class="dropdown-menu dropdown-menu-end mt-1" aria-labelledby="ordersExportDropdown1" style="">
                                             <span class="dropdown-header">Options</span>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item text-danger" onclick="return confirm('Are you sure you want to delete this service?')" href="{{route('backend.services.delete', $service->id)}}">Delete</a>
+                                            <a class="dropdown-item text-danger" onclick="return confirm('Are you sure you want to archive this service?')" href="{{route('backend.services.delete', $service->id)}}">Delete</a>
                                         </div>
                                     </div>
                                     <!-- End Unfold -->
@@ -85,7 +85,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                
+
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@
                         data: 'id',
                         name: 'id'
                     },
-                   
+
                     {
                         data: 'name',
                         name: 'name'

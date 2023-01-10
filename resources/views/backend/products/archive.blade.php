@@ -1,10 +1,10 @@
-@extends('backend.layouts.app', ['activePage' => 'products', 'title' => 'All Products', 'navName' => 'productstrash', 'activeButton' => 'catalogue'])
+@extends('backend.layouts.app', ['activePage' => 'products', 'title' => 'All Products', 'navName' => 'productsarchive', 'activeButton' => 'catalogue'])
 
 @section('content')
 <div class="page-header">
     <div class="row align-items-center mb-3">
         <div class="col-sm mb-2 mb-sm-0">
-            <h1 class="page-header-title">Deleted Products <span class="badge bg-soft-dark text-dark ms-2">72,031</span></h1>
+            <h1 class="page-header-title">Archived Products <span class="badge bg-soft-dark text-dark ms-2">72,031</span></h1>
         </div>
         <!-- End Col -->
     </div>
@@ -26,14 +26,14 @@
                                             </div>
                                         </th>
                                         <th class="sorting">ID</th>
-                                        <th >Name</th>
+                                        <th>Name</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
                                         <th>Category</th>
                                         <th>Actions</th>
                                     </thead>
                                     <tbody>
-                                        
+
                                             @foreach ($products as $product)
                                             <tr>
                                             <td class="table-column-pe-0">
@@ -48,13 +48,13 @@
                                             <td>{{ $product->qty }}</td>
                                             <td>{{ $product->category }}</td>
                                             <td>
-                                                
+
                                                     <a class="btn btn-dark btn-sm" href="{{ route('backend.products.recover', $product->id) }}"> <i class="bi-load"></i> Restore </a>
-                                                   
+
                                             </td>
                                             </tr>
                                             @endforeach
-                                        
+
                                     </tbody>
                                 </table>
                             </div>

@@ -28,10 +28,10 @@ class BServicesController extends Controller
         ]);
     }
 
-    public function trash()
+    public function archive()
     {
-        return view('backend.service.services.trash', [
-            'services' => ServicePost::onlyTrashed()->orderBy('id', 'DESC')->get(),
+        return view('backend.service.services.archive', [
+            'services' => ServicePost::where('status', 4)->orderBy('id', 'DESC')->get(),
         ]);
     }
 
