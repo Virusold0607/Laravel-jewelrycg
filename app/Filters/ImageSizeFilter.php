@@ -26,6 +26,6 @@ class ImageSizeFilter implements FilterInterface
                 $constraint->aspectRatio();
             });
 
-        return $image->resize($width, $height);
+        return $image->crop($width, $height);
     }
 }
