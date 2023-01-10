@@ -94,10 +94,15 @@ class CheckoutController extends Controller
                     $orderItem->product_variant = 0;
                     $orderItem->product_digital_download_assets = $item->model->digital_download_assets;
 
+                    if ($orderItem->product_digital_download_assets) {
+                        $orderItem->status_fulfillment = 3;
+                    }
+
                     $total += $orderItem->price * $orderItem->quantity;
 
                     if (isset($item->options['id'])) {
                         $orderItem->product_variant = $item->options['id'];
+                        $orderItem->status_fulfillment = 3;
 
                         $productVariant = ProductsVariant::find($item->options['id']);
                         $orderItem->product_variant_name = $productVariant->variant_name;
