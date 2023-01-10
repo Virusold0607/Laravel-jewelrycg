@@ -16,6 +16,18 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="mb-3">
+                            <div class="d-flex align-items-center">
+                                <a href="/u/jewelrycg">
+                                    <img id="fileManagerPreview" src="https://jewelrycg.com/uploads/all//BUlLzCBNsv5tupNfLLFsY47PkXtqFU1TPmePnR9x_thumbnail-100-100.jpeg" class="product-seller rounded-circle h-60px mr-5px">
+                                </a>
+                                
+                                <div class="product-details-title px-2">
+                                    <div class="fs-20 fw-600">Jagged Edge Cross Pendant</div>
+                                    <div class="link">
+                                        <span><a href="/u/jewelrycg">jewelrycg</a></span>
+                                    </div>
+                                </div>
+                            </div>
                             <h1 class="fs-24 fw-700 w-100 mb-2">{{$service->name}}</h4>
                                 <div class="d-flex align-items-center">
                                     <div class="mr-10px w-30px">
