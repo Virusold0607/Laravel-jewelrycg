@@ -19,7 +19,7 @@
                         <div class="d-flex align-items-center">
                             <a href="/u/{{$product->user->username}}">
                                 <img id="fileManagerPreview"
-                                     src="{{ $product->user->uploads->getImageOptimizedFullName(100,100) }}"
+                                     src="{{ $product->user->uploads->getImageOptimizedFullName(200,200) }}"
                                      class="product-seller rounded-circle h-60px mr-5px">
                             </a>
                             {{-- <img src="https://jewelrycg.com/assets/img/avatar.png" class="product-seller rounded-circle h-60px mr-5px" /> --}}
