@@ -57,14 +57,25 @@ class Upload extends Model
             if($height == "0" || $height =="") {
                 $height = $width * $image->height() / $image->width();
             }
-            
+
+            $ratio = $image->width() / $image->height();
+            if ($image->width() < $width) {
+                $width = $image->width();
+                $height = $width / $ratio;
+            }
+            if ($image->height() < $height) {
+                $height = $image->height();
+                $width = $height * $ratio;
+            }
+            $image->resize($width, $height);
+
             // If image is a square use resize method
             if($image->height() == $image->width()) {
-                $image->resize($width, $height);
+                //$image->resize($width, $height);
             }
             else
             {
-                $image->fit($width, $height);
+                //$image->fit($width, $height);
                 //$image->resize($width, $height)->crop($width, $height,null,'center');
 
             }
