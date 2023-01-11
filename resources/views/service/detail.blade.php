@@ -100,7 +100,7 @@
                                         </div>
                                         <div class="col mb-3">
                                             <span class="text-muted mb-0">Avg. response time</span>
-                                            <div class="fw-700">{{ !$service->postauthor->get_avg_response_time() == '-' ? '-' : ($service->postauthor->get_avg_response_time() . 'Hours') }}</div>
+                                            <div class="fw-700">{{ !$service->postauthor->get_avg_response_time() == '-' ? '-' : ($service->postauthor->get_avg_response_time() * 60 . ' Minutes') }}</div>
                                         </div>
                                     </div>
                                     <div class="row">
