@@ -425,26 +425,48 @@ button.navbar-toggler {
     font-size: 30px;
     color: #ccc;
 }
-.rate:not(:checked) > label:before {
-    content: "★ ";
+
+.rate > input:checked ~ label .label-check {
+    display: block !important;
+    position: inherit;
 }
-.rate > input:checked ~ label {
-    color: #387dff;
+.rate > input:checked ~ label .label-not-check {
+    display: none;
 }
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #2358bc;
+.rate:not(:checked) > label:hover .label-check,
+.rate:not(:checked) > label:hover ~ label .label-check {
+    display: block !important;
+    position: inherit;
 }
+
+.rate:not(:checked) > label:hover .label-not-check,
+.rate:not(:checked) > label:hover ~ label .label-not-check {
+    display: none;
+}
+
 .rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
+.rate > input:checked + label:hover ~ label .label-check,
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #2358bc;
+.rate > label:hover ~ input:checked ~ label .label-check {
+    display: block !important;
+    position: inherit;
+}
+
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label .label-not-check,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label .label-not-check {
+    display: none;
 }
 
 .relative {
     position: relative;
+}
+
+.absolute {
+    position: absolute;
 }
 
 .star-ratings {
