@@ -63,7 +63,7 @@ class Upload extends Model
             else
             {
                 //$image->crop($width, $height);
-                $image->crop( $width, $height, (int) ($image->width() - $width) / 2, (int) ($image->height() - $height) / 2 );
+                $image->crop( intval($width), intval($height), (int) ($image->width() - $width) / 2, (int) ($image->height() - $height) / 2 );
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
