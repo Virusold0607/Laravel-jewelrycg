@@ -49,7 +49,7 @@ class Upload extends Model
             return asset($this->fileUploadPath . "/" . $filename);
         }
 
-        if (file_exists(public_path($this->fileUploadPath) . $this->file_name)) {
+        if (file_exists(public_path($this->fileUploadPath) . $this->file_name) && $this->type == 'image') {
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
 
             $height = $width * $image->height() / $image->width();
