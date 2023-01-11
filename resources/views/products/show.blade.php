@@ -402,13 +402,13 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="text-center">
-                                <div class="star-ratings me-auto ml-auto">
-                                    <div class="fill-ratings" style="width: {{ $average_rating * 100 / 5 }}%;">
-                                        <span>★★★★★</span>
-                                    </div>
-                                    <div class="empty-ratings">
-                                        <span>★★★★★</span>
-                                    </div>
+                                <div class="flex">
+                                    @for($i = 0; $i < $average_rating; $i ++)
+                                        <img src="/assets/img/star_blue.png" width="30"/>
+                                    @endfor
+                                    @for($i = 0; $i < 5 - $average_rating; $i ++)
+                                        <img src="/assets/img/star_gray.png" width="30"/>
+                                    @endfor
                                 </div>
                                 <h1 class="text-black fs-30 fw-700">{{ $average_rating }}</h1>
                                 <p>based on {{ $review_count }} reviews</>

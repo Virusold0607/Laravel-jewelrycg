@@ -12,13 +12,13 @@
                         <div class="fs-20 fw-600 reviewer_name w-100">{{ $review->user->first_name }} {{ $review->user->last_name }}</div>
                         <div class="row">
                             <div class="col-auto pr-0">
-                                <div class="star-ratings star-ratings-sm">
-                                    <div class="fill-ratings" style="width: {{ $review->rating * 100 / 5 }}%;">
-                                        <span>★★★★★</span>
-                                    </div>
-                                    <div class="empty-ratings">
-                                        <span>★★★★★</span>
-                                    </div>
+                                <div class="flex">
+                                    @for($i = 0; $i < $review->rating; $i ++)
+                                        <img src="/assets/img/star_blue.png" width="25"/>
+                                    @endfor
+                                    @for($i = 0; $i < 5 - $review->rating; $i ++)
+                                        <img src="/assets/img/star_gray.png" width="25"/>
+                                    @endfor
                                 </div>
                             </div>
                             <div class="col-auto">
