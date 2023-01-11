@@ -371,9 +371,8 @@
                                     @endfor
                                 </div>
                                 @if ($user_product_review)
-                                    <div class="rated_date">
-                                        Rated at {{ $user_product_review->updated_at }}
-                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="rated_date">Rated at {{ $user_product_review->updated_at }}</div>
                                 @endif
 
                                 <div class="clearfix"></div>
