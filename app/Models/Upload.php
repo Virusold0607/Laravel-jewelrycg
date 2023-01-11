@@ -62,7 +62,7 @@ class Upload extends Model
             }
             else
             {
-                $image->scale($width, $height);
+                $image->fit($width, $height);
                 //$image->crop( intval($width), intval($height), (int) ($image->width() - $width) / 2, (int) ($image->height() - $height) / 2 );
 
             }
