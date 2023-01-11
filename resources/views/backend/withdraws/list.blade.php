@@ -1,4 +1,4 @@
-@extends('backend.layouts.app', ['activePage' => 'withdraws', 'title' => "Withdaw Methods", 'navName' => 'withdraws', 'activeButton' => 'laravel']) 
+@extends('backend.layouts.app', ['activePage' => 'withdraws', 'title' => "Withdaw Methods", 'navName' => 'withdraws', 'activeButton' => 'laravel'])
 @section('content')
 <!-- Page Header -->
 <div class="page-header mb-4">
@@ -33,17 +33,25 @@
 						<th class="sorting" tabindex="0" aria-controls="datatable">Seller name</th>
 						<th class="sorting" tabindex="0" aria-controls="datatable">Payment Method</th>
 						<th class="sorting" tabindex="0" aria-controls="datatable">Amount</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable">Question 1</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable">Question 2</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable">Question 3</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable">Question 4</th>
 						<th class="sorting" tabindex="0" aria-controls="datatable">Status</th>
 					</tr>
 				</thead>
-				<tbody> 
-          @foreach ($withdraws as $withdraw) 
+				<tbody>
+          @foreach ($withdraws as $withdraw)
             <tr role="row" class="odd">
 						  <td class="table-column-ps-0">
                 {{ $withdraw->user->first_name . " " . $withdraw->user->last_name }}
 						  </td>
 						  <td>{{ $withdraw->payment_method_name }}</td>
 						  <td>${{ number_format($withdraw->amount / 100, 2) }}</td>
+                          <td>{{ $withdraw->q1 }}</td>
+                          <td>{{ $withdraw->q2 }}</td>
+                          <td>{{ $withdraw->q3 }}</td>
+                          <td>{{ $withdraw->q4 }}</td>
               <td>
                 <div class="dropdown">
                   <button class="btn btn-xs btn-primary dropdown-toggle" type="button" id="dropdownMenuButton_{{$withdraw->id}}" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,8 +64,8 @@
                   </ul>
                 </div>
               </td>
-            </tr> 
-          @endforeach 
+            </tr>
+          @endforeach
         </tbody>
 			</table>
 			{{-- <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing 1 to 15 of 24 entries</div> --}}
