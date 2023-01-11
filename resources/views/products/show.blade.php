@@ -357,7 +357,7 @@
                             @csrf
                             <div class="fs-18 py-2 fw-600 card-header">Rating</div>
                             <div class="card-body">
-                                <div class="rate pb-3">
+                                <div class="rate pb-1">
                                     @for ($i = 5; $i > 0; $i--)
                                         <input
                                             type="radio" id="star{!! $i !!}" class="rate" name="rating"
@@ -372,7 +372,7 @@
                                 </div>
                                 @if ($user_product_review)
                                     <div class="clearfix"></div>
-                                    <div class="rated_date">Rated at {{ $user_product_review->updated_at }}</div>
+                                    <div class="rated_date pb-2">Rated at {{ $user_product_review->updated_at }}</div>
                                 @endif
 
                                 <div class="clearfix"></div>
