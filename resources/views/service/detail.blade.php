@@ -106,7 +106,7 @@
                                     <h4 class="mb-3 fs-20">About this seller</h4>
                                     <div class="d-flex">
                                         <div class="">
-                                            <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(110,110) }}"
+                                            <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}"
                                                 alt="avatar"
                                                 class="rounded-circle img-fluid">
                                         </div>
