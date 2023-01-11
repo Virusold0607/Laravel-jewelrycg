@@ -42,10 +42,11 @@ class Upload extends Model
 
     public function getImageOptimizedFullName($width = 0, $height = 0)
     {
+        /*
         if ($height === 0) {
             return asset($this->fileUploadPath) . '/' . $this->file_name;
         }
-
+*/
         $filename = str_replace("." . $this->extension, "", $this->file_name) . "-" . $width . "-" . $height . "." . $this->extension;
 
         if (file_exists(public_path($this->fileUploadPath) . $this->file_name)) {
