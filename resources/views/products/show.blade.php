@@ -360,11 +360,14 @@
                                 <div class="rate pb-3">
                                     @for ($i = 5; $i > 0; $i--)
                                         <input
-                                                type="radio" id="star{!! $i !!}" class="rate" name="rating"
-                                                value="{!! $i !!}"
-                                                {{ $user_product_review?->rating == $i ? "checked" : "" }}
+                                            type="radio" id="star{!! $i !!}" class="rate" name="rating"
+                                            value="{!! $i !!}"
+                                            {{ $user_product_review?->rating == $i ? "checked" : "" }}
                                         />
-                                        <label for="star{!! $i !!}">{{ $i }}</label>
+                                        <label for="star{!! $i !!}" class="d-flex relative">
+                                            <img src="/assets/img/star_blue.png" width="25" class="label-check absolute d-none"/>
+                                            <img src="/assets/img/star_gray.png" width="25" class="label-not-check"/>
+                                        </label>
                                     @endfor
                                 </div>
                                 @if ($user_product_review)
