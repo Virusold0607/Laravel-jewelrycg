@@ -42,12 +42,12 @@ class Upload extends Model
 
     public function getImageOptimizedFullName($width = 0, $height = 0)
     {
-        /*
-        if ($height === 0) {
-            return asset($this->fileUploadPath) . '/' . $this->file_name;
-        }
-*/
+
         $filename = str_replace("." . $this->extension, "", $this->file_name) . "-" . $width . "-" . $height . "." . $this->extension;
+
+        if (file_exists(public_path($this->fileUploadPath . "/" . $filename))) {
+            return asset($this->fileUploadPath . "/" . $filename);
+        }
 
         if (file_exists(public_path($this->fileUploadPath) . $this->file_name)) {
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
@@ -69,7 +69,7 @@ class Upload extends Model
     public function getFileManagerThumbnailPath()
     {
         $filename = str_replace('.' . $this->extension, Config::get('constants.file_manager_thumbnail_suffix') . '.' . $this->extension, $this->file_name);
-
+        
         if (!file_exists(public_path($this->fileUploadPath) . '/' . $filename) && $this->type == 'image') {
             // this is for the file manager thumbnail
             $image = Image::make(public_path($this->fileUploadPath) . $this->file_name);
