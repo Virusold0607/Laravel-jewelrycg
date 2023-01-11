@@ -58,6 +58,7 @@ class Upload extends Model
                 $height = $width * $image->height() / $image->width();
             }
 
+            /*
             $ratio = $image->width() / $image->height();
             if ($image->width() < $width) {
                 $width = $image->width();
@@ -68,16 +69,14 @@ class Upload extends Model
                 $width = $height * $ratio;
             }
             $image->resize($width, $height);
-
+            */
             // If image is a square use resize method
             if($image->height() == $image->width()) {
-                //$image->resize($width, $height);
+                $image->resize($width, $height);
             }
             else
             {
-                //$image->fit($width, $height);
-                //$image->resize($width, $height)->crop($width, $height,null,'center');
-
+                $image->fit($width, $height);
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
