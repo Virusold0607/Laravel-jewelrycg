@@ -402,13 +402,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="text-center">
-                                <div class="flex">
-                                    @for($i = 0; $i < $average_rating; $i ++)
-                                        <img src="/assets/img/star_blue.png" width="30"/>
-                                    @endfor
-                                    @for($i = 0; $i < 5 - $average_rating; $i ++)
-                                        <img src="/assets/img/star_gray.png" width="30"/>
-                                    @endfor
+                                <div class="star-ratings me-auto ml-auto">
+                                    <div class="relative">
+                                        <div class="fill-ratings" style="width: {{ $average_rating * 150 / 5 }}px;">
+                                            <img src="/assets/img/star_fill.png" width="150"/>
+                                        </div>
+                                        <div class="empty-ratings">
+                                            <img src="/assets/img/star_empty.png" width="150"/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <h1 class="text-black fs-30 fw-700">{{ $average_rating }}</h1>
                                 <p>based on {{ $review_count }} reviews</>
