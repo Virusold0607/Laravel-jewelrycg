@@ -111,7 +111,7 @@
                                 @if ($file->type != 'image')
                                     <img src="{{ asset('assets/img/file.svg') }}" alt="">
                                 @else
-                                    <img src="{{ $file->getImageOptimizedFullName() }}"
+                                    <img src="{{ $file->getImageOptimizedFullName(400) }}"
                                         class="card-img-top img-thumbnail" alt="{{ $file->file_name }}">
                                 @endif
                                 <div class="card-body">
