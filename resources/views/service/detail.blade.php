@@ -37,7 +37,6 @@
                         <div class="carousel mb-6">
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
-                                    {{count($service->galleries)}}
                                     @for ($i = 0; $i < count($service->galleries); ++$i)
                                         <div class="carousel-item {{ $i == 0 ? "active" : "" }}">
                                             <img src="{{$service->galleries[$i]->getImageOptimizedFullName(1280,700) }}"

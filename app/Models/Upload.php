@@ -48,7 +48,16 @@ class Upload extends Model
         if (file_exists(public_path($this->fileUploadPath . "/" . $filename))) {
             return asset($this->fileUploadPath . "/" . $filename);
         }
-        return asset(self::UPLOAD_PATH. $this->file_name . '?width=' . $width . '&height=' . $height);
+
+        if (file_exists(public_path($this->fileUploadPath) . $this->file_name)) {
+            $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
+
+            $image->resize($width, $height);
+            $image->save(public_path($this->fileUploadPath) . $filename, 80);
+            clearstatcache();
+        }
+        return asset($this->fileUploadPath) . '/' . $filename;
+
     }
 
     // public function getImageCacheFullName($width = 0) {

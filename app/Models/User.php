@@ -65,6 +65,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Upload::class, 'avatar', 'id')->withDefault([
             'file_name' => "avatar.png",
+            'extension' => "png",
             'id' => null,
         ]);
     }
