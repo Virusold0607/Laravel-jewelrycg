@@ -64,92 +64,94 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
-                            <div class="mb-6 about-service">
-                                <h4 class="mb-3 fs-20">About This Service</h4>
-                                <div>{!! $service->content !!}</div>
-                            </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-6 about-service">
+                                    <h4 class="mb-3 fs-20">About This Service</h4>
+                                    <div>{!! $service->content !!}</div>
+                                </div>
 
-                            <div class="mb-6 about-seller">
-                                <h4 class="mb-3 fs-20">About this seller</h4>
-                                <div class="d-flex">
-                                    <div class="">
-                                        <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(110,110) }}"
-                                            alt="avatar"
-                                            class="rounded-circle img-fluid">
+                                <div class="mb-6 about-seller">
+                                    <h4 class="mb-3 fs-20">About this seller</h4>
+                                    <div class="d-flex">
+                                        <div class="">
+                                            <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(110,110) }}"
+                                                alt="avatar"
+                                                class="rounded-circle img-fluid">
+                                        </div>
+                                        <div class="ml-15px">
+                                            <a href="/u/{{ $service->postauthor->username }}" class="fs-18 fw-700 text-black">{{ $service->postauthor->full_name }}</a>
+                                            <p class="mb-1 mt-1">{{ $service->seller->slogan == '' ? 'No Slogan' : $service->seller->slogan }}</p>
+                                            @if ($rating->count > 0)
+                                            <div class="mb-1">
+                                                <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $rating->rating ?: "0.0" }}</span>
+                                                <span class="text-secondary">({{$rating->count}})</span>
+                                            </div>
+                                            @endif
+                                            <div class="d-flex justify-content-start">
+                                                <a class="text-primary" href="{{route('create_chat_room',['conversation_id'=>$service->seller->user->id])}}">Contact Me</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="ml-15px">
-                                        <a href="/u/{{ $service->postauthor->username }}" class="fs-18 fw-700 text-black">{{ $service->postauthor->full_name }}</a>
-                                        <p class="mb-1 mt-1">{{ $service->seller->slogan == '' ? 'No Slogan' : $service->seller->slogan }}</p>
-                                        @if ($rating->count > 0)
-                                        <div class="mb-1">
-                                            <span><i class="bi bi-star-fill fs-20 text-warning"></i> {{ $rating->rating ?: "0.0" }}</span>
-                                            <span class="text-secondary">({{$rating->count}})</span>
+                                    <div class="card mt-3">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col mb-3">
+                                                    <span class="text-muted mb-0">Member since</span>
+                                                    <div class="fw-700">{{ $service->postauthor->created_at->format('M Y') }}</div>
+                                                </div>
+                                                <div class="col mb-3">
+                                                    <span class="text-muted mb-0">Avg. response time</span>
+                                                    <div class="fw-700">{{ !$service->postauthor->get_avg_response_time() == '-' ? '-' : (round($service->postauthor->get_avg_response_time() * 60) . (round($service->postauthor->get_avg_response_time() * 60) == 1 ? ' Minute' : ' Minutes')) }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <span class="text-muted mb-0">Last delivery</span>
+                                                    <div class="fw-700">{{ !$service->postauthor->last_delivery_time() ? 'None' : $service->postauthor->last_delivery_time()->diffForHumans() }}</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="border-top mt-3 pt-3">
+                                                {{ $service->seller->about }}
+                                            </div>
                                         </div>
-                                        @endif
-                                        <div class="d-flex justify-content-start">
-                                            <a class="text-primary" href="{{route('create_chat_room',['conversation_id'=>$service->seller->user->id])}}">Contact Me</a>
-                                        </div>
+
+                                        <hr>
+
                                     </div>
                                 </div>
-                                <div class="card mt-3">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mb-3">
-                                                <span class="text-muted mb-0">Member since</span>
-                                                <div class="fw-700">{{ $service->postauthor->created_at->format('M Y') }}</div>
-                                            </div>
-                                            <div class="col mb-3">
-                                                <span class="text-muted mb-0">Avg. response time</span>
-                                                <div class="fw-700">{{ !$service->postauthor->get_avg_response_time() == '-' ? '-' : (round($service->postauthor->get_avg_response_time() * 60) . (round($service->postauthor->get_avg_response_time() * 60) == 1 ? ' Minute' : ' Minutes')) }}</div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <span class="text-muted mb-0">Last delivery</span>
-                                                <div class="fw-700">{{ !$service->postauthor->last_delivery_time() ? 'None' : $service->postauthor->last_delivery_time()->diffForHumans() }}</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-top mt-3 pt-3">
-                                            {{ $service->seller->about }}
-                                        </div>
-                                    </div>
-
-                                    <hr>
-
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="service-packages-card border p-3">
-                                <ul class="nav nav-pills nav-fill mb-3 service-packages-pill rounded p-2" id="pills-tab" role="tablist">
-                                    @foreach ($service->packages as $k => $package)
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link {{ $k == 0 ? 'active' : '' }}"
-                                                    id="pills-{{ $package->id }}-tab"
-                                                    data-bs-toggle="pill"
-                                                    data-bs-target="#pills-{{ $package->id }}" type="button" role="tab"
-                                                    aria-controls="pills-{{ $package->id }}"
-                                                    aria-selected="true">{{ $package->name }}
-                                            </button>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                                <div class="tab-content" id="pills-tabContent">
-                                    @foreach ($service->packages as $k => $package)
-                                        <div class="tab-pane fade {{ $k == 0 ? 'show active' : '' }}"
-                                            id="pills-{{ $package->id }}" role="tabpanel"
-                                            aria-labelledby="pills-{{ $package->id }}-tab">
-                                            <h3>${{number_format($package->price / 100, 2)}}</h3>
-                                            <h4>{{$package->name}}</h4>
-                                            <p>{{$package->description}}</p>
-                                            <p>{{$package->delivery_time}} Day Delivery</p>
-                                            <p>{{$package->revisions}} Revisions</p>
-                                            <a href="/services/checkout/{{$package->id}}" type="button"
-                                            class="btn btn-primary w-100">Continue</a>
-                                        </div>
-                                    @endforeach
+                            <div class="col-lg-6">
+                                <div class="service-packages-card border p-3">
+                                    <ul class="nav nav-pills nav-fill mb-3 service-packages-pill rounded p-2" id="pills-tab" role="tablist">
+                                        @foreach ($service->packages as $k => $package)
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link {{ $k == 0 ? 'active' : '' }}"
+                                                        id="pills-{{ $package->id }}-tab"
+                                                        data-bs-toggle="pill"
+                                                        data-bs-target="#pills-{{ $package->id }}" type="button" role="tab"
+                                                        aria-controls="pills-{{ $package->id }}"
+                                                        aria-selected="true">{{ $package->name }}
+                                                </button>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        @foreach ($service->packages as $k => $package)
+                                            <div class="tab-pane fade {{ $k == 0 ? 'show active' : '' }}"
+                                                id="pills-{{ $package->id }}" role="tabpanel"
+                                                aria-labelledby="pills-{{ $package->id }}-tab">
+                                                <h3>${{number_format($package->price / 100, 2)}}</h3>
+                                                <h4>{{$package->name}}</h4>
+                                                <p>{{$package->description}}</p>
+                                                <p>{{$package->delivery_time}} Day Delivery</p>
+                                                <p>{{$package->revisions}} Revisions</p>
+                                                <a href="/services/checkout/{{$package->id}}" type="button"
+                                                class="btn btn-primary w-100">Continue</a>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
