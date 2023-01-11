@@ -55,8 +55,16 @@ class Upload extends Model
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
 
             $height = $width * $image->height() / $image->width();
-
-            $image->resize($width, $height);
+            
+            // If image is a square use resize
+            if($image->height() == $image->width()) {
+                $image->resize($width, $height);
+            }
+            else
+            {
+                //$image->crop($width, $height);
+                $image->crop( $width, $height, (int) ($image->width() - $width) / 2, (int) ($image->height() - $height) / 2 );
+            }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
             clearstatcache();
