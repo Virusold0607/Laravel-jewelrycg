@@ -152,7 +152,7 @@
                             @php
                                 $values_selected = explode(',', $product->product_attribute_values)
                             @endphp
-                            <select name="values[]" id="product_attribute_values" value="" class="form-control select2"
+                        <select name="values[]" id="product_attribute_values" value="" class="form-control select2"
                                     multiple="multiple" style="width: 100%;">
 
                                 @include('backend.products.attributes.values.ajax',[
@@ -485,7 +485,7 @@
 
                     <!-- Body -->
                     <div class="card-body">
-                        
+
                         @if ($product->product_3dpreview != null)
                             <div class="w-100">
                                 <span class="badge btn-success mb-2"> 3d model attached </span>
