@@ -125,7 +125,7 @@
                                         </div>
                                     </div>
                                     <div class="car mt-3">
-                                        <div class="card-body">
+                                        <div class="card-bod">
                                             <div class="row">
                                                 <div class="col mb-3">
                                                     <span class="text-muted mb-0">Member since</span>
