@@ -64,7 +64,7 @@ class Upload extends Model
             }
             else
             {
-                $image->fit($width, $height);
+                $image->resize($width, $height);
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
