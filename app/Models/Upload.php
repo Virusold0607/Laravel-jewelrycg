@@ -44,7 +44,6 @@ class Upload extends Model
     {
         if($width == "0" || $width =="") {
             $width = "100";
-            $height = "100";
         }
 
         $filename = str_replace("." . $this->extension, "", $this->file_name) . "-" . $width . "-" . $height . "." . $this->extension;
@@ -61,6 +60,9 @@ class Upload extends Model
 
             // If image is a square use resize method
             if($image->height() == $image->width()) {
+                $image->resize($width, $height);
+            }
+            elseif($width > $image->width()) {
                 $image->resize($width, $height);
             }
             else
