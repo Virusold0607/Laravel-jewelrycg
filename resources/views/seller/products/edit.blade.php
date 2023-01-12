@@ -151,6 +151,11 @@
                                         </div>
                                     </div>
                                     <div class="card-body" id="variantsbody" style="overflow-x: scroll ">
+                                        @include('seller.products.ajax.values',[
+                                            'variants' => $variants,
+                                            'product_id' => $product->id,
+                                            'isDigital' => $product->is_digital
+                                        ])
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +204,8 @@
                                     <div class="card-body">
                                         <div class="mb-4">
                                             <label for="priceNameLabel" class="form-label">Price</label>
-                                            <input type="text" name="price" id="price" class="form-control" placeholder="0.00" value="{{ old('price', 0.00) }}">
+                                            <input type="text" value='{{ $product->price }}' name="price" id="price"
+                                                class="form-control" placeholder="80.00...">
                                         </div>
                                         {{-- <label class="row form-switch mb-4" for="availabilitySwitch5">
                                             <span class="col-8 col-sm-9 ms-0">

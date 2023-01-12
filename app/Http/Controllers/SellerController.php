@@ -72,10 +72,17 @@ class SellerController extends Controller
 
     public function editProduct($id) {
         $product = Product::whereId($id)->with(['tags', 'variants', 'variants.uploads'])->firstOrFail();
+        $product->setPriceToFloat();
+        $variants = ProductsVariant::where('product_id', $id)->get();
+
+        $variants->each(function ($product) {
+            $product->setPriceToFloat();
+        });
         $selected_attributes = explode(',', $product->product_attributes);
         $prepare_values = Attribute::whereIn('id', $selected_attributes)->with(['values'])->get();
         return view('seller.products.edit', [
             'product' => $product,
+            'variants' => $variants,
             'attributes' => Attribute::orderBy('id', 'DESC')->get(),
             'categories' => ProductsCategorie::all(),
             'taxes' => ProductsTaxOption::all(),
@@ -161,20 +168,28 @@ class SellerController extends Controller
         $product->update($data);
         $id_product = $product->id;
 
+        ProductTagsRelationship::where('id_product', $product->id)->delete();
+        $variantIds = [];
+        foreach ($variants as $variant) {
+            $variantIds[] = $variant['id'];
+        }
+        ProductsVariant::where('product_id', $product->id)->whereNotIn('id', $variantIds)->delete();
+
         foreach ($variants as $variant) {
             $variant_data = $variant;
-            $variant_data['product_id'] = $id_product;
+            $variant_data['product_id'] = $product->id;
             $variant_data['variant_price'] = Product::stringPriceToCents($variant_data['variant_price']);
-            $product_variant = ProductsVariant::where('product_id', $id_product)->first();
-            $product_variant->update($variant_data);
+
+            ProductsVariant::updateOrCreate(['product_id' => $product->id, 'variant_attribute_value' => $variant['variant_attribute_value']], $variant_data);
         }
 
         foreach ($tags as $tag) {
             $id_tag = (!is_numeric($tag)) ? $this->registerNewTag($tag) : $tag;
-            $product_tag_relation = ProductTagsRelationship::where('id_product', $id_product)->first();
-            $product->update([
+            ProductTagsRelationship::create([
                 'id_tag' => $id_tag,
+                'id_product' => $product->id
             ]);
+
         }
 
         return redirect()->route('seller.dashboard');
