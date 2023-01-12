@@ -44,9 +44,10 @@ class Upload extends Model
     {
         if($width == "0" || $width =="") {
             $width = "100";
+            $height = "100";
         }
-        $filename = str_replace("." . $this->extension, "", $this->file_name) . "-" . $width . "-" . $height . "." . $this->extension;
 
+        $filename = str_replace("." . $this->extension, "", $this->file_name) . "-" . $width . "-" . $height . "." . $this->extension;
         if (file_exists(public_path($this->fileUploadPath . "/" . $filename))) {
             return asset($this->fileUploadPath . "/" . $filename);
         }
@@ -64,7 +65,7 @@ class Upload extends Model
             }
             else
             {
-                $image->resize($width, $height);
+                $image->fit($width, $height);
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
