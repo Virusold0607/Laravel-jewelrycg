@@ -43,6 +43,7 @@ class Upload extends Model
     public function getImageOptimizedFullName($width = 0, $height = 0)
     {
         if($width == "0" || $width =="") {
+            //default width
             $width = "100";
         }
 
@@ -55,21 +56,15 @@ class Upload extends Model
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
             
             if($height == "0" || $height =="") {
-                $height = $width * $image->height() / $image->width();
+                $ratio = $image->width() / $image->height();
+                $height = round($width / $ratio);
+                //$height = $width * $image->height() / $image->width();
             }
 
             // If image is a square use resize method
             if($image->height() == $image->width()) {
                 $image->resize($width, $height);
             }
-            elseif($width > $image->width()) {
-                $image->resize($width);
-            }
-            /*
-            elseif($height > $image->height()) {
-                $image->resize($width, $height);
-            }
-            */
             else
             {
                 $image->fit($width, $height);
