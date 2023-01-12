@@ -70,6 +70,20 @@ class SellerController extends Controller
         ]);
     }
 
+    public function editProduct($id) {
+        $product = Product::whereId($id)->with(['tags', 'variants', 'variants.uploads'])->firstOrFail();
+        $selected_attributes = explode(',', $product->product_attributes);
+        $prepare_values = Attribute::whereIn('id', $selected_attributes)->with(['values'])->get();
+        return view('seller.products.edit', [
+            'product' => $product,
+            'attributes' => Attribute::orderBy('id', 'DESC')->get(),
+            'categories' => ProductsCategorie::all(),
+            'taxes' => ProductsTaxOption::all(),
+            'tags' => ProductTag::all(),
+            'uploads' => Upload::whereIn('id', explode(',', $product->product_images))->get(),
+            'selected_values' => $prepare_values,
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -114,6 +128,52 @@ class SellerController extends Controller
             ProductTagsRelationship::create([
                 'id_tag' => $id_tag,
                 'id_product' => $id_product,
+            ]);
+        }
+
+        return redirect()->route('seller.dashboard');
+    }
+
+
+    public function updateProduct(ProductStoreRequest $req, $product)
+    {
+        $tags = (array) $req->input('tags');
+        $variants = (array) $req->input('variant');
+        $attributes = implode(",", (array) $req->input('attributes'));
+        $values = implode(",", (array) $req->input('values'));
+        $data = $req->all();
+        $data['vendor'] = auth()->id();
+        $data['price'] = Product::stringPriceToCents($req->price);
+        $data['is_digital'] = 1;
+        $data['status'] = 2;
+        $data['is_virtual'] = 0;
+        $data['is_backorder'] = 0;
+        $data['is_madetoorder'] = 0;
+        $data['is_trackingquantity'] = 0;
+        $data['product_attributes'] = $attributes;
+        $data['product_attribute_values'] = $values;
+        $data['slug'] = str_replace(" ", "-", strtolower($req->name));
+        $slug_count = Product::where('slug', $data['slug'])->count();
+        if ($slug_count) {
+            $data['slug'] = $data['slug'] . '-' . ($slug_count + 1);
+        }
+        $product = Product::findOrFail($product);
+        $product->update($data);
+        $id_product = $product->id;
+
+        foreach ($variants as $variant) {
+            $variant_data = $variant;
+            $variant_data['product_id'] = $id_product;
+            $variant_data['variant_price'] = Product::stringPriceToCents($variant_data['variant_price']);
+            $product_variant = ProductsVariant::where('product_id', $id_product)->first();
+            $product_variant->update($variant_data);
+        }
+
+        foreach ($tags as $tag) {
+            $id_tag = (!is_numeric($tag)) ? $this->registerNewTag($tag) : $tag;
+            $product_tag_relation = ProductTagsRelationship::where('id_product', $id_product)->first();
+            $product->update([
+                'id_tag' => $id_tag,
             ]);
         }
 
