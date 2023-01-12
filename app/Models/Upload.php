@@ -56,6 +56,7 @@ class Upload extends Model
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
             
             // update default width if image width less than 100
+            /*
             if($image->width() < 100) 
             {
                 $width = $image->width();
@@ -63,12 +64,12 @@ class Upload extends Model
             else if($width == "0" || $width =="") 
             {
                 $width = "100";
-            }
+            }*/
             
             if($height == "0" || $height =="") {
-                $ratio = $image->width() / $image->height();
-                $height = round($width / $ratio);
-                //$height = $width * $image->height() / $image->width();
+                //$ratio = $image->width() / $image->height();
+                //$height = round($width / $ratio);
+                $height = round($width * $image->height() / $image->width());
             }
 
             // If image is a square use resize method
