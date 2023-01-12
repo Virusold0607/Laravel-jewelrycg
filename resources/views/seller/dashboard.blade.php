@@ -77,9 +77,9 @@
                                                 @if ($product->status == 4)
                                                     <div class="fw-bold mb-2">Status : Denied</div>
                                                 @endif
-                                                <button class="btn btn-danger">
+                                                <a class="btn btn-danger" href="{{route('seller.product.edit', $product->id)}}">
                                                     <i class="bi bi-pencil"></i> Edit
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

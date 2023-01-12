@@ -464,6 +464,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'seller', 'as' => 'seller.']
     Route::get('/transaction/history', [SellerController::class, 'transactionHistory'])->name('transaction.history');
     Route::get('/product/create', [SellerController::class, 'createProduct'])->name('product.create');
     Route::post('/product/create', [SellerController::class, 'storeProduct'])->name('product.store');
+    Route::get('/product/edit/{id}', [SellerController::class, 'editProduct'])->name('product.edit');
+    Route::put('/product/update/{product}', [SellerController::class, 'updateProduct'])->name('product.update');
     Route::get('/withdraw', [SellerController::class, 'withdraw'])->name('withdraw.get');
     Route::post('/withdraw', [SellerController::class, 'withdraw_post'])->name('withdraw.post');
     Route::get('/withdraw/history', [SellerController::class, 'withdraw_history'])->name('withdraw.history');
