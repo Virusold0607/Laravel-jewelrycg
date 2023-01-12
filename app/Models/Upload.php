@@ -63,8 +63,13 @@ class Upload extends Model
                 $image->resize($width, $height);
             }
             elseif($width > $image->width()) {
+                $image->resize($width);
+            }
+            /*
+            elseif($height > $image->height()) {
                 $image->resize($width, $height);
             }
+            */
             else
             {
                 $image->fit($width, $height);
