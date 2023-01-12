@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="service-packages-card border p-3">
+                                <div class="service-packages-card card p-3">
                                     <ul class="nav nav-pills nav-fill mb-3 service-packages-pill rounded p-2" id="pills-tab" role="tablist">
                                         @foreach ($service->packages as $k => $package)
                                             <li class="nav-item" role="presentation">
@@ -102,8 +102,8 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                <div class="mb-6 about-seller">
-                                    <h4 class="mb-3 fs-20">About this seller</h4>
+                                <div class="mb-6 about-seller card p-3">
+                                    <h4 class="mb-4 fs-20">About this seller</h4>
                                     <div class="d-flex">
                                         <div class="">
                                             <img src="{{ $service->postauthor->uploads->getImageOptimizedFullName(100,100) }}"
@@ -124,7 +124,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card mt-3">
+                                    <div class="car mt-3">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col mb-3">
