@@ -55,6 +55,16 @@ class Upload extends Model
         if (file_exists(public_path($this->fileUploadPath) . $this->file_name) && $this->type == 'image') {
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
             
+            // update default width if image width less than 100
+            if($image->width() < 100) 
+            {
+                $width = $image->width();
+            } 
+            else if($width == "0" || $width =="") 
+            {
+                $width = "100";
+            }
+            
             if($height == "0" || $height =="") {
                 $ratio = $image->width() / $image->height();
                 $height = round($width / $ratio);
