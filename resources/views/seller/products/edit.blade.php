@@ -50,7 +50,8 @@
                                     <div class="card-body">
                                         <div class="mb-4">
                                             <label for="productNameLabel" class="form-label">Name </label>
-                                            <input type="text" name="name" id="name" class="form-control" value="{{ $product->name }}" disabled>
+                                            <input type="text" class="form-control" value="{{ $product->name }}" disabled>
+                                            <input type="text" name="name" id="name" class="form-control d-none" value="{{ $product->name }}">
                                         </div>
 
                                         <div class="mb-4">
@@ -224,7 +225,8 @@
                                     <div class="card-body">
                                         <div class="mb-4">
                                             <label for="category" class="mb-2">Category:</label>
-                                            <select class="selectpicker w-100" name="category" data-live-search="true" disabled>
+                                            <input type="text" name="category" id="category" class="form-control d-none" value="{{ $product->category }}">
+                                            <select class="selectpicker w-100" data-live-search="true" disabled>
                                                 <option disabled>Select category</option>
                                                 @foreach ($categories as $categorie)
                                                     <option value="{{ $categorie->id }}"
