@@ -67,7 +67,7 @@ class Upload extends Model
             
             if($height == "0" || $height =="") {
                 $ratio = $image->width() / $image->height();
-                $height = round($width / $ratio);
+                $height = floor($width / $ratio);
 
             }
 
