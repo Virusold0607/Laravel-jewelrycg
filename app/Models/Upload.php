@@ -69,8 +69,8 @@ class Upload extends Model
             }
             else
             {
-                //$image->fit($width, $height);
-                $image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
+                $image->fit($width, $height);
+                //$image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
 
             }
 
