@@ -80,7 +80,10 @@ class Upload extends Model
             }
             else
             {
-                $image->fit($width, $height);
+                //$image->fit($width, $height);
+                $image->resize($width, $height, function ($constraint) {
+    $constraint->aspectRatio();
+});
 
             }
 
