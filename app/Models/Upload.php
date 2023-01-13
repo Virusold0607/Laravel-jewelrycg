@@ -57,7 +57,7 @@ class Upload extends Model
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
 
             // If image is a square use resize method
-            if($image->height() == $image->width()) 
+            if(($image->height() == $image->width()) && ($height = "" || $height = "0")) 
             {
                 $image->resize($width, $width);
             }
@@ -70,8 +70,6 @@ class Upload extends Model
             else
             {
                 $image->fit($width, $height);
-                //$image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
-
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
