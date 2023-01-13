@@ -73,8 +73,7 @@ class Upload extends Model
 
             // If image is a square use resize method
             if($image->height() == $image->width()) {
-                //$image->resize($width, $height);
-                $image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
+                $image->resize($width, $height);
             }
             else
             {
