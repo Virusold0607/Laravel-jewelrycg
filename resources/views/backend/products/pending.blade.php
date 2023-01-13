@@ -52,7 +52,7 @@
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <a class="btn btn-dark btn-sm"
-                                                    href="{{ route('backend.products.edit', $product->id) }}">Edit</a>
+                                                    href="{{ route('backend.products.pending.edit', $product->id) }}">Edit</a>
                                                 <!-- Button Group -->
                                                 <div class="btn-group">
                                                     <button type="button"

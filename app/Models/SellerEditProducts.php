@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SellerEditProducts extends Model
 {
-    use HasFactory;
+    use HasFactory, FormatPrices;
     protected $fillable = [
         'is_approved',
         'product_id',
@@ -121,7 +121,7 @@ class SellerEditProducts extends Model
 
     public function tags()
     {
-        return $this->hasMany(ProductTagsRelationship::class, 'id_product', 'id');
+        return $this->hasMany(ProductTagsRelationship::class, 'id_product', 'product_id');
     }
 
     public function product_category()
@@ -226,13 +226,13 @@ class SellerEditProducts extends Model
 
     public function product_materials()
     {
-        return $this->hasMany(ProductMaterial::class, 'product_id', 'id');
+        return $this->hasMany(ProductMaterial::class, 'product_id', 'product_id');
     }
 
     public function product_materials_by_material_id($material_id)
     {
         $product_materials = ProductMaterial::where('material_id', $material_id)
-            ->where('product_id', $this->id)
+            ->where('product_id', $this->product_id)
             ->orderBy('product_attribute_value_id', 'asc')
             ->orderBy('material_type_id', 'asc')
             ->get();
@@ -242,15 +242,15 @@ class SellerEditProducts extends Model
 
     public function measurements()
     {
-        return $this->hasMany(ProductMeasurementRelationship::class, 'product_id', 'id');
+        return $this->hasMany(ProductMeasurementRelationship::class, 'product_id', 'product_id');
     }
 
     public function formatPriceFor($products)
     {
         $products->each(function ($product) {
-            $count = SellerEditProductVariants::where('product_id', $product->id)->count();
-            $maxPrice = SellerEditProductVariants::where('product_id', $product->id)->max('variant_price');
-            $minPrice = SellerEditProductVariants::where('product_id', $product->id)->min('variant_price');
+            $count = SellerEditProductVariants::where('product_id', $product->product_id)->count();
+            $maxPrice = SellerEditProductVariants::where('product_id', $product->product_id)->max('variant_price');
+            $minPrice = SellerEditProductVariants::where('product_id', $product->product_id)->min('variant_price');
             if ($count) {
                 if ($minPrice != $maxPrice) {
                     $product->price = "$" . number_format($minPrice / 100, 2) . " - $" . number_format($maxPrice / 100, 2);

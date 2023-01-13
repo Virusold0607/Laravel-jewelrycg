@@ -11,6 +11,8 @@ use App\Http\Requests\ProductStoreRequest;
 use App\Models\ProductsCategorie;
 use App\Models\ProductTag;
 use App\Models\ProductsVariant;
+use App\Models\SellerEditProducts;
+use App\Models\SellerEditProductVariants;
 use App\Models\Attribute;
 use App\Models\Material;
 use App\Models\ProductMaterial;
@@ -63,7 +65,7 @@ class ProductsController extends Controller
     public function pending()
     {
         return view('backend.products.pending', [
-            'products' => Product::where('status', 2)->with('product_category')->orderBy('id', 'DESC')->get()
+            'products' => SellerEditProducts::where('is_approved', 0)->with('product_category')->orderBy('product_id', 'DESC')->get()
         ]);
     }
 
@@ -184,6 +186,59 @@ class ProductsController extends Controller
         //
     }
 
+    public function pendingEdit($id)
+    {
+        $product = SellerEditProducts::whereId($id)->with(['tags', 'variants', 'variants.uploads'])->firstOrFail();
+        $product->setPriceToFloat();
+        $product_measurements = ProductMeasurement::all();
+
+        $variants = SellerEditProductVariants::where('product_id', $product->product_id)->get();
+
+        $variants->each(function ($product) {
+            $product->setPriceToFloat();
+        });
+
+        $selected_attributes = explode(',', $product->product_attributes);
+        $prepare_values = Attribute::whereIn('id', $selected_attributes)->with(['values'])->get();
+        $seller = User::query()->find($product->vendor);
+
+        $arrMaterials = Material::with('types')->get();
+        $arrProductMaterials = ProductMaterial::getMaterialsByProduct($product->product_id);
+        $arrDiamondTypes = MaterialTypeDiamonds::where('material_id', '=', '1')->get();
+        $arrDiamondTypeColors = MaterialTypeDiamondsColor::all();
+        $arrDiamondTypeClarity = MaterialTypeDiamondsClarity::all();
+        $user_id = Auth::id();
+        $arrDiamondTypePrices = MaterialTypeDiamondsPrices::where('user_id', $user_id)->get()->toArray();
+        $diamondPrices = [];
+        foreach ($arrDiamondTypePrices as $key => $value) {
+            $diamondPrices[$value['diamond_id']] = $value;
+        }
+
+        $arrStepGroups = StepGroup::pluck('name', 'id')->toArray();
+        $arrSteps = Step::pluck('name', 'id')->toArray();
+
+        return view('backend.products.pending_edit', [
+            'product' => $product,
+            'product_measurements' => $product_measurements,
+            'variants' => $variants,
+            'categories' => ProductsCategorie::all(),
+            'attributes' => Attribute::orderBy('id', 'DESC')->get(),
+            'tags' => ProductTag::all(),
+            'uploads' => Upload::whereIn('id', explode(',', $product->product_images))->get(),
+            'selected_values' => $prepare_values,
+            'seller' => $seller,
+            'taxes' => ProductsTaxOption::all(),
+            'arrProductMaterials' => $arrProductMaterials,
+            'arrDiamondTypes' => $arrDiamondTypes,
+            'arrMaterials' => $arrMaterials,
+            'arrSteps' => $arrSteps,
+            'arrStepGroups' => $arrStepGroups,
+            'arrDiamondTypeColors' => $arrDiamondTypeColors,
+            'arrDiamondTypeClarity' => $arrDiamondTypeClarity,
+            'diamondPrices' => $diamondPrices,
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -241,6 +296,123 @@ class ProductsController extends Controller
             'arrDiamondTypeClarity' => $arrDiamondTypeClarity,
             'diamondPrices' => $diamondPrices,
         ]);
+    }
+
+
+    public function pendingUpdate(ProductStoreRequest $req, $product)
+    {
+        if ($req->status !== "2") {
+            $counter = Product::where('slug', $req->slug)->count();
+            $sep = ($counter == 0) ? '' : '-' . $counter + 1;
+            $tags = (array)$req->input('tags');
+            $variants = (array)$req->input('variant');
+            $attributes = implode(",", (array)$req->input('attributes'));
+            $values = implode(",", (array)$req->input('values'));
+            $data = $req->all();
+            $data['price'] = Product::stringPriceToCents($req->price);
+            $data['is_digital'] = ($req->is_digital) ? 1 : 0;
+            $data['is_virtual'] = ($req->is_virtual) ? 1 : 0;
+            $data['is_backorder'] = ($req->is_backorder & $req->is_backorder == 1) ? 1 : 0;
+            $data['is_madetoorder'] = ($req->is_madetoorder & $req->is_madetoorder == 1) ? 1 : 0;
+            $data['is_trackingquantity'] = $req->is_trackingquantity ? 1 : 0;
+            $data['product_attributes'] = $attributes;
+            $data['product_attribute_values'] = $values;
+            $data['category'] = $req->get('category');
+
+            if ($req->slug == "") {
+                $data['slug'] = str_replace(" ", "-", strtolower($req->name)) . $sep;
+            }
+            $user_id = Auth::id();
+            $edit_product = SellerEditProducts::find($product);
+            $edit_product->is_approved = 1;
+            $edit_product->update();
+            $product = Product::findOrFail($edit_product->product_id);
+            $product->update($data);
+            ProductTagsRelationship::where('id_product', $product->id)->delete();
+
+            $variantIds = [];
+            foreach ($variants as $variant) {
+                $variantIds[] = $variant['id'];
+            }
+            ProductsVariant::where('product_id', $product->id)->whereNotIn('id', $variantIds)->delete();
+
+            foreach ($variants as $variant) {
+                $variant_data = $variant;
+                $variant_data['product_id'] = $product->id;
+                $variant_data['variant_price'] = Product::stringPriceToCents($variant_data['variant_price']);
+
+                ProductsVariant::updateOrCreate(['product_id' => $product->id, 'variant_attribute_value' => $variant['variant_attribute_value']], $variant_data);
+            }
+
+            foreach ($tags as $tag) {
+                $id_tag = (!is_numeric($tag)) ? $this->registerNewTag($tag) : $tag;
+                ProductTagsRelationship::create([
+                    'id_tag' => $id_tag,
+                    'id_product' => $product->id
+                ]);
+
+            }
+
+            $product_measurement_values = $req->product_measurement_values ? $req->product_measurement_values : [];
+            $product_measurement_ids = $req->product_measurement_ids ? $req->product_measurement_ids: [];
+
+            ProductMeasurementRelationship::where('product_id', $product->id)
+                ->whereNotIn('measurement_id', $product_measurement_ids)
+                ->delete();
+
+            $product_measurement_relationships = array();
+            foreach($product_measurement_values as $k => $product_measurement_value){
+                ProductMeasurementRelationship::updateOrCreate(
+                    ['product_id' => $product->id, 'measurement_id' => $product_measurement_ids[$k]],
+                    ['value' => $product_measurement_value]
+                );
+            }
+
+            cache()->forget('todays-deals');
+        } else {
+            $tags = (array) $req->input('tags');
+            $variants = (array) $req->input('variant');
+            $attributes = implode(",", (array) $req->input('attributes'));
+            $values = implode(",", (array) $req->input('values'));
+            $data = $req->all();
+            $data['vendor'] = auth()->id();
+            $data['price'] = Product::stringPriceToCents($req->price);
+            $data['is_digital'] = 1;
+            $data['status'] = 2;
+            $data['is_virtual'] = 0;
+            $data['is_backorder'] = 0;
+            $data['is_madetoorder'] = 0;
+            $data['is_trackingquantity'] = 0;
+            $data['product_attributes'] = $attributes;
+            $data['product_attribute_values'] = $values;
+            $data['slug'] = str_replace(" ", "-", strtolower($req->name));
+            $slug_count = Product::where('slug', $data['slug'])->count();
+            if ($slug_count) {
+                $data['slug'] = $data['slug'] . '-' . ($slug_count + 1);
+            }
+            $edit_product = SellerEditProducts::where('id', $product)->first();
+            if (!$edit_product) {
+                $edit_product = SellerEditProducts::create($data);
+            } else {
+                $edit_product->update($data);
+            }
+            $id_product = $edit_product->product_id;
+
+            $variantIds = [];
+            foreach ($variants as $variant) {
+                $variantIds[] = $variant['id'];
+            }
+            SellerEditProductVariants::where('product_id', $id_product)->whereNotIn('id', $variantIds)->delete();
+
+            foreach ($variants as $variant) {
+                $variant_data = $variant;
+                $variant_data['variant_id'] = (int)$variant['id'];
+                $variant_data['product_id'] = $id_product;
+                $variant_data['variant_price'] = SellerEditProductVariants::stringPriceToCents($variant_data['variant_price']);
+                SellerEditProductVariants::updateOrCreate(['product_id' => $id_product, 'variant_attribute_value' => $variant['variant_attribute_value']], $variant_data);
+            }
+        }
+        return redirect()->route('backend.products.pending.list');
     }
 
     /**

@@ -112,6 +112,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
         Route::get('/', [ProductsController::class, 'index'])->name('list');
         Route::get('/pending', [ProductsController::class, 'pending'])->name('pending.list');
+        Route::get('/pending/edit/{id}', [ProductsController::class, 'pendingEdit'])->name('pending.edit');
+        Route::put('/pending/update/{id}', [ProductsController::class, 'pendingUpdate'])->name('pending.update');
         Route::get('/active', [ProductsController::class, 'active'])->name('active.list');
         Route::get('/archive', [ProductsController::class, 'archive'])->name('archive');
         Route::get('/archive/recover/{id}', [ProductsController::class, 'recover'])->name('recover');
