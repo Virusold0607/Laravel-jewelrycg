@@ -73,13 +73,15 @@ class Upload extends Model
 
             // If image is a square use resize method
             if($image->height() == $image->width()) {
-                $image->resize($width, $height);
+                //$image->resize($width, $height);
+                $image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
             }
             else
             {
                 //$image->fit($width, $height);
                 //$image->fit($width, $height, function ($constraint) { $constraint->aspectRatio(); $constraint->upsize(); });
-                $image->crop($width, $height, ($image->width()-$width)/2, ($image->height()-$height)/2);
+                //$image->crop($width, $height, ($image->width()-$width)/2, ($image->height()-$height)/2);
+                $image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
