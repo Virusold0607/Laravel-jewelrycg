@@ -43,7 +43,8 @@ class Upload extends Model
     public function getImageOptimizedFullName($width = 0, $height = 0)
     {
         //default width
-        if($width == "0" || $width =="") {
+        if($width == "0" || $width =="") 
+        {
             $width = "100";
         }
 
@@ -62,6 +63,7 @@ class Upload extends Model
             }
             elseif($height == "0" || $height =="") 
             {
+                
                 $image->resize($width, null, function ($constraint) 
                 {
                     $constraint->aspectRatio();
