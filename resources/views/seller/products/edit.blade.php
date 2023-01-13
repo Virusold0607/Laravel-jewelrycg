@@ -138,7 +138,7 @@
                                             <select name="values[]" id="product_attribute_values" value="" class="form-control select2"
                                                     multiple="multiple" style="width: 100%;">
 
-                                                @include('backend.products.attributes.values.ajax',[
+                                                @include('seller.products.attributes.values.ajax',[
                                                     'attributes' => $selected_values,
                                                     'values_selected' => $values_selected
                                                 ])
@@ -163,33 +163,6 @@
                             <div class="col-lg-4">
 
                                 <!-- Card -->
-                                {{-- <div class="card mb-3 mb-4">
-                                    <!-- Header -->
-                                    <div class="card-header">
-                                        <h4 class="card-header-title mb-0">Options</h4>
-                                    </div>
-                                    <!-- End Header -->
-
-                                    <!-- Body -->
-                                    <div class="card-body">
-                                        <label class="row form-switch mb-4" for="availabilitySwitch1">
-                                            <span class="col-8 col-sm-9 ms-0">
-                                                <span class="text-dark">Digital</span>
-                                            </span>
-                                            <span class="col-4 col-sm-3 text-end">
-                                                <input type="checkbox" class="form-check-input" name="is_digital" id="availabilitySwitch1" {{ old('is_digital') ? 'checked' : '' }}>
-                                            </span>
-                                        </label>
-                                        <label class="row form-switch mb-4" for="availabilitySwitch2">
-                                            <span class="col-8 col-sm-9 ms-0">
-                                                <span class="text-dark">Virtual</span>
-                                            </span>
-                                            <span class="col-4 col-sm-3 text-end">
-                                                <input type="checkbox" name="is_virtual" class="form-check-input" id="availabilitySwitch2" {{ old('is_virtual') ? 'checked' : '' }}>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div> --}}
                                 <!-- End Card -->
 
                                 <!-- Card -->
@@ -480,31 +453,6 @@
         });
 
         // check the digital setting turn on
-        $('#availabilitySwitch1').click(function () {
-            if ($('#availabilitySwitch1').prop('checked')) {
-            $('#digital_download_assets').val(0);
-            $('#digital_download_assets').parent().parent().show();
-            } else {
-            $('#digital_download_assets').parent().parent().hide();
-            }
-
-            if ($('#variantsbody').html() != '') {
-            var values_selected = $('#product_attribute_values').val()
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('backend.products.attributes.combinations') }}",
-                data: {
-                "_token": "{{ csrf_token() }}",
-                "values": values_selected,
-                'isDigital': $('#availabilitySwitch1').prop('checked') * 1
-                },
-                success: function (result) {
-                $('#variantsbody').html(result)
-                }
-            })
-            }
-            // getVariants($('#availabilitySwitch1').prop('checked') * 1);
-        })
 
         $('#availabilitySwitch5').click(function () {
             var isTrackQuantity = $('#availabilitySwitch5').prop('checked');
@@ -545,7 +493,7 @@
         var digital_download_assets = [];
         $('#getFileManagerModel').click(function () {
             $.ajax({
-            url: "{{ route('backend.file.show') }}",
+            url: "{{ route('seller.file.show') }}",
             success: function (data) {
                 if (!$.trim($('#fileManagerContainer').html()))
                 $('#fileManagerContainer').html(data);
@@ -565,7 +513,7 @@
 
         $('#getFileManagerAsset').click(function () {
             $.ajax({
-            url: "{{ route('backend.file.show') }}",
+            url: "{{ route('seller.file.show') }}",
             success: function (data) {
                 if (!$.trim($('#fileManagerContainer').html()))
                 $('#fileManagerContainer').html(data);
@@ -584,7 +532,7 @@
 
         $('#getFileManager').click(function () {
             $.ajax({
-            url: "{{ route('backend.file.show') }}",
+            url: "{{ route('seller.file.show') }}",
             success: function (data) {
                 if (!$.trim($('#fileManagerContainer').html()))
                 $('#fileManagerContainer').html(data);

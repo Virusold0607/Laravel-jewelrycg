@@ -5,7 +5,7 @@
     }
     .modal-body{
         overflow: auto;
-    }    
+    }
     .check-option {
         right: 4px;
         top: 4px;
@@ -77,7 +77,7 @@
                                         <span class="spinner-border spinner-border-sm upload-btn-loading" role="status"
                                             aria-hidden="true"></span>
                                         <span class="upload-btn-loading-text">Loading</span>
-                                        <span class="upload-btn-text">Upload</span>
+                                        <span class="upload-btn-text">Uploads</span>
                                     </button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
@@ -126,7 +126,7 @@
         }
 
         function abortHandler(event) {
-        }        
+        }
         document.file_upload_form.onsubmit = function() {
             if (document.getElementById('file_upload_input').files.length) {
                 var formData = new FormData();
@@ -159,7 +159,7 @@
                         xhr.addEventListener("abort", abortHandler, false);
 
                         return xhr;
-                    }                    
+                    }
                 });
             }
 
