@@ -519,7 +519,7 @@
 
         $('#getFileManagerForProducts').click(function () {
             $.ajax({
-            url: "{{ route('backend.file.show') }}",
+            url: "{{ route('seller.file.show') }}",
             success: function (data) {
                 if (!$.trim($('#fileManagerContainer').html()))
                 $('#fileManagerContainer').html(data);
