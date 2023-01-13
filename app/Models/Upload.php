@@ -83,10 +83,11 @@ class Upload extends Model
 $image->crop($width, $height, ($image->width()-$width)/2, ($image->height()-$height)/2);
 
 //create a new image with transparent background
-$canvas = Image::canvas($width_new, $height_new);
+$canvas = Image::canvas($width, $height);
 
 //put the image on the center of the canvas without stretching it
-$canvas->insert($image, 'center')->fit($width_new, $height_new);
+$canvas->insert($image, 'center')->fit($width, $height);
+
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
