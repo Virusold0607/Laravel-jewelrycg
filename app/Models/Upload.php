@@ -55,13 +55,6 @@ class Upload extends Model
         if (file_exists(public_path($this->fileUploadPath) . $this->file_name) && $this->type == 'image') {
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
             
-            // update default width if image width less than 100
-            /*if($image->width() < 100) 
-            {
-                $width = $image->width();
-            } 
-            else 
-            */
             // default width
             if($width == "0" || $width =="") 
             {
@@ -81,10 +74,7 @@ class Upload extends Model
             else
             {
                 //$image->fit($width, $height);
-                $image->resize($width, $height, function ($constraint) {
-    $constraint->aspectRatio();
-});
-
+                $image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
