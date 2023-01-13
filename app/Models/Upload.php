@@ -56,11 +56,14 @@ class Upload extends Model
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
             
             // update default width if image width less than 100
-            if($image->width() < 100) 
+            /*if($image->width() < 100) 
             {
                 $width = $image->width();
             } 
-            else if($width == "0" || $width =="") 
+            else 
+            */
+            // default width
+            if($width == "0" || $width =="") 
             {
                 $width = "100";
             }
