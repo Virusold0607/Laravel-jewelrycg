@@ -78,9 +78,7 @@ class Upload extends Model
             else
             {
                 //$image->fit($width, $height);
-                //$image->fit($width, $height, function ($constraint) { $constraint->aspectRatio(); $constraint->upsize(); });
-                //$image->crop($width, $height, ($image->width()-$width)/2, ($image->height()-$height)/2);
-                $image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
+                $image->crop($width, $height, ($image->width()-$width)/2, ($image->height()-$height)/2);
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
