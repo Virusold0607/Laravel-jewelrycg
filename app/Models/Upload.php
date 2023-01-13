@@ -68,7 +68,7 @@ class Upload extends Model
             if($height == "0" || $height =="") {
                 $ratio = $image->width() / $image->height();
                 $height = round($width / $ratio);
-                //$height = round($width * $image->height() / $image->width());
+
             }
 
             // If image is a square use resize method
@@ -77,16 +77,7 @@ class Upload extends Model
             }
             else
             {
-                //$image->fit($width, $height);
-                //$image->crop($width, $height, ($image->width()-$width)/2, ($image->height()-$height)/2);
-                // Crop image from center
-$image->crop($width, $height, ($image->width()-$width)/2, ($image->height()-$height)/2);
-
-//create a new image with transparent background
-$canvas = Image::canvas($width, $height);
-
-//put the image on the center of the canvas without stretching it
-$canvas->insert($image, 'center')->fit($width, $height);
+                $image->fit($width, $height);
 
             }
 
