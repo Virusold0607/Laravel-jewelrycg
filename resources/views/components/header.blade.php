@@ -82,7 +82,7 @@
                 </div>
             </div>
             <nav>
-                <ul class="ml-auto navbar-nav header-menu-action">
+                <ul class="ml-auto navbar-nav header-menu-action align-items-end">
                     <li class="nav-item dropdown menu-area">
                         <a href="{{route('cart.index')}}" class="nav-link">
                             <?php
