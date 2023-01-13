@@ -42,8 +42,8 @@ class Upload extends Model
 
     public function getImageOptimizedFullName($width = 0, $height = 0)
     {
+        //default width
         if($width == "0" || $width =="") {
-            //default width
             $width = "100";
         }
 
@@ -54,12 +54,6 @@ class Upload extends Model
 
         if (file_exists(public_path($this->fileUploadPath) . $this->file_name) && $this->type == 'image') {
             $image = Image::make(public_path($this->fileUploadPath) . "/" . $this->file_name);
-            
-            // default width
-            if($width == "0" || $width =="") 
-            {
-                $width = "100";
-            }
             
             if($height == "0" || $height =="") {
                 $ratio = $image->width() / $image->height();
@@ -73,8 +67,8 @@ class Upload extends Model
             }
             else
             {
-                //$image->fit($width, $height);
-                $image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
+                $image->fit($width, $height);
+                //$image->resizeCanvas($width, $height, 'center', false, 'rgba(255, 255, 255, 0)');
             }
 
             $image->save(public_path($this->fileUploadPath) . $filename, 80);
