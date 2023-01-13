@@ -193,9 +193,10 @@
 
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false"
-                               href="#">{{ Auth::user()->first_name }}</a>
+                            <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                            <!--{{ Auth::user()->first_name }}-->
+                            <img src="{{user_name(Auth::user()->id)[0]->uploads->getImageOptimizedFullName(100,100)}}" alt="avatar" class="w-30px rounded-circle img-fluid">
+                            </a>
                             <ul class="dropdown-menu small-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <div class="d-flex align-items-center py-2">
                                     <div class="mr-10px w-40px">
