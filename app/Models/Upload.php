@@ -63,11 +63,9 @@ class Upload extends Model
             }
             elseif($height == "0" || $height =="") 
             {
-                
-                $image->resize($width, null, function ($constraint) 
-                {
-                    $constraint->aspectRatio();
-                });
+                $ratio = $image->width() / $image->height();
+                $height = round($width / $ratio);
+                $image->resize($width, $height);
             }
             else
             {
