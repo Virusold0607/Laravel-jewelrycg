@@ -11,6 +11,8 @@ use App\Models\Product;
 use App\Models\ProductsCategorie;
 use App\Models\ProductsTaxOption;
 use App\Models\ProductsVariant;
+use App\Models\SellerEditProductVariants;
+use App\Models\SellerEditProducts;
 use App\Models\ProductTag;
 use App\Models\ProductTagsRelationship;
 use App\Models\SellerPaymentMethod;
@@ -164,34 +166,23 @@ class SellerController extends Controller
         if ($slug_count) {
             $data['slug'] = $data['slug'] . '-' . ($slug_count + 1);
         }
-        $product = Product::findOrFail($product);
-        $product->update($data);
-        $id_product = $product->id;
+        $data['product_id'] = (int)$product;
+        $edit_product = SellerEditProducts::create($data);
+        $id_product = $edit_product->product_id;
 
-        ProductTagsRelationship::where('id_product', $product->id)->delete();
         $variantIds = [];
         foreach ($variants as $variant) {
             $variantIds[] = $variant['id'];
         }
-        ProductsVariant::where('product_id', $product->id)->whereNotIn('id', $variantIds)->delete();
+        SellerEditProductVariants::where('product_id', $id_product)->whereNotIn('id', $variantIds)->delete();
 
         foreach ($variants as $variant) {
             $variant_data = $variant;
-            $variant_data['product_id'] = $product->id;
-            $variant_data['variant_price'] = Product::stringPriceToCents($variant_data['variant_price']);
+            $variant_data['product_id'] = $id_product;
+            $variant_data['variant_price'] = SellerEditProductVariants::stringPriceToCents($variant_data['variant_price']);
 
-            ProductsVariant::updateOrCreate(['product_id' => $product->id, 'variant_attribute_value' => $variant['variant_attribute_value']], $variant_data);
+            SellerEditProductVariants::updateOrCreate(['product_id' => $id_product, 'variant_attribute_value' => $variant['variant_attribute_value']], $variant_data);
         }
-
-        foreach ($tags as $tag) {
-            $id_tag = (!is_numeric($tag)) ? $this->registerNewTag($tag) : $tag;
-            ProductTagsRelationship::create([
-                'id_tag' => $id_tag,
-                'id_product' => $product->id
-            ]);
-
-        }
-
         return redirect()->route('seller.dashboard');
     }
 

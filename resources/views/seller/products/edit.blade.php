@@ -50,7 +50,7 @@
                                     <div class="card-body">
                                         <div class="mb-4">
                                             <label for="productNameLabel" class="form-label">Name </label>
-                                            <input type="text" name="name" id="name" class="form-control" value="{{ $product->name }}">
+                                            <input type="text" name="name" id="name" class="form-control" value="{{ $product->name }}" disabled>
                                         </div>
 
                                         <div class="mb-4">
@@ -224,7 +224,7 @@
                                     <div class="card-body">
                                         <div class="mb-4">
                                             <label for="category" class="mb-2">Category:</label>
-                                            <select class="selectpicker w-100" name="category" data-live-search="true">
+                                            <select class="selectpicker w-100" name="category" data-live-search="true" disabled>
                                                 <option disabled>Select category</option>
                                                 @foreach ($categories as $categorie)
                                                     <option value="{{ $categorie->id }}"
@@ -238,7 +238,7 @@
                                         <div class="mb-4">
                                             <label for="name" class="mb-2">Tags:</label>
                                             <select name="tags[]" id="tags" value="" class="form-control select2"
-                                                multiple="multiple" style="width: 100%;">
+                                                multiple="multiple" style="width: 100%;" disabled>
                                             @foreach ($tags as $tag)
                                                 <option @if ($product->tags->contains('id_tag', $tag->id)) selected
                                                         @endif value='{{ $tag->id }}'>
