@@ -9,6 +9,7 @@ class SellerEditProductVariants extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'variant_id',
         'product_id',
         'variant_name',
         'variant_price',
