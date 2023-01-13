@@ -183,9 +183,9 @@ class SellerController extends Controller
 
         foreach ($variants as $variant) {
             $variant_data = $variant;
+            $variant_data['variant_id'] = (int)$variant['id'];
             $variant_data['product_id'] = $id_product;
             $variant_data['variant_price'] = SellerEditProductVariants::stringPriceToCents($variant_data['variant_price']);
-
             SellerEditProductVariants::updateOrCreate(['product_id' => $id_product, 'variant_attribute_value' => $variant['variant_attribute_value']], $variant_data);
         }
         return redirect()->route('seller.dashboard');
