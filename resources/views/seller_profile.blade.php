@@ -32,7 +32,9 @@
                             <div class="mb-4 col-lg-3">
                                 <div class="card">
                                 <div class="card-body">
-                                    <img src="{{ $product->uploads->getImageOptimizedFullName(400,400) }}" alt="{{ $product->name }}" class="border w-100 mb-3 img-fluid">
+                                    <a href="{{ route('products.show', $product->slug) }}">
+                                      <img src="{{ $product->uploads->getImageOptimizedFullName(400,400) }}" alt="{{ $product->name }}" class="border w-100 mb-3 img-fluid">
+                                    </a>
                                     <h5>{{ $product->name }}</h5>
                                     <!--
                                     <p class="text-muted mb-1">{{ $product->description }}</p>
