@@ -328,8 +328,8 @@
               }
               new_html += '</select></td>'
 
-              new_html += '<td><input class="form-control" type="number" name="material_type_diamonds_lab_price[]" value="' + (material_type_diamonds_price ? material_type_diamonds_price.natural_price : 0) + '"></td>'
-              new_html += '<td><input class="form-control" type="number" name="material_type_diamonds_natural_price[]" value="' + (material_type_diamonds_price ? material_type_diamonds_price.lab_price : 0) + '"></td>'
+              new_html += '<td><input class="form-control" type="number" name="material_type_diamonds_lab_price[]" value="' + (material_type_diamonds_price ? material_type_diamonds_price.lab_price : 0) + '"></td>'
+              new_html += '<td><input class="form-control" type="number" name="material_type_diamonds_natural_price[]" value="' + (material_type_diamonds_price ? material_type_diamonds_price.natural_price : 0) + '"></td>'
               new_html += '<td><button class="form-control btn btn-danger btn-sm" onclick="delete_current_row(this)">Delete</button></td>'
 
               new_html += '</tr>';
