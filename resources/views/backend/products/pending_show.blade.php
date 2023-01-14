@@ -1,10 +1,10 @@
-@extends('backend.layouts.app', ['activePage' => 'products', 'title' => 'Pending Products', 'navName' => 'pendingproducts', 'activeButton' => 'catalogue'])
+@extends('backend.layouts.app', ['activePage' => 'products', 'title' => 'Seller Edit Products', 'navName' => 'sellereditproducts', 'activeButton' => 'catalogue'])
 
 @section('content')
     <div class="page-header">
         <div class="row align-items-center mb-3">
             <div class="col-sm mb-2 mb-sm-0">
-                <h1 class="page-header-title">Pending Products <span class="badge bg-soft-dark text-dark ms-2">{{ $products->count() }}</span></h1>
+                <h1 class="page-header-title">Seller Edit Products <span class="badge bg-soft-dark text-dark ms-2">{{ $products->count() }}</span></h1>
             </div>
         </div>
         <!-- End Row -->
@@ -52,7 +52,7 @@
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <a class="btn btn-dark btn-sm"
-                                                    href="{{ route('backend.products.edit', $product->id) }}">Edit</a>
+                                                    href="{{ route('backend.products.edit_pending.edit', $product->id) }}">Edit</a>
                                                 <!-- Button Group -->
                                                 <div class="btn-group">
                                                     <button type="button"
@@ -87,10 +87,12 @@
 @section('js_content')
     <script>
         $(function() {
+
             $('.table').DataTable({
                 processing: true,
                 serverSide: true,
                 bAutoWidth: false,
+
                 ajax: '{{ route('backend.products.get') }}',
                 columns: [{
                         data: 'id',

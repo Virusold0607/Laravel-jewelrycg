@@ -167,6 +167,7 @@ class SellerController extends Controller
             $data['slug'] = $data['slug'] . '-' . ($slug_count + 1);
         }
         $data['product_id'] = (int)$product;
+        $data['is_approved'] = 0;
         $edit_product = SellerEditProducts::where('product_id', $product)->first();
         if (!$edit_product) {
             $edit_product = SellerEditProducts::create($data);

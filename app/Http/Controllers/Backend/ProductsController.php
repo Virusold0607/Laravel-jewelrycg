@@ -65,6 +65,13 @@ class ProductsController extends Controller
     public function pending()
     {
         return view('backend.products.pending', [
+            'products' => Product::where('status', 2)->with('product_category')->orderBy('id', 'DESC')->get()
+        ]);
+    }
+
+    public function editPendingShow()
+    {
+        return view('backend.products.pending_show', [
             'products' => SellerEditProducts::where('is_approved', 0)->with('product_category')->orderBy('product_id', 'DESC')->get()
         ]);
     }
@@ -412,7 +419,7 @@ class ProductsController extends Controller
                 SellerEditProductVariants::updateOrCreate(['product_id' => $id_product, 'variant_attribute_value' => $variant['variant_attribute_value']], $variant_data);
             }
         }
-        return redirect()->route('backend.products.pending.list');
+        return redirect()->route('backend.products.edit_pending.list');
     }
 
     /**
