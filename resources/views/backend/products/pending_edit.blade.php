@@ -43,7 +43,7 @@
         <!-- End Row -->
     </div>
 
-    <form action="{{ route('backend.products.pending.update', $product) }}"
+    <form action="{{ route('backend.products.edit_pending.update', $product) }}"
           id="frmUpdateProduct"
           method="post" enctype="multipart/form-data"
     >
