@@ -48,6 +48,15 @@
                                 class="form-control">
                         </div>
 
+                        <!-- Whatsapp -->
+                        @if ($user->seller && $user->seller->whatsapp)
+                        <div class="col-md-12 mb-2">
+                            <label for="whatsapp">Whatsapp:</label>
+                            <input type="text"  value='{{ $user->seller->whatsapp }}'
+                                class="form-control" disabled>
+                        </div>
+                        @endif
+
                         <!-- Status -->
                         <div class="col-md-12 mb-2">
                             <label for="email">Status:</label>
