@@ -6,7 +6,7 @@
           <div class="card mb-4">
             <div class="card-body text-center">
               <img src="{{ $seller->user->uploads->getImageOptimizedFullName(150,150) }}" alt="avatar"
-                class="rounded-circle img-fluid">
+                class="rounded-circle img-fluid border">
               <h5 class="my-3">{{ $seller->user->first_name . " " . $seller->user->last_name }}</h5>
               <p class="text-muted mb-1">{{ $seller->user->username }}</p>
               <p class="text-muted mb-4">{{ $seller->slogan }}</p>
