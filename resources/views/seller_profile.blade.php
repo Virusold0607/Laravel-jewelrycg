@@ -56,7 +56,9 @@
                         <div class="mb-4 col-lg-3">
                         <div class="card">
                             <div class="card-body">
-                            <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" alt="{{ $service->name }}" class="border w-100 mb-3 img-fluid">
+                            <a href="/services/{{$service->slug}}">
+                              <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" alt="{{ $service->name }}" class="border w-100 mb-3 img-fluid">
+                            </a>
                             <h5>{{ $service->name }}</h5>
                             <!--
                             <p class="text-muted mb-1">{{ $service->description }}</p>
