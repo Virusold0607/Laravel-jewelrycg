@@ -109,10 +109,10 @@
                                 </td>
                                 <td><input class="form-control" type="number"
                                            name="material_type_diamonds_lab_price[]"
-                                           value="{{ $product_material->material_type_diamonds_price($product_material->diamond_id)->natural_price }}">
+                                           value="{{ $product_material->material_type_diamonds_price($product_material->diamond_id)->lab_price }}">
                                 </td>
                                 <td><input class="form-control" type="number" name="material_type_diamonds_natural_price[]"
-                                           value="{{ $product_material->material_type_diamonds_price($product_material->diamond_id)->lab_price }}">
+                                           value="{{ $product_material->material_type_diamonds_price($product_material->diamond_id)->natural_price }}">
                                 </td>
                                 <td>
                                     <button class="form-control btn btn-danger btn-sm"
