@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('wallet')->default(0);
             $table->integer('sales_commission_rate')->nullable();
             $table->text('business_name')->nullable();
+            $table->text('whatsapp')->nullable();
             $table->text('slogan')->nullable();
             $table->text('about')->nullable();
             $table->unsignedInteger('default_payment_method')->nullable();
