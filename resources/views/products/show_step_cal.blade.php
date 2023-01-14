@@ -181,7 +181,7 @@
                             @foreach ($arrProductDiamonds as $diamond)
                                 <tr class="natural_price"
                                     data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
-                                    <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} *
+                                    <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} carats *
                                         ${{ $diamond->natural_price }})
                                     </td>
                                     <td class="product_diamond_price">
@@ -191,7 +191,7 @@
                             @foreach ($arrProductDiamonds as $diamond)
                                 <tr class="lab_price"
                                     data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
-                                    <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} *
+                                    <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} carats *
                                         ${{ $diamond->lab_price }})
                                     </td>
                                     <td class="product_diamond_price">${{ ($diamond->tcw * $diamond->lab_price) }}</td>
