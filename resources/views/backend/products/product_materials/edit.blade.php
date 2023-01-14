@@ -108,10 +108,10 @@
                                     </select>
                                 </td>
                                 <td><input class="form-control" type="number"
-                                           name="material_type_diamonds_natural_price[]"
+                                           name="material_type_diamonds_lab_price[]"
                                            value="{{ $product_material->material_type_diamonds_price($product_material->diamond_id)->natural_price }}">
                                 </td>
-                                <td><input class="form-control" type="number" name="material_type_diamonds_lab_price[]"
+                                <td><input class="form-control" type="number" name="material_type_diamonds_natural_price[]"
                                            value="{{ $product_material->material_type_diamonds_price($product_material->diamond_id)->lab_price }}">
                                 </td>
                                 <td>
@@ -328,8 +328,8 @@
               }
               new_html += '</select></td>'
 
-              new_html += '<td><input class="form-control" type="number" name="material_type_diamonds_natural_price[]" value="' + (material_type_diamonds_price ? material_type_diamonds_price.natural_price : 0) + '"></td>'
-              new_html += '<td><input class="form-control" type="number" name="material_type_diamonds_lab_price[]" value="' + (material_type_diamonds_price ? material_type_diamonds_price.lab_price : 0) + '"></td>'
+              new_html += '<td><input class="form-control" type="number" name="material_type_diamonds_lab_price[]" value="' + (material_type_diamonds_price ? material_type_diamonds_price.natural_price : 0) + '"></td>'
+              new_html += '<td><input class="form-control" type="number" name="material_type_diamonds_natural_price[]" value="' + (material_type_diamonds_price ? material_type_diamonds_price.lab_price : 0) + '"></td>'
               new_html += '<td><button class="form-control btn btn-danger btn-sm" onclick="delete_current_row(this)">Delete</button></td>'
 
               new_html += '</tr>';
