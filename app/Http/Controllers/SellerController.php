@@ -446,6 +446,7 @@ class SellerController extends Controller
         $seller = SellersProfile::withWhereHas('user', fn($query) => $query->where('id', Auth::id()))->firstOrFail();
 
         $seller->slogan = $request->slogan;
+        $seller->whatsapp = $request->whatsapp;
         $seller->about = $request->about;
         $seller->default_payment_method = $request->method;
         $seller->save();

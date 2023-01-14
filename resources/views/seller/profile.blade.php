@@ -17,7 +17,7 @@
     .dropzone .dz-preview{
         margin: 0;
     }
-    
+
     .dz-image img{
         width: 100%;
         height: 100%;
@@ -36,12 +36,16 @@
                 @if (session('error'))
                     <div class="alert alert-danger" role="alert">{{session('error')}}</div>
                 @endif
- 
+
                 <form action="{{ route('seller.profile.post') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card mb-4">
                         <div class="card-header">Seller Information</div>
                         <div class="card-body">
+                            <div class="mb-2">
+                                <label for="whatsapp">Whatsapp:</label>
+                                <input type="text" name="whatsapp" id="whatsapp" value="{{ old('whatsapp') ?? $seller->whatsapp }}" class="form-control">
+                            </div>
                             <div class="mb-2">
                                 <label for="slogan">Slogan:</label>
                                 <input type="text" name="slogan" id="slogan" value="{{ old('slogan') ?? $seller->slogan }}" class="form-control">
@@ -74,12 +78,12 @@
                         </div>
                     </div>
                 </form>
-                
+
             </div>
         </div><!-- end .row -->
     </div>
 </div>
-  
+
 @section('js')
 <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
 <script>
