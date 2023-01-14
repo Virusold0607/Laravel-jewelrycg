@@ -36,6 +36,7 @@ class SellerRegisterController extends Controller
         if(Auth::user()){
             $request->validate([
                 'business_name' => ['required', 'string'],
+                'whatsapp' => ['required', 'string'],
                 'slogan' => ['required', 'string'],
                 'about' => ['required', 'string'],
             ]);
@@ -48,6 +49,7 @@ class SellerRegisterController extends Controller
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'username' => ['required', 'unique:users,username'],
                 'business_name' => ['required', 'string'],
+                'whatsapp' => ['required', 'string'],
                 'slogan' => ['required', 'string'],
                 'about' => ['required', 'string'],
             ]);
@@ -70,6 +72,7 @@ class SellerRegisterController extends Controller
             $seller = SellersProfile::create([
                 'user_id'   => $user->id,
                 'business_name' => $request->business_name,
+                'whatsapp' => $request->whatsapp,
                 'slogan' => $request->slogan,
                 'about'     => $request->about,
             ]);

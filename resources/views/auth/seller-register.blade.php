@@ -69,6 +69,13 @@
                 <x-input id="business_name" class="block w-full mt-1" type="text" name="business_name" :value="old('business_name')"
                     required />
             </div>
+            <!-- Whatsapp Number -->
+            <div class="mt-4">
+                <x-label for="whatsapp" :value="__('Whatsapp')" />
+
+                <x-input id="whatsapp" class="block w-full mt-1" type="text" name="whatsapp" :value="old('whatsapp')"
+                    required />
+            </div>
             <!-- Slogan -->
             <div class="mt-4">
                 <x-label for="slogan" :value="__('Slogan')" />

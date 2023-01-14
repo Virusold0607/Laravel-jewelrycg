@@ -18,6 +18,7 @@ class SellersProfile extends Model
     protected $fillable = [
         'user_id',
         'business_name',
+        'whatsapp',
         'slogan',
         'about',
         'default_payment_method',
