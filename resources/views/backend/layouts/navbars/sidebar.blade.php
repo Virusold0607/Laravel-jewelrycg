@@ -181,6 +181,10 @@
                       @endif
                     </span>
                   </a>
+                  <a class="nav-link @if($navName == 'sellereditproducts') active @endif" href="{{ route('backend.products.edit_pending.list') }}">
+                    <span class="nav-link-title">{{ __("Seller Edit Products") }}
+                    </span>
+                  </a>
                   <a class="nav-link @if($navName == 'addproduct') active @endif" href="{{ route('backend.products.create') }}">{{ __("Create Product") }}</a>
                   <a class="nav-link @if($navName == 'attributes') active @endif " href="{{route('backend.products.attributes.list')}}">{{ __("Attributes") }}</a>
                   <a class="nav-link @if($navName == 'productscategories') active @endif" href="{{ route('backend.products.categories.list') }}">{{ __("Categories") }}</a>
