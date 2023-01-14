@@ -18,11 +18,7 @@
                      aria-labelledby="offcanvasNavbarLightLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">
-                            <img src="{{ asset('img/logo.png') }}" width="50" height="50" alt="logo">
-                            {{--                            <img class="logo"--}}
-                            {{--                                 src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
-                            {{--                                 data-src="https://districtgurus.com/public/uploads/all/SC008HOLHmfOeB8E3SxNDONHI7nad1YJcmSl0ds9.png"--}}
-                            {{--                                 alt="District Gurus">--}}
+                            <!--<img src="{{ asset('img/logo.png') }}" width="50" height="50" alt="logo">-->
                             #JEWELRYCG
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -82,7 +78,7 @@
                 </div>
             </div>
             <nav>
-                <ul class="ml-auto navbar-nav header-menu-action">
+                <ul class="ml-auto navbar-nav header-menu-action align-items-end">
                     <li class="nav-item dropdown menu-area">
                         <a href="{{route('cart.index')}}" class="nav-link">
                             <?php
@@ -193,9 +189,10 @@
 
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false"
-                               href="#">{{ Auth::user()->first_name }}</a>
+                            <a class="nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                            <!--{{ Auth::user()->first_name }}-->
+                            <img src="{{user_name(Auth::user()->id)[0]->uploads->getImageOptimizedFullName(100,100)}}" alt="avatar" class="w-30px rounded-circle img-fluid">
+                            </a>
                             <ul class="dropdown-menu small-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <div class="d-flex align-items-center py-2">
                                     <div class="mr-10px w-40px">
