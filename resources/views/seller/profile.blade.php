@@ -43,6 +43,10 @@
                         <div class="card-header">Seller Information</div>
                         <div class="card-body">
                             <div class="mb-2">
+                                <label for="business_name">Business name:</label>
+                                <input type="text" name="business_name" id="business_name" value="{{ old('business_name') ?? $seller->business_name }}" class="form-control">
+                            </div>
+                            <div class="mb-2">
                                 <label for="whatsapp">Whatsapp:</label>
                                 <input type="text" name="whatsapp" id="whatsapp" value="{{ old('whatsapp') ?? $seller->whatsapp }}" class="form-control">
                             </div>

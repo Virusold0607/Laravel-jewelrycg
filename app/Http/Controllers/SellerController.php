@@ -447,6 +447,7 @@ class SellerController extends Controller
 
         $seller->slogan = $request->slogan;
         $seller->whatsapp = $request->whatsapp;
+        $seller->business_name = $request->business_name;
         $seller->about = $request->about;
         $seller->default_payment_method = $request->method;
         $seller->save();
