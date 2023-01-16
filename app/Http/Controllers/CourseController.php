@@ -11,6 +11,7 @@ use App\Models\CourseCategory;
 use App\Models\CourseLesson;
 use App\Models\CourseLessonContent;
 use App\Models\OrderCourse;
+use App\Models\User;
 use App\Models\UserAddress;
 use App\Models\CourseLessonHistory;
 use Illuminate\Http\Request;
