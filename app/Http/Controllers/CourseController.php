@@ -435,7 +435,7 @@ class CourseController extends Controller
             $lessonContent = CourseLessonContent::find($request->content);
             if( $lessonContent ) {
                 $displayText = $lessonContent->content;
-                $displayName = "test";
+                $displayName = $lessonContent->name;
             }
         }
         $lesson = CourseLesson::where('course_id', $course->id)->pluck('id')->toArray();
