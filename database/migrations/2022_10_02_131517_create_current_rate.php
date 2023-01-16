@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Command to run in forge php artisan rate:get_current
      * @return void
      */
     public function up()
