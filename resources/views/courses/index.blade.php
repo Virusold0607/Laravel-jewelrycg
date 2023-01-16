@@ -22,7 +22,7 @@
                                 @if($course->uploads->file_name == 'none.png')
                                     <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="{{ $course->name }}" class="img-blog-cropped border lazyloaded rounded">
                                 @else
-                                    <img src="{{$course->uploads->getImageOptimizedFullName(600,100)}}" alt="{{ $course->name }}" class="img-blog-cropped border lazyloaded rounded">
+                                    <img src="{{$course->uploads->getImageOptimizedFullName(600,1000)}}" alt="{{ $course->name }}" class="img-blog-cropped border lazyloaded rounded">
                                 @endif
                             </a>
                             <div class="p-2 pt-3">
