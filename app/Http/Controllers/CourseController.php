@@ -418,6 +418,8 @@ class CourseController extends Controller
     {
         $course = Course::where('slug', $slug)
             ->firstOrFail();
+        $displayName = $course->name; 
+           
         $isPurchased = !!OrderCourse::where([
             "user_id" => Auth::id(),
             "course_id" => $course->id
@@ -428,7 +430,6 @@ class CourseController extends Controller
             ]);
         }
         $displayText = $course->description;
-        $displayName = "name test";
         $currentId = -1;
         if($request->has("content")){
             $currentId = $request->content;
