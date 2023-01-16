@@ -430,6 +430,7 @@ class CourseController extends Controller
         $displayName = $course->name; 
         $displayText = $course->description;
         $currentId = -1;
+
         if($request->has("content")){
             $currentId = $request->content;
             $lessonContent = CourseLessonContent::find($request->content);
@@ -437,6 +438,12 @@ class CourseController extends Controller
                 $displayText = $lessonContent->content;
                 $displayName = $lessonContent->name;
             }
+        }
+        else {
+            return redirect()->route("courses.take", [
+                "slug" => $slug,
+                "content" => 1,
+            ]);
         }
         $lesson = CourseLesson::where('course_id', $course->id)->pluck('id')->toArray();
         $content = CourseLessonContent::whereIn('lesson_id', $lesson)->pluck('id')->toArray();
