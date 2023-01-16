@@ -437,6 +437,14 @@ class CourseController extends Controller
                 $displayText = $lessonContent->content;
                 $displayName = $lessonContent->name;
             }
+            else
+            {
+                $currentId = 1;
+                return redirect()->route("take_show", [
+                    "slug" => $slug,
+                    "content" => $currentId
+                ]);
+            }
         }
         $lesson = CourseLesson::where('course_id', $course->id)->pluck('id')->toArray();
         $content = CourseLessonContent::whereIn('lesson_id', $lesson)->pluck('id')->toArray();
