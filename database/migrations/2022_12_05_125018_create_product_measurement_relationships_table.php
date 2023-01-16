@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('product_measurement_relationships', function (Blueprint $table) {
             $table->id();
-            $table->string('value');
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('product_id');
+            $table->integer('product_attribute_value_id')->default(0); // //aka products_variants id
             $table->unsignedBigInteger('measurement_id');
-            $table->foreign('measurement_id')->references('id')->on('product_measurements')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('value');
             $table->timestamps();
         });
     }
