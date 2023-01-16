@@ -88,7 +88,7 @@ class CourseController extends Controller
         }
 
         if (Course::where('slug', $slug)->count()) {
-            $slug .= "1";
+            $slug .= "-1";
         }
         $data['slug'] = $slug;
 
@@ -429,7 +429,7 @@ class CourseController extends Controller
         }
         $displayName = $course->name; 
         $displayText = $course->description;
-        $currentId = 1;
+        $currentId = -1;
         if($request->has("content")){
             $currentId = $request->content;
             $lessonContent = CourseLessonContent::find($request->content);
