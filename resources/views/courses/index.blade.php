@@ -11,7 +11,7 @@
     <section class="bg-white pb-0">
         <div class="container">
             <div class="section-page-content col-xl-11 mx-auto">
-                <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1">
+                <div class="row row-cols-lg-4 row-cols-md-3 row-cols-2">
                     @foreach ($arrCourses as $course)
                     @php
                         $course->setPriceToFloat()
