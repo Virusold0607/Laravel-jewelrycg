@@ -428,11 +428,15 @@ class CourseController extends Controller
             ]);
         }
         $displayText = $course->description;
+        $displayName = $course->name;
         $currentId = -1;
         if($request->has("content")){
             $currentId = $request->content;
             $lessonContent = CourseLessonContent::find($request->content);
-            if( $lessonContent ) $displayText = $lessonContent->content;
+            if( $lessonContent ) {
+                $displayText = $lessonContent->content;
+                $displayName = $lessonContent->name;
+            }
         }
         $lesson = CourseLesson::where('course_id', $course->id)->pluck('id')->toArray();
         $content = CourseLessonContent::whereIn('lesson_id', $lesson)->pluck('id')->toArray();
