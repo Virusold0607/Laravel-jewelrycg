@@ -447,7 +447,7 @@ class CourseController extends Controller
         if( $key < count($content) - 1 ) $nextId = $content[$key + 1];
 
         return view('courses.take.show', compact(
-            'course', 'history', 'displayText', 'currentId', 'nextId'
+            'course', 'history', 'displayName', 'displayText', 'currentId', 'nextId'
         ));
     }
 
