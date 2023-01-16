@@ -112,7 +112,7 @@
                     <div class="product-3dmodel bg-white mb-4">
                         <div class="model-box border rounded h-500px p-2">
                             <model-viewer class="model-full-hw" alt="{{ $product->name }} Preview"
-                                          src="{{ asset('uploads/all/ ') }}/{{ $product->modelpreview->file_name }}"
+                                          src="{{ asset('uploads/all/') }}/{{ $product->modelpreview->file_name }}"
                                           poster="{{ asset('assets/img/placeholder.jpg') }}" ar-scale="auto"
                                           poster="assets/img/placeholder.jpg" loading="lazy"
                                           camera-orbit="{{$product->product_3dpreview_xyz}}"
