@@ -624,13 +624,42 @@ class ProductsController extends Controller
     public function product_lengths(Request $request, $id)
     {
         $product = Product::find($id);
+
+        if (is_null($product)) {
+            return redirect()->back();
+        }
+
         $measurements = ProductMeasurement::all();
         $attribute_values = AttributeValue::all();
-
+        $product_measurements = ProductMeasurementRelationship::where('product_id', $product->id)->get();
         $selected_attributes = explode(',', $product->product_attributes);
         $product_attributes = Attribute::whereIn('id', $selected_attributes)->with(['values'])->get();
 
-        return view('backend.products.product_lengths.edit', compact('product', 'measurements', 'attribute_values', 'product_attributes'));
+        $product_attributes_group_by = [];
+        if (count($product_measurements) > 0) {
+            foreach($product_measurements as $key => $measurement) {
+                if (!isset($product_attributes_group_by[$measurement->product_attribute_value_id])) {
+                    $product_attributes_group_by[$measurement->product_attribute_value_id] = [
+                        'id' => $measurement->product_attribute_value_id,
+                        'attribute_name' => $measurement->attribute_name,
+                        'measurements' => []
+                    ];
+                }
+
+                $sub_measurements = $product_attributes_group_by[$measurement->product_attribute_value_id]['measurements'];                
+                array_push($sub_measurements, [
+                    'id' => $measurement->product_measurement->id,
+                    'name' => $measurement->product_measurement->name,
+                    'unit' => $measurement->product_measurement->units,
+                    'product_attribute_value_id' => $measurement->product_attribute_value_id,
+                    'measurement_id' => $measurement->measurement_id,
+                    'value' => $measurement->value,
+                ]);
+                $product_attributes_group_by[$measurement->product_attribute_value_id]['measurements'] = $sub_measurements;
+            }
+        }
+
+        return view('backend.products.product_lengths.edit', compact('product', 'measurements', 'attribute_values', 'product_attributes', 'product_attributes_group_by'));
     }
 
     public function product_materials(Request $request, $id)
