@@ -621,6 +621,18 @@ class ProductsController extends Controller
         return ProductsVariant::where('id', $id)->update(['digital_download_assets' => $request->value]);
     }
 
+    public function product_lengths(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $measurements = ProductMeasurement::all();
+        $attribute_values = AttributeValue::all();
+
+        $selected_attributes = explode(',', $product->product_attributes);
+        $product_attributes = Attribute::whereIn('id', $selected_attributes)->with(['values'])->get();
+
+        return view('backend.products.product_lengths.edit', compact('product', 'measurements', 'attribute_values', 'product_attributes'));
+    }
+
     public function product_materials(Request $request, $id)
     {
         $product = Product::find($id);
@@ -637,6 +649,33 @@ class ProductsController extends Controller
 
         return view('backend.products.product_materials.edit', compact('product', 'materials', 'material_types', 'material_type_diamonds',
             'material_type_diamonds_clarities', 'material_type_diamonds_colors', 'material_type_diamonds_prices', 'attribute_values', 'product_attributes'));
+    }
+
+    public function update_product_lengths(Request $request)
+    {
+        $measurement_ids = $request->measurement_id ? $request->measurement_id : [];
+        $product_attribute_value_ids = $request->length_product_attribute_value_id ? $request->length_product_attribute_value_id : [];
+        $values = $request->value ? $request->value : [];
+        ProductMeasurementRelationship::whereNotIn('product_attribute_value_id', $product_attribute_value_ids)
+            ->whereNotIn('measurement_id', $measurement_ids)
+            ->where('product_id', $request->product_id)
+            ->delete();
+        foreach($measurement_ids as $k => $measurement_id)
+        {
+            $product_relation = ProductMeasurementRelationship::where('product_attribute_value_id', $product_attribute_value_ids[$k])
+                ->where('measurement_id', $measurement_id)
+                ->where('product_id', $request->product_id)
+                ->first();
+            if (!$product_relation) {
+                $product_relation = new ProductMeasurementRelationship;
+                $product_relation->product_id = $request->product_id;
+                $product_relation->product_attribute_value_id = $product_attribute_value_ids[$k];
+                $product_relation->measurement_id = $measurement_id;
+            }
+            $product_relation->value = $values[$k];
+            $product_relation->save();
+        }
+        return redirect()->back();
     }
 
     public function update_product_materials(Request $request)

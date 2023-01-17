@@ -101,7 +101,4 @@
             </table>
         </div>
     </div>
-
-    @include('backend.products.materials.add_material')
-    @include('backend.products.materials.edit_material')
 @endforeach

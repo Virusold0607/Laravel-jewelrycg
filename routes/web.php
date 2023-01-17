@@ -129,6 +129,9 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
 
         Route::get('/product_materials/{id}', [ProductsController::class, 'product_materials'])->name('product_materials');
         Route::post('/update_product_materials', [ProductsController::class, 'update_product_materials'])->name('update_product_materials');
+
+        Route::get('/product_lengths/{id}', [ProductsController::class, 'product_lengths'])->name('product_lengths');
+        Route::post('/update_product_lengths', [ProductsController::class, 'update_product_lengths'])->name('update_product_lengths');
     });
 
     //users routes
