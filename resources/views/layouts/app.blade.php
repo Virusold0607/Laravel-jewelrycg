@@ -50,6 +50,7 @@
         <!-- for chat -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4556888383944808"
      crossorigin="anonymous"></script>
+     
     </head>
     <body>
 
