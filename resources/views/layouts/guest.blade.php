@@ -25,6 +25,8 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         {{ $scripts ?? null }}
         <script src="{{asset('js/func_util.js')}}" defer></script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4556888383944808"
+     crossorigin="anonymous"></script>
     </head>
     <body>
 
