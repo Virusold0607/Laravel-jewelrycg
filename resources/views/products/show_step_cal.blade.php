@@ -44,7 +44,7 @@
                                  data-product-measurement-id="{{ $measurement->measurement_id }}"
                                  data-product-attribute-value-id="{{ $measurement->product_attribute_value_id }}"
                                  data-product-measurement-value="{{ $measurement->value }}"
-                                 onclick="select_product_measurement({{ $measurement->measurement_id }})">
+                            >
                                 <div class="item-value-card-body">
                                     <div class="pt-2 fw-700 fs-14 text-center">{{ $measurement->product_measurement->full_name }}</div>
                                 </div>
@@ -266,11 +266,12 @@
     $('tr.natural_price[data-attribute-value-id="' + attribute_value_id + '"]').removeClass('d-none')
     $('tr.lab_price').addClass('d-none')
     $('tr.lab_price[data-attribute-value-id="' + attribute_value_id + '"]').removeClass('d-none')
-    $('.cal-select-item-wrapper:not(.d-none) .cal-select-item')[0].click()
-
-    $('.measurements-container').children('div').hide();
+    $('.cal-select-item-wrapper:not(.d-none) .cal-select-item').eq(0).click()
+  
+    $('.item-value-card', '.measurements-container').hide();
+    $('.item-value-card', '.measurements-container').removeClass('active');
     $('.product-measurement-select-item[data-product-attribute-value-id="'+ attribute_value_id + '"]').show();
-
+    $('.product-measurement-select-item[data-product-attribute-value-id="'+ attribute_value_id + '"]').eq(0).click();
   }
 
   let filterMetalsByAttributeValue = function (attribute_value) {
@@ -347,24 +348,24 @@
     estimatedPrice += diamond_setting_cost;
 
     $('.total-estimate-price').html('$' + estimatedPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
-    if($('.product-measurement-select-item').length){
-      let measurement_value = $('.product-measurement-select-item.active')[0].dataset.productMeasurementValue
+    if($('.product-measurement-select-item').length) {
+      let measurement_value = $('.product-measurement-select-item.active').eq(0).data('product-measurement-value')
       $('#measurement_value').html(measurement_value)
       $('.total-price').html('$' + (estimatedPrice * measurement_value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
     }
   }
 
   if ($('.variant-select-item').length) {
-    selectVariant($('.variant-select-item')[0].dataset.attributeValueId)
+    $('.variant-select-item').eq(0).click();
   }
 
-  let select_product_measurement = function (measurement_id) {
+  $('.product-measurement-select-item').on('click', function() {
     $('.product-measurement-select-item').removeClass('active')
-    $('.product-measurement-select-item[data-product-measurement-id="'+ measurement_id +'"]').addClass('active')
+    $(this).addClass('active');
     getEstimatePrice()
-  }
+  })
 
-  if($('.product-measurement-select-item').length){
-    select_product_measurement($('.product-measurement-select-item')[0].dataset.productMeasurementId)
+  if($('.product-measurement-select-item').length) {
+    $('.product-measurement-select-item').eq(0).click()
   }
 </script>
