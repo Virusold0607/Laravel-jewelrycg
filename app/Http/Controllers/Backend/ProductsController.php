@@ -656,25 +656,20 @@ class ProductsController extends Controller
         $measurement_ids = $request->measurement_id ? $request->measurement_id : [];
         $product_attribute_value_ids = $request->length_product_attribute_value_id ? $request->length_product_attribute_value_id : [];
         $values = $request->value ? $request->value : [];
-        ProductMeasurementRelationship::whereNotIn('product_attribute_value_id', $product_attribute_value_ids)
-            ->whereNotIn('measurement_id', $measurement_ids)
-            ->where('product_id', $request->product_id)
+
+        ProductMeasurementRelationship::where('product_id', $request->product_id)
             ->delete();
+
         foreach($measurement_ids as $k => $measurement_id)
         {
-            $product_relation = ProductMeasurementRelationship::where('product_attribute_value_id', $product_attribute_value_ids[$k])
-                ->where('measurement_id', $measurement_id)
-                ->where('product_id', $request->product_id)
-                ->first();
-            if (!$product_relation) {
-                $product_relation = new ProductMeasurementRelationship;
-                $product_relation->product_id = $request->product_id;
-                $product_relation->product_attribute_value_id = $product_attribute_value_ids[$k];
-                $product_relation->measurement_id = $measurement_id;
-            }
+            $product_relation = new ProductMeasurementRelationship;
+            $product_relation->product_id = $request->product_id;
+            $product_relation->product_attribute_value_id = $product_attribute_value_ids[$k];
+            $product_relation->measurement_id = $measurement_id;
             $product_relation->value = $values[$k];
             $product_relation->save();
         }
+
         return redirect()->back();
     }
 
