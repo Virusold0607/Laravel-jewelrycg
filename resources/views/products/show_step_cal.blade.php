@@ -38,10 +38,11 @@
                 </div>
                 <div>
                     <label for="" class="control-label opacity-50 my-2">Product Length:</label>
-                    <div class="accordion-body d-flex">
+                    <div class="accordion-body d-flex measurements-container">
                         @foreach($product->measurements as $k => $measurement)
                             <div class="border p-2 item-value-card mb-3 rounded mr-10px h-50px product-measurement-select-item {{ $k == 0 ? 'active' : '' }}"
                                  data-product-measurement-id="{{ $measurement->measurement_id }}"
+                                 data-product-attribute-value-id="{{ $measurement->product_attribute_value_id }}"
                                  data-product-measurement-value="{{ $measurement->value }}"
                                  onclick="select_product_measurement({{ $measurement->measurement_id }})">
                                 <div class="item-value-card-body">
@@ -266,6 +267,10 @@
     $('tr.lab_price').addClass('d-none')
     $('tr.lab_price[data-attribute-value-id="' + attribute_value_id + '"]').removeClass('d-none')
     $('.cal-select-item-wrapper:not(.d-none) .cal-select-item')[0].click()
+
+    $('.measurements-container').children('div').hide();
+    $('.product-measurement-select-item[data-product-attribute-value-id="'+ attribute_value_id + '"]').show();
+
   }
 
   let filterMetalsByAttributeValue = function (attribute_value) {
