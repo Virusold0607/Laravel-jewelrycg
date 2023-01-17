@@ -39,41 +39,42 @@
                     @php
                         $cur_product_attribute_value_id = -1;
                     @endphp
-                    @foreach($product_measurements = $product->measurements as $k => $product_measurement)
-                        @if($product_measurement->product_attribute_value_id != $cur_product_attribute_value_id)
-                            <tr data-length-attribute-id="{{ $product_measurement->product_attribute_value_id }}">
-                                @if(count($product_measurements) == 0)
+                    @foreach($product_attributes_group_by as $k => $product_attribute)
+                        @if(isset($product_attribute))
+                            <tr data-length-attribute-id="{{ $product_attribute['id'] }}">
+                                @if(count($product_attribute['measurements']) == 0)
                                     <div class="text-danger">No Data to display</div>
                                 @else
                                     <td colspan="3">
-                                        <div class="text-primary">{{ $product_measurement->attribute_name ? $product_measurement->attribute_name : 'No Attribute' }}</div>
+                                        <div class="text-primary">
+                                            {{ $product_attribute['attribute_name'] ? $product_attribute['attribute_name'] : 'No Attribute' }}
+                                        </div>
                                     </td>
                                 @endif
                             </tr>
                         @endif
-                        
-                        <tr data-unique-key="metal_{{ $product_measurement->product_attribute_value_id . '_' . $product_measurement->measurement_id }}"
-                            data-length-attribute-id="{{ $product_measurement->product_attribute_value_id }}">
-                            <td>
-                                <input type="number" inputmode="decimal" step="0.01" name="value[]"
-                                        value="{{ $product_measurement->value }}" class="form-control">
-                                <input type="hidden" name="measurement_id[]"
-                                        value="{{ $product_measurement->measurement_id }}">
-                                <input type="hidden" name="length_product_attribute_value_id[]"
-                                        value="{{ $product_measurement->product_attribute_value_id }}">
-                            </td>
-                            <td>
-                                {{ $product_measurement->measurement_name }}
-                            </td>
-                            <td>
-                                <button class="form-control btn btn-danger btn-sm"
-                                        onclick="delete_current_length_row(this)">Delete
-                                </button>
-                            </td>
-                        </tr>
-                        @php
-                            $cur_product_attribute_value_id = $product_measurement->product_attribute_value_id;
-                        @endphp
+
+                        @foreach($product_attribute['measurements'] as $measurement)
+                            <tr data-unique-key="metal_{{ $product_attribute['id'] . '_' . $measurement['id'] }}"
+                                data-length-attribute-id="{{ $product_attribute['id'] }}">
+                                <td>
+                                    <input type="number" inputmode="decimal" step="0.01" name="value[]"
+                                            value="{{ $measurement['value'] }}" class="form-control">
+                                    <input type="hidden" name="measurement_id[]"
+                                            value="{{ $measurement['id'] }}">
+                                    <input type="hidden" name="length_product_attribute_value_id[]"
+                                            value="{{ $product_attribute['id'] }}">
+                                </td>
+                                <td>
+                                    {{ $measurement['name']  }} {{ $measurement['unit'] }}
+                                </td>
+                                <td>
+                                    <button class="form-control btn btn-danger btn-sm"
+                                            onclick="delete_current_length_row(this)">Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
                     @endforeach
                     </tbody>
                 </table>
