@@ -14,7 +14,7 @@
             @php $step = 1 @endphp
             @foreach($attributes as $attribute)
                 @if($product->attributeValue($attribute->id)->count())
-                    <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong>
+                    <div class="alert alert-secondary" role="alert"><strong>Step {{ $step }}:</strong>
                         Select {{ $attribute->name }}.
                     </div>
                     <div>
@@ -34,7 +34,7 @@
                 @endif
             @endforeach
             @if($product->measurements->count())
-                <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select Product Length.
+                <div class="alert alert-secondary" role="alert"><strong>Step {{ $step }}:</strong> Select Product Length.
                 </div>
                 <div>
                     <label for="" class="control-label opacity-50 my-2">Product Length:</label>
@@ -55,7 +55,7 @@
                 @php $step++; @endphp
             @endif
 
-            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the metal below you
+            <div class="alert alert-secondary" role="alert"><strong>Step {{ $step }}:</strong> Select the metal below you
                 want to make
                 this item with.
             </div>
@@ -123,7 +123,7 @@
                 $step++;
             @endphp
             @if($diamond_tamount > 0)
-            <div class="alert alert-info" role="alert"><strong>Step {{ $step }}:</strong> Select the type of diamond you
+            <div class="alert alert-secondary" role="alert"><strong>Step {{ $step }}:</strong> Select the type of diamond you
                 want to
                 below.
             </div>
