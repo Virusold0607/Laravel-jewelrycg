@@ -90,6 +90,9 @@ class PageController extends Controller
         // lowercase
         $text = strtolower($text);
 
+        // removed #hastag
+        $text = str_replace('#', '', $text);
+
         if (empty($text)) {
             return 'n-a';
         }
