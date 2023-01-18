@@ -116,7 +116,7 @@ class SellerController extends Controller
         $data['is_trackingquantity'] = 0;
         $data['product_attributes'] = $attributes;
         $data['product_attribute_values'] = $values;
-        $data['slug'] = str_replace(" ", "-", strtolower($req->name));
+        $data['slug'] = str_replace('#', '', str_replace(" ", "-", strtolower($req->name)));
         $slug_count = Product::where('slug', $data['slug'])->count();
         if ($slug_count) {
             $data['slug'] = $data['slug'] . '-' . ($slug_count + 1);
@@ -161,7 +161,7 @@ class SellerController extends Controller
         $data['is_trackingquantity'] = 0;
         $data['product_attributes'] = $attributes;
         $data['product_attribute_values'] = $values;
-        $data['slug'] = str_replace(" ", "-", strtolower($req->name));
+        $data['slug'] = str_replace('#', '', str_replace(" ", "-", strtolower($req->name)));
         $slug_count = Product::where('slug', $data['slug'])->count();
         if ($slug_count) {
             $data['slug'] = $data['slug'] . '-' . ($slug_count + 1);
@@ -238,7 +238,7 @@ class SellerController extends Controller
 
         // removed #hastag
         $text = str_replace('#', '', $text);
-        
+
         if (empty($text)) {
             return 'n-a';
         }
