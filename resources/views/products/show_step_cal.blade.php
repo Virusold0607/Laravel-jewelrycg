@@ -164,7 +164,7 @@
                                 </tr>
                                 @if($product->measurements->count())
                                 <tr class="measurement">
-                                    <th>Estimated Length Cost (<span class="total-estimate-price"></span> X <span id="measurement_value"></span>)</th>
+                                    <th>Estimated Length Cost (<span class="total-estimate-price"></span> X <span id="measurement_value"></span> links)</th>
                                     <th class="total-price"></th>
                                 </tr>
                                 @endif
