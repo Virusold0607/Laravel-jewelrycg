@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\CheckPendingBalance;
+use App\Console\Commands\CheckUnreadMessages;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -13,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        CheckPendingBalance::class
+        CheckPendingBalance::class,
+        CheckUnreadMessages::class
     ];    
     /**
      * Define the application's command schedule.
@@ -25,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('queue:work --queue=high,default')->everyTwoMinutes();
         $schedule->command('check:pendingbalance')->timezone('America/New_York')->dailyAt('00:00')->runInBackground();
-        $schedule->command('rate:get_current')->timezone('America/New_York')->dailyAt('09:00')->runInBackground();
+        $schedule->command('rate:get_current')->timezone('America/New_York')->dailyAt('2:30')->runInBackground();
         $schedule->command('queue:unread_messages')->everyTenMinutes()->runInBackground();
     }
 
