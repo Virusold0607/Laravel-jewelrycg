@@ -158,7 +158,7 @@ class ProductsController extends Controller
         $data['is_trackingquantity'] = $req->is_trackingquantity ? 1 : 0;
         $data['product_attributes'] = $attributes;
         $data['product_attribute_values'] = $values;
-        $data['slug'] = str_replace(" ", "-", strtolower($req->name));
+        $data['slug'] = str_replace('#', '', str_replace(" ", "-", strtolower($req->name)));
         $slug_count = Product::where('slug', $data['slug'])->count();
         if ($slug_count) {
             $data['slug'] = $data['slug'] . '-' . ($slug_count + 1);
@@ -330,7 +330,7 @@ class ProductsController extends Controller
             $data['category'] = $req->get('category');
 
             if ($req->slug == "") {
-                $data['slug'] = str_replace(" ", "-", strtolower($req->name)) . $sep;
+                $data['slug'] = str_replace('#', '', str_replace(" ", "-", strtolower($req->name))) . $sep;
             }
             $user_id = Auth::id();
             $edit_product = SellerEditProducts::find($product);
@@ -395,7 +395,7 @@ class ProductsController extends Controller
             $data['is_trackingquantity'] = 0;
             $data['product_attributes'] = $attributes;
             $data['product_attribute_values'] = $values;
-            $data['slug'] = str_replace(" ", "-", strtolower($req->name));
+            $data['slug'] = str_replace('#', '', str_replace(" ", "-", strtolower($req->name)));
             $slug_count = Product::where('slug', $data['slug'])->count();
             if ($slug_count) {
                 $data['slug'] = $data['slug'] . '-' . ($slug_count + 1);
@@ -453,7 +453,7 @@ class ProductsController extends Controller
         $data['category'] = $req->get('category');
 
         if ($req->slug == "") {
-            $data['slug'] = str_replace(" ", "-", strtolower($req->name)) . $sep;
+            $data['slug'] = str_replace('#', '', str_replace(" ", "-", strtolower($req->name))) . $sep;
         }
         $user_id = Auth::id();
         $product = Product::findOrFail($product);
