@@ -121,7 +121,10 @@ class ProductsController extends Controller
 
     private function generateSlug($string)
     {
-        return str_replace(' ', '-', $string);
+        // replace space into '-'
+        $str_rersut = tr_replace(' ', '-', $string);
+        // remove #hashtag
+        return str_replace('#', '', $str_rersut);
     }
 
     private function registerNewTag($tag)
