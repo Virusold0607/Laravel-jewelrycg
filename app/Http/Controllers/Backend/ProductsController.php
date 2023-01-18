@@ -332,6 +332,10 @@ class ProductsController extends Controller
             if ($req->slug == "") {
                 $data['slug'] = str_replace('#', '', str_replace(" ", "-", strtolower($req->name))) . $sep;
             }
+            else {
+                $data['slug'] = str_replace('#', '', $data['slug']);
+            }
+            
             $user_id = Auth::id();
             $edit_product = SellerEditProducts::find($product);
             $edit_product->is_approved = 1;
@@ -455,6 +459,10 @@ class ProductsController extends Controller
         if ($req->slug == "") {
             $data['slug'] = str_replace('#', '', str_replace(" ", "-", strtolower($req->name))) . $sep;
         }
+        else {
+            $data['slug'] = str_replace('#', '', $data['slug']);
+        }
+
         $user_id = Auth::id();
         $product = Product::findOrFail($product);
         $product->update($data);
