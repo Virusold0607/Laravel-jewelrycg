@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('queue:work --queue=high,default')->everyTwoMinutes();
         $schedule->command('check:pendingbalance')->timezone('America/New_York')->dailyAt('00:00')->runInBackground();
         $schedule->command('rate:get_current')->timezone('America/New_York')->dailyAt('09:00')->runInBackground();
-        // $schedule->command('queue:listen --queue=high,default')->everyTwoMinutes();
+        $schedule->command('queue:unread_messages')->everyTenMinutes()->runInBackground();
     }
 
     /**
