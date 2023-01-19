@@ -33,6 +33,10 @@ class SendUnreadMail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->message->user->email)->send(new UnreadMail($this->message));
+        if($this->message->conversation)
+        {
+            Mail::to($this->message->conversation->email)->send(new UnreadMail($this->message));
+        }
+        
     }
 }
