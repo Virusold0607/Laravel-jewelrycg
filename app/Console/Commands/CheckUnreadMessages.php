@@ -32,7 +32,7 @@ class CheckUnreadMessages extends Command
     {
         $messages = Message::where('is_seen', 0)
                         ->where('created_at','>=',"now() - interval 10 minute")
-                        ->with('user')
+                        ->with(['user', 'conversation'])
                         ->get();
 
         foreach($messages as $message) 

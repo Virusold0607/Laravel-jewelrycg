@@ -238,7 +238,7 @@ a{
             	<tr>
             		<td style="padding: 0 1.0em; text-align: left;">
             			<div class="text">
-            				<h2>A new message is received from  {{$user->username}}</h2>
+            				<h2>A new message is received from {{ $user_info->username ? $user_info->username : $user_info->email}}</h2>
             			</div>
             		</td>
             	</tr>
@@ -252,7 +252,7 @@ a{
                         <div class="product-entry" style="width:100%">
                             <div class="text" style="color:#000000;">
                                 <div>
-                                    {{ $message }}
+                                    {{ $description }}
                                 </div>
                             </div>
                         </div>

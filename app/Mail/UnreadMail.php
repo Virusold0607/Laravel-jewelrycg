@@ -46,8 +46,8 @@ class UnreadMail extends Mailable
         return new Content(
             view: 'emails.unread',
             with: [
-                'user' => $this->message->user,
-                'message' => $this->message->message,
+                'user_info' => $this->message->user,
+                'description' => $this->message->message,
             ],
         );
     }
