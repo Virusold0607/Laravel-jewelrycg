@@ -315,7 +315,7 @@
                                                                     class="text-muted small text-nowrap mt-2">{{date('g:i a',strtotime($content->updated_at))}}</div>
                                                             </div>
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                                                <div class="font-weight-bold mb-1">You</div>
+                                                                <div class="fw-700 mb-1">You</div>
                                                                 @if(getChatMessage($content->message)["file"])
                                                                     @if(getChatMessage($content->message)["file"]->type =="image")
                                                                         <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
@@ -344,7 +344,7 @@
                                                             </div>
                                                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
                                                                 <div
-                                                                    class="font-weight-bold mb-1">{{users_name($content->user_id)->first()->full_name}}</div>
+                                                                    class="fw-700 mb-1">{{users_name($content->user_id)->first()->full_name}}</div>
                                                                 @if(getChatMessage($content->message)["file"])
                                                                     @if(getChatMessage($content->message)["file"]->type =="image")
                                                                         <img src="{{getChatMessage($content->message)["upload_file"]}}" width="100" height="100" />
@@ -569,7 +569,7 @@
                                         <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
                                     </div>
                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                        <div class="font-weight-bold mb-1">You</div>
+                                        <div class="fw-700 mb-1">You</div>
                                   `
                             if (file.type == "image")
                             {
@@ -722,7 +722,7 @@
                                         <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
                                     </div>
                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                        <div class="font-weight-bold mb-1">You</div>
+                                        <div class="fw-700 mb-1">You</div>
                                         ${message}
                                     </div>
                                 </div>
@@ -803,7 +803,7 @@
                                         <div class="text-muted small text-nowrap mt-2">${getDateFormat()}</div>
                                 </div>
                                 <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                    <div class="font-weight-bold mb-1">${user.full_name}</div>
+                                    <div class="fw-700 mb-1">${user.full_name}</div>
                         `;
                                     if(chatFileInfo.file)
                                     {
