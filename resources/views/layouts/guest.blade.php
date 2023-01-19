@@ -25,8 +25,20 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         {{ $scripts ?? null }}
         <script src="{{asset('js/func_util.js')}}" defer></script>
+        
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4556888383944808"
      crossorigin="anonymous"></script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37796498-42"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-37796498-42');
+        </script>
+
     </head>
     <body>
 
