@@ -46,6 +46,17 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         {{ $scripts ?? null }}
+        
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37796498-42"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-37796498-42');
+        </script>
+
 
         <!-- for chat -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4556888383944808"
