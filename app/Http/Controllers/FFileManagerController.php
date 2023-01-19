@@ -264,6 +264,8 @@ class FFileManagerController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', $id);
+        
         Upload::destroy($id);
 
         return true;
