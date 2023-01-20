@@ -150,6 +150,8 @@ class SellerController extends Controller
         $variants = (array) $req->input('variant');
         $attributes = implode(",", (array) $req->input('attributes'));
         $values = implode(",", (array) $req->input('values'));
+        $product_images = $req->input('product_images');
+        $product_3dpreview = $req->input('product_3dpreview');
         $data = $req->all();
         $data['vendor'] = auth()->id();
         $data['price'] = Product::stringPriceToCents($req->price);
@@ -161,6 +163,8 @@ class SellerController extends Controller
         $data['is_trackingquantity'] = 0;
         $data['product_attributes'] = $attributes;
         $data['product_attribute_values'] = $values;
+        $data['product_images'] = $product_images;
+        $data['product_3dpreview'] = $product_3dpreview;
         $data['slug'] = str_replace('#', '', str_replace(" ", "-", strtolower($req->name)));
         $slug_count = Product::where('slug', $data['slug'])->count();
         if ($slug_count) {
