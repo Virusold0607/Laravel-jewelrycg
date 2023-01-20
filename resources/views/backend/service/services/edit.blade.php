@@ -162,7 +162,13 @@
     <script>
         $(document).ready(function() {
             $('#desc').trumbowyg();
-            // $('#meta_description').trumbowyg();
+            $('#meta_description').trumbowyg();
+            $('#name').keyup(function(){
+                var slug = $(this).val()
+                slug = slug.replaceAll('.', '')
+                slug = slug.replaceAll('/', '')
+                $('#slug').val(slug.replace(/\s+/g, '-').toLowerCase());
+            })
         })
         $(".imgAdd").click(function() {
             $(this).closest(".row").find('.imgAdd').before(
