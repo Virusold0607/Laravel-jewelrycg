@@ -159,6 +159,14 @@ class Product extends Model
         ]);
     }
 
+    public function product_3dmodel()
+    {
+        return $this->belongsTo(Upload::class, 'product_3dpreview', 'id')->withDefault([
+            'file_name' => "none.png",
+            'id' => null,
+        ]);
+    }
+
     public function digital()
     {
         return $this->belongsTo(Upload::class, 'digital_download_assets', 'id')->withDefault([
