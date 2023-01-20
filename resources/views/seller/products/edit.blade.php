@@ -9,10 +9,41 @@
         .navbar-brand{
             color: black !important;
         }
+
+        #thumbnail .dropzone {
+            border-radius: 25px;
+            width: 132px;
+            overflow: hidden;
+            padding: 4px;
+            background: transparent;
+        }
+        #thumbnail .dropzone .dz-preview{
+            margin: 0;
+        }
+
+        #preview3d .dropzone {
+            border-radius: 25px;
+            width: 132px;
+            overflow: hidden;
+            padding: 4px;
+            background: transparent;
+        }
+        #preview3d .dropzone .dz-preview{
+            margin: 0;
+        }
+        
+        #preview3d .dropzone .dz-size {
+            display: none;
+        }
+        .dz-image img{
+            width: 100%;
+            height: 100%;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/css/backend/app.css') }}" data-hs-appearance="default" as="style">
+    <link rel="stylesheet" href="{{ asset('dropzone/css/dropzone.css') }}">
     @endsection
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -64,44 +95,17 @@
                                     <!-- Header -->
                                     <div class="card-header card-header-content-between">
                                         <h4 class="card-header-title mb-0">Media</h4>
-
-                                        <!-- Gallery link -->
-                                        <label class="btn text-primary p-0" id="getFileManagerForProducts">
-                                            Select product gallery images
-                                            <input type="hidden" id="all_checks" value="{{ $product->product_images }}" name="product_images">
-                                        </label>
-                                        <!-- Gallery link -->
                                     </div>
                                     <!-- End Header -->
 
                                     <!-- Body -->
                                     <div class="card-body">
                                         <!-- Gallery -->
-                                        <div id="fancyboxGallery" class="js-fancybox row justify-content-sm-start gx-3">
-                                        @foreach ($uploads as $upload)
-                                            <div id="fileappend-{{$upload->id}}" class="col-6 col-sm-4 col-md-3 mb-3 mb-lg-5">
-                                                <div class="card card-sm"><img class="card-img-top"
-                                                                            src="{{ $upload->getFileFullPath() }}"
-                                                                            alt="Image Description">
-                                                    <div class="card-body">
-                                                        <div class="row col-divider text-center">
-                                                            <div class="col"><a class="text-body"
-                                                                                href="./assets/img/1920x1080/img3.jpg"
-                                                                                data-bs-toggle="tooltip"
-                                                                                data-bs-placement="top" title=""
-                                                                                data-fslightbox="gallery"
-                                                                                data-bs-original-title="View"><i class="bi-eye"></i></a>
-                                                            </div>
-                                                            <div class="col"><a onclick="removepreviewappended({{$upload->id}})"
-                                                                                class="text-danger" href="javascript:;"><i
-                                                                            class="bi-trash"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div id="gallery_container">
+                                            <div class="dropzone" id="gallery_dropzone">
                                             </div>
-                                        @endforeach
                                         </div>
+                                        <input name="product_images" id="product_images" type="hidden"/>
                                         <!-- End Gallery -->
 
                                         <!-- Dropzone -->
@@ -261,25 +265,14 @@
 
                                     <!-- Body -->
                                     <div class="card-body">
-                                        @if ($product->product_3dpreview != null)
-                                            <div class="w-100">
-                                                <span class="badge btn-success mb-2"> 3d model attached </span>
-                                            </div>
-                                            <div class="w-100">
-                                                <span class="mb-2 d-block">{{$product->modelpreview->file_original_name . "." . $product->modelpreview->extension}}</span>
-                                            </div>
-                                        @else
-                                            <div class="w-100">
-                                                <span class="badge btn-danger mb-2"> No 3d model attached</span>
-                                            </div>
-                                        @endif
-
-                                        <label class="btn text-primary p-0" id="getFileManagerModel">Select 3d model</label>
-                                            <input class="d-none" id="fileManagerModelId" value="{{ $product->product_3dpreview }}" name="product_3dpreview">
-                                            <div class="form-group mt-2">
-                                                <span class="mb-2">Position</span>
-                                                <input type="text" class="form-control" value="{{ $product->product_3dpreview_xyz }}" placeholder="Example 0.04139deg 127.6deg" name="product_3dpreview_xyz">
-                                            </div>
+                                        <div id="preview3d">
+                                            <div class="dropzone" id="3dpreview_dropzone"></div>
+                                        </div>
+                                        <input type="hidden" id="product_3dpreview" name="product_3dpreview"> 
+                                        <div class="form-group mt-2">
+                                            <span class="mb-2">Position</span>
+                                            <input type="text" class="form-control" value="{{ $product->product_3dpreview_xyz }}" placeholder="Example 0.04139deg 127.6deg" name="product_3dpreview_xyz">
+                                            </div> 
                                     </div>
                                 </div>
                                 <!-- End Card -->
@@ -293,14 +286,18 @@
 
                                     <!-- Body -->
                                     <div class="card-body">
-                                        <div class="imagePreview img-thumbnail p-2">
+                                        <div id="thumbnail">
+                                            <div class="dropzone" id="thumbnail_dropzone"></div>
+                                        </div>
+                                        <input type="hidden" id="product_thumbnail" name="product_thumbnail"> 
+                                        <!-- <div class="imagePreview img-thumbnail p-2">
                                             <img id="fileManagerPreview"
                                                 src="{{ $product->uploads->getImageOptimizedFullName(400) }}"
                                                 style="width: 100%">
                                         </div>
                                         <label class="btn text-primary mt-2 p-0" id="getFileManager">Select thumbnail</label>
                                         <input type="hidden" id="fileManagerId" value="{{$product->product_thumbnail}}"
-                                            name="product_thumbnail">
+                                            name="product_thumbnail"> -->
                                     </div>
                                 </div>
                                 <!-- End Card -->
@@ -387,10 +384,198 @@
     @section('js')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+        <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
         <script>
-        var createChecks = $('#all_checks').val() === '' ? [] : $('#all_checks').val().split(",");
-
+        var galleries = {!! json_encode($uploads) !!}
+        var thumbnail = {!! json_encode($product->uploads) !!}
+        var preview = {!! json_encode($product->product_3dmodel) !!}
+        var currentFile = null;
+        Dropzone.autoDiscover = false;
+        var thumbnailDropzone, galleryDropzone, previewDropzone;
         $(document).ready(function () {
+            $("#gallery_dropzone").dropzone({
+                method:'post',
+                url: "{{ route('seller.file.image') }}",
+                dictDefaultMessage: "Select photos",
+                paramName: "file",
+                maxFilesize: 2,
+                clickable: true,
+                addRemoveLinks: true,
+                acceptedFiles: "image/*",
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                },
+                init: function () {
+                    galleryDropzone = this;
+                    var thumb = $("#product_images").val();
+
+                    for (const gallery of galleries) {
+                        if(!gallery) {
+                            continue;
+                        }
+                        if(thumb === '') {
+                            thumb = gallery.id;
+                        } else {
+                            thumb += ',' + gallery.id;
+                        }
+
+                        var mockFile = { name: gallery.file_original_name, size: gallery.file_size };
+
+                        galleryDropzone.emit("addedfile", mockFile);
+                        galleryDropzone.emit("thumbnail", mockFile, `{{asset("/uploads/all")}}/${gallery.file_name}`);
+                        galleryDropzone.emit("complete", mockFile);
+                    }
+                    $("#product_images").val(thumb);
+                },
+                success: (file, response) => {
+                    var inputs = $("#inputs");
+                    var productImages = $("#product_images").val();
+
+                    if (productImages === '') {
+                        productImages = response.id;
+                    } else {
+                        productImages += "," + (response.id);
+                    }
+                    $("#product_images").val(productImages);
+                    galleries.push(response);
+                },
+                removedfile: function(file) {
+                    for(var i=0;i<galleries.length;++i){
+                        if(!galleries[i]) {
+                            continue;
+                        }
+                        if(file.name.includes(galleries[i].file_original_name)) {
+                            $.ajax({
+                                url: `/seller/file/destroy/${galleries[i].id}`,
+                                type: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                                },
+                                success: function(result) {
+                                    var last = $("#product_images");
+                                    var lastValue = last.val().split(',');
+                                    lastValue.splice(i, 1);
+                                    last.val(lastValue);
+                                    $(file.previewElement).remove();
+                                    galleries.splice(i, 1)
+                                },
+                                error: function(error) {
+                                    return false;
+                                }
+                            });
+                            break;
+                        }
+                    }
+                }
+            })
+
+            $("#3dpreview_dropzone").dropzone({
+                method:'post',
+                url: "{{ route('seller.file.thumb') }}",
+                dictDefaultMessage: "Select 3D Preview Model",
+                paramName: "file",
+                maxFilesize: 2,
+                maxFiles: 1,
+                clickable: true,
+                addRemoveLinks: true,
+                acceptedFiles: "image/*",
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                },
+                init: function () {
+                    previewDropzone = this;
+                    $("#3dpreview_dropzone .dz-deatils .dz-size").css('display', 'none');
+                    if(preview && preview.id) {
+                        $("#3dpreview_dropzone .dz-details .dz-size").css('display', 'none');
+                        var mockFile = { name: preview.file_original_name };
+                        $("#product_3dpreview").val(preview.id)
+                        previewDropzone.emit("addedfile", mockFile);
+                        previewDropzone.emit("preview", mockFile, `{{asset("/uploads/all")}}/${preview.file_name}`);
+                        previewDropzone.emit("complete", mockFile);
+                    }
+                },
+                success: (file, response) => {
+                    var inputs = $("#inputs");
+                    var last = $("#product_3dpreview");
+
+                    last.val(response.id)
+                    preview = response;
+                    $('#3dpreview_dropzone .dz-size').css('display', 'none');
+                    $('#3dpreview_dropzone .dz-image').css('display', 'none');
+                    $('#3dpreview_dropzone .dz-details').css('position', 'relative');
+                    $('#3dpreview_dropzone .dz-details').css('opacity', 1);
+                    // ONLY DO THIS IF YOU KNOW WHAT YOU'RE DOING!
+                },
+                removedfile: function(file) {
+                    $.ajax({
+                        url: `/seller/file/destroy/${preview.id}`,
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                        },
+                        success: function(result) {
+                            var last = $("#product_3dpreview");
+                            last.val("")
+                            $(file.previewElement).remove();
+                        },
+                        error: function(error) {
+                            return false;
+                        }
+                    });
+                }
+            })
+
+            $("#thumbnail_dropzone").dropzone({
+                method:'post',
+                url: "{{ route('seller.file.thumb') }}",
+                dictDefaultMessage: "Select photos",
+                paramName: "file",
+                maxFilesize: 2,
+                maxFiles: 1,
+                clickable: true,
+                addRemoveLinks: true,
+                acceptedFiles: "image/*",
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                },
+                init: function () {
+                    thumbnailDropzone = this;
+
+                    if(thumbnail.id) {
+                        var mockFile = { name: thumbnail.file_original_name, size: thumbnail.file_size };
+                        $("#product_thumbnail").val(thumbnail.id)
+                        thumbnailDropzone.emit("addedfile", mockFile);
+                        thumbnailDropzone.emit("thumbnail", mockFile, `{{asset("/uploads/all")}}/${thumbnail.file_name}`);
+                        thumbnailDropzone.emit("complete", mockFile);
+                    }
+                },
+                success: (file, response) => {
+                    var inputs = $("#inputs");
+                    var last = $("#product_thumbnail");
+
+                    last.val(response.id)
+                    thumbnail = response;
+                    // ONLY DO THIS IF YOU KNOW WHAT YOU'RE DOING!
+                },
+                removedfile: function(file) {
+                    $.ajax({
+                        url: `/seller/file/destroy/${thumbnail.id}`,
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                        },
+                        success: function(result) {
+                            var last = $("#product_thumbnail");
+                            last.val("")
+                            $(file.previewElement).remove();
+                        },
+                        error: function(error) {
+                            return false;
+                        }
+                    });
+                }
+            })
+
             $("ul.droptrue").sortable({
             connectWith: "ul"
             });
