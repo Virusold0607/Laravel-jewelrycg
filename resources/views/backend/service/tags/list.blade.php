@@ -174,13 +174,12 @@
 @section('js_content')
     <script>
         $(document).ready(function() {
-            // $('#name').keyup(function() {
-            //     var slug = $(this).val()
-
-            //     if (slug.charAt(slug.length - 1) != " ") {
-            //         $('#slug').val(slug.replace(/\s+/g, '-').toLowerCase());
-            //     }
-            // })
+            $('#name').keyup(function(){
+                var slug = $(this).val()
+                slug = slug.replaceAll('.', '')
+                slug = slug.replaceAll('/', '')
+                $('#slug').val(slug.replace(/\s+/g, '-').toLowerCase());
+            })
         })
     </script>
 @endsection

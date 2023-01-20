@@ -65,6 +65,8 @@
             $('#name').keyup(function(){
                 var slug = $(this).val()
 
+                slug = slug.replaceAll('.', '');
+                slug = slug.replaceAll('/', '');
                 if(slug.charAt(slug.length - 1) != " ")
                 {
                     $('#slug').val(slug.replace(/\s+/g, '-').toLowerCase());

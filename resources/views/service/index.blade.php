@@ -19,7 +19,7 @@
                       <div class="card-body p-3">
                         <div class="row">
                           <div class="col-4">
-                            <a href="/services/{{$service->slug}}" class=""">
+                            <a href="/services/{{$service->slug}}" class="">
                               <img src="{{ $service->uploads->getImageOptimizedFullName(400,400) }}" class="rounded w-100 border" alt="{{ $service->name }}">
                             </a>
                           </div>
