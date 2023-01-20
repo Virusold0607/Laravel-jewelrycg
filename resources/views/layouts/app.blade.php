@@ -56,11 +56,6 @@
 
         gtag('config', 'UA-37796498-42');
         </script>
-
-
-        <!-- for chat -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4556888383944808"
-     crossorigin="anonymous"></script>
      
     </head>
     <body>
@@ -202,88 +197,6 @@
                     getVariants($('#availabilitySwitch1').prop('checked') * 1, $(this).attr('data-product-id'));
                 })
 
-                // jQuery('#getFileManager').click(function(e) {
-                //     e.preventDefault();
-                //     $.ajaxSetup({
-                //         headers: {
-                //             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                //         }
-                //     });
-                //     jQuery.ajax({
-                //         url: "{{ route('backend.filemanager.get_filemanager') }}",
-                //         method: 'get',
-                //         dataType: 'HTML',
-                //         success: function(result) {
-                //             $('#ajaxCalls').html(result);
-                //             $('#CallFilesModal').modal('show')
-                //         }
-                //     });
-                // });
-
-                // jQuery('#getFileManagerModel').click(function(e) {
-                //     e.preventDefault();
-                //     $.ajaxSetup({
-                //         headers: {
-                //             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                //         }
-                //     });
-                //     jQuery.ajax({
-                //         url: "{{ route('backend.filemanager.get_filemanager') }}",
-                //         method: 'get',
-                //         data: {
-                //             'is_model': true
-                //         },
-                //         dataType: 'HTML',
-                //         success: function(result) {
-                //             $('#ajaxCalls').html(result);
-                //             $('#CallFilesModal').modal('show')
-                //         }
-                //     });
-                // });
-
-                // jQuery('#getFileManagerAsset').click(function(e) {
-                //     e.preventDefault();
-                //     $.ajaxSetup({
-                //         headers: {
-                //             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                //         }
-                //     });
-                //     jQuery.ajax({
-                //         url: "{{ route('backend.filemanager.get_filemanager') }}",
-                //         method: 'get',
-                //         data: {
-                //             'is_asset': true
-                //         },
-                //         dataType: 'HTML',
-                //         success: function(result) {
-                //             $('#ajaxCalls').html(result);
-                //             $('#CallFilesModal').modal('show')
-                //         }
-                //     });
-                // });
-
-
-                // jQuery('#getFileManagerForProducts').click(function(e) {
-                //     e.preventDefault();
-                //     $.ajaxSetup({
-                //         headers: {
-                //             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                //         }
-                //     });
-                //     jQuery.ajax({
-                //         url: "{{ route('backend.filemanager.get_filemanager') }}",
-                //         method: 'get',
-                //         data: {
-                //             'is_product': true,
-                //             'seleted': $('#all_checks').val()
-                //         },
-                //         dataType: 'HTML',
-                //         success: function(result) {
-                //             $('#ajaxCalls').html(result);
-                //             $('#CallFilesModal').modal('show')
-                //         }
-                //     });
-                // });
             });
             $('#variant').on('change', function() {
 
