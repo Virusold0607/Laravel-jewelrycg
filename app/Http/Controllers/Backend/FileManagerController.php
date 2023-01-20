@@ -190,7 +190,7 @@ class FileManagerController extends Controller
      */
     public function destroy($id)
     {
-        //Upload::destroy($id);
+        Upload::destroy($id);
 
         return redirect()->route('backend.file.index');
     }
