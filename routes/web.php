@@ -484,7 +484,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'seller', 'as' => 'seller.']
         Route::post('/store', [FFileManagerController::class, 'store'])->name('store');
         Route::post('/store_image', [FFileManagerController::class, 'store_origin_image'])->name('image');
         Route::post('/store_thumb', [FFileManagerController::class, 'store_thumb_image'])->name('thumb');
-        Route::post('/destroy/{id}', [FFileManagerController::class, 'destroy'])->name('destroy');
     });
 
     //services routes
