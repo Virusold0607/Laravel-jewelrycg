@@ -1,17 +1,7 @@
 <x-app-layout>
     @section('css')
 
-    <style>
-        .pur {
-            width: 100%;
-            margin-bottom: 8px;
-        }     
-        .navbar-brand{
-            color: black !important;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"> 
     <link rel="stylesheet" href="{{ asset('assets/css/backend/app.css') }}" data-hs-appearance="default" as="style">
     @endsection
     <x-slot name="header">
