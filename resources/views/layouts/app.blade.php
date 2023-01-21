@@ -74,6 +74,7 @@
 
 
         <!-- JS Plugins Init. -->
+        @if (auth()->user()->role == 1)
         <script>
             function deletevarient(id) {
                 $('#variantproduct-' + id).remove();
@@ -214,5 +215,6 @@
                 });
             })
         </script>
+        @endif
     </body>
 </html>
