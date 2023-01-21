@@ -74,149 +74,151 @@
 
 
         <!-- JS Plugins Init. -->
-        @if (auth()->user()->role == 1)
-        <script>
-            function deletevarient(id) {
-                $('#variantproduct-' + id).remove();
-            }
+        @auth
+            @if (auth()->user()->role == 1)
+            <script>
+                function deletevarient(id) {
+                    $('#variantproduct-' + id).remove();
+                }
 
-            function selectFileFromManager(id, preview) {
-                $('#fileManagerPreview').attr('src', preview);
-                $('#fileManagerId').val(id);
-                $('#CallFilesModal').modal('hide')
-                return false;
-            }
+                function selectFileFromManager(id, preview) {
+                    $('#fileManagerPreview').attr('src', preview);
+                    $('#fileManagerId').val(id);
+                    $('#CallFilesModal').modal('hide')
+                    return false;
+                }
 
-            function selectFileFromManagerModel(id) {
-                $('#fileManagerModelId').val(id);
-                $('#CallFilesModal').modal('hide')
-            }
+                function selectFileFromManagerModel(id) {
+                    $('#fileManagerModelId').val(id);
+                    $('#CallFilesModal').modal('hide')
+                }
 
-            function selectFileFromManagerAsset(id) {
-                $('#digital_download_assets').val(id);
-                $('#CallFilesModal').modal('hide')
-            }
+                function selectFileFromManagerAsset(id) {
+                    $('#digital_download_assets').val(id);
+                    $('#CallFilesModal').modal('hide')
+                }
 
-            function uploadAjax(is_model, is_product) {
-                var files = $("#prepare_images").get(0).files[0];
-                var formData = new FormData()
-                formData.append('file', files);
-                formData.append("_token", "{{ csrf_token() }}")
-                formData.append("is_model", is_model)
-                formData.append("is_product", is_product)
+                function uploadAjax(is_model, is_product) {
+                    var files = $("#prepare_images").get(0).files[0];
+                    var formData = new FormData()
+                    formData.append('file', files);
+                    formData.append("_token", "{{ csrf_token() }}")
+                    formData.append("is_model", is_model)
+                    formData.append("is_product", is_product)
 
-                jQuery.ajax({
-                    type: 'POST',
-                    url: "{{ route('backend.filemanager.ajaxupload') }}",
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: (data) => {
-                        $('#modelmanagerAppend').html(data);
-                        $('#media-tab').trigger('click')
-                    }
-                })
-
-            }
-
-            function uploadPrepareAjax(is_model, is_product) {
-                $("#prepare_images").trigger('click');
-            }
-
-            function productImageDiv(id, preview) {
-                var div = '<div id="fileappend-' + id + '" class="col-6 col-sm-4 col-md-3 mb-3 mb-lg-5">' +
-                    '<div class="card card-sm">' +
-                    '<img class="card-img-top" src="' + preview + '" alt="Image Description">' +
-
-                    '<div class="card-body">' +
-                    '<div class="row col-divider text-center">' +
-                    '<div class="col">' +
-                    '<a class="text-body" href="./assets/img/1920x1080/img3.jpg" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-fslightbox="gallery" data-bs-original-title="View">' +
-                    '<i class="bi-eye"></i>' +
-                    '</a>' +
-                    '</div>' +
-
-
-                    '<div class="col">' +
-                    '<a onclick="removepreviewappended(' + id +
-                    ')" class="text-danger" href="javascript:;" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">' +
-                    '<i class="bi-trash"></i>' +
-                    '</a>' +
-                    '</div>' +
-                    '</div>' +
-
-                    '</div>' +
-                    '</div>' +
-                    '</div>';
-                return div;
-            }
-
-            jQuery(document).ready(function() {
-                $(document).on("click", ".modal-body li a", function() {
-                    tab = $(this).attr("href");
-                    $(".modal-body .tab-content div").each(function() {
-                        $(this).removeClass("active");
-                    });
-                    $(".modal-body .tab-content " + tab).addClass("active");
-                });
-
-                $('#attributes').on('change', function() {
-                    var attributes = $(this).val()
-                    $.ajax({
+                    jQuery.ajax({
                         type: 'POST',
-                        url: "{{ route('backend.products.attributes.ajaxcall') }}",
-                        data: {
-                            "_token": "{{ csrf_token() }}",
-                            "attributes": attributes
-                        },
+                        url: "{{ route('backend.filemanager.ajaxupload') }}",
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
                         success: (data) => {
-                            $('#product_attribute_values').html(data);
+                            $('#modelmanagerAppend').html(data);
+                            $('#media-tab').trigger('click')
                         }
                     })
-                })
 
-                var getVariants = function(isDigital, productId) {
-                    var values_selected = $('#product_attribute_values').val();
+                }
 
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('backend.products.attributes.combinations') }}",
+                function uploadPrepareAjax(is_model, is_product) {
+                    $("#prepare_images").trigger('click');
+                }
+
+                function productImageDiv(id, preview) {
+                    var div = '<div id="fileappend-' + id + '" class="col-6 col-sm-4 col-md-3 mb-3 mb-lg-5">' +
+                        '<div class="card card-sm">' +
+                        '<img class="card-img-top" src="' + preview + '" alt="Image Description">' +
+
+                        '<div class="card-body">' +
+                        '<div class="row col-divider text-center">' +
+                        '<div class="col">' +
+                        '<a class="text-body" href="./assets/img/1920x1080/img3.jpg" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-fslightbox="gallery" data-bs-original-title="View">' +
+                        '<i class="bi-eye"></i>' +
+                        '</a>' +
+                        '</div>' +
+
+
+                        '<div class="col">' +
+                        '<a onclick="removepreviewappended(' + id +
+                        ')" class="text-danger" href="javascript:;" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">' +
+                        '<i class="bi-trash"></i>' +
+                        '</a>' +
+                        '</div>' +
+                        '</div>' +
+
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                    return div;
+                }
+
+                jQuery(document).ready(function() {
+                    $(document).on("click", ".modal-body li a", function() {
+                        tab = $(this).attr("href");
+                        $(".modal-body .tab-content div").each(function() {
+                            $(this).removeClass("active");
+                        });
+                        $(".modal-body .tab-content " + tab).addClass("active");
+                    });
+
+                    $('#attributes').on('change', function() {
+                        var attributes = $(this).val()
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('backend.products.attributes.ajaxcall') }}",
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                "attributes": attributes
+                            },
+                            success: (data) => {
+                                $('#product_attribute_values').html(data);
+                            }
+                        })
+                    })
+
+                    var getVariants = function(isDigital, productId) {
+                        var values_selected = $('#product_attribute_values').val();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('backend.products.attributes.combinations') }}",
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                "values": values_selected,
+                                'isDigital': isDigital,
+                                product_id: productId
+                            },
+                            success: function(result) {
+                                $('#variantsbody').html(result)
+                            }
+                        })
+                    }
+
+                    $('#generatevariants').on('click', function() {
+                        getVariants($('#availabilitySwitch1').prop('checked') * 1, $(this).attr('data-product-id'));
+                    })
+
+                });
+                $('#variant').on('change', function() {
+
+                    jQuery.ajax({
+                        url: "{{ route('backend.products.attributes.getvalues') }}",
+                        method: 'post',
                         data: {
-                            "_token": "{{ csrf_token() }}",
-                            "values": values_selected,
-                            'isDigital': isDigital,
-                            product_id: productId
+                            'id_attribute': $(this).val(),
+                            "_token": "{{ csrf_token() }}"
                         },
+                        dataType: 'HTML',
                         success: function(result) {
                             $('#variantsbody').html(result)
                         }
-                    })
-                }
-
-                $('#generatevariants').on('click', function() {
-                    getVariants($('#availabilitySwitch1').prop('checked') * 1, $(this).attr('data-product-id'));
+                    });
                 })
-
-            });
-            $('#variant').on('change', function() {
-
-                jQuery.ajax({
-                    url: "{{ route('backend.products.attributes.getvalues') }}",
-                    method: 'post',
-                    data: {
-                        'id_attribute': $(this).val(),
-                        "_token": "{{ csrf_token() }}"
-                    },
-                    dataType: 'HTML',
-                    success: function(result) {
-                        $('#variantsbody').html(result)
-                    }
-                });
-            })
-        </script>
+            </script>    
+            @endif
         @else
-        
-        @endif
+        //dont show
+        @endauth
     </body>
 </html>
