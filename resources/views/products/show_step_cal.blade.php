@@ -21,7 +21,7 @@
                         <label for="" class="control-label opacity-50 my-2">{{ $attribute->name }}:</label>
                         <div class="accordion-body d-flex">
                             @foreach($product->attributeValue($attribute->id ) as $k => $att)
-                                <div class="border p-2 item-value-card mb-3 rounded mr-10px h-50px min-w-50 variant-select-item {{ $k == 0 ? 'active' : '' }}"
+                                <div class="border p-2 item-value-card mb-3 rounded mr-10px variant-select-item {{ $k == 0 ? 'active' : '' }}"
                                      data-attribute-value-id="{{ $att->id }}" onclick="selectVariant({{ $att->id }})">
                                     <div class="item-value-card-body">
                                         <div class="pt-2 fw-700 fs-14 text-center">{{ $att->name }}</div>
