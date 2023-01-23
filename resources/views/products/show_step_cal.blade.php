@@ -19,12 +19,14 @@
                     </div>
                     <div>
                         <label for="" class="control-label opacity-50 my-2">{{ $attribute->name }}:</label>
-                        <div class="accordion-body d-flex">
+                        <div class="accordion-body row g-3">
                             @foreach($product->attributeValue($attribute->id ) as $k => $att)
-                                <div class="border p-2 item-value-card mb-3 rounded mr-10px h-50px min-w-50 variant-select-item {{ $k == 0 ? 'active' : '' }}"
-                                     data-attribute-value-id="{{ $att->id }}" onclick="selectVariant({{ $att->id }})">
-                                    <div class="item-value-card-body">
-                                        <div class="pt-2 fw-700 fs-14 text-center">{{ $att->name }}</div>
+                                <div class="col-auto">
+                                    <div class="border mb-2 item-value-card mb-3 rounded variant-select-item {{ $k == 0 ? 'active' : '' }}"
+                                        data-attribute-value-id="{{ $att->id }}" onclick="selectVariant({{ $att->id }})">
+                                        <div class="item-value-card-body">
+                                            <div class="p-2 fw-700 fs-14 text-center">{{ $att->name }}</div>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -135,7 +137,7 @@
                                  data-diamondtype_id="1">
                                 <div class="item-value-card-body">
                                     <div class="py-1 fw-700 fs-24">Natural Diamonds</div>
-                                    <div class="py-1 fw-700 fs-14">Natural Diamonds</div>
+                                    <div class="py-1 fw-700 fs-14">Natural VS Diamonds</div>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +146,7 @@
                                  data-diamondtype_id="2">
                                 <div class="item-value-card-body">
                                     <div class="py-1 fw-700 fs-24">Lab Diamonds</div>
-                                    <div class="py-1 fw-700 fs-14">Lab Diamonds</div>
+                                    <div class="py-1 fw-700 fs-14">Lab VS Diamonds</div>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +185,7 @@
                                 <tr class="natural_price"
                                     data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
                                     <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} carats *
-                                        ${{ $diamond->natural_price }})
+                                        ${{ $diamond->natural_price }}/per carat)
                                     </td>
                                     <td class="product_diamond_price">
                                         ${{ ($diamond->tcw * $diamond->natural_price) }}</td>
@@ -193,7 +195,7 @@
                                 <tr class="lab_price"
                                     data-attribute-value-id="{{ $diamond->product_attribute_value_id }}">
                                     <td class="product_diamond_category">{{ $diamond->mm_size }} mm ({{$diamond->tcw}} carats *
-                                        ${{ $diamond->lab_price }})
+                                        ${{ $diamond->lab_price }}/per carat)
                                     </td>
                                     <td class="product_diamond_price">${{ ($diamond->tcw * $diamond->lab_price) }}</td>
                                 </tr>
@@ -212,10 +214,10 @@
                             </tr>
                             @if($diamond_tamount > 0)
                                 <tr class="diamond_setting_cost">
-                                    <td class="diamond_setting_cost_title">Diamond Setting Cost ({{ $diamond_tamount }}x
-                                        $1.5)
+                                    <td class="diamond_setting_cost_title">Diamond Setting Cost ({{ $diamond_tamount }} x
+                                        $1.25)
                                     </td>
-                                    <td class="diamond_setting_cost_amount">${{ round($diamond_tamount * 1.5, 2) }}</td>
+                                    <td class="diamond_setting_cost_amount">${{ round($diamond_tamount * 1.25, 2) }}</td>
                                 </tr>
                             @endif
                             @if($product->measurements->count())

@@ -1,8 +1,8 @@
 <x-app-layout page-title="{{ $post->meta_title?$post->meta_title:$post->name }}" page-description="{{$post->meta_description}}">
-    <section class="bg-white py-8">
+    <section class="bg-white py-9">
         <div class="container">
             <div class="row">
-                <div class="col-xl-11 mx-auto">
+                <div class="col-lg-10 mx-auto">
                     <div class="blog-post-single-container">
                         <div class="border-bottom mb-2">
                             <h1 class="text-black fw-700 article-single-title">{{ $post->name }}</h1>

@@ -47,7 +47,7 @@ class SellerRegisterController extends Controller
                 'last_name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
-                'username' => ['required', 'unique:users,username'],
+                'username' => ['required', 'unique:users,username', 'regex:/^[a-zA-Z0-9]+$/u'],
                 'business_name' => ['required', 'string'],
                 'whatsapp' => ['required', 'string'],
                 'slogan' => ['required', 'string'],
