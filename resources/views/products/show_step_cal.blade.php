@@ -212,7 +212,7 @@
                             </tr>
                             @if($diamond_tamount > 0)
                                 <tr class="diamond_setting_cost">
-                                    <td class="diamond_setting_cost_title">Diamond Setting Cost ({{ $diamond_tamount }}x
+                                    <td class="diamond_setting_cost_title">Diamond Setting Cost ({{ $diamond_tamount }} x
                                         $1.25)
                                     </td>
                                     <td class="diamond_setting_cost_amount">${{ round($diamond_tamount * 1.25, 2) }}</td>
