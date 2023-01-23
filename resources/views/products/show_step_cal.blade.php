@@ -19,7 +19,7 @@
                     </div>
                     <div>
                         <label for="" class="control-label opacity-50 my-2">{{ $attribute->name }}:</label>
-                        <div class="accordion-body row g-2">
+                        <div class="accordion-body row g-3">
                             @foreach($product->attributeValue($attribute->id ) as $k => $att)
                                 <div class="col-auto">
                                     <div class="border mb-2 item-value-card mb-3 rounded variant-select-item {{ $k == 0 ? 'active' : '' }}"
