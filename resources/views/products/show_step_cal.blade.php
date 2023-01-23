@@ -137,7 +137,7 @@
                                  data-diamondtype_id="1">
                                 <div class="item-value-card-body">
                                     <div class="py-1 fw-700 fs-24">Natural Diamonds</div>
-                                    <div class="py-1 fw-700 fs-14">Natural Diamonds</div>
+                                    <div class="py-1 fw-700 fs-14">Natural VS Diamonds</div>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                                  data-diamondtype_id="2">
                                 <div class="item-value-card-body">
                                     <div class="py-1 fw-700 fs-24">Lab Diamonds</div>
-                                    <div class="py-1 fw-700 fs-14">Lab Diamonds</div>
+                                    <div class="py-1 fw-700 fs-14">Lab VS Diamonds</div>
                                 </div>
                             </div>
                         </div>
