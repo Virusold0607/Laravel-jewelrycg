@@ -77,6 +77,13 @@
         </form>
 
         <script type="text/javascript">
+            $(document).ready(function() {
+                $("#username").keyup(function() {
+                    const username = $("#username").val()
+                    console.log('username', username)
+                    $('#username').val(username.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, ''))
+                })
+            })
             function callbackThen(response) {
                 // read HTTP status
                 console.log(response.status);
