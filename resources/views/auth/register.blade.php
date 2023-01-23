@@ -80,7 +80,6 @@
             $(document).ready(function() {
                 $("#username").keyup(function() {
                     const username = $("#username").val()
-                    console.log('username', username)
                     $('#username').val(username.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, ''))
                 })
             })
