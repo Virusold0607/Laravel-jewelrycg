@@ -9,10 +9,40 @@
         .navbar-brand{
             color: black !important;
         }
+        #thumbnail .dropzone {
+            border-radius: 25px;
+            width: 132px;
+            overflow: hidden;
+            padding: 4px;
+            background: transparent;
+        }
+        #thumbnail .dropzone .dz-preview{
+            margin: 0;
+        }
+
+        #preview3d .dropzone {
+            border-radius: 25px;
+            width: 132px;
+            overflow: hidden;
+            padding: 4px;
+            background: transparent;
+        }
+        #preview3d .dropzone .dz-preview{
+            margin: 0;
+        }
+        
+        #preview3d .dropzone .dz-size {
+            display: none;
+        }
+        .dz-image img{
+            width: 100%;
+            height: 100%;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />    
     <link rel="stylesheet" href="{{ asset('assets/css/backend/app.css') }}" data-hs-appearance="default" as="style">
+    <link rel="stylesheet" href="{{ asset('dropzone/css/dropzone.css') }}">
     @endsection
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -64,10 +94,10 @@
                                         <h4 class="card-header-title mb-0">Media</h4>
                 
                                         <!-- Gallery link -->
-                                        <label class="btn text-primary p-0" id="getFileManagerForProducts">
+                                        <!-- <label class="btn text-primary p-0" id="getFileManagerForProducts">
                                             Select product gallery images
                                             <input type="hidden" id="all_checks" value="{{ old('product_images') }}" name="product_images">
-                                        </label>
+                                        </label> -->
                                         <!-- Gallery link -->
                                     </div>
                                     <!-- End Header -->
@@ -81,6 +111,11 @@
                                         <!-- End Gallery -->
                 
                                         <!-- Dropzone -->
+                                        <div id="gallery_container">
+                                            <div class="dropzone" id="gallery_dropzone">
+                                            </div>
+                                        </div>
+                                        <input name="product_images" id="product_images" type="hidden"/>
                 
                                         <!-- End Dropzone -->
                                     </div>
@@ -239,12 +274,16 @@
                 
                                     <!-- Body -->
                                     <div class="card-body">
-                                        <p class="text-danger">Please export your 3D Model file fully assembled then convert it to a .glb file and upload it here. All layers should be assembled, all materials should be visible. <a href="#">learn more.</a></p>
+                                        <div id="preview3d">
+                                            <div class="dropzone" id="3dpreview_dropzone"></div>
+                                        </div>
+                                        <input type="hidden" id="product_3dpreview" name="product_3dpreview"> 
+                                        <!-- <p class="text-danger">Please export your 3D Model file fully assembled then convert it to a .glb file and upload it here. All layers should be assembled, all materials should be visible. <a href="#">learn more.</a></p>
                                         <div class="imagePreview img-thumbnail p-2">
                                             <img id="3dFilePreview" src="" style="width: 100%">
-                                        </div>                                        
+                                        </div>
                                         <label class="btn text-primary mt-2 p-0" id="getFileManagerModel">Select 3d model</label>
-                                        <input type="hidden" id="fileManagerModelId" name="product_3dpreview" value="{{ old('product_3dpreview') }}">
+                                        <input type="hidden" id="fileManagerModelId" name="product_3dpreview" value="{{ old('product_3dpreview') }}"> -->
                                     </div>
                                 </div>
                                 <!-- End Card -->
@@ -278,13 +317,17 @@
                 
                                     <!-- Body -->
                                     <div class="card-body">
-                                        <div class="imagePreview img-thumbnail p-2">
+                                        <div id="thumbnail">
+                                            <div class="dropzone" id="thumbnail_dropzone"></div>
+                                        </div>
+                                        <input type="hidden" id="product_thumbnail" name="product_thumbnail">
+                                        <!-- <div class="imagePreview img-thumbnail p-2">
                                             <img id="digitalAssetPreview"
                                                 src=""
                                                 style="width: 100%">
-                                        </div>                                        
+                                        </div>
                                         <label class="btn text-primary mt-2 p-0" id="getFileManagerAsset">Select asset</label>
-                                        <input type="hidden" id="digital_download_assets" name="digital_download_assets" value="{{ old('digital_download_assets') }}" >
+                                        <input type="hidden" id="digital_download_assets" name="digital_download_assets" value="{{ old('digital_download_assets') }}" > -->
                                     </div>
                                 </div>
                                 <!-- End Card -->
@@ -346,14 +389,204 @@
     @section('js')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+        <script src="{{ asset('dropzone/js/dropzone.js') }}"></script>
         <script>
-            $(function(){
+            var galleries = []
+            var thumbnail = []
+            var preview = []
+            var currentFile = null;
+            Dropzone.autoDiscover = false;
+            var thumbnailDropzone, galleryDropzone, previewDropzone;
+            $(document).ready(function(){
                 $('.select2').select2({
                     tags: true,
                     maximumSelectionLength: 10,
                     tokenSeparators: [','],
                     placeholder: "Select or type keywords",
                 });
+                $("#gallery_dropzone").dropzone({
+                    method:'post',
+                    url: "{{ route('seller.file.image') }}",
+                    dictDefaultMessage: "Select photos",
+                    paramName: "file",
+                    maxFilesize: 2,
+                    clickable: true,
+                    addRemoveLinks: true,
+                    acceptedFiles: "image/*",
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    },
+                    init: function () {
+                        galleryDropzone = this;
+                        var thumb = $("#product_images").val();
+
+                        for (const gallery of galleries) {
+                            if(!gallery) {
+                                continue;
+                            }
+                            if(thumb === '') {
+                                thumb = gallery.id;
+                            } else {
+                                thumb += ',' + gallery.id;
+                            }
+
+                            var mockFile = { name: gallery.file_original_name, size: gallery.file_size };
+
+                            galleryDropzone.emit("addedfile", mockFile);
+                            galleryDropzone.emit("thumbnail", mockFile, `{{asset("/uploads/all")}}/${gallery.file_name}`);
+                            galleryDropzone.emit("complete", mockFile);
+                        }
+                        $("#product_images").val(thumb);
+                    },
+                    success: (file, response) => {
+                        var inputs = $("#inputs");
+                        var productImages = $("#product_images").val();
+
+                        if (productImages === '') {
+                            productImages = response.id;
+                        } else {
+                            productImages += "," + (response.id);
+                        }
+                        $("#product_images").val(productImages);
+                        galleries.push(response);
+                    },
+                    removedfile: function(file) {
+                        for(var i=0;i<galleries.length;++i){
+                            if(!galleries[i]) {
+                                continue;
+                            }
+                            if(file.name.includes(galleries[i].file_original_name)) {
+                                $.ajax({
+                                    url: `/seller/file/destroy/${galleries[i].id}`,
+                                    type: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                                    },
+                                    success: function(result) {
+                                        var last = $("#product_images");
+                                        var lastValue = last.val().split(',');
+                                        lastValue.splice(i, 1);
+                                        last.val(lastValue);
+                                        $(file.previewElement).remove();
+                                        galleries.splice(i, 1)
+                                    },
+                                    error: function(error) {
+                                        return false;
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                    }
+                })
+                
+                $("#3dpreview_dropzone").dropzone({
+                    method:'post',
+                    url: "{{ route('seller.file.thumb') }}",
+                    dictDefaultMessage: "Select 3D Preview Model",
+                    paramName: "file",
+                    maxFilesize: 2,
+                    maxFiles: 1,
+                    clickable: true,
+                    addRemoveLinks: true,
+                    acceptedFiles: "image/*",
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    },
+                    init: function () {
+                        previewDropzone = this;
+                        $("#3dpreview_dropzone .dz-deatils .dz-size").css('display', 'none');
+                        if(preview && preview.id) {
+                            $("#3dpreview_dropzone .dz-details .dz-size").css('display', 'none');
+                            var mockFile = { name: preview.file_original_name };
+                            $("#product_3dpreview").val(preview.id)
+                            previewDropzone.emit("addedfile", mockFile);
+                            previewDropzone.emit("preview", mockFile, `{{asset("/uploads/all")}}/${preview.file_name}`);
+                            previewDropzone.emit("complete", mockFile);
+                        }
+                    },
+                    success: (file, response) => {
+                        var inputs = $("#inputs");
+                        var last = $("#product_3dpreview");
+
+                        last.val(response.id)
+                        preview = response;
+                        $('#3dpreview_dropzone .dz-size').css('display', 'none');
+                        $('#3dpreview_dropzone .dz-image').css('display', 'none');
+                        $('#3dpreview_dropzone .dz-details').css('position', 'relative');
+                        $('#3dpreview_dropzone .dz-details').css('opacity', 1);
+                        // ONLY DO THIS IF YOU KNOW WHAT YOU'RE DOING!
+                    },
+                    removedfile: function(file) {
+                        $.ajax({
+                            url: `/seller/file/destroy/${preview.id}`,
+                            type: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                            },
+                            success: function(result) {
+                                var last = $("#product_3dpreview");
+                                last.val("")
+                                $(file.previewElement).remove();
+                            },
+                            error: function(error) {
+                                return false;
+                            }
+                        });
+                    }
+                })
+
+                $("#thumbnail_dropzone").dropzone({
+                    method:'post',
+                    url: "{{ route('seller.file.thumb') }}",
+                    dictDefaultMessage: "Select photos",
+                    paramName: "file",
+                    maxFilesize: 2,
+                    maxFiles: 1,
+                    clickable: true,
+                    addRemoveLinks: true,
+                    acceptedFiles: "image/*",
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    },
+                    init: function () {
+                        thumbnailDropzone = this;
+
+                        if(thumbnail.id) {
+                            var mockFile = { name: thumbnail.file_original_name, size: thumbnail.file_size };
+                            $("#product_thumbnail").val(thumbnail.id)
+                            thumbnailDropzone.emit("addedfile", mockFile);
+                            thumbnailDropzone.emit("thumbnail", mockFile, `{{asset("/uploads/all")}}/${thumbnail.file_name}`);
+                            thumbnailDropzone.emit("complete", mockFile);
+                        }
+                    },
+                    success: (file, response) => {
+                        var inputs = $("#inputs");
+                        var last = $("#product_thumbnail");
+
+                        last.val(response.id)
+                        thumbnail = response;
+                        // ONLY DO THIS IF YOU KNOW WHAT YOU'RE DOING!
+                    },
+                    removedfile: function(file) {
+                        $.ajax({
+                            url: `/seller/file/destroy/${thumbnail.id}`,
+                            type: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                            },
+                            success: function(result) {
+                                var last = $("#product_thumbnail");
+                                last.val("")
+                                $(file.previewElement).remove();
+                            },
+                            error: function(error) {
+                                return false;
+                            }
+                        });
+                    }
+                })
+                
                 $('#attributes').on('change', function() {
                     var attributes = $(this).val()
                     $.ajax({
