@@ -289,7 +289,15 @@
                                         <div id="thumbnail">
                                             <div class="dropzone" id="thumbnail_dropzone"></div>
                                         </div>
-                                        <input type="hidden" id="product_thumbnail" name="product_thumbnail">
+                                        <input type="hidden" id="product_thumbnail" name="product_thumbnail"> 
+                                        <!-- <div class="imagePreview img-thumbnail p-2">
+                                            <img id="fileManagerPreview"
+                                                src="{{ $product->uploads->getImageOptimizedFullName(400) }}"
+                                                style="width: 100%">
+                                        </div>
+                                        <label class="btn text-primary mt-2 p-0" id="getFileManager">Select thumbnail</label>
+                                        <input type="hidden" id="fileManagerId" value="{{$product->product_thumbnail}}"
+                                            name="product_thumbnail"> -->
                                     </div>
                                 </div>
                                 <!-- End Card -->
