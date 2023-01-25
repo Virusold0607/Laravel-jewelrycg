@@ -1,3 +1,7 @@
+@auth
+    @if (auth()->user()->role == 1)
+
+    
 <link rel="stylesheet" href="{{ asset('dropzone/css/bs-dropzone.css') }}">
 <style>
     .modal-content{
@@ -249,3 +253,7 @@
         })
     }
 </script>
+    @endif
+@else
+
+@endauth
