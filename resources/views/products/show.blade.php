@@ -1,9 +1,8 @@
+<x-app-layout page-title="{{$product->meta_title?$product->meta_title:$product->name}}" page-description="{{$product->meta_description}}">
 <meta property="og:image" content="{{ $product->uploads->getImageOptimizedFullName(400) }}">
 <meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="1024">
-<x-app-layout page-title="{{$product->meta_title?$product->meta_title:$product->name}}"
-              page-description="{{$product->meta_description}}">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
     <style>
         .btn-check:active + .btn, .btn-check:checked + .btn, .btn.active, .btn.show, .btn:active {
             border: solid 1px white !important;
