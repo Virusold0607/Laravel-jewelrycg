@@ -938,6 +938,6 @@ button.remove-item-btn:after {
     --bs-btn-disabled-border-color: #f8f9fa;
 }
 
-.course-lesson-desc img {
+.course-lesson-desc img, .table-responsive img {
     width: 100% !important;
 }
