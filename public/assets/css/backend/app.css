@@ -401,3 +401,6 @@ span.badge.bg-primary.rounded-pill {
     text-align: center;
     margin-bottom: 4px;
 }
+.table-responsive img {
+    width: 100% !important;
+}
