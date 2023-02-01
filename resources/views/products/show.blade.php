@@ -29,7 +29,7 @@
 
                                 @if(Auth::id() != $product->vendor)
                                     <a class="btn btn-primary"
-                                       href="{{route('create_chat_room',['conversation_id'=>$product->user->username])}}">Message</a>
+                                       href="{{route('create_chat_room',['conversation_id'=>$product->vendor])}}">Message</a>
                                 @endif
                                 <a class="btn btn-primary product_price" href="#">
                                     <i class="bi bi-cart-plus p-1"></i>
