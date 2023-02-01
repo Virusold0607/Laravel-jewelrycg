@@ -17,7 +17,7 @@
               </div>
               @endif
               <div class="d-flex justify-content-center mb-2">
-                <a class="btn btn-primary" href="{{route('create_chat_room',['conversation_id'=>$seller->user->id])}}">Message</a>
+                <a class="btn btn-primary" href="{{route('create_chat_room',['conversation_id'=>$seller->user->username])}}">Message</a>
               </div>
             </div>
           </div>
