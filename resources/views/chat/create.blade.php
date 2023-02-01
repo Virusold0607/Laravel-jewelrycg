@@ -224,8 +224,8 @@
                             </div>
                         </div>
                         @foreach($side_info as $info)
-                            <a href="#" class="list-group-item list-group-item-action border-0 filterDiscussions all unread single {{$conversation_id== $info->user_username ?"active":""}}"
-                               data-toggle="list" role="tab" data-id="{{$info->user_username}}">
+                            <a href="#" class="list-group-item list-group-item-action border-0 filterDiscussions all unread single {{$conversation_id== $info->user_id ?"active":""}}"
+                               data-toggle="list" role="tab" data-id="{{$info->user_id}}">
                                 <div class="badge bg-success float-right">
                                     <span>{{$info->cnt > 0 ? $info->cnt :  0}}</span>
                                 </div>
