@@ -161,7 +161,7 @@
                                 <div class="content-max-scroll">
                                 @foreach ($message_notifications as $message_notification)
                                     @if(user_name($message_notification->user_id)->first())
-                                        <a href="/chat/{{$message_notification->user_username }}"
+                                        <a href="/chat/{{$message_notification->user_id }}"
                                            class="filterDiscussions all unread single active d-block py-2 border-bottom text-black"
                                            data-toggle="list" role="tab">
                                             <div class="row">
