@@ -224,9 +224,8 @@
                             </div>
                         </div>
                         @foreach($side_info as $info)
-                            <a href="#"
-                               class="list-group-item list-group-item-action border-0 filterDiscussions all unread single {{$conversation_id== $info->user_id ?"active":""}}"
-                               data-toggle="list" role="tab" data-id="{{$info->user_id}}">
+                            <a href="#" class="list-group-item list-group-item-action border-0 filterDiscussions all unread single {{$conversation_id== $info->user_username ?"active":""}}"
+                               data-toggle="list" role="tab" data-id="{{$info->user_username}}">
                                 <div class="badge bg-success float-right">
                                     <span>{{$info->cnt > 0 ? $info->cnt :  0}}</span>
                                 </div>
@@ -237,7 +236,7 @@
                                         alt="avatar"
                                         class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                     <div class="flex-grow-1 ml-10px">
-                                        {{optional(users_name($info->user_id)->first())->full_name}}
+                                        {{optional(users_name($info->user_id)->first())->username}}
                                         <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
                                     </div>
                                 </div>
