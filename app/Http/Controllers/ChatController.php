@@ -83,6 +83,11 @@ class ChatController extends Controller
 
         $user = Auth::user();
         $user_id = $user->id;
+        $real_id = User::where(['username' => $conversation_id])
+                        ->get('id')
+                        ->first();
+        $conversation_id = $real_id->id;
+
         if ($user_id == $conversation_id)
         {
             return abort(404);
