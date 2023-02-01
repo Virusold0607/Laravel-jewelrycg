@@ -37,17 +37,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    var total_amount = 0;
-    var total_tcw = 0;
-    $(".product_diamond_amount").map(function(idx, ele){
-        total_amount += Number($(ele).html());
-    })
-    $(".total_amount").html(total_amount)
-    $(".product_diamond_tcw").map(function(idx, ele){
-        total_tcw += Number($(ele).html())
-    })
-    $(".total_tcw").html(total_tcw.toFixed(2))
-
-</script>
