@@ -161,7 +161,7 @@
                                 <div class="content-max-scroll">
                                 @foreach ($message_notifications as $message_notification)
                                     @if(user_name($message_notification->user_id)->first())
-                                        <a href="/chat/{{$message_notification->user_id }}"
+                                        <a href="/chat/{{optional(user_name($message_notification->user_id)->first())->username }}"
                                            class="filterDiscussions all unread single active d-block py-2 border-bottom text-black"
                                            data-toggle="list" role="tab">
                                             <div class="row">
@@ -173,7 +173,7 @@
                                                              alt="{{optional(user_name($message_notification->user_id)->first())->first_name}} avatar">
                                                     </div>
                                                     <div class="col- fs-14 fw-700 d-flex align-items-center">
-                                                            <p class="fw-700 mb-0 mr-5px">{{optional(user_name($message_notification->user_id)->first())->username}}</p>
+                                                            <p class="fw-700 mb-0 mr-5px">{{optional(user_name($message_notification->user_id)->first())->fullname}}</p>
                                                             <div class="badge bg-success float-right">
                                                                 <span>{{$message_notification->cnt > 0 ? $message_notification->cnt :  0}}</span>
                                                         </div>
