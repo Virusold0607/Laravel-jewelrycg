@@ -105,7 +105,7 @@ class ChatController extends Controller
         }
 
         $query = '
-SELECT   c.user_id , max(cnt) as cnt from (
+SELECT   c.user_id , max(cnt) as cnt, users.username as username from (
 SELECT a.user_id,b.cnt FROM
             (SELECT `user_id` FROM `messages` WHERE `conversation_id` = '.$user_id.' and user_id != '.$user_id.'
 GROUP BY (user_id))as a
@@ -119,7 +119,7 @@ GROUP BY (user_id))as a
         UNION ALL
         SELECT `conversation_id` as user_id,"0" as cnt FROM `messages` WHERE `user_id` = '.$user_id.'
          and conversation_id!= '.$user_id.' GROUP By `conversation_id`
-         )as c GROUP BY c.user_id
+         )as c, users  where c.user_id = users.id GROUP BY c.user_id
         '
         ;
 

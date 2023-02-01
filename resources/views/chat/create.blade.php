@@ -224,8 +224,8 @@
                             </div>
                         </div>
                         @foreach($side_info as $info)
-                            <a href="#" class="list-group-item list-group-item-action border-0 filterDiscussions all unread single {{$conversation_id== $info->user_id ?"active":""}}"
-                               data-toggle="list" role="tab" data-id="{{$info->user_id}}">
+                            <a href="javascript:;" class="list-group-item list-group-item-action border-0 filterDiscussions all unread single {{$conversation_id== $info->user_id ?"active":""}}"
+                               data-toggle="list" role="tab" data-id="{{$info->username}}">
                                 <div class="badge bg-success float-right">
                                     <span>{{$info->cnt > 0 ? $info->cnt :  0}}</span>
                                 </div>
@@ -633,6 +633,7 @@
                         $('.filterDiscussions').click(function () {
 
                             client_id = $(this).attr('data-id');
+                            console.log(client_id);
                             $(location).attr('href', `{{env('APP_URL')}}/chat/${client_id}`);
                             // windows.location.href(`http://localhost/jewelrycg/public/chat/${client_id}`);
                             // $.ajax({
