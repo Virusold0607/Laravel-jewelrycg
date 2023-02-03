@@ -255,6 +255,7 @@
                                                 <div class="col-md-10 mt-1">
                                                     <div class="variants-btn-group" data-toggle="buttons"
                                                          id="variants_group">
+                                                         
                                                         @foreach ($product->attributeValue($attribute->id) as $attributeValue)
                                                             @if ($attribute->type == 1)
                                                                 <!-- color type -->

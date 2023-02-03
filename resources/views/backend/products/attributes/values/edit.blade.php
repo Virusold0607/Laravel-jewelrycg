@@ -26,6 +26,10 @@
                                         <label for="name">Slug:</label>
                                         <input type="text" value="{{ $value->slug }}" name="slug" id="slug" value="" class="form-control">
                                     </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="name">Order:</label>
+                                        <input type="text" value="{{ $value->order }}" name="order" id="order" value="" class="form-control">
+                                    </div>
                                     @if($attribute->type != 0)
                                     <div class="col-md-6 mb-2">
                                         <label for="name">Value:</label>

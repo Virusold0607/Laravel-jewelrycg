@@ -24,17 +24,16 @@
                 <div class="card-body">
                     <form action="{{ route('backend.products.attributes.values.store', $attribute->id) }}" method="POST">
                         @csrf
-                        @if ($errors->has('name'))
-                            <div class="col-md-12 mb-2">
-                                <span class="badge btn-danger col-md-12"> value name is required </span>
-                            </div>
-                        @endif
                         <div class="col-md-12 mb-2">
                             <label for="name">Name:</label>
                             <input type="text" name="name" id="name" value="" class="form-control">
-
                         </div>
 
+                        <div class="col-md-12 mb-2">
+                            <label for="name">Order:</label>
+                            <input type="text" name="order" id="order" value="" class="form-control">
+                        </div>
+                        
                         @if($attribute->type != 0)
                         <div class="col-md-12 mb-2">
                             <label for="name">Value:</label>
@@ -85,6 +84,7 @@
                                     <th class="sorting_disabled" tabindex="0" aria-controls="datatable" aria-label="Name: activate to sort column ascending">Name</th>
                                     <th class="sorting_disabled" tabindex="0" aria-controls="datatable" aria-label="Name: activate to sort column ascending">Slug</th>
                                     <th class="sorting_disabled" tabindex="0" aria-controls="datatable" aria-label="Name: activate to sort column ascending">Value</th>
+                                    <th class="sorting_disabled" tabindex="0" aria-controls="datatable" aria-label="Name: activate to sort column ascending">Order</th>
                                     <th class="sorting_disabled"aria-label="">Actions</th>
                                 </tr>
                             </thead>
@@ -111,6 +111,7 @@
                                             {{ $value->name }}
                                             @endif
                                         </td>
+                                        <td> {{ $value->order }} </td>
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <a class="btn btn-dark btn-sm" href="{{ route('backend.products.attributes.values.edit', ['id_attribute' => $attribute->id , 'id' => $value->id]) }}">Edit</a>

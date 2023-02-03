@@ -26,6 +26,9 @@ class StoreAttributeValuesRequest extends FormRequest
         return [
             'name' => 'required|string',
             'value' => 'required',
+            'order' => 'required|numeric'
         ];
     }
+
+    
 }
