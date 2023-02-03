@@ -15,6 +15,7 @@ class AttributeValue extends Model
         'attribute_id',
         'value',
         'slug',
+        'order'
     ];
 
     function image() {
