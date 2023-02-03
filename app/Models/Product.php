@@ -212,7 +212,7 @@ class Product extends Model
             $model = $model->where('attribute_id', $attributeId);
         }
 
-        $attributesValues = $model->get();
+        $attributesValues = $model->orderBy('order')->get();
 
         return $attributesValues;
     }

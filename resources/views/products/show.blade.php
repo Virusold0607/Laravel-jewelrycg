@@ -255,18 +255,8 @@
                                                 <div class="col-md-10 mt-1">
                                                     <div class="variants-btn-group" data-toggle="buttons"
                                                          id="variants_group">
-                                                         @php
-                                                         $result = collect();
-                                                         if ($attribute->type == 0){
-                                                         $result=$product->attributeValue($attribute->id)->sort(
-                                                            static function ($a, $b) {
-                                                                return (float)$a['name'] > (float)$b['name'];
-                                                            }
-                                                            );
-                                                        }
-                                                        
-                                                         @endphp
-                                                        @foreach ($result as $attributeValue)
+                                                         
+                                                        @foreach ($product->attributeValue($attribute->id) as $attributeValue)
                                                             @if ($attribute->type == 1)
                                                                 <!-- color type -->
                                                                 <input type="radio"
