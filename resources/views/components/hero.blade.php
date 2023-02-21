@@ -65,7 +65,7 @@
                                 @foreach ($attrs as $attr)
                                     <div class="col-md-3 p-3">
                                         <label for="colorAttributeFilter" class="form-label fw-bold">{{ $attr->name }}</label>
-                                        <div class="attribute-list d-flex">
+                                        <div class="attribute-list row">
                                             @foreach ($attr->values as $value)
                                                 @if ($attr->type == 0) {{-- text attribute --}}
                                                     <div class="attribute-item text-attribute p-2 text-center text-capitalize" 
