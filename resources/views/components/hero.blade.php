@@ -65,20 +65,20 @@
                                 @foreach ($attrs as $attr)
                                     <div class="col-md-3 p-3">
                                         <label for="colorAttributeFilter" class="form-label fw-bold">{{ $attr->name }}</label>
-                                        <div class="attribute-list row">
+                                        <div class="attribute-list row g-3">
                                             @foreach ($attr->values as $value)
                                                 @if ($attr->type == 0) {{-- text attribute --}}
-                                                    <div class="attribute-item text-attribute p-2 text-center text-capitalize" 
+                                                    <div class="attribute-item text-attribute p-2 text-center text-capitalize col-auto" 
                                                     data-toggle="tooltip" title="{{ $value->name }}"
                                                     data-id="{{ $value->id }}">{{ $value->name }}</div>
                                                 @endif
                                                 @if ($attr->type == 1) {{-- color attribute--}}
-                                                    <div class="attribute-item p-2 text-center color-attribute rounded-circle" 
+                                                    <div class="attribute-item p-2 text-center color-attribute rounded-circle col-auto" 
                                                     data-toggle="tooltip" title="{{ $value->name }}"
                                                     data-id="{{ $value->id }}" style="background-color: {{ $value->value }}"></div>
                                                 @endif
                                                 @if ($attr->type == 2) {{-- color attribute--}}
-                                                <div class="attribute-item p-2 text-center image-attribute img-rounded img-thumbnail" 
+                                                <div class="attribute-item p-2 text-center image-attribute img-rounded img-thumbnail col-auto" 
                                                 data-toggle="tooltip" title="{{ $value->name }}"
                                                 data-id="{{ $value->id }}" style="background-image: url({{ $value->image->getFileFullPath() }})"></div>
                                                 @endif
